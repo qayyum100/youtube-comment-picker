@@ -304,11 +304,11 @@ export default function App() {
           </div>
         </div>
       </footer>
-    </footer>
 
-      {/* Privacy and Terms Modals */ }
-  { showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} /> }
-  { showTerms && <TermsModal onClose={() => setShowTerms(false)} /> }
-    </div >
+      {/* Privacy and Terms Modals */}
+      { showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} /> }
+      { showTerms && <TermsModal onClose={() => setShowTerms(false)} /> }
+    </div>
   );
 }
+
