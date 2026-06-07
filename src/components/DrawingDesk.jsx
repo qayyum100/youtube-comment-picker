@@ -182,7 +182,7 @@ export default function DrawingDesk({
 
       {/* ── title ── */}
       <h2 style={{ fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-        <Trophy size={20} className="text-gradient" />
+        <Trophy size={20} style={{ color: 'var(--brand-indigo)' }} />
         High-Fidelity Drawing Desk
       </h2>
 
@@ -243,7 +243,7 @@ export default function DrawingDesk({
       {isDrawing && (
         <div className="shuffler-container animate-fade-in" style={{ marginBottom: '20px' }}>
           <div className="shuffler-item">
-            <span className="text-gradient">🎰 {shufflingName}</span>
+            <span style={{ color: 'var(--brand-indigo)' }}>🎰 {shufflingName}</span>
           </div>
         </div>
       )}
@@ -256,7 +256,7 @@ export default function DrawingDesk({
           {winners.length > 0 && (
             <ResultSection
               title="PRIMARY WINNERS"
-              titleColor="#ec4899"
+              titleColor="var(--brand-indigo)"
               icon={<Trophy size={15} />}
               items={winners}
               type="winner"
@@ -267,7 +267,7 @@ export default function DrawingDesk({
               onCopy={handleCopyPost}
               onCertificate={onGenerateCertificate}
               onPrizeTagChange={handlePrizeTagChange}
-              accentColor="#ec4899"
+              accentColor="var(--brand-indigo)"
             />
           )}
 
@@ -275,7 +275,7 @@ export default function DrawingDesk({
           {standbys.length > 0 && (
             <ResultSection
               title="STANDBY ALTERNATIVES"
-              titleColor="#f97316"
+              titleColor="var(--text-secondary)"
               icon={<ShieldCheck size={15} />}
               items={standbys}
               type="standby"
@@ -286,7 +286,7 @@ export default function DrawingDesk({
               onCopy={handleCopyPost}
               onCertificate={onGenerateCertificate}
               onPrizeTagChange={handlePrizeTagChange}
-              accentColor="#f97316"
+              accentColor="var(--text-secondary)"
             />
           )}
         </div>

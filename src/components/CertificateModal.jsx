@@ -207,7 +207,7 @@ export default function CertificateModal({ winner, onClose }) {
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.85)',
+      backgroundColor: 'rgba(0, 0, 0, 0.4)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -217,7 +217,6 @@ export default function CertificateModal({ winner, onClose }) {
       overflowY: 'auto'
     }}>
       <div 
-        className="glass-panel" 
         style={{
           width: '100%',
           maxWidth: '520px',
@@ -227,8 +226,9 @@ export default function CertificateModal({ winner, onClose }) {
           display: 'flex',
           flexDirection: 'column',
           gap: '20px',
-          boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
-          border: '1px solid rgba(255,255,255,0.1)'
+          boxShadow: '0 10px 40px rgba(0,0,0,0.1)',
+          backgroundColor: '#ffffff',
+          border: '1px solid var(--border-dark)'
         }}
       >
         {/* Close Button */}
@@ -239,8 +239,8 @@ export default function CertificateModal({ winner, onClose }) {
             position: 'absolute',
             top: '16px',
             right: '16px',
-            background: 'rgba(255,255,255,0.05)',
-            border: '1px solid rgba(255,255,255,0.1)',
+            background: 'var(--bg-panel)',
+            border: '1px solid var(--border-dark)',
             borderRadius: '50%',
             width: '32px',
             height: '32px',
@@ -257,7 +257,7 @@ export default function CertificateModal({ winner, onClose }) {
 
         {/* Modal Title */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <ShieldCheck size={22} className="text-gradient" />
+          <ShieldCheck size={22} style={{ color: 'var(--brand-indigo)' }} />
           <h3 style={{ fontSize: '1.25rem' }}>Winner Certificate Generator</h3>
         </div>
 
@@ -266,11 +266,11 @@ export default function CertificateModal({ winner, onClose }) {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#08080a',
+          backgroundColor: '#f3f4f6',
           borderRadius: 'var(--radius-md)',
           padding: '10px',
           border: '1px solid var(--border-dark)',
-          boxShadow: 'inset 0 2px 10px rgba(0,0,0,0.6)'
+          boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.1)'
         }}>
           <canvas 
             ref={canvasRef} 

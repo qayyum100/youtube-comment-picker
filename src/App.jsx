@@ -173,7 +173,7 @@ export default function App() {
       <header style={{
         borderBottom: '1px solid var(--border-dark)',
         padding: '16px 0',
-        backgroundColor: '#0a0a0c',
+        backgroundColor: '#ffffff',
         position: 'sticky',
         top: 0,
         zIndex: 50
@@ -181,7 +181,7 @@ export default function App() {
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{
-              background: 'var(--accent-gradient)',
+              background: 'var(--brand-indigo)',
               width: '32px',
               height: '32px',
               borderRadius: '8px',
@@ -194,7 +194,7 @@ export default function App() {
             }}>
               S
             </div>
-            <span style={{ fontSize: '1.3rem', fontWeight: '800' }} className="text-gradient">
+            <span style={{ fontSize: '1.3rem', fontWeight: '800', color: 'var(--brand-indigo)' }}>
               Youtube Comment Picker
             </span>
           </div>
@@ -208,7 +208,7 @@ export default function App() {
           {/* Welcome Banner */}
           <div style={{ textAlign: 'center', marginBottom: '32px' }} className="animate-fade-in">
             <h1 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '8px', lineHeight: '1.2' }}>
-              Youtube Comment Picker - <span className="text-gradient">YouTube Random Comment Picker:</span> Free Giveaway Tool
+              Youtube Comment Picker - <span style={{ color: 'var(--brand-indigo)' }}>YouTube Random Comment Picker:</span> Free Giveaway Tool
             </h1>
             <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', maxWidth: '600px', margin: '0 auto' }}>
               The premier lottery & drawing suite for giveaways. Unbiased, fast, and secure. Run verification certs instantly.
@@ -292,7 +292,7 @@ export default function App() {
       <footer style={{
         borderTop: '1px solid var(--border-dark)',
         padding: '24px 0',
-        backgroundColor: '#070709',
+        backgroundColor: 'var(--bg-panel)',
         fontSize: '0.8rem',
         color: 'var(--text-muted)'
       }}>

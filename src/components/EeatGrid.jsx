@@ -18,13 +18,13 @@ export default function EeatGrid() {
             width: '40px',
             height: '40px',
             borderRadius: '50%',
-            backgroundColor: 'rgba(236, 72, 153, 0.1)',
+            backgroundColor: '#eef2ff',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             marginBottom: '16px'
           }}>
-            <ShieldCheck size={20} color="#ec4899" />
+            <ShieldCheck size={20} color="var(--brand-indigo)" />
           </div>
           <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Unbiased Cryptographic Rolls</h3>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6' }}>
@@ -39,13 +39,13 @@ export default function EeatGrid() {
             width: '40px',
             height: '40px',
             borderRadius: '50%',
-            backgroundColor: 'rgba(249, 115, 22, 0.1)',
+            backgroundColor: '#eef2ff',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             marginBottom: '16px'
           }}>
-            <EyeOff size={20} color="#f97316" />
+            <EyeOff size={20} color="var(--brand-indigo)" />
           </div>
           <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>No OAuth or Passwords Needed</h3>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6' }}>
@@ -60,13 +60,13 @@ export default function EeatGrid() {
             width: '40px',
             height: '40px',
             borderRadius: '50%',
-            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+            backgroundColor: '#eef2ff',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             marginBottom: '16px'
           }}>
-            <HardDrive size={20} color="#3b82f6" />
+            <HardDrive size={20} color="var(--brand-indigo)" />
           </div>
           <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Local-Storage Bound</h3>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6' }}>
@@ -80,18 +80,16 @@ export default function EeatGrid() {
       <div style={{ marginTop: '50px' }}>
         <h3 style={{ fontSize: '1.3rem', textAlign: 'center', marginBottom: '24px' }}>Raffle Picker Knowledge Base</h3>
         <div className="grid-cols-2">
-          <div style={{ border: '1px solid var(--border-dark)', padding: '20px', borderRadius: 'var(--radius-md)', backgroundColor: '#0d0d0f' }}>
-            <h4 style={{ fontSize: '1rem', color: '#ec4899', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
-              <HelpCircle size={16} />
+          <div style={{ border: '1px solid var(--border-dark)', borderLeft: '3px solid var(--brand-indigo)', padding: '20px', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--bg-card)' }}>
+            <h4 style={{ fontSize: '1rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
               How do I use keyword filters?
             </h4>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.5' }}>
               Simply enter a required word or hashtag (e.g. <code>#giveaway</code>) into the filter panel. Comments that do not contain this precise string will be ignored from the final drawing.
             </p>
           </div>
-          <div style={{ border: '1px solid var(--border-dark)', padding: '20px', borderRadius: 'var(--radius-md)', backgroundColor: '#0d0d0f' }}>
-            <h4 style={{ fontSize: '1rem', color: '#f97316', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
-              <HelpCircle size={16} />
+          <div style={{ border: '1px solid var(--border-dark)', borderLeft: '3px solid var(--brand-indigo)', padding: '20px', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--bg-card)' }}>
+            <h4 style={{ fontSize: '1rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
               What is the difference between Fair and Boost modes?
             </h4>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.5' }}>

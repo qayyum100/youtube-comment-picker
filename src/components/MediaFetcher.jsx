@@ -51,7 +51,7 @@ export default function MediaFetcher({ platform, onFetch, isLoading, isSimulated
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
         <div>
           <h2 style={{ fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Link2 size={20} className="text-gradient" />
+            <Link2 size={20} style={{ color: 'var(--brand-indigo)' }} />
             Media Stream Fetcher
           </h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginTop: '2px' }}>

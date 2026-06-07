@@ -43,13 +43,13 @@ export default function FilterDashboard({ filters, setFilters, totalComments, fi
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <SlidersHorizontal size={20} className="text-gradient" />
+          <SlidersHorizontal size={20} style={{ color: 'var(--brand-indigo)' }} />
           <h2 style={{ fontSize: '1.25rem' }}>Advanced Algorithmic Filters</h2>
           {activeFiltersCount > 0 && (
             <span style={{
-              backgroundColor: 'rgba(236, 72, 153, 0.1)',
-              border: '1px solid rgba(236, 72, 153, 0.2)',
-              color: '#ec4899',
+              backgroundColor: '#eef2ff',
+              border: '1px solid #c7d2fe',
+              color: 'var(--brand-indigo)',
               padding: '2px 8px',
               borderRadius: 'var(--radius-full)',
               fontSize: '0.7rem',
@@ -62,7 +62,7 @@ export default function FilterDashboard({ filters, setFilters, totalComments, fi
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           {totalComments > 0 && (
             <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-              Pool: <strong style={{ color: '#ec4899' }}>{filteredCount}</strong> / {totalComments} comments
+              Pool: <strong style={{ color: 'var(--brand-indigo)' }}>{filteredCount}</strong> / {totalComments} comments
             </span>
           )}
           {isOpen ? <ChevronUp size={18} color="var(--text-secondary)" /> : <ChevronDown size={18} color="var(--text-secondary)" />}
@@ -112,7 +112,7 @@ export default function FilterDashboard({ filters, setFilters, totalComments, fi
               {/* Keyword / Hashtag filter */}
               <div>
                 <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', fontWeight: '500', color: 'var(--text-secondary)', marginBottom: '8px' }}>
-                  <Hash size={14} className="text-gradient" />
+                  <Hash size={14} style={{ color: 'var(--brand-indigo)' }} />
                   Keyword Hurdle
                 </label>
                 <input
@@ -136,7 +136,7 @@ export default function FilterDashboard({ filters, setFilters, totalComments, fi
                 {/* Min Tag Count */}
                 <div>
                   <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', fontWeight: '500', color: 'var(--text-secondary)', marginBottom: '8px' }}>
-                    <Users size={14} className="text-gradient" />
+                    <Users size={14} style={{ color: 'var(--brand-indigo)' }} />
                     Min Friend @Tags
                   </label>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -168,7 +168,7 @@ export default function FilterDashboard({ filters, setFilters, totalComments, fi
                 {/* Min Likes Count */}
                 <div>
                   <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', fontWeight: '500', color: 'var(--text-secondary)', marginBottom: '8px' }}>
-                    <ThumbsUp size={14} className="text-gradient" />
+                    <ThumbsUp size={14} style={{ color: 'var(--brand-indigo)' }} />
                     Min Likes
                   </label>
                   <input
@@ -189,7 +189,7 @@ export default function FilterDashboard({ filters, setFilters, totalComments, fi
               {/* Exclusion Lists */}
               <div>
                 <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', fontWeight: '500', color: 'var(--text-secondary)', marginBottom: '8px' }}>
-                  <ShieldAlert size={14} className="text-gradient" />
+                  <ShieldAlert size={14} style={{ color: 'var(--brand-indigo)' }} />
                   Exclusion & Spam Filter
                 </label>
                 <textarea

@@ -5,11 +5,11 @@ export default function TermsModal({ onClose }) {
   return (
     <div style={{
       position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-      backgroundColor: 'rgba(0,0,0,0.8)', zIndex: 100,
+      backgroundColor: 'rgba(0,0,0,0.4)', zIndex: 100,
       display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px'
     }}>
       <div style={{
-        backgroundColor: '#0a0a0c', border: '1px solid var(--border-dark)',
+        backgroundColor: '#ffffff', border: '1px solid var(--border-dark)',
         borderRadius: 'var(--radius-lg)', maxWidth: '600px', width: '100%',
         maxHeight: '80vh', display: 'flex', flexDirection: 'column'
       }}>
