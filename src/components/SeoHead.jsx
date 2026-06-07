@@ -6,7 +6,7 @@ export default function SeoHead({ platform }) {
     const title = `${platformLabel} Picker — Premium Giveaway Drawing Desk`;
     const description = `Extract and pick random giveaway winners from your ${platformLabel}. Apply advanced criteria like friend mentions, minimum likes, duplicate comment controls, and keyword filters.`;
     const url = window.location.href;
-    
+
     // Update document title
     document.title = title;
 

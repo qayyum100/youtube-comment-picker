@@ -6,6 +6,8 @@ import DrawingDesk from './components/DrawingDesk';
 import CertificateModal from './components/CertificateModal';
 import EeatGrid from './components/EeatGrid';
 import SeoHead from './components/SeoHead';
+import PrivacyModal from './components/PrivacyModal';
+import TermsModal from './components/TermsModal';
 import { Award, AlertCircle, Info, Sparkles } from 'lucide-react';
 
 export default function App() {
@@ -14,13 +16,17 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSimulated, setIsSimulated] = useState(false);
   const [apiError, setApiError] = useState('');
-  
+
   // Winners and standby alternates
   const [winners, setWinners] = useState([]);
   const [standbys, setStandbys] = useState([]);
-  
+
   // Modal certificate state
   const [activeCertificate, setActiveCertificate] = useState(null);
+
+  // Privacy & Terms modal states
+  const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showTerms, setShowTerms] = useState(false);
 
   // Initialize filters from localStorage or default
   const [filters, setFilters] = useState(() => {
@@ -65,7 +71,7 @@ export default function App() {
     try {
       const endpoint = platform === 'youtube' ? '/api/youtube/comments' : '/api/instagram/comments';
       const encodedUrl = encodeURIComponent(url);
-      
+
       const response = await fetch(`${endpoint}?url=${encodedUrl}`);
       if (!response.ok) {
         const errData = await response.json();
@@ -73,7 +79,7 @@ export default function App() {
       }
 
       const data = await response.json();
-      
+
       setComments(data.comments || []);
       setIsSimulated(data.simulated || false);
       if (data.error) {
@@ -90,7 +96,7 @@ export default function App() {
   // Algorithmic Filters Implementation
   const getFilteredComments = () => {
     if (!comments || comments.length === 0) return [];
-    
+
     let result = [...comments];
 
     // 1. Keyword / Hashtag filter
@@ -189,13 +195,8 @@ export default function App() {
               S
             </div>
             <span style={{ fontSize: '1.3rem', fontWeight: '800' }} className="text-gradient">
-              SocialPicker
+              Youtube Comment Picker
             </span>
-          </div>
-
-          <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10b981' }}></span>
-            Vercel Portable
           </div>
         </div>
       </header>
@@ -203,11 +204,11 @@ export default function App() {
       {/* Main Content Workspace */}
       <main style={{ flexGrow: 1, padding: '40px 0' }}>
         <div className="container">
-          
+
           {/* Welcome Banner */}
           <div style={{ textAlign: 'center', marginBottom: '32px' }} className="animate-fade-in">
-            <h1 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '8px' }}>
-              YouTube & Instagram <span className="text-gradient">Comments Picker</span>
+            <h1 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '8px', lineHeight: '1.2' }}>
+              Youtube Comment Picker - <span className="text-gradient">YouTube Random Comment Picker:</span> Free Giveaway Tool
             </h1>
             <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', maxWidth: '600px', margin: '0 auto' }}>
               The premier lottery & drawing suite for giveaways. Unbiased, fast, and secure. Run verification certs instantly.
@@ -215,9 +216,9 @@ export default function App() {
           </div>
 
           {/* Platform Segment switcher */}
-          <PlatformSwitcher 
-            platform={platform} 
-            setPlatform={setPlatform} 
+          <PlatformSwitcher
+            platform={platform}
+            setPlatform={setPlatform}
           />
 
           {/* Error notifications */}
@@ -296,13 +297,18 @@ export default function App() {
         color: 'var(--text-muted)'
       }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
-          <span>© 2026 SocialPicker. All rights reserved.</span>
+          <span>© 2026 Youtube Comment Picker. All rights reserved.</span>
           <div style={{ display: 'flex', gap: '16px' }}>
-            <span>Privacy Policy</span>
-            <span>Terms of Service</span>
+            <span style={{ cursor: 'pointer' }} onClick={() => setShowPrivacy(true)}>Privacy Policy</span>
+            <span style={{ cursor: 'pointer' }} onClick={() => setShowTerms(true)}>Terms of Service</span>
           </div>
         </div>
       </footer>
-    </div>
+    </footer>
+
+      {/* Privacy and Terms Modals */ }
+  { showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} /> }
+  { showTerms && <TermsModal onClose={() => setShowTerms(false)} /> }
+    </div >
   );
 }
