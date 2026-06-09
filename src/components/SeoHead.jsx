@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export default function SeoHead({ pageType, platform }) {
+export default function SeoHead({ pageType, platform, blogData }) {
   useEffect(() => {
     let title, description;
     const url = window.location.href;
@@ -8,6 +8,12 @@ export default function SeoHead({ pageType, platform }) {
     if (pageType === 'thumbnail') {
       title = 'YouTube Thumbnail Downloader — Extract High Quality Images';
       description = 'Download high-resolution (HD, 4K, 1080p) thumbnails from any YouTube video instantly. Free YouTube thumbnail grabber tool.';
+    } else if (pageType === 'blog') {
+      title = 'Creator Resources & Guides — YouTube Comment Picker';
+      description = 'Master the art of social media growth. Learn how to run viral giveaways, optimize your thumbnails, and build an engaged audience.';
+    } else if (pageType === 'blog-post' && blogData) {
+      title = `${blogData.title} | Creator Guides`;
+      description = blogData.excerpt;
     } else {
       const platformLabel = platform === 'youtube' ? 'YouTube Video Comments' : 'Instagram Posts & Reels';
       title = `${platformLabel} Picker — Premium Giveaway Drawing Desk`;

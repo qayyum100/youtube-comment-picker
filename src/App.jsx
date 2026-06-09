@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import CommentPickerPage from './pages/CommentPickerPage';
 import ThumbnailDownloaderPage from './pages/ThumbnailDownloaderPage';
+import BlogIndexPage from './pages/BlogIndexPage';
+import BlogPostPage from './pages/BlogPostPage';
 import PrivacyModal from './components/PrivacyModal';
 import TermsModal from './components/TermsModal';
-import { Download, Gift } from 'lucide-react';
+import { Download, Gift, BookOpen } from 'lucide-react';
 
 function Navigation() {
   const location = useLocation();
@@ -32,6 +34,10 @@ function Navigation() {
       <Link to="/thumbnail-downloader" style={navLinkStyle('/thumbnail-downloader')}>
         <Download size={16} />
         Thumbnail Downloader
+      </Link>
+      <Link to="/blogs" style={navLinkStyle(location.pathname.startsWith('/blog') ? location.pathname : '/blogs')}>
+        <BookOpen size={16} />
+        Blogs
       </Link>
     </nav>
   );
@@ -84,6 +90,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<CommentPickerPage />} />
           <Route path="/thumbnail-downloader" element={<ThumbnailDownloaderPage />} />
+          <Route path="/blogs" element={<BlogIndexPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
         </Routes>
 
         {/* Shared Footer */}
@@ -97,7 +105,8 @@ export default function App() {
         }}>
           <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
             <span>© 2026 Youtube Comment Picker. All rights reserved.</span>
-            <div style={{ display: 'flex', gap: '16px' }}>
+            <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+              <Link to="/blogs" style={{ color: 'inherit', textDecoration: 'none' }}>Blogs</Link>
               <span style={{ cursor: 'pointer' }} onClick={() => setShowPrivacy(true)}>Privacy Policy</span>
               <span style={{ cursor: 'pointer' }} onClick={() => setShowTerms(true)}>Terms of Service</span>
             </div>
