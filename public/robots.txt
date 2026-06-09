@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://youtubecommentpickerthumbnaildownload.online/sitemap.xml
+Sitemap: https://www.youtubecommentpickerthumbnaildownload.online/sitemap.xml
