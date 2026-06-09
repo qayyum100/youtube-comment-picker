@@ -1,11 +1,18 @@
 import { useEffect } from 'react';
 
-export default function SeoHead({ platform }) {
+export default function SeoHead({ pageType, platform }) {
   useEffect(() => {
-    const platformLabel = platform === 'youtube' ? 'YouTube Video Comments' : 'Instagram Posts & Reels';
-    const title = `${platformLabel} Picker — Premium Giveaway Drawing Desk`;
-    const description = `Extract and pick random giveaway winners from your ${platformLabel}. Apply advanced criteria like friend mentions, minimum likes, duplicate comment controls, and keyword filters.`;
+    let title, description;
     const url = window.location.href;
+
+    if (pageType === 'thumbnail') {
+      title = 'YouTube Thumbnail Downloader — Extract High Quality Images';
+      description = 'Download high-resolution (HD, 4K, 1080p) thumbnails from any YouTube video instantly. Free YouTube thumbnail grabber tool.';
+    } else {
+      const platformLabel = platform === 'youtube' ? 'YouTube Video Comments' : 'Instagram Posts & Reels';
+      title = `${platformLabel} Picker — Premium Giveaway Drawing Desk`;
+      description = `Extract and pick random giveaway winners from your ${platformLabel}. Apply advanced criteria like friend mentions, minimum likes, duplicate comment controls, and keyword filters.`;
+    }
 
     // Update document title
     document.title = title;
@@ -43,7 +50,7 @@ export default function SeoHead({ platform }) {
       document.head.appendChild(canonical);
     }
     canonical.href = url;
-  }, [platform]);
+  }, [pageType, platform]);
 
   return null;
 }
