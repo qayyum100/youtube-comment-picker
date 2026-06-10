@@ -16,8 +16,8 @@
   --text-secondary: #6b7280;
   --text-muted: #9ca3af;
   
-  --font-main: 'Inter', system-ui, sans-serif;
-  --font-display: 'Inter', system-ui, sans-serif;
+  --font-main: 'Roboto', system-ui, sans-serif;
+  --font-display: 'Open Sans', system-ui, sans-serif;
   
   --radius-sm: 6px;
   --radius-md: 8px;
@@ -28,6 +28,21 @@
   --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+[data-theme='dark'] {
+  --bg-dark: #0a0a0c;
+  --bg-card: #121214;
+  --bg-input: #1a1a1c;
+  --bg-panel: #0d0d0f;
+  --border-dark: #27272a;
+  
+  --text-primary: #f9fafb;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 /* Base Styles */
 * {
   box-sizing: border-box;
@@ -39,7 +54,8 @@ body {
   background-color: var(--bg-dark);
   color: var(--text-primary);
   font-family: var(--font-main);
-  line-height: 1.5;
+  line-height: 1.6;
+  font-size: 16px; /* Minimum 16px for mobile accessibility */
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -167,7 +183,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
   padding: 10px 16px;
   font-family: var(--font-main);
-  font-size: 0.95rem;
+  font-size: 16px; /* Minimum 16px prevents iOS zoom */
   width: 100%;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   outline: none;

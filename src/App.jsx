@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import CommentPickerPage from './pages/CommentPickerPage';
 import ThumbnailDownloaderPage from './pages/ThumbnailDownloaderPage';
@@ -6,7 +6,8 @@ import BlogIndexPage from './pages/BlogIndexPage';
 import BlogPostPage from './pages/BlogPostPage';
 import PrivacyModal from './components/PrivacyModal';
 import TermsModal from './components/TermsModal';
-import { Download, Gift, BookOpen } from 'lucide-react';
+import DisclaimerModal from './components/DisclaimerModal';
+import { Download, Gift, BookOpen, Sun, Moon } from 'lucide-react';
 
 function Navigation() {
   const location = useLocation();
@@ -46,6 +47,17 @@ function Navigation() {
 export default function App() {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
+  const [showDisclaimer, setShowDisclaimer] = useState(false);
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
 
   return (
     <BrowserRouter>
@@ -55,7 +67,7 @@ export default function App() {
         <header style={{
           borderBottom: '1px solid var(--border-dark)',
           padding: '16px 0',
-          backgroundColor: '#ffffff',
+          backgroundColor: 'var(--bg-card)',
           position: 'sticky',
           top: 0,
           zIndex: 50
@@ -81,8 +93,29 @@ export default function App() {
               </span>
             </Link>
 
-            {/* Navigation links */}
-            <Navigation />
+            {/* Navigation links & Theme Toggle */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+              <Navigation />
+              <button 
+                onClick={toggleTheme} 
+                style={{
+                  background: 'var(--bg-panel)',
+                  border: '1px solid var(--border-dark)',
+                  color: 'var(--text-primary)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '50%',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease'
+                }}
+                title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+              >
+                {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+              </button>
+            </div>
           </div>
         </header>
 
@@ -107,6 +140,7 @@ export default function App() {
             <span>© 2026 Youtube Comment Picker. All rights reserved.</span>
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
               <Link to="/blogs" style={{ color: 'inherit', textDecoration: 'none' }}>Blogs</Link>
+              <span style={{ cursor: 'pointer' }} onClick={() => setShowDisclaimer(true)}>Disclaimer</span>
               <span style={{ cursor: 'pointer' }} onClick={() => setShowPrivacy(true)}>Privacy Policy</span>
               <span style={{ cursor: 'pointer' }} onClick={() => setShowTerms(true)}>Terms of Service</span>
             </div>
@@ -116,6 +150,7 @@ export default function App() {
         {/* Modals */}
         {showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} />}
         {showTerms && <TermsModal onClose={() => setShowTerms(false)} />}
+        {showDisclaimer && <DisclaimerModal onClose={() => setShowDisclaimer(false)} />}
 
       </div>
     </BrowserRouter>
