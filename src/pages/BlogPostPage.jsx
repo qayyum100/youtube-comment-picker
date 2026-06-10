@@ -61,9 +61,14 @@ export default function BlogPostPage() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: 'var(--text-muted)'
+                color: 'var(--text-muted)',
+                overflow: 'hidden'
               }}>
-                <span style={{ fontSize: '1.2rem' }}>Featured Image Placeholder</span>
+                {blog.image ? (
+                  <img src={blog.image} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                ) : (
+                  <span style={{ fontSize: '1.2rem' }}>Featured Image Placeholder</span>
+                )}
               </div>
             </header>
 

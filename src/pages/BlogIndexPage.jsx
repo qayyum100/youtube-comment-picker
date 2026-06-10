@@ -55,9 +55,14 @@ export default function BlogIndexPage() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: 'var(--brand-indigo)'
+                    color: 'var(--brand-indigo)',
+                    overflow: 'hidden'
                   }}>
-                    <BookOpen size={48} opacity={0.5} />
+                    {blog.image ? (
+                      <img src={blog.image} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    ) : (
+                      <BookOpen size={48} opacity={0.5} />
+                    )}
                   </div>
                   
                   <div style={{ display: 'flex', gap: '12px', fontSize: '0.8rem', color: 'var(--text-muted)' }}>

@@ -20,6 +20,11 @@ export default function SeoHead({ pageType, platform, blogData }) {
       description = `Extract and pick random giveaway winners from your ${platformLabel}. Apply advanced criteria like friend mentions, minimum likes, duplicate comment controls, and keyword filters.`;
     }
 
+    let image = 'https://www.youtubecommentpickerthumbnaildownload.online/og-image.jpg';
+    if (pageType === 'blog-post' && blogData && blogData.image) {
+      image = `https://www.youtubecommentpickerthumbnaildownload.online${blogData.image}`;
+    }
+
     // Update document title
     document.title = title;
 
@@ -42,11 +47,13 @@ export default function SeoHead({ pageType, platform, blogData }) {
     updateMetaTag('meta[property="og:title"]', 'property', 'og:title', title);
     updateMetaTag('meta[property="og:description"]', 'property', 'og:description', description);
     updateMetaTag('meta[property="og:url"]', 'property', 'og:url', url);
+    updateMetaTag('meta[property="og:image"]', 'property', 'og:image', image);
 
     // Update Twitter tags
     updateMetaTag('meta[name="twitter:title"]', 'name', 'twitter:title', title);
     updateMetaTag('meta[name="twitter:description"]', 'name', 'twitter:description', description);
     updateMetaTag('meta[name="twitter:url"]', 'name', 'twitter:url', url);
+    updateMetaTag('meta[name="twitter:image"]', 'name', 'twitter:image', image);
 
     // Update canonical link
     let canonical = document.querySelector('link[rel="canonical"]');

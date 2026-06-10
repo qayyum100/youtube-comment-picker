@@ -74,20 +74,7 @@ export default function App() {
         }}>
           <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
             <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <div style={{
-                background: 'var(--brand-indigo)',
-                width: '32px',
-                height: '32px',
-                borderRadius: '8px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: 'bold',
-                fontSize: '1.2rem',
-                color: '#fff'
-              }}>
-                S
-              </div>
+              <img src="/images/app_logo.png" alt="Youtube Comment Picker Logo" style={{ width: '32px', height: '32px', borderRadius: '8px' }} />
               <span style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--brand-indigo)' }}>
                 Youtube Comment Picker
               </span>
