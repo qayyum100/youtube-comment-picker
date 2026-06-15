@@ -68,6 +68,8 @@ export default function App() {
           borderBottom: '1px solid var(--border-dark)',
           padding: '16px 0',
           backgroundColor: 'var(--bg-card)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
           position: 'sticky',
           top: 0,
           zIndex: 50
@@ -119,6 +121,8 @@ export default function App() {
           borderTop: '1px solid var(--border-dark)',
           padding: '24px 0',
           backgroundColor: 'var(--bg-panel)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
           fontSize: '0.8rem',
           color: 'var(--text-muted)',
           marginTop: 'auto'
