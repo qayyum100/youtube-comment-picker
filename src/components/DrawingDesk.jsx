@@ -63,6 +63,37 @@ export default function DrawingDesk({
   const [reRollingSlot, setReRollingSlot] = useState(null); // {type,index}
   const [reRollingName, setReRollingName] = useState('');
 
+  // ── EXPORT CSV ─────────────────────────────────────────────────────────────
+  const handleExportCSV = () => {
+    const dataToExport = (winners.length > 0 || standbys.length > 0) 
+      ? [...winners, ...standbys] 
+      : filteredComments;
+
+    if (dataToExport.length === 0) return;
+
+    const headers = ['Platform', 'Author', 'Timestamp', 'Likes', 'Comment', 'Prize/Role', 'SerialCode'];
+    const rows = dataToExport.map(item => [
+      item.platform || 'unknown',
+      item.author,
+      new Date(item.timestamp).toISOString(),
+      item.likes || 0,
+      `"${(item.text || '').replace(/"/g, '""')}"`,
+      item.prizeTag || 'Participant',
+      item.serialCode || ''
+    ]);
+
+    const csvContent = "data:text/csv;charset=utf-8," 
+      + [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `giveaway_export_${new Date().getTime()}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   // keep a cancellable ref so we can abort if needed
   const timerRef = useRef(null);
 
@@ -178,13 +209,25 @@ export default function DrawingDesk({
 
   // ── RENDER ─────────────────────────────────────────────────────────────────
   return (
-    <div className="card-premium animate-fade-in" style={{ marginBottom: '24px' }}>
+    <div className="card-premium animate-fade-in" style={{ marginBottom: '24px', minHeight: '400px' }}>
 
       {/* ── title ── */}
-      <h2 style={{ fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-        <Trophy size={20} style={{ color: 'var(--brand-indigo)' }} />
-        High-Fidelity Drawing Desk
-      </h2>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
+        <h2 style={{ fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <Trophy size={20} style={{ color: 'var(--brand-indigo)' }} />
+          High-Fidelity Drawing Desk
+        </h2>
+        
+        {/* CSV Export Button */}
+        <button 
+          onClick={handleExportCSV} 
+          className="btn-secondary" 
+          disabled={filteredComments.length === 0 || isDrawing}
+          style={{ padding: '6px 12px', fontSize: '0.85rem' }}
+        >
+          Download CSV
+        </button>
+      </div>
 
       {/* ── config bar ── */}
       <div style={{

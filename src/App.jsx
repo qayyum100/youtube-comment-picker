@@ -28,7 +28,7 @@ function Navigation() {
 
   return (
     <nav style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-      <Link to="/" style={navLinkStyle('/')}>
+      <Link to="/youtube-comment-picker" style={navLinkStyle('/youtube-comment-picker')}>
         <Gift size={16} />
         Comment Picker
       </Link>
@@ -110,7 +110,10 @@ export default function App() {
 
         {/* Dynamic Route Content */}
         <Routes>
-          <Route path="/" element={<CommentPickerPage />} />
+          <Route path="/" element={<CommentPickerPage defaultPlatform="youtube" />} />
+          <Route path="/youtube-comment-picker" element={<CommentPickerPage defaultPlatform="youtube" />} />
+          <Route path="/instagram-comment-picker" element={<CommentPickerPage defaultPlatform="instagram" />} />
+          <Route path="/tiktok-comment-picker" element={<CommentPickerPage defaultPlatform="tiktok" />} />
           <Route path="/thumbnail-downloader" element={<ThumbnailDownloaderPage />} />
           <Route path="/blogs" element={<BlogIndexPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />

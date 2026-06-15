@@ -18,9 +18,12 @@ export default function MediaFetcher({ platform, onFetch, isLoading, isSimulated
     if (platform === 'youtube') {
       const isYt = /youtube\.com|youtu\.be/i.test(inputUrl);
       if (!isYt) return 'Please enter a valid YouTube video or shorts URL';
-    } else {
+    } else if (platform === 'instagram') {
       const isIg = /instagram\.com/i.test(inputUrl);
       if (!isIg) return 'Please enter a valid Instagram post or reel URL';
+    } else if (platform === 'tiktok') {
+      const isTt = /tiktok\.com/i.test(inputUrl);
+      if (!isTt) return 'Please enter a valid TikTok video URL';
     }
     return '';
   };
@@ -41,7 +44,9 @@ export default function MediaFetcher({ platform, onFetch, isLoading, isSimulated
     // Use a placeholder URL for mock load
     const demoUrl = platform === 'youtube' 
       ? 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' 
-      : 'https://www.instagram.com/p/C7X-xyz123/';
+      : platform === 'instagram'
+        ? 'https://www.instagram.com/p/C7X-xyz123/'
+        : 'https://www.tiktok.com/@tiktok/video/1234567890';
     setUrl(demoUrl);
     onFetch(demoUrl, true);
   };
@@ -57,7 +62,9 @@ export default function MediaFetcher({ platform, onFetch, isLoading, isSimulated
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginTop: '2px' }}>
             {platform === 'youtube' 
               ? 'Paste any public YouTube video link or Shorts URL to extract participants.' 
-              : 'Paste any public Instagram post, TV, or Reel URL to capture comments.'}
+              : platform === 'instagram'
+                ? 'Paste any public Instagram post, TV, or Reel URL to capture comments.'
+                : 'Paste any public TikTok video URL to fetch comments.'}
           </p>
         </div>
 
@@ -91,7 +98,9 @@ export default function MediaFetcher({ platform, onFetch, isLoading, isSimulated
               className="input-premium"
               placeholder={platform === 'youtube' 
                 ? 'e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ' 
-                : 'e.g. https://www.instagram.com/p/C7X-xyz123/'
+                : platform === 'instagram'
+                  ? 'e.g. https://www.instagram.com/p/C7X-xyz123/'
+                  : 'e.g. https://www.tiktok.com/@username/video/123'
               }
               value={url}
               onChange={(e) => {

@@ -62,8 +62,51 @@ export default function SeoHead({ pageType, platform, blogData }) {
       canonical.rel = 'canonical';
       document.head.appendChild(canonical);
     }
-    canonical.href = url;
-  }, [pageType, platform]);
+    // Schema Markup Injection
+    const addOrUpdateSchema = (id, schemaObj) => {
+      let script = document.getElementById(id);
+      if (!script) {
+        script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.id = id;
+        document.head.appendChild(script);
+      }
+      script.text = JSON.stringify(schemaObj);
+    };
+
+    if (pageType === 'thumbnail' || pageType === 'picker') {
+      addOrUpdateSchema('schema-webapp', {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": title,
+        "url": url,
+        "description": description,
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      });
+    }
+
+    if (pageType === 'picker' || pageType === 'blog') {
+      addOrUpdateSchema('schema-faq', {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is this Comment Picker free and safe?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, our tool is 100% free and does not require account passwords." }
+          },
+          {
+            "@type": "Question",
+            "name": "How are winners selected?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Winners are selected using an unbiased cryptographic algorithm ensuring absolute fairness." }
+          }
+        ]
+      });
+    }
+
+  }, [pageType, platform, blogData]);
 
   return null;
 }

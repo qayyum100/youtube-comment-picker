@@ -27,6 +27,14 @@ function extractInstagramShortcode(url) {
   return match ? match[1] : null;
 }
 
+// Helper to extract TikTok video ID from URL
+function extractTikTokId(url) {
+  if (!url) return null;
+  const regExp = /(?:https?:\/\/)?(?:www\.)?tiktok\.com\/@[a-zA-Z0-9_.-]+\/video\/(\d+)/;
+  const match = url.match(regExp);
+  return match ? match[1] : null;
+}
+
 // Route: Get YouTube comments
 app.get('/api/youtube/comments', async (req, res) => {
   const { url } = req.query;
@@ -123,6 +131,27 @@ app.get('/api/instagram/comments', async (req, res) => {
   return res.json({
     simulated: true,
     shortcode,
+    comments: simulatedComments,
+    totalCount: simulatedComments.length
+  });
+});
+
+// Route: Get TikTok comments
+app.get('/api/tiktok/comments', async (req, res) => {
+  const { url } = req.query;
+  const videoId = extractTikTokId(url);
+
+  if (!url) {
+    return res.status(400).json({ error: 'TikTok URL is required' });
+  }
+
+  // Same as Instagram, TikTok requires complex scraping/auth. Use simulation.
+  const mockCount = Math.floor(Math.random() * (35 - 24 + 1)) + 24;
+  const simulatedComments = generateMockComments('tiktok', mockCount);
+
+  return res.json({
+    simulated: true,
+    videoId: videoId || 'tiktok_simulated',
     comments: simulatedComments,
     totalCount: simulatedComments.length
   });

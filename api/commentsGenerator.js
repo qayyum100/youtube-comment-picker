@@ -23,6 +23,13 @@ const INSTAGRAM_USERNAMES = [
   '@glow.skincare', '@design_inspiration', '@neon_vibes_only'
 ];
 
+const TIKTOK_USERNAMES = [
+  '@dance.king', '@trending_now', '@viral_vibes', '@funny.vids.only',
+  '@cooking_hacks_101', '@prank_master', '@lip_sync_queen', '@aesthetic_edits',
+  '@pov_creator', '@duet_this_vid', '@storytime.with.me', '@meme.dealer',
+  '@transition.god', '@tiktok.finds', '@daily.hacks', '@foryoupage.only'
+];
+
 const YOUTUBE_COMMENTS_TEMPLATES = [
   { text: "Awesome video! I really want to win the prize! #giveaway @alex_m @josh_t", likes: 85 },
   { text: "Hope I get lucky this time! Great content as always. @friend_tester", likes: 12 },
@@ -99,10 +106,21 @@ const INSTAGRAM_COMMENTS_TEMPLATES = [
   { text: "Count me in! @user_abc @user_def", likes: 14 }
 ];
 
+const TIKTOK_COMMENTS_TEMPLATES = [
+  { text: "POV: You found the best giveaway 🔥 @friend_one", likes: 1205 },
+  { text: "Wait I actually need this rn 💀 @user_xyz", likes: 809 },
+  { text: "First! Also #giveaway", likes: 45 },
+  { text: "This is the sign I was looking for ✨", likes: 340 },
+  { text: "Not me wanting this immediately 😭 @bestie", likes: 210 },
+  { text: "The algorithm brought me here for a reason 🍀", likes: 530 },
+  { text: "Yes please! Shared the link! 🔗", likes: 110 },
+  { text: "Entering! Good luck everyone! @my_friend_1 @my_friend_2", likes: 88 }
+];
+
 export function generateMockComments(platform, count = 30) {
   const finalCount = Math.max(24, Math.min(35, count));
-  const templates = platform === 'youtube' ? YOUTUBE_COMMENTS_TEMPLATES : INSTAGRAM_COMMENTS_TEMPLATES;
-  const usernames = platform === 'youtube' ? YOUTUBE_USERNAMES : INSTAGRAM_USERNAMES;
+  const templates = platform === 'youtube' ? YOUTUBE_COMMENTS_TEMPLATES : platform === 'instagram' ? INSTAGRAM_COMMENTS_TEMPLATES : TIKTOK_COMMENTS_TEMPLATES;
+  const usernames = platform === 'youtube' ? YOUTUBE_USERNAMES : platform === 'instagram' ? INSTAGRAM_USERNAMES : TIKTOK_USERNAMES;
   
   // Shuffle arrays to ensure variety on each fetch
   const shuffledTemplates = [...templates].sort(() => 0.5 - Math.random());

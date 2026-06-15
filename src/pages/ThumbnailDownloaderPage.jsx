@@ -110,22 +110,29 @@ export default function ThumbnailDownloaderPage() {
               </h3>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-                {thumbnails.map((thumb) => (
-                  <div key={thumb.quality} className="card-premium" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
-                      <h4 style={{ fontSize: '1.1rem', fontWeight: '600' }}>{thumb.label}</h4>
-                      <div style={{ display: 'flex', gap: '12px' }}>
-                        <a 
-                          href={thumb.url} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className="btn-secondary"
-                          style={{ padding: '8px 16px', fontSize: '0.85rem', textDecoration: 'none' }}
-                        >
-                          <ExternalLink size={16} /> Open Full Size
-                        </a>
-                      </div>
-                    </div>
+                <div className="card-premium" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                  
+                  {/* Quality Selector Buttons */}
+                  <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center', paddingBottom: '16px', borderBottom: '1px solid var(--border-dark)' }}>
+                    {thumbnails.map((thumb) => (
+                      <a 
+                        key={thumb.quality}
+                        href={thumb.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className={thumb.quality === 'maxresdefault' ? 'btn-primary' : 'btn-secondary'}
+                        style={{ padding: '10px 16px', fontSize: '0.9rem', textDecoration: 'none' }}
+                      >
+                        <Download size={16} /> {thumb.label}
+                      </a>
+                    ))}
+                  </div>
+
+                  {/* Primary Preview */}
+                  <div>
+                    <h4 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '12px', textAlign: 'center' }}>
+                      Primary Preview (Max Resolution)
+                    </h4>
                     
                     <div style={{ 
                       width: '100%', 
@@ -136,27 +143,26 @@ export default function ThumbnailDownloaderPage() {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      minHeight: '200px'
+                      minHeight: '360px',
+                      aspectRatio: '16/9'
                     }}>
-                      {/* Using an img tag with a fallback in case maxresdefault doesn't exist for older videos */}
                       <img 
-                        src={thumb.url} 
-                        alt={`${thumb.label} thumbnail`}
-                        style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
+                        src={thumbnails[0].url} 
+                        alt="Highest quality thumbnail preview"
+                        style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover' }}
                         onError={(e) => {
-                          // maxresdefault doesn't exist on all videos, fallback to hqdefault
-                          if (thumb.quality === 'maxresdefault' && !e.target.dataset.failed) {
+                          if (!e.target.dataset.failed) {
                             e.target.dataset.failed = true;
-                            e.target.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                            e.target.src = thumbnails[2].url; // fallback to hqdefault
                           }
                         }}
                       />
                     </div>
-                    <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', textAlign: 'center' }}>
-                      Right-click the image and select "Save image as..." to download.
+                    <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', textAlign: 'center', marginTop: '12px' }}>
+                      Right-click the image and select "Save image as..." to download directly, or use the buttons above.
                     </p>
                   </div>
-                ))}
+                </div>
               </div>
             </div>
           )}

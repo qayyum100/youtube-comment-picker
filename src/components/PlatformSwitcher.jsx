@@ -1,28 +1,35 @@
 import React from 'react';
-import { Youtube, Instagram } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Youtube, Instagram, Music } from 'lucide-react';
 
-export default function PlatformSwitcher({ platform, setPlatform }) {
+export default function PlatformSwitcher({ platform }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0 30px' }}>
       <div className="switch-container">
-        <button
-          type="button"
+        <Link
+          to="/youtube-comment-picker"
           className={`switch-btn ${platform === 'youtube' ? 'active' : ''}`}
-          onClick={() => setPlatform('youtube')}
-          id="btn-platform-youtube"
+          style={{ textDecoration: 'none' }}
         >
           <Youtube size={18} color={platform === 'youtube' ? '#fff' : '#ef4444'} />
-          YouTube Video Comments
-        </button>
-        <button
-          type="button"
+          YouTube
+        </Link>
+        <Link
+          to="/instagram-comment-picker"
           className={`switch-btn ${platform === 'instagram' ? 'active' : ''}`}
-          onClick={() => setPlatform('instagram')}
-          id="btn-platform-instagram"
+          style={{ textDecoration: 'none' }}
         >
           <Instagram size={18} color={platform === 'instagram' ? '#fff' : '#ec4899'} />
-          Instagram Posts & Reels
-        </button>
+          Instagram
+        </Link>
+        <Link
+          to="/tiktok-comment-picker"
+          className={`switch-btn ${platform === 'tiktok' ? 'active' : ''}`}
+          style={{ textDecoration: 'none' }}
+        >
+          <Music size={18} color={platform === 'tiktok' ? '#fff' : '#00f2fe'} />
+          TikTok
+        </Link>
       </div>
     </div>
   );

@@ -8,12 +8,16 @@ import EeatGrid from '../components/EeatGrid';
 import SeoHead from '../components/SeoHead';
 import { AlertCircle } from 'lucide-react';
 
-export default function CommentPickerPage() {
-  const [platform, setPlatform] = useState('youtube');
+export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
+  const [platform, setPlatform] = useState(defaultPlatform);
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSimulated, setIsSimulated] = useState(false);
   const [apiError, setApiError] = useState('');
+
+  useEffect(() => {
+    setPlatform(defaultPlatform);
+  }, [defaultPlatform]);
 
   // Winners and standby alternates
   const [winners, setWinners] = useState([]);
@@ -63,7 +67,10 @@ export default function CommentPickerPage() {
     setStandbys([]);
 
     try {
-      const endpoint = platform === 'youtube' ? '/api/youtube/comments' : '/api/instagram/comments';
+      let endpoint = '/api/youtube/comments';
+      if (platform === 'instagram') endpoint = '/api/instagram/comments';
+      if (platform === 'tiktok') endpoint = '/api/tiktok/comments';
+      
       const encodedUrl = encodeURIComponent(url);
 
       const response = await fetch(`${endpoint}?url=${encodedUrl}`);
@@ -162,18 +169,15 @@ export default function CommentPickerPage() {
 
           {/* Welcome Banner */}
           <div style={{ textAlign: 'center', marginBottom: '32px' }} className="animate-fade-in">
-            <h1 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '8px', lineHeight: '1.2' }}>
-              Youtube Comment Picker - <span style={{ color: 'var(--brand-indigo)' }}>YouTube Random Comment Picker:</span> Free Giveaway Tool
+            <h1 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '8px', lineHeight: '1.2', textTransform: 'capitalize' }}>
+              {platform} Comment Picker - <span style={{ color: 'var(--brand-indigo)' }}>Random Winner Generator</span>
             </h1>
             <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', maxWidth: '600px', margin: '0 auto' }}>
               The premier lottery & drawing suite for giveaways. Unbiased, fast, and secure. Run verification certs instantly.
             </p>
           </div>
 
-          <PlatformSwitcher
-            platform={platform}
-            setPlatform={setPlatform}
-          />
+          <PlatformSwitcher platform={platform} />
 
           {apiError && (
             <div style={{
