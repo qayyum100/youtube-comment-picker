@@ -1,16 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
-import CommentPickerPage from './pages/CommentPickerPage';
-import ThumbnailDownloaderPage from './pages/ThumbnailDownloaderPage';
-import BlogIndexPage from './pages/BlogIndexPage';
-import BlogPostPage from './pages/BlogPostPage';
+
+const CommentPickerPage = lazy(() => import('./pages/CommentPickerPage'));
+const ThumbnailDownloaderPage = lazy(() => import('./pages/ThumbnailDownloaderPage'));
+const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage'));
+const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
+
 import PrivacyModal from './components/PrivacyModal';
 import TermsModal from './components/TermsModal';
 import DisclaimerModal from './components/DisclaimerModal';
-import { Download, Gift, BookOpen, Sun, Moon } from 'lucide-react';
+import { Download, Gift, BookOpen, Sun, Moon, Menu, X } from 'lucide-react';
 
-function Navigation() {
+function Navigation({ isMobileMenuOpen, setIsMobileMenuOpen }) {
   const location = useLocation();
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname, setIsMobileMenuOpen]);
 
   const navLinkStyle = (path) => ({
     textDecoration: 'none',
@@ -27,7 +33,7 @@ function Navigation() {
   });
 
   return (
-    <nav style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+    <nav className={`nav-container ${isMobileMenuOpen ? 'open' : ''}`}>
       <Link to="/youtube-comment-picker" style={navLinkStyle('/youtube-comment-picker')}>
         <Gift size={16} />
         Comment Picker
@@ -49,6 +55,7 @@ export default function App() {
   const [showTerms, setShowTerms] = useState(false);
   const [showDisclaimer, setShowDisclaimer] = useState(false);
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -84,7 +91,7 @@ export default function App() {
 
             {/* Navigation links & Theme Toggle */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
-              <Navigation />
+              <Navigation isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
               <button 
                 onClick={toggleTheme} 
                 style={{
@@ -104,20 +111,29 @@ export default function App() {
               >
                 {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
               </button>
+              <button 
+                className="mobile-menu-btn"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                aria-label="Toggle Menu"
+              >
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
             </div>
           </div>
         </header>
 
         {/* Dynamic Route Content */}
-        <Routes>
-          <Route path="/" element={<CommentPickerPage defaultPlatform="youtube" />} />
-          <Route path="/youtube-comment-picker" element={<CommentPickerPage defaultPlatform="youtube" />} />
-          <Route path="/instagram-comment-picker" element={<CommentPickerPage defaultPlatform="instagram" />} />
-          <Route path="/tiktok-comment-picker" element={<CommentPickerPage defaultPlatform="tiktok" />} />
-          <Route path="/thumbnail-downloader" element={<ThumbnailDownloaderPage />} />
-          <Route path="/blogs" element={<BlogIndexPage />} />
-          <Route path="/blog/:slug" element={<BlogPostPage />} />
-        </Routes>
+        <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1, padding: '40px' }}><div className="animate-float" style={{ color: 'var(--brand-indigo)', fontWeight: 'bold' }}>Loading...</div></div>}>
+          <Routes>
+            <Route path="/" element={<CommentPickerPage defaultPlatform="youtube" />} />
+            <Route path="/youtube-comment-picker" element={<CommentPickerPage defaultPlatform="youtube" />} />
+            <Route path="/instagram-comment-picker" element={<CommentPickerPage defaultPlatform="instagram" />} />
+            <Route path="/tiktok-comment-picker" element={<CommentPickerPage defaultPlatform="tiktok" />} />
+            <Route path="/thumbnail-downloader" element={<ThumbnailDownloaderPage />} />
+            <Route path="/blogs" element={<BlogIndexPage />} />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
+          </Routes>
+        </Suspense>
 
         {/* Shared Footer */}
         <footer style={{
