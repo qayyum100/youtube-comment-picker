@@ -4,7 +4,7 @@ import MediaFetcher from '../components/MediaFetcher';
 import FilterDashboard from '../components/FilterDashboard';
 import DrawingDesk from '../components/DrawingDesk';
 import CertificateModal from '../components/CertificateModal';
-import EeatGrid from '../components/EeatGrid';
+import CompetitorContent from '../components/CompetitorContent';
 import SeoHead from '../components/SeoHead';
 import { AlertCircle } from 'lucide-react';
 
@@ -228,7 +228,7 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
             />
           )}
 
-          <EeatGrid />
+          <CompetitorContent />
 
         </div>
       </main>
