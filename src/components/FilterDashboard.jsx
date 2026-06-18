@@ -30,7 +30,7 @@ export default function FilterDashboard({ filters, setFilters, totalComments, fi
   };
 
   return (
-    <div className="card-premium animate-fade-in" style={{ marginBottom: '24px' }}>
+    <section className="card-premium animate-fade-in" style={{ marginBottom: '24px' }} aria-labelledby="filter-dashboard-title">
       {/* Header Accordion Trigger */}
       <div 
         onClick={() => setIsOpen(!isOpen)}
@@ -41,10 +41,12 @@ export default function FilterDashboard({ filters, setFilters, totalComments, fi
           cursor: 'pointer',
           userSelect: 'none'
         }}
+        role="button"
+        aria-expanded={isOpen}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <SlidersHorizontal size={20} style={{ color: 'var(--brand-indigo)' }} />
-          <h2 style={{ fontSize: '1.25rem' }}>Advanced Algorithmic Filters</h2>
+          <h2 id="filter-dashboard-title" style={{ fontSize: '1.25rem' }}>Advanced Algorithmic Filters</h2>
           {activeFiltersCount > 0 && (
             <span style={{
               backgroundColor: '#eef2ff',
@@ -222,6 +224,6 @@ export default function FilterDashboard({ filters, setFilters, totalComments, fi
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 }

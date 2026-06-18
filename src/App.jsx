@@ -108,6 +108,7 @@ export default function App() {
                   transition: 'all 0.2s ease'
                 }}
                 title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+                aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
               >
                 {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
               </button>
@@ -150,9 +151,9 @@ export default function App() {
             <span>© 2026 Youtube Comment Picker. All rights reserved.</span>
             <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
               <Link to="/blogs" style={{ color: 'inherit', textDecoration: 'none' }}>Blogs</Link>
-              <span style={{ cursor: 'pointer' }} onClick={() => setShowDisclaimer(true)}>Disclaimer</span>
-              <span style={{ cursor: 'pointer' }} onClick={() => setShowPrivacy(true)}>Privacy Policy</span>
-              <span style={{ cursor: 'pointer' }} onClick={() => setShowTerms(true)}>Terms of Service</span>
+              <span role="button" tabIndex={0} style={{ cursor: 'pointer' }} onClick={() => setShowDisclaimer(true)} onKeyDown={(e) => e.key === 'Enter' && setShowDisclaimer(true)}>Disclaimer</span>
+              <span role="button" tabIndex={0} style={{ cursor: 'pointer' }} onClick={() => setShowPrivacy(true)} onKeyDown={(e) => e.key === 'Enter' && setShowPrivacy(true)}>Privacy Policy</span>
+              <span role="button" tabIndex={0} style={{ cursor: 'pointer' }} onClick={() => setShowTerms(true)} onKeyDown={(e) => e.key === 'Enter' && setShowTerms(true)}>Terms of Service</span>
             </div>
           </div>
         </footer>
