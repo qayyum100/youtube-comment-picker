@@ -139,20 +139,32 @@ export default function CompetitorContent() {
       <section style={{ maxWidth: '800px', margin: '0 auto', width: '100%' }}>
         <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '32px' }}>Frequently Asked Questions</h2>
         <FAQItem 
-          question="What is YouTube Comment Picker?" 
-          answer="YouTube Comment Picker is a web app that helps you scale engagement with your YouTube audience. It's the ultimate YouTube comment management tool for giveaways." 
+          question="What is the YouTube Comment Random Picker?" 
+          answer="The YouTube Comment Random Picker is a web app that helps you scale engagement with your YouTube audience. It's the ultimate YouTube comment management tool for giveaways." 
         />
         <FAQItem 
-          question="How does it work?" 
-          answer="YouTube Comment Picker connects to your YouTube channel via the official API. You set up rules that match specific text or use filters, and we randomly select a winner based on your criteria securely." 
+          question="How does the YouTube Comment Random Picker work?" 
+          answer="The YouTube Comment Random Picker connects to your YouTube channel via the official API. You set up rules that match specific text or use filters, and we randomly select a winner based on your criteria securely." 
         />
         <FAQItem 
-          question="How is YouTube Comment Picker different from YouTube Studio's built-in tools?" 
-          answer="YouTube Studio lets you moderate comments manually — one at a time. YouTube Comment Picker adds automation on top: keyword rules, filtering, and true cryptographic randomness to select winners fairly." 
+          question="How is the YouTube Comment Random Picker different from YouTube Studio's built-in tools?" 
+          answer="YouTube Studio lets you moderate comments manually — one at a time. Our YouTube Comment Random Picker adds automation on top: keyword rules, filtering, and true cryptographic randomness to select winners fairly." 
         />
         <FAQItem 
-          question="Is it safe?" 
+          question="Is the YouTube Comment Random Picker safe to use?" 
           answer="Absolutely. We use official YouTube APIs and OAuth 2.0 for secure authentication. We don't store your password, and all drawing algorithms run fairly and securely in your browser." 
+        />
+        <FAQItem 
+          question="How many comments can the YouTube Comment Random Picker load?" 
+          answer="Our YouTube Comment Random Picker can load up to 500 comments from any public video or Short, ensuring all recent participants are included in your giveaway draw." 
+        />
+        <FAQItem 
+          question="Can I use the YouTube Comment Random Picker on mobile devices?" 
+          answer="Yes! Our YouTube Comment Random Picker is fully mobile responsive. You can easily pick a giveaway winner directly from your smartphone or tablet." 
+        />
+        <FAQItem 
+          question="Does the YouTube Comment Random Picker filter spam or duplicate users?" 
+          answer="Yes, our advanced algorithms allow you to filter out duplicate commenters, ensuring a fair 'one entry per user' drawing process for your contests." 
         />
       </section>
 
