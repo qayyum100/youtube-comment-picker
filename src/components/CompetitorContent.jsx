@@ -92,6 +92,14 @@ export default function CompetitorContent() {
             <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>Text Search</h3>
             <p style={{ color: 'var(--text-secondary)' }}>The Text Search filter allows you to select a random winner from all comments on your YouTube video that contain a specific word or phrase. You can even use hash tags, links, and emojis! 🔥</p>
           </div>
+          <div className="card-premium">
+            <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>Subscribers Only</h3>
+            <p style={{ color: 'var(--text-secondary)' }}>Our YouTube Comment Random Picker can verify public subscriptions, ensuring you only reward true fans who are subscribed to your channel.</p>
+          </div>
+          <div className="card-premium">
+            <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>Raffle Wheel UI</h3>
+            <p style={{ color: 'var(--text-secondary)' }}>Experience our interactive Wheel of Fortune animation. This ensures a transparent, exciting, and highly visual winner selection process directly inside the YouTube Comment Random Picker.</p>
+          </div>
         </div>
       </section>
 
@@ -165,6 +173,18 @@ export default function CompetitorContent() {
         <FAQItem 
           question="Does the YouTube Comment Random Picker filter spam or duplicate users?" 
           answer="Yes, our advanced algorithms allow you to filter out duplicate commenters, ensuring a fair 'one entry per user' drawing process for your contests." 
+        />
+        <FAQItem 
+          question="Can I filter by Subscribers Only using the YouTube Comment Random Picker?" 
+          answer="Yes! Our YouTube Comment Random Picker includes a powerful 'Subscribers Only' filter. It securely verifies if a user is publicly subscribed to your channel before allowing them to enter the giveaway pool." 
+        />
+        <FAQItem 
+          question="How does the Raffle Wheel UI ensure fairness?" 
+          answer="The Raffle Wheel UI in our YouTube Comment Random Picker is powered by a secure cryptographic algorithm. The spinning animation provides an exciting visual experience for your viewers while guaranteeing a 100% unbiased, random result." 
+        />
+        <FAQItem 
+          question="What is the First Commenter Bonus in the YouTube Comment Random Picker?" 
+          answer="The First Commenter Bonus is a unique feature in our YouTube Comment Random Picker that identifies the earliest comment on your video and grants it extra entries in the draw, helping you reward your most dedicated subscribers." 
         />
       </section>
 

@@ -41,7 +41,9 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
       minTags: 0,
       minLikes: 0,
       excludeList: '',
-      duplicateMode: 'fair'
+      duplicateMode: 'fair',
+      subscribersOnly: false,
+      firstCommentBonus: false
     };
   });
 
@@ -143,6 +145,10 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
       });
     }
 
+    if (filters.subscribersOnly) {
+      result = result.filter(c => c.isSubscribed !== false);
+    }
+
     if (filters.duplicateMode === 'fair') {
       const seenAuthors = new Set();
       result = result.filter(c => {
@@ -153,6 +159,22 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
         seenAuthors.add(author);
         return true;
       });
+    }
+
+    // First Commenter Bonus
+    if (filters.firstCommentBonus && result.length > 0) {
+      let oldest = result[0];
+      let oldestDate = new Date(oldest.timestamp).getTime();
+      for (let i = 1; i < result.length; i++) {
+        const d = new Date(result[i].timestamp).getTime();
+        if (d < oldestDate) {
+          oldestDate = d;
+          oldest = result[i];
+        }
+      }
+      for (let i = 0; i < 5; i++) {
+        result.push({ ...oldest, id: `${oldest.id}_bonus_${i}`, isBonus: true });
+      }
     }
 
     return result;

@@ -145,7 +145,8 @@ export function generateMockComments(platform, count = 30) {
       text: template.text,
       likes: template.likes + Math.floor(Math.random() * 10), // Add slight random variation
       timestamp: date.toISOString(),
-      platform: platform
+      platform: platform,
+      isSubscribed: Math.random() > 0.3
     });
   }
   

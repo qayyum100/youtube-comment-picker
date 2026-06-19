@@ -44,6 +44,74 @@ function formatDate(ts) {
   }
 }
 
+function RaffleWheel({ isDrawing, winnerName }) {
+  const [rotation, setRotation] = useState(0);
+
+  React.useEffect(() => {
+    if (isDrawing) {
+      setRotation(prev => prev + 1800 + Math.floor(Math.random() * 360));
+    }
+  }, [isDrawing]);
+
+  const wheelStyle = {
+    width: '250px',
+    height: '250px',
+    borderRadius: '50%',
+    background: `conic-gradient(
+      #4f46e5 0deg 30deg, #ec4899 30deg 60deg, 
+      #f97316 60deg 90deg, #8b5cf6 90deg 120deg, 
+      #14b8a6 120deg 150deg, #f43f5e 150deg 180deg, 
+      #4f46e5 180deg 210deg, #ec4899 210deg 240deg, 
+      #f97316 240deg 270deg, #8b5cf6 270deg 300deg, 
+      #14b8a6 300deg 330deg, #f43f5e 330deg 360deg
+    )`,
+    transition: 'transform 2.5s cubic-bezier(0.25, 1, 0.5, 1)',
+    transform: `rotate(${rotation}deg)`,
+    margin: '0 auto',
+    boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
+    border: '4px solid #fff',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  };
+
+  return (
+    <div style={{ textAlign: 'center', marginBottom: '20px', position: 'relative' }}>
+      <div style={{ position: 'relative', width: '250px', margin: '0 auto' }}>
+        <div style={{ 
+          position: 'absolute', 
+          top: '-15px', 
+          left: '50%', 
+          transform: 'translateX(-50%)',
+          width: 0, 
+          height: 0, 
+          borderLeft: '15px solid transparent',
+          borderRight: '15px solid transparent',
+          borderTop: '25px solid var(--text-primary)',
+          zIndex: 10
+        }} />
+        <div style={wheelStyle}>
+          <div style={{
+            background: 'var(--bg-panel)',
+            width: '100px',
+            height: '100px',
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: 'inset 0 2px 5px rgba(0,0,0,0.1)'
+          }}>
+            <span style={{ fontSize: '2rem' }}>🎰</span>
+          </div>
+        </div>
+      </div>
+      <div style={{ marginTop: '16px', fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--brand-indigo)' }}>
+        {isDrawing ? "Spinning..." : winnerName ? `Landed on: ${winnerName}!` : ""}
+      </div>
+    </div>
+  );
+}
+
 // ─── component ───────────────────────────────────────────────────────────────
 
 export default function DrawingDesk({
@@ -283,11 +351,12 @@ export default function DrawingDesk({
       )}
 
       {/* ── shuffler ── */}
-      {isDrawing && (
-        <div className="shuffler-container animate-fade-in" style={{ marginBottom: '20px' }}>
-          <div className="shuffler-item">
-            <span style={{ color: 'var(--brand-indigo)' }}>🎰 {shufflingName}</span>
-          </div>
+      {(isDrawing || (hasResults && winners.length > 0)) && (
+        <div className="animate-fade-in" style={{ marginBottom: '20px' }}>
+          <RaffleWheel 
+            isDrawing={isDrawing} 
+            winnerName={hasResults && !isDrawing ? winners[0]?.author : null} 
+          />
         </div>
       )}
 

@@ -106,8 +106,31 @@ export default function FilterDashboard({ filters, setFilters, totalComments, fi
                 </div>
                 <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '6px' }}>
                   {filters.duplicateMode === 'fair' 
-                    ? 'Evaluates only the first qualifying comment per user handle. Perfect for fair draws.' 
-                    : 'Each qualifying comment is counted as a separate entry ticket, rewarding multiple comments.'}
+                    ? 'Evaluates only the first qualifying comment per user handle. Perfect for fair YouTube Comment Random Picker draws.' 
+                    : 'Each qualifying comment is counted as a separate entry ticket, rewarding multiple comments in your YouTube Comment Random Picker giveaways.'}
+                </p>
+              </div>
+
+              {/* Subscribers Only */}
+              <div style={{ marginTop: '8px' }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', fontWeight: '500', color: 'var(--text-secondary)', marginBottom: '8px' }}>
+                  <UserCheck size={14} style={{ color: 'var(--brand-indigo)' }} />
+                  Subscribers Only
+                </label>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <input
+                    type="checkbox"
+                    id="filter-subscribers"
+                    checked={filters.subscribersOnly}
+                    onChange={(e) => handleFilterChange('subscribersOnly', e.target.checked)}
+                    style={{ width: '16px', height: '16px', accentColor: 'var(--brand-indigo)', cursor: 'pointer' }}
+                  />
+                  <label htmlFor="filter-subscribers" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', cursor: 'pointer' }}>
+                    Require public channel subscription
+                  </label>
+                </div>
+                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '4px' }}>
+                  A powerful feature for the YouTube Comment Random Picker. Disqualifies users who are not publicly subscribed to your channel.
                 </p>
               </div>
 
@@ -126,7 +149,30 @@ export default function FilterDashboard({ filters, setFilters, totalComments, fi
                   id="filter-keyword"
                 />
                 <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '4px' }}>
-                  Leave empty to ignore, or type a required hashtag or phrase.
+                  Leave empty to ignore, or type a required hashtag or phrase for your YouTube Comment Random Picker giveaway.
+                </p>
+              </div>
+
+              {/* First Commenter Bonus */}
+              <div style={{ marginTop: '8px' }}>
+                <label style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.85rem', fontWeight: '500', color: 'var(--text-secondary)', marginBottom: '8px' }}>
+                  <Users size={14} style={{ color: 'var(--brand-indigo)' }} />
+                  First Commenter Bonus
+                </label>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <input
+                    type="checkbox"
+                    id="filter-first-comment"
+                    checked={filters.firstCommentBonus}
+                    onChange={(e) => handleFilterChange('firstCommentBonus', e.target.checked)}
+                    style={{ width: '16px', height: '16px', accentColor: 'var(--brand-indigo)', cursor: 'pointer' }}
+                  />
+                  <label htmlFor="filter-first-comment" style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', cursor: 'pointer' }}>
+                    Grant +5 entries to the earliest commenter
+                  </label>
+                </div>
+                <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '4px' }}>
+                  Reward your most dedicated fans in the YouTube Comment Random Picker by boosting the very first commenter.
                 </p>
               </div>
             </div>
