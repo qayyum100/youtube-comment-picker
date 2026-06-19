@@ -170,7 +170,7 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
           {/* Welcome Banner */}
           <div style={{ textAlign: 'center', marginBottom: '32px' }} className="animate-fade-in">
             <h1 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '8px', lineHeight: '1.2', textTransform: 'capitalize' }}>
-              {platform} Comment Picker - <span style={{ color: 'var(--brand-indigo)' }}>Random Winner Generator</span>
+              {platform === 'youtube' ? 'YouTube Comment Random Picker' : `${platform} Comment Picker`} - <span style={{ color: 'var(--brand-indigo)' }}>Random Winner Generator</span>
             </h1>
             <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', maxWidth: '600px', margin: '0 auto' }}>
               The premier lottery & drawing suite for giveaways. Unbiased, fast, and secure. Run verification certs instantly.

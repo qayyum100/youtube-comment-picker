@@ -15,9 +15,14 @@ export default function SeoHead({ pageType, platform, blogData }) {
       title = `${blogData.title} | Creator Guides`;
       description = blogData.excerpt;
     } else {
-      const platformLabel = platform === 'youtube' ? 'YouTube Video Comments' : 'Instagram Posts & Reels';
-      title = `${platformLabel} Picker — Premium Giveaway Drawing Desk`;
-      description = `Extract and pick random giveaway winners from your ${platformLabel}. Apply advanced criteria like friend mentions, minimum likes, duplicate comment controls, and keyword filters.`;
+      if (platform === 'youtube') {
+        title = 'YouTube Comment Random Picker — Free Giveaway Winner Generator';
+        description = 'Use our free YouTube Comment Random Picker to easily extract and select a random winner for your YouTube giveaways, contests, and sweepstakes.';
+      } else {
+        const platformLabel = 'Instagram Posts & Reels';
+        title = `${platformLabel} Picker — Premium Giveaway Drawing Desk`;
+        description = `Extract and pick random giveaway winners from your ${platformLabel}. Apply advanced criteria like friend mentions, minimum likes, duplicate comment controls, and keyword filters.`;
+      }
     }
 
     let image = 'https://www.youtubecommentpickerthumbnaildownload.online/og-image.png';

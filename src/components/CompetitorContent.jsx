@@ -50,10 +50,10 @@ export default function CompetitorContent() {
         <div>
           <h2 style={{ fontSize: '2rem', marginBottom: '16px', color: 'var(--text-primary)' }}>Random Comment Picker for Youtube</h2>
           <p style={{ color: 'var(--text-secondary)', marginBottom: '16px' }}>
-            Our YouTube Random Comment Picker offers a simple and efficient method to select a random winner from all comments (first 500) on your YouTube video. Perfect for determining winners in YouTube giveaways, promotions, sweepstakes, or contests.
+            Our YouTube Comment Random Picker offers a simple and efficient method to select a random winner from all comments (first 500) on your YouTube video. Perfect for determining winners in YouTube giveaways, promotions, sweepstakes, or contests.
           </p>
           <p style={{ color: 'var(--text-secondary)' }}>
-            All you need to do is input your YouTube video link, choose filters and settings, retrieve comments, and begin the raffle to select a random winner. The best part is, the YouTube Random Comment Picker is available for you to use at no cost! It works with both standard YouTube videos and YouTube Shorts, so you can use it for giveaways on any type of video content.
+            All you need to do is input your YouTube video link, choose filters and settings, retrieve comments, and begin the raffle to select a random winner. The best part is, the YouTube Comment Random Picker is available for you to use at no cost! It works with both standard YouTube videos and YouTube Shorts, so you can use it for giveaways on any type of video content.
           </p>
         </div>
       </section>
@@ -61,10 +61,10 @@ export default function CompetitorContent() {
       <section className="grid-cols-2" style={{ alignItems: 'center', direction: 'rtl' }}>
         <div style={{ direction: 'ltr' }}>
           <h2 style={{ fontSize: '2rem', marginBottom: '16px', color: 'var(--text-primary)' }}>How do I select a winner for a YouTube giveaway contest?</h2>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '16px' }}>Selecting a winner for a YouTube giveaway contest is easy with our YouTube Random Comment Picker. Simply follow these steps:</p>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: '16px' }}>Selecting a winner for a YouTube giveaway contest is easy with our YouTube Comment Random Picker. Simply follow these steps:</p>
           <ul style={{ color: 'var(--text-secondary)', paddingLeft: '24px', lineHeight: 1.8 }}>
             <li>Find the URL of your YouTube video</li>
-            <li>Enter the URL of your YouTube video into the YouTube Random Comment Picker search bar</li>
+            <li>Enter the URL of your YouTube video into the YouTube Comment Random Picker search bar</li>
             <li>Select filters and settings for your YouTube giveaway contest</li>
             <li>Retrieve comments from your YouTube video</li>
             <li>Start the raffle to select a random winner</li>
@@ -98,9 +98,9 @@ export default function CompetitorContent() {
       {/* More Content Sections */}
       <section className="grid-cols-2" style={{ alignItems: 'center' }}>
         <div>
-          <h2 style={{ fontSize: '2rem', marginBottom: '16px', color: 'var(--text-primary)' }}>Benefits of Using a YouTube Comment Picker</h2>
+          <h2 style={{ fontSize: '2rem', marginBottom: '16px', color: 'var(--text-primary)' }}>Benefits of Using a YouTube Comment Random Picker</h2>
           <p style={{ color: 'var(--text-secondary)' }}>
-            Utilizing a YouTube Comment Picker has many benefits for content creators and businesses. It streamlines the process of conducting fair and impartial giveaways or contests, enhances audience engagement, and incentivizes viewers to participate in the community. By automating winner selection, you not only save time but also provide transparency to your audience, which can lead to increased trust and channel growth.
+            Utilizing a YouTube Comment Random Picker has many benefits for content creators and businesses. It streamlines the process of conducting fair and impartial giveaways or contests, enhances audience engagement, and incentivizes viewers to participate in the community. By automating winner selection, you not only save time but also provide transparency to your audience, which can lead to increased trust and channel growth.
           </p>
         </div>
       </section>
@@ -112,7 +112,7 @@ export default function CompetitorContent() {
           <ul style={{ color: 'var(--text-secondary)', paddingLeft: '24px', lineHeight: 1.8, marginBottom: '16px' }}>
             <li>Start by defining clear rules and a compelling prize</li>
             <li>Promote your giveaway across multiple platforms to maximize reach</li>
-            <li>Ensure a fair selection process by using our reliable YouTube Random Comment Picker</li>
+            <li>Ensure a fair selection process by using our reliable YouTube Comment Random Picker</li>
             <li>Engage with your audience during the giveaway to maintain excitement</li>
             <li>Consider a follow-up video announcing winners to bolster community trust and connections</li>
           </ul>
