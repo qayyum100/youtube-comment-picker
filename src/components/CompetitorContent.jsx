@@ -1,45 +1,5 @@
 import React, { useState } from 'react';
 
-function FAQItem({ question, answer }) {
-  const [isOpen, setIsOpen] = useState(false);
-  return (
-    <details 
-      style={{
-        background: 'var(--bg-panel)',
-        borderRadius: '16px',
-        padding: '16px 24px',
-        border: '1px solid var(--border-dark)',
-        overflow: 'hidden',
-        transition: 'all 0.3s ease',
-        width: '100%',
-        marginBottom: '16px'
-      }}
-      open={isOpen}
-      onClick={(e) => {
-        e.preventDefault();
-        setIsOpen(!isOpen);
-      }}
-    >
-      <summary style={{
-        fontSize: '1.2rem',
-        fontWeight: '700',
-        cursor: 'pointer',
-        listStyle: 'none',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-      }}>
-        <div>{question}</div>
-        <span style={{ fontSize: '1.5rem', fontWeight: '300', transform: isOpen ? 'rotate(45deg)' : 'none', transition: 'transform 0.3s' }}>+</span>
-      </summary>
-      {isOpen && (
-        <div style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginTop: '16px', fontSize: '1.05rem' }}>
-          {answer}
-        </div>
-      )}
-    </details>
-  );
-}
 
 export default function CompetitorContent() {
   return (
@@ -143,50 +103,6 @@ export default function CompetitorContent() {
         </p>
       </section>
 
-      {/* FAQ Section */}
-      <section style={{ maxWidth: '800px', margin: '0 auto', width: '100%' }}>
-        <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '32px' }}>Frequently Asked Questions</h2>
-        <FAQItem 
-          question="What is the YouTube Comment Random Picker?" 
-          answer="The YouTube Comment Random Picker is a web app that helps you scale engagement with your YouTube audience. It's the ultimate YouTube comment management tool for giveaways." 
-        />
-        <FAQItem 
-          question="How does the YouTube Comment Random Picker work?" 
-          answer="The YouTube Comment Random Picker connects to your YouTube channel via the official API. You set up rules that match specific text or use filters, and we randomly select a winner based on your criteria securely." 
-        />
-        <FAQItem 
-          question="How is the YouTube Comment Random Picker different from YouTube Studio's built-in tools?" 
-          answer="YouTube Studio lets you moderate comments manually — one at a time. Our YouTube Comment Random Picker adds automation on top: keyword rules, filtering, and true cryptographic randomness to select winners fairly." 
-        />
-        <FAQItem 
-          question="Is the YouTube Comment Random Picker safe to use?" 
-          answer="Absolutely. We use official YouTube APIs and OAuth 2.0 for secure authentication. We don't store your password, and all drawing algorithms run fairly and securely in your browser." 
-        />
-        <FAQItem 
-          question="How many comments can the YouTube Comment Random Picker load?" 
-          answer="Our YouTube Comment Random Picker can load up to 500 comments from any public video or Short, ensuring all recent participants are included in your giveaway draw." 
-        />
-        <FAQItem 
-          question="Can I use the YouTube Comment Random Picker on mobile devices?" 
-          answer="Yes! Our YouTube Comment Random Picker is fully mobile responsive. You can easily pick a giveaway winner directly from your smartphone or tablet." 
-        />
-        <FAQItem 
-          question="Does the YouTube Comment Random Picker filter spam or duplicate users?" 
-          answer="Yes, our advanced algorithms allow you to filter out duplicate commenters, ensuring a fair 'one entry per user' drawing process for your contests." 
-        />
-        <FAQItem 
-          question="Can I filter by Subscribers Only using the YouTube Comment Random Picker?" 
-          answer="Yes! Our YouTube Comment Random Picker includes a powerful 'Subscribers Only' filter. It securely verifies if a user is publicly subscribed to your channel before allowing them to enter the giveaway pool." 
-        />
-        <FAQItem 
-          question="How does the Raffle Wheel UI ensure fairness?" 
-          answer="The Raffle Wheel UI in our YouTube Comment Random Picker is powered by a secure cryptographic algorithm. The spinning animation provides an exciting visual experience for your viewers while guaranteeing a 100% unbiased, random result." 
-        />
-        <FAQItem 
-          question="What is the First Commenter Bonus in the YouTube Comment Random Picker?" 
-          answer="The First Commenter Bonus is a unique feature in our YouTube Comment Random Picker that identifies the earliest comment on your video and grants it extra entries in the draw, helping you reward your most dedicated subscribers." 
-        />
-      </section>
 
     </div>
   );

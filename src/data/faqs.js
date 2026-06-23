@@ -167,5 +167,17 @@ export const faqs = [
     category: "Troubleshooting",
     question: "What if I accidentally close the page?",
     answer: "Since we do not store data on our servers for privacy reasons, closing the page will wipe the current session. You will need to fetch the comments again."
+  },
+  
+  // Advanced Features & Comparisons
+  {
+    category: "Advanced Features",
+    question: "How is the YouTube Comment Random Picker different from YouTube Studio's built-in tools?",
+    answer: "YouTube Studio lets you moderate comments manually — one at a time. Our YouTube Comment Random Picker adds automation on top: keyword rules, filtering, and true cryptographic randomness to select winners fairly."
+  },
+  {
+    category: "Advanced Features",
+    question: "How does the Raffle Wheel UI ensure fairness?",
+    answer: "The Raffle Wheel UI in our YouTube Comment Random Picker is powered by a secure cryptographic algorithm. The spinning animation provides an exciting visual experience for your viewers while guaranteeing a 100% unbiased, random result."
   }
 ];
