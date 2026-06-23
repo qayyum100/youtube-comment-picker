@@ -5,6 +5,7 @@ import FilterDashboard from '../components/FilterDashboard';
 import DrawingDesk from '../components/DrawingDesk';
 import CertificateModal from '../components/CertificateModal';
 import CompetitorContent from '../components/CompetitorContent';
+import FaqSection from '../components/FaqSection';
 import SeoHead from '../components/SeoHead';
 import { AlertCircle } from 'lucide-react';
 
@@ -251,6 +252,8 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
           )}
 
           <CompetitorContent />
+          
+          <FaqSection />
 
         </div>
       </main>
