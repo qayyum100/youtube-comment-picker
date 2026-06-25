@@ -72,11 +72,12 @@ export default function App() {
         
         {/* Shared Premium Header */}
         <header style={{
-          borderBottom: '1px solid var(--border-dark)',
+          borderBottom: '1px solid var(--border-light)',
           padding: '16px 0',
           backgroundColor: 'var(--bg-card)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
+          backdropFilter: 'blur(28px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(28px) saturate(180%)',
+          boxShadow: 'var(--glass-inner-shadow), 0 4px 30px rgba(0, 0, 0, 0.1)',
           position: 'sticky',
           top: 0,
           zIndex: 50
@@ -96,8 +97,11 @@ export default function App() {
                 onClick={toggleTheme} 
                 style={{
                   background: 'var(--bg-panel)',
-                  border: '1px solid var(--border-dark)',
+                  border: '1px solid var(--border-light)',
                   color: 'var(--text-primary)',
+                  boxShadow: 'var(--glass-inner-shadow), 0 4px 12px rgba(0,0,0,0.05)',
+                  backdropFilter: 'blur(20px) saturate(160%)',
+                  WebkitBackdropFilter: 'blur(20px) saturate(160%)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -138,11 +142,12 @@ export default function App() {
 
         {/* Shared Footer */}
         <footer style={{
-          borderTop: '1px solid var(--border-dark)',
+          borderTop: '1px solid var(--border-light)',
           padding: '24px 0',
           backgroundColor: 'var(--bg-panel)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
+          backdropFilter: 'blur(28px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(28px) saturate(180%)',
+          boxShadow: '0 -4px 30px rgba(0, 0, 0, 0.05)',
           fontSize: '0.8rem',
           color: 'var(--text-muted)',
           marginTop: 'auto'
