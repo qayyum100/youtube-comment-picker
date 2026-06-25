@@ -149,51 +149,43 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Glowing Border Trail Animation (Rotating Gradient) */
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
 .active-border {
   position: relative;
-  overflow: hidden;
-  border: none !important;
-  z-index: 1;
+  border-color: transparent !important;
 }
 
 .active-border::before {
   content: "";
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
+  inset: -1px;
+  border-radius: var(--radius-lg);
+  padding: 2px;
   background: conic-gradient(
+    from var(--border-angle),
     transparent,
     rgba(99, 102, 241, 0.1),
     var(--brand-indigo),
     #e1306c,
     transparent 50%
   );
-  animation: borderRotate 4s linear infinite;
-  z-index: 0;
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: borderRotateProperty 4s linear infinite;
+  pointer-events: none;
 }
 
-.active-border::after {
-  content: "";
-  position: absolute;
-  inset: 2px;
-  background: var(--bg-card);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: calc(var(--radius-lg) - 2px);
-  z-index: 0;
-  border: 1px solid var(--border-dark);
-}
-
-.active-border > * {
-  position: relative;
-  z-index: 1;
-}
-
-@keyframes borderRotate {
+@keyframes borderRotateProperty {
   100% {
-    transform: rotate(360deg);
+    --border-angle: 360deg;
   }
 }
 
