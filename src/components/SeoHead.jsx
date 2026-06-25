@@ -54,6 +54,7 @@ export default function SeoHead({ pageType, platform, blogData }) {
     updateMetaTag('meta[property="og:url"]', 'property', 'og:url', url);
     updateMetaTag('meta[property="og:image"]', 'property', 'og:image', image);
     updateMetaTag('meta[property="og:type"]', 'property', 'og:type', pageType === 'blog-post' ? 'article' : 'website');
+    updateMetaTag('meta[property="og:locale"]', 'property', 'og:locale', 'en_US');
 
     // Advanced Article Meta Tags
     if (pageType === 'blog-post' && blogData) {
