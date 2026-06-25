@@ -277,7 +277,7 @@ export default function DrawingDesk({
 
   // ── RENDER ─────────────────────────────────────────────────────────────────
   return (
-    <div className="card-premium animate-fade-in" style={{ marginBottom: '24px', minHeight: '400px' }}>
+    <div className="card-premium active-border animate-fade-in" style={{ marginBottom: '24px', minHeight: '400px' }}>
 
       {/* ── title ── */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>

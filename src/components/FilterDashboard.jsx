@@ -30,7 +30,7 @@ export default function FilterDashboard({ filters, setFilters, totalComments, fi
   };
 
   return (
-    <section className="card-premium animate-fade-in" style={{ marginBottom: '24px' }} aria-labelledby="filter-dashboard-title">
+    <section className="card-premium active-border animate-fade-in" style={{ marginBottom: '24px' }} aria-labelledby="filter-dashboard-title">
       {/* Header Accordion Trigger */}
       <div 
         onClick={() => setIsOpen(!isOpen)}
