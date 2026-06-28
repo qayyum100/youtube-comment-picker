@@ -7,10 +7,10 @@ export default function FilterDashboard({ filters, setFilters, totalComments, fi
 
   // Compute number of active filters
   const activeFiltersCount = [
-    filters.keyword.trim() !== '',
-    filters.minTags > 0,
-    filters.minLikes > 0,
-    filters.excludeList.trim() !== ''
+    (filters?.keyword || '').trim() !== '',
+    (filters?.minTags || 0) > 0,
+    (filters?.minLikes || 0) > 0,
+    (filters?.excludeList || '').trim() !== ''
   ].filter(Boolean).length;
 
   const handleFilterChange = (key, value) => {
