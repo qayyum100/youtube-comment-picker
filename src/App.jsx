@@ -1,16 +1,15 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import PrivacyModal from './components/PrivacyModal';
+import TermsModal from './components/TermsModal';
+import DisclaimerModal from './components/DisclaimerModal';
+import { Download, Gift, BookOpen, Sun, Moon, Menu, X } from 'lucide-react';
 
 const CommentPickerPage = lazy(() => import('./pages/CommentPickerPage'));
 const ThumbnailDownloaderPage = lazy(() => import('./pages/ThumbnailDownloaderPage'));
 const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
-
-import PrivacyModal from './components/PrivacyModal';
-import TermsModal from './components/TermsModal';
-import DisclaimerModal from './components/DisclaimerModal';
-import { Download, Gift, BookOpen, Sun, Moon, Menu, X } from 'lucide-react';
 
 function Navigation({ isMobileMenuOpen, setIsMobileMenuOpen }) {
   const location = useLocation();
