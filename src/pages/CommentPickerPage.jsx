@@ -8,6 +8,7 @@ import CompetitorContent from '../components/CompetitorContent';
 import FaqSection from '../components/FaqSection';
 import SeoHead from '../components/SeoHead';
 import { AlertCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
   const [platform, setPlatform] = useState(defaultPlatform);
@@ -187,39 +188,62 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
     <>
       <SeoHead pageType="picker" platform={platform} />
 
-      <main style={{ flexGrow: 1, padding: '40px 0' }}>
+      <main style={{ flexGrow: 1, padding: '60px 0' }}>
         <div className="container">
 
           {/* Welcome Banner */}
-          <div style={{ textAlign: 'center', marginBottom: '32px' }} className="animate-fade-in">
-            <h1 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '8px', lineHeight: '1.2', textTransform: 'capitalize' }}>
-              {platform === 'youtube' ? 'YouTube Comment Random Picker' : `${platform} Comment Picker`} - <span style={{ color: 'var(--brand-indigo)' }}>Random Winner Generator</span>
-            </h1>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', maxWidth: '600px', margin: '0 auto' }}>
-              The premier lottery & drawing suite for giveaways. Unbiased, fast, and secure. Run verification certs instantly.
+          <motion.div 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            style={{ textAlign: 'center', marginBottom: '48px' }}
+          >
+            <motion.h1 
+              animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+              style={{ 
+                fontSize: '3rem', 
+                fontWeight: '600', 
+                marginBottom: '16px', 
+                lineHeight: '1.2', 
+                textTransform: 'capitalize',
+                background: 'linear-gradient(90deg, var(--text-primary), var(--glow-primary), var(--text-primary))',
+                backgroundSize: '200% auto',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                display: 'inline-block'
+              }}
+            >
+              {platform === 'youtube' ? 'YouTube Comment Random Picker' : `${platform} Comment Picker`} - Random Winner Generator
+            </motion.h1>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '700px', margin: '0 auto', letterSpacing: '-0.01em' }}>
+              The premium liquid drawing suite for giveaways. Unbiased, fast, and secure. Run verification certs instantly.
             </p>
-          </div>
+          </motion.div>
 
           <PlatformSwitcher platform={platform} />
 
           {apiError && (
-            <div style={{
-              backgroundColor: 'rgba(239, 68, 68, 0.1)',
-              border: '1px solid rgba(239, 68, 68, 0.2)',
-              color: '#f87171',
-              padding: '12px 16px',
-              borderRadius: 'var(--radius-md)',
-              marginBottom: '20px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              fontSize: '0.85rem'
-            }} className="animate-fade-in">
-              <AlertCircle size={18} style={{ flexShrink: 0 }} />
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="liquid-glass"
+              style={{
+                borderColor: 'var(--glow-error)',
+                padding: '16px 20px',
+                marginBottom: '24px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                fontSize: '0.9rem',
+                color: 'var(--text-primary)'
+              }}
+            >
+              <AlertCircle size={20} color="var(--glow-error)" style={{ flexShrink: 0 }} />
               <div>
-                <strong>System Notice:</strong> {apiError}
+                <strong style={{ color: 'var(--glow-error)' }}>System Notice:</strong> {apiError}
               </div>
-            </div>
+            </motion.div>
           )}
 
           <MediaFetcher

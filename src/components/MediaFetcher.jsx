@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link2, Sparkles, Database, AlertCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function MediaFetcher({ platform, onFetch, isLoading, isSimulated, totalComments }) {
   const [url, setUrl] = useState('');
@@ -52,14 +53,28 @@ export default function MediaFetcher({ platform, onFetch, isLoading, isSimulated
   };
 
   return (
-    <div className="card-premium active-border animate-fade-in" style={{ marginBottom: '24px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
+    <motion.div 
+      animate={{ y: [0, -4, 0] }}
+      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      className="liquid-glass" 
+      style={{ 
+        marginBottom: '32px', 
+        padding: '32px',
+        borderRadius: 'var(--radius-xl)'
+      }}
+    >
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
         <div>
-          <h2 style={{ fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Link2 size={20} style={{ color: 'var(--brand-indigo)' }} />
+          <h2 style={{ fontSize: '1.4rem', display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-primary)', fontWeight: '600' }}>
+            <motion.div
+              animate={{ rotate: [0, 10, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Link2 size={24} style={{ color: 'var(--glow-primary)' }} />
+            </motion.div>
             Media Stream Fetcher
           </h2>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', marginTop: '2px' }}>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginTop: '6px' }}>
             {platform === 'youtube' 
               ? 'Paste any public YouTube video link or Shorts URL to extract participants.' 
               : platform === 'instagram'
@@ -69,31 +84,37 @@ export default function MediaFetcher({ platform, onFetch, isLoading, isSimulated
         </div>
 
         {/* Sync Mode Badge */}
-        <div style={{ display: 'flex', gap: '8px' }}>
+        <AnimatePresence>
           {totalComments > 0 && (
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              backgroundColor: isSimulated ? 'rgba(249, 115, 22, 0.1)' : 'rgba(16, 185, 129, 0.1)',
-              border: `1px solid ${isSimulated ? 'rgba(249, 115, 22, 0.2)' : 'rgba(16, 185, 129, 0.2)'}`,
-              color: isSimulated ? '#f97316' : '#10b981',
-              padding: '4px 10px',
-              borderRadius: 'var(--radius-full)',
-              fontSize: '0.75rem',
-              fontWeight: '600'
-            }}>
-              {isSimulated ? <Sparkles size={12} /> : <Database size={12} />}
-              {isSimulated ? 'SANDBOX SIMULATED DATA' : 'LIVE FETCH CONNECTED'}
-            </div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                backgroundColor: isSimulated ? 'rgba(249, 115, 22, 0.15)' : 'rgba(16, 185, 129, 0.15)',
+                border: `1px solid ${isSimulated ? 'rgba(249, 115, 22, 0.3)' : 'rgba(16, 185, 129, 0.3)'}`,
+                color: isSimulated ? '#f97316' : '#10b981',
+                padding: '6px 14px',
+                borderRadius: 'var(--radius-full)',
+                fontSize: '0.8rem',
+                fontWeight: '600',
+                backdropFilter: 'blur(10px)'
+              }}>
+              {isSimulated ? <Sparkles size={14} /> : <Database size={14} />}
+              {isSimulated ? 'SANDBOX SIMULATED' : 'LIVE FETCH CONNECTED'}
+            </motion.div>
           )}
-        </div>
+        </AnimatePresence>
       </div>
 
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        <div style={{ display: 'flex', gap: '12px', width: '100%' }}>
-          <div style={{ position: 'relative', flexGrow: 1 }}>
-            <input
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div style={{ display: 'flex', gap: '16px', width: '100%', flexWrap: 'wrap' }}>
+          <div style={{ position: 'relative', flexGrow: 1, minWidth: '250px' }}>
+            <motion.input
+              whileFocus={{ scale: 1.01 }}
               type="text"
               className="input-premium"
               placeholder={platform === 'youtube' 
@@ -109,43 +130,85 @@ export default function MediaFetcher({ platform, onFetch, isLoading, isSimulated
               }}
               id="input-media-url"
               disabled={isLoading}
-              style={{ paddingRight: '40px' }}
             />
           </div>
-          <button
+          <motion.button
+            whileHover={{ scale: 1.02, boxShadow: '0 8px 30px var(--glow-primary)' }}
+            whileTap={{ scale: 0.98 }}
             type="submit"
-            className="btn-primary"
+            className="liquid-glass"
+            style={{
+              padding: '16px 32px',
+              border: 'none',
+              background: 'var(--glow-primary)',
+              color: '#fff',
+              fontWeight: '600',
+              fontSize: '1rem',
+              cursor: isLoading || !url ? 'not-allowed' : 'pointer',
+              opacity: isLoading || !url ? 0.6 : 1,
+              borderRadius: 'var(--radius-md)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              minWidth: '160px'
+            }}
             disabled={isLoading || !url}
             id="btn-fetch-comments"
           >
-            {isLoading ? 'Syncing...' : 'Fetch Comments'}
-          </button>
+            {isLoading ? (
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                style={{ width: '20px', height: '20px', border: '3px solid rgba(255,255,255,0.3)', borderTopColor: '#fff', borderRadius: '50%' }}
+              />
+            ) : 'Fetch Comments'}
+          </motion.button>
         </div>
 
-        {error && (
-          <div style={{ color: '#ef4444', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <AlertCircle size={14} />
-            {error}
-          </div>
-        )}
+        <AnimatePresence>
+          {error && (
+            <motion.div 
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              style={{ color: '#ef4444', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}
+            >
+              <AlertCircle size={16} />
+              {error}
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '4px', flexWrap: 'wrap', gap: '10px' }}>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '8px', flexWrap: 'wrap', gap: '16px', paddingTop: '16px', borderTop: '1px solid var(--glass-border-bottom)' }}>
+          <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
             No credentials set in workspace env? Try our sandbox demo generator instead:
           </span>
-          <button
+          <motion.button
+            whileHover={{ scale: 1.02, background: 'var(--glass-bg-hover)' }}
+            whileTap={{ scale: 0.98 }}
             type="button"
-            className="btn-secondary"
+            className="liquid-glass"
             onClick={handleLoadDemo}
             disabled={isLoading}
             id="btn-load-sandbox"
-            style={{ padding: '8px 16px', fontSize: '0.8rem' }}
+            style={{ 
+              padding: '10px 20px', 
+              fontSize: '0.9rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              cursor: isLoading ? 'not-allowed' : 'pointer',
+              opacity: isLoading ? 0.6 : 1,
+              color: 'var(--text-primary)'
+            }}
           >
-            <Sparkles size={14} style={{ color: '#f97316' }} />
+            <motion.div animate={{ rotate: [0, 15, -15, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+              <Sparkles size={16} style={{ color: '#f97316' }} />
+            </motion.div>
             Load Sandbox Demo
-          </button>
+          </motion.button>
         </div>
       </form>
-    </div>
+    </motion.div>
   );
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const CommentPickerPage = lazy(() => import('./pages/CommentPickerPage'));
 const ThumbnailDownloaderPage = lazy(() => import('./pages/ThumbnailDownloaderPage'));
@@ -21,32 +22,127 @@ function Navigation({ isMobileMenuOpen, setIsMobileMenuOpen }) {
   const navLinkStyle = (path) => ({
     textDecoration: 'none',
     fontSize: '0.9rem',
-    fontWeight: '600',
+    fontWeight: '500',
     padding: '8px 16px',
     borderRadius: 'var(--radius-md)',
     display: 'flex',
     alignItems: 'center',
     gap: '6px',
     color: location.pathname === path ? '#ffffff' : 'var(--text-secondary)',
-    backgroundColor: location.pathname === path ? 'var(--brand-indigo)' : 'transparent',
-    transition: 'all 0.2s ease'
+    backgroundColor: location.pathname === path ? 'var(--glow-primary)' : 'transparent',
+    transition: 'all var(--transition-liquid)',
+    position: 'relative',
+    overflow: 'hidden'
   });
 
   return (
     <nav className={`nav-container ${isMobileMenuOpen ? 'open' : ''}`}>
-      <Link to="/youtube-comment-picker" style={navLinkStyle('/youtube-comment-picker')}>
+      <Link to="/youtube-comment-picker" style={navLinkStyle('/youtube-comment-picker')} className="liquid-glass hover:scale-105 transition-transform">
         <Gift size={16} />
         Comment Picker
       </Link>
-      <Link to="/thumbnail-downloader" style={navLinkStyle('/thumbnail-downloader')}>
+      <Link to="/thumbnail-downloader" style={navLinkStyle('/thumbnail-downloader')} className="liquid-glass hover:scale-105 transition-transform">
         <Download size={16} />
         Thumbnail Downloader
       </Link>
-      <Link to="/blogs" style={navLinkStyle(location.pathname.startsWith('/blog') ? location.pathname : '/blogs')}>
+      <Link to="/blogs" style={navLinkStyle(location.pathname.startsWith('/blog') ? location.pathname : '/blogs')} className="liquid-glass hover:scale-105 transition-transform">
         <BookOpen size={16} />
         Blogs
       </Link>
     </nav>
+  );
+}
+
+// Global Cursor Interaction logic
+function CursorGlowTracker() {
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+      document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+  return null;
+}
+
+const pageVariants = {
+  initial: { opacity: 0, scale: 0.96, filter: 'blur(10px)' },
+  in: { opacity: 1, scale: 1, filter: 'blur(0px)' },
+  out: { opacity: 0, scale: 1.04, filter: 'blur(10px)' }
+};
+
+const pageTransition = {
+  type: 'spring',
+  stiffness: 100,
+  damping: 20,
+  mass: 1
+};
+
+function AnimatedRoutes() {
+  const location = useLocation();
+
+  return (
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location.pathname}
+        initial="initial"
+        animate="in"
+        exit="out"
+        variants={pageVariants}
+        transition={pageTransition}
+        style={{ flex: 1, display: 'flex', flexDirection: 'column' }}
+      >
+        <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}><motion.div animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }} transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }} style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--glow-primary)', filter: 'blur(10px)' }} /></div>}>
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<CommentPickerPage defaultPlatform="youtube" />} />
+            <Route path="/youtube-comment-picker" element={<CommentPickerPage defaultPlatform="youtube" />} />
+            <Route path="/instagram-comment-picker" element={<CommentPickerPage defaultPlatform="instagram" />} />
+            <Route path="/tiktok-comment-picker" element={<CommentPickerPage defaultPlatform="tiktok" />} />
+            <Route path="/thumbnail-downloader" element={<ThumbnailDownloaderPage />} />
+            <Route path="/blogs" element={<BlogIndexPage />} />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
+          </Routes>
+        </Suspense>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+function FloatingParticles() {
+  const particles = Array.from({ length: 15 });
+  return (
+    <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', pointerEvents: 'none', zIndex: 0, overflow: 'hidden' }}>
+      {particles.map((_, i) => (
+        <motion.div
+          key={i}
+          initial={{ 
+            x: Math.random() * window.innerWidth, 
+            y: Math.random() * window.innerHeight,
+            opacity: Math.random() * 0.5 + 0.2,
+            scale: Math.random() * 0.5 + 0.5
+          }}
+          animate={{
+            y: [null, Math.random() * window.innerHeight],
+            x: [null, Math.random() * window.innerWidth],
+          }}
+          transition={{
+            duration: Math.random() * 20 + 20,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "linear"
+          }}
+          style={{
+            position: 'absolute',
+            width: Math.random() * 200 + 50,
+            height: Math.random() * 200 + 50,
+            borderRadius: '50%',
+            background: i % 2 === 0 ? 'var(--glow-primary)' : 'var(--glow-success)',
+            filter: 'blur(80px)',
+          }}
+        />
+      ))}
+    </div>
   );
 }
 
@@ -68,24 +164,31 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <CursorGlowTracker />
+      <FloatingParticles />
+      
+      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 1 }}>
         
         {/* Shared Premium Header */}
-        <header style={{
-          borderBottom: '1px solid var(--border-light)',
+        <header className="liquid-glass" style={{
           padding: '16px 0',
-          backgroundColor: 'var(--bg-card)',
-          backdropFilter: 'blur(28px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(28px) saturate(180%)',
-          boxShadow: 'var(--glass-inner-shadow), 0 4px 30px rgba(0, 0, 0, 0.1)',
           position: 'sticky',
           top: 0,
-          zIndex: 50
+          zIndex: 50,
+          borderRadius: 0,
+          borderTop: 'none',
+          borderLeft: 'none',
+          borderRight: 'none'
         }}>
           <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
-            <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <img src="/images/app_logo.png" alt="Youtube Comment Picker Logo" style={{ width: '32px', height: '32px', borderRadius: '8px' }} />
-              <span style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--brand-indigo)' }}>
+            <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <motion.img 
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                src="/images/app_logo.png" 
+                alt="Youtube Comment Picker Logo" 
+                style={{ width: '32px', height: '32px', borderRadius: '10px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }} 
+              />
+              <span style={{ fontSize: '1.2rem', fontWeight: '600', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>
                 Youtube Comment Picker
               </span>
             </Link>
@@ -93,33 +196,32 @@ export default function App() {
             {/* Navigation links & Theme Toggle */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
               <Navigation isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
-              <button 
+              <motion.button 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
                 onClick={toggleTheme} 
+                className="liquid-glass"
                 style={{
-                  background: 'var(--bg-panel)',
-                  border: '1px solid var(--border-light)',
                   color: 'var(--text-primary)',
-                  boxShadow: 'var(--glass-inner-shadow), 0 4px 12px rgba(0,0,0,0.05)',
-                  backdropFilter: 'blur(20px) saturate(160%)',
-                  WebkitBackdropFilter: 'blur(20px) saturate(160%)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  width: '36px',
-                  height: '36px',
+                  width: '40px',
+                  height: '40px',
                   borderRadius: '50%',
                   cursor: 'pointer',
-                  transition: 'all 0.2s ease'
+                  border: 'none',
                 }}
                 title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
                 aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
               >
                 {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-              </button>
+              </motion.button>
               <button 
-                className="mobile-menu-btn"
+                className="mobile-menu-btn liquid-glass"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle Menu"
+                style={{ border: 'none', borderRadius: 'var(--radius-sm)' }}
               >
                 {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
               </button>
@@ -128,45 +230,36 @@ export default function App() {
         </header>
 
         {/* Dynamic Route Content */}
-        <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1, padding: '40px' }}><div className="animate-float" style={{ color: 'var(--brand-indigo)', fontWeight: 'bold' }}>Loading...</div></div>}>
-          <Routes>
-            <Route path="/" element={<CommentPickerPage defaultPlatform="youtube" />} />
-            <Route path="/youtube-comment-picker" element={<CommentPickerPage defaultPlatform="youtube" />} />
-            <Route path="/instagram-comment-picker" element={<CommentPickerPage defaultPlatform="instagram" />} />
-            <Route path="/tiktok-comment-picker" element={<CommentPickerPage defaultPlatform="tiktok" />} />
-            <Route path="/thumbnail-downloader" element={<ThumbnailDownloaderPage />} />
-            <Route path="/blogs" element={<BlogIndexPage />} />
-            <Route path="/blog/:slug" element={<BlogPostPage />} />
-          </Routes>
-        </Suspense>
+        <AnimatedRoutes />
 
         {/* Shared Footer */}
-        <footer style={{
-          borderTop: '1px solid var(--border-light)',
+        <footer className="liquid-glass" style={{
           padding: '24px 0',
-          backgroundColor: 'var(--bg-panel)',
-          backdropFilter: 'blur(28px) saturate(180%)',
-          WebkitBackdropFilter: 'blur(28px) saturate(180%)',
-          boxShadow: '0 -4px 30px rgba(0, 0, 0, 0.05)',
-          fontSize: '0.8rem',
+          fontSize: '0.85rem',
           color: 'var(--text-muted)',
-          marginTop: 'auto'
+          marginTop: 'auto',
+          borderRadius: 0,
+          borderBottom: 'none',
+          borderLeft: 'none',
+          borderRight: 'none'
         }}>
           <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
             <span>© 2026 Youtube Comment Picker. All rights reserved.</span>
-            <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-              <Link to="/blogs" style={{ color: 'inherit', textDecoration: 'none' }}>Blogs</Link>
-              <span role="button" tabIndex={0} style={{ cursor: 'pointer' }} onClick={() => setShowDisclaimer(true)} onKeyDown={(e) => e.key === 'Enter' && setShowDisclaimer(true)}>Disclaimer</span>
-              <span role="button" tabIndex={0} style={{ cursor: 'pointer' }} onClick={() => setShowPrivacy(true)} onKeyDown={(e) => e.key === 'Enter' && setShowPrivacy(true)}>Privacy Policy</span>
-              <span role="button" tabIndex={0} style={{ cursor: 'pointer' }} onClick={() => setShowTerms(true)} onKeyDown={(e) => e.key === 'Enter' && setShowTerms(true)}>Terms of Service</span>
+            <div style={{ display: 'flex', gap: '20px', alignItems: 'center', fontWeight: '500' }}>
+              <Link to="/blogs" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}>Blogs</Link>
+              <span role="button" tabIndex={0} style={{ cursor: 'pointer', transition: 'color 0.2s' }} onClick={() => setShowDisclaimer(true)} onKeyDown={(e) => e.key === 'Enter' && setShowDisclaimer(true)}>Disclaimer</span>
+              <span role="button" tabIndex={0} style={{ cursor: 'pointer', transition: 'color 0.2s' }} onClick={() => setShowPrivacy(true)} onKeyDown={(e) => e.key === 'Enter' && setShowPrivacy(true)}>Privacy Policy</span>
+              <span role="button" tabIndex={0} style={{ cursor: 'pointer', transition: 'color 0.2s' }} onClick={() => setShowTerms(true)} onKeyDown={(e) => e.key === 'Enter' && setShowTerms(true)}>Terms of Service</span>
             </div>
           </div>
         </footer>
 
         {/* Modals */}
-        {showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} />}
-        {showTerms && <TermsModal onClose={() => setShowTerms(false)} />}
-        {showDisclaimer && <DisclaimerModal onClose={() => setShowDisclaimer(false)} />}
+        <AnimatePresence>
+          {showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} />}
+          {showTerms && <TermsModal onClose={() => setShowTerms(false)} />}
+          {showDisclaimer && <DisclaimerModal onClose={() => setShowDisclaimer(false)} />}
+        </AnimatePresence>
 
       </div>
     </BrowserRouter>

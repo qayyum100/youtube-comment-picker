@@ -4,6 +4,7 @@ import {
   Award, Calendar, Sparkles, ThumbsUp
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // ─── helpers ─────────────────────────────────────────────────────────────────
 
@@ -53,30 +54,8 @@ function RaffleWheel({ isDrawing, winnerName }) {
     }
   }, [isDrawing]);
 
-  const wheelStyle = {
-    width: '250px',
-    height: '250px',
-    borderRadius: '50%',
-    background: `conic-gradient(
-      #4f46e5 0deg 30deg, #ec4899 30deg 60deg, 
-      #f97316 60deg 90deg, #8b5cf6 90deg 120deg, 
-      #14b8a6 120deg 150deg, #f43f5e 150deg 180deg, 
-      #4f46e5 180deg 210deg, #ec4899 210deg 240deg, 
-      #f97316 240deg 270deg, #8b5cf6 270deg 300deg, 
-      #14b8a6 300deg 330deg, #f43f5e 330deg 360deg
-    )`,
-    transition: 'transform 2.5s cubic-bezier(0.25, 1, 0.5, 1)',
-    transform: `rotate(${rotation}deg)`,
-    margin: '0 auto',
-    boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
-    border: '4px solid #fff',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  };
-
   return (
-    <div style={{ textAlign: 'center', marginBottom: '20px', position: 'relative' }}>
+    <div style={{ textAlign: 'center', marginBottom: '24px', position: 'relative' }}>
       <div style={{ position: 'relative', width: '250px', margin: '0 auto' }}>
         <div style={{ 
           position: 'absolute', 
@@ -90,24 +69,52 @@ function RaffleWheel({ isDrawing, winnerName }) {
           borderTop: '25px solid var(--text-primary)',
           zIndex: 10
         }} />
-        <div style={wheelStyle}>
-          <div style={{
-            background: 'var(--bg-panel)',
+        <motion.div 
+          animate={{ rotate: rotation }}
+          transition={{ duration: 2.5, ease: [0.25, 1, 0.5, 1] }}
+          style={{
+            width: '250px',
+            height: '250px',
+            borderRadius: '50%',
+            background: `conic-gradient(
+              var(--glow-primary) 0deg 30deg, #ec4899 30deg 60deg, 
+              #f97316 60deg 90deg, #8b5cf6 90deg 120deg, 
+              #14b8a6 120deg 150deg, #f43f5e 150deg 180deg, 
+              var(--glow-primary) 180deg 210deg, #ec4899 210deg 240deg, 
+              #f97316 240deg 270deg, #8b5cf6 270deg 300deg, 
+              #14b8a6 300deg 330deg, #f43f5e 330deg 360deg
+            )`,
+            margin: '0 auto',
+            boxShadow: '0 10px 35px rgba(0,0,0,0.2)',
+            border: '4px solid var(--glass-border-top)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <div className="liquid-glass" style={{
             width: '100px',
             height: '100px',
             borderRadius: '50%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            boxShadow: 'inset 0 2px 5px rgba(0,0,0,0.1)'
           }}>
-            <span style={{ fontSize: '2rem' }}>🎰</span>
+            <span style={{ fontSize: '2.5rem' }}>🎰</span>
           </div>
-        </div>
+        </motion.div>
       </div>
-      <div style={{ marginTop: '16px', fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--brand-indigo)' }}>
-        {isDrawing ? "Spinning..." : winnerName ? `Landed on: ${winnerName}!` : ""}
-      </div>
+      <AnimatePresence mode="wait">
+        <motion.div 
+          key={isDrawing ? 'spinning' : winnerName ? 'winner' : 'idle'}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          style={{ marginTop: '20px', fontSize: '1.25rem', fontWeight: '600', color: 'var(--glow-primary)' }}
+        >
+          {isDrawing ? "Spinning..." : winnerName ? `Landed on: ${winnerName}!` : ""}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }
@@ -277,36 +284,42 @@ export default function DrawingDesk({
 
   // ── RENDER ─────────────────────────────────────────────────────────────────
   return (
-    <div className="card-premium active-border animate-fade-in" style={{ marginBottom: '24px', minHeight: '400px' }}>
-
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="liquid-glass" 
+      style={{ marginBottom: '32px', minHeight: '400px', padding: '32px', borderRadius: 'var(--radius-xl)' }}
+    >
       {/* ── title ── */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
-        <h2 style={{ fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Trophy size={20} style={{ color: 'var(--brand-indigo)' }} />
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
+        <h2 style={{ fontSize: '1.4rem', display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-primary)', fontWeight: '600' }}>
+          <Trophy size={24} style={{ color: 'var(--glow-primary)' }} />
           High-Fidelity Drawing Desk
         </h2>
         
         {/* CSV Export Button */}
-        <button 
+        <motion.button 
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
           onClick={handleExportCSV} 
-          className="btn-secondary" 
+          className="liquid-glass" 
           disabled={filteredComments.length === 0 || isDrawing}
-          style={{ padding: '6px 12px', fontSize: '0.85rem' }}
+          style={{ padding: '10px 20px', fontSize: '0.9rem', color: 'var(--text-primary)', border: 'none', cursor: filteredComments.length === 0 || isDrawing ? 'not-allowed' : 'pointer', opacity: filteredComments.length === 0 || isDrawing ? 0.6 : 1 }}
         >
           Download CSV
-        </button>
+        </motion.button>
       </div>
 
       {/* ── config bar ── */}
-      <div style={{
+      <div className="liquid-glass" style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-        gap: '16px',
-        backgroundColor: 'var(--bg-input)',
-        padding: '16px',
-        borderRadius: 'var(--radius-md)',
-        border: '1px solid var(--border-dark)',
-        marginBottom: '20px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+        gap: '24px',
+        padding: '24px',
+        borderRadius: 'var(--radius-lg)',
+        marginBottom: '32px',
+        border: 'none',
+        background: 'var(--glass-bg-base)'
       }}>
         {/* winners stepper */}
         <StepperField
@@ -328,82 +341,117 @@ export default function DrawingDesk({
 
         {/* draw button */}
         <div style={{ display: 'flex', alignItems: 'flex-end' }}>
-          <button
+          <motion.button
+            whileHover={{ scale: 1.02, boxShadow: '0 8px 25px var(--glow-primary)' }}
+            whileTap={{ scale: 0.98 }}
             id="btn-draw"
             type="button"
-            className="btn-primary"
+            className="liquid-glass"
             onClick={commenceDrawing}
             disabled={isDrawing || filteredComments.length === 0}
-            style={{ width: '100%', height: '46px' }}
+            style={{ 
+              width: '100%', 
+              height: '48px', 
+              border: 'none', 
+              background: 'var(--glow-primary)', 
+              color: '#fff', 
+              fontWeight: '600', 
+              fontSize: '1rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '8px',
+              cursor: isDrawing || filteredComments.length === 0 ? 'not-allowed' : 'pointer',
+              opacity: isDrawing || filteredComments.length === 0 ? 0.6 : 1
+            }}
           >
             {isDrawing
-              ? <><RefreshCw size={15} style={{ animation: 'spin 0.8s linear infinite' }} /> Drawing…</>
-              : <><Sparkles size={15} /> Commence Drawing</>}
-          </button>
+              ? <><motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}><RefreshCw size={18} /></motion.div> Drawing…</>
+              : <><Sparkles size={18} /> Commence Drawing</>}
+          </motion.button>
         </div>
       </div>
 
       {/* empty-pool notice */}
-      {filteredComments.length === 0 && comments.length > 0 && (
-        <p style={{ textAlign: 'center', color: '#f97316', fontSize: '0.85rem', padding: '8px 0' }}>
-          No comments match your filters — adjust them to draw.
-        </p>
-      )}
+      <AnimatePresence>
+        {filteredComments.length === 0 && comments.length > 0 && (
+          <motion.p 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            style={{ textAlign: 'center', color: '#f97316', fontSize: '0.9rem', padding: '12px 0' }}
+          >
+            No comments match your filters — adjust them to draw.
+          </motion.p>
+        )}
+      </AnimatePresence>
 
       {/* ── shuffler ── */}
-      {(isDrawing || (hasResults && winners.length > 0)) && (
-        <div className="animate-fade-in" style={{ marginBottom: '20px' }}>
-          <RaffleWheel 
-            isDrawing={isDrawing} 
-            winnerName={hasResults && !isDrawing ? winners[0]?.author : null} 
-          />
-        </div>
-      )}
+      <AnimatePresence>
+        {(isDrawing || (hasResults && winners.length > 0)) && (
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            style={{ marginBottom: '32px' }}
+          >
+            <RaffleWheel 
+              isDrawing={isDrawing} 
+              winnerName={hasResults && !isDrawing ? winners[0]?.author : null} 
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ── results ── */}
-      {hasResults && !isDrawing && (
-        <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <AnimatePresence>
+        {hasResults && !isDrawing && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}
+          >
+            {/* winners */}
+            {winners.length > 0 && (
+              <ResultSection
+                title="PRIMARY WINNERS"
+                titleColor="var(--glow-primary)"
+                icon={<Trophy size={18} />}
+                items={winners}
+                type="winner"
+                reRollingSlot={reRollingSlot}
+                reRollingName={reRollingName}
+                copiedId={copiedId}
+                onReRoll={handleReRoll}
+                onCopy={handleCopyPost}
+                onCertificate={onGenerateCertificate}
+                onPrizeTagChange={handlePrizeTagChange}
+                accentColor="var(--glow-primary)"
+              />
+            )}
 
-          {/* winners */}
-          {winners.length > 0 && (
-            <ResultSection
-              title="PRIMARY WINNERS"
-              titleColor="var(--brand-indigo)"
-              icon={<Trophy size={15} />}
-              items={winners}
-              type="winner"
-              reRollingSlot={reRollingSlot}
-              reRollingName={reRollingName}
-              copiedId={copiedId}
-              onReRoll={handleReRoll}
-              onCopy={handleCopyPost}
-              onCertificate={onGenerateCertificate}
-              onPrizeTagChange={handlePrizeTagChange}
-              accentColor="var(--brand-indigo)"
-            />
-          )}
-
-          {/* standbys */}
-          {standbys.length > 0 && (
-            <ResultSection
-              title="STANDBY ALTERNATIVES"
-              titleColor="var(--text-secondary)"
-              icon={<ShieldCheck size={15} />}
-              items={standbys}
-              type="standby"
-              reRollingSlot={reRollingSlot}
-              reRollingName={reRollingName}
-              copiedId={copiedId}
-              onReRoll={handleReRoll}
-              onCopy={handleCopyPost}
-              onCertificate={onGenerateCertificate}
-              onPrizeTagChange={handlePrizeTagChange}
-              accentColor="var(--text-secondary)"
-            />
-          )}
-        </div>
-      )}
-    </div>
+            {/* standbys */}
+            {standbys.length > 0 && (
+              <ResultSection
+                title="STANDBY ALTERNATIVES"
+                titleColor="var(--text-secondary)"
+                icon={<ShieldCheck size={18} />}
+                items={standbys}
+                type="standby"
+                reRollingSlot={reRollingSlot}
+                reRollingName={reRollingName}
+                copiedId={copiedId}
+                onReRoll={handleReRoll}
+                onCopy={handleCopyPost}
+                onCertificate={onGenerateCertificate}
+                onPrizeTagChange={handlePrizeTagChange}
+                accentColor="var(--text-secondary)"
+              />
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }
 
@@ -412,25 +460,25 @@ export default function DrawingDesk({
 function StepperField({ label, value, min, max, disabled, onChange }) {
   return (
     <div>
-      <label style={{ display: 'block', fontSize: '0.82rem', color: 'var(--text-secondary)', marginBottom: '8px' }}>
+      <label style={{ display: 'block', fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '12px', fontWeight: '500' }}>
         {label}
       </label>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-        <button
+      <div className="liquid-glass" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px', padding: '6px', borderRadius: 'var(--radius-md)', background: 'transparent' }}>
+        <motion.button
+          whileTap={{ scale: 0.9 }}
           type="button"
-          className="btn-secondary"
           onClick={() => onChange(v => Math.max(min, v - 1))}
           disabled={disabled}
-          style={{ padding: '5px 12px', fontSize: '1.1rem', borderRadius: 'var(--radius-sm)', lineHeight: 1 }}
-        >−</button>
-        <span style={{ fontSize: '1.25rem', fontWeight: '700', minWidth: '24px', textAlign: 'center' }}>{value}</span>
-        <button
+          style={{ padding: '8px 16px', fontSize: '1.2rem', borderRadius: 'var(--radius-sm)', border: 'none', background: 'var(--glass-bg-hover)', color: 'var(--text-primary)', cursor: disabled ? 'not-allowed' : 'pointer' }}
+        >−</motion.button>
+        <span style={{ fontSize: '1.25rem', fontWeight: '600', minWidth: '30px', textAlign: 'center', color: 'var(--text-primary)' }}>{value}</span>
+        <motion.button
+          whileTap={{ scale: 0.9 }}
           type="button"
-          className="btn-secondary"
           onClick={() => onChange(v => Math.min(max, v + 1))}
           disabled={disabled}
-          style={{ padding: '5px 12px', fontSize: '1.1rem', borderRadius: 'var(--radius-sm)', lineHeight: 1 }}
-        >+</button>
+          style={{ padding: '8px 16px', fontSize: '1.2rem', borderRadius: 'var(--radius-sm)', border: 'none', background: 'var(--glass-bg-hover)', color: 'var(--text-primary)', cursor: disabled ? 'not-allowed' : 'pointer' }}
+        >+</motion.button>
       </div>
     </div>
   );
@@ -444,147 +492,171 @@ function ResultSection({
   return (
     <div>
       <h3 style={{
-        fontSize: '0.9rem', letterSpacing: '0.08em',
+        fontSize: '1rem', letterSpacing: '0.05em',
         color: titleColor, display: 'flex', alignItems: 'center',
-        gap: '6px', marginBottom: '12px',
+        gap: '8px', marginBottom: '16px', fontWeight: '600'
       }}>
         {icon} {title}
       </h3>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-        {items.map((item, idx) => {
-          const isRollingThis =
-            reRollingSlot?.type === type && reRollingSlot?.index === idx;
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <AnimatePresence>
+          {items.map((item, idx) => {
+            const isRollingThis =
+              reRollingSlot?.type === type && reRollingSlot?.index === idx;
 
-          return (
-            <div
-              key={item.id || idx}
-              className={`winner-card ${type === 'winner' ? 'is-winner' : 'is-standby'}`}
-            >
-              {isRollingThis ? (
-                /* rolling placeholder */
-                <div style={{
-                  minHeight: '72px', display: 'flex', alignItems: 'center',
-                  justifyContent: 'center', gap: '10px',
-                  color: accentColor, fontWeight: 600,
-                }}>
-                  <RefreshCw size={18} style={{ animation: 'spin 0.7s linear infinite' }} />
-                  Re-rolling: {reRollingName}
-                </div>
-              ) : (
-                /* normal card */
-                <div style={{
-                  display: 'flex', justifyContent: 'space-between',
-                  alignItems: 'flex-start', flexWrap: 'wrap', gap: '14px',
-                }}>
-                  {/* ── left: user info ── */}
-                  <div style={{ display: 'flex', gap: '12px', flex: 1, minWidth: '240px' }}>
-                    <img
-                      src={item.authorAvatar || `https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(item.author)}`}
-                      alt={item.author}
-                      onError={e => {
-                        e.currentTarget.src = `https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(item.author)}`;
-                      }}
-                      style={{
-                        width: '44px', height: '44px',
-                        borderRadius: '50%',
-                        border: `2px solid ${accentColor}44`,
-                        flexShrink: 0,
-                      }}
-                    />
-                    <div style={{ minWidth: 0 }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                        <span style={{ fontWeight: 700, color: 'var(--text-primary)', fontSize: '1rem' }}>
-                          {item.author}
-                        </span>
-                        <span style={{
-                          fontSize: '0.72rem', color: 'var(--text-muted)',
-                          display: 'flex', alignItems: 'center', gap: '3px',
-                        }}>
-                          <ThumbsUp size={9} /> {item.likes ?? 0}
-                        </span>
-                      </div>
-
-                      <p style={{
-                        fontSize: '0.84rem', color: 'var(--text-secondary)',
-                        marginTop: '4px', fontStyle: 'italic',
-                        wordBreak: 'break-word',
-                      }}>
-                        "{item.text}"
-                      </p>
-
-                      <div style={{
-                        display: 'flex', alignItems: 'center', gap: '8px',
-                        marginTop: '6px', fontSize: '0.68rem', color: 'var(--text-muted)',
-                        flexWrap: 'wrap',
-                      }}>
-                        <Calendar size={9} />
-                        {formatDate(item.timestamp)}
-                        <span>•</span>
-                        <span style={{ color: accentColor, fontFamily: 'monospace' }}>
-                          {item.serialCode}
-                        </span>
-                      </div>
-                    </div>
+            return (
+              <motion.div
+                layout
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                key={item.id || idx}
+                className="liquid-glass"
+                style={{
+                  padding: '24px',
+                  borderRadius: 'var(--radius-lg)',
+                  border: type === 'winner' ? `1px solid ${accentColor}` : 'var(--glass-border)',
+                  boxShadow: type === 'winner' ? `0 8px 32px ${accentColor}33` : 'var(--glass-shadow)',
+                }}
+                whileHover={{ scale: 1.01, translateY: -2 }}
+              >
+                {isRollingThis ? (
+                  /* rolling placeholder */
+                  <div style={{
+                    minHeight: '80px', display: 'flex', alignItems: 'center',
+                    justifyContent: 'center', gap: '12px',
+                    color: titleColor, fontWeight: 600, fontSize: '1.1rem'
+                  }}>
+                    <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1, ease: 'linear' }}>
+                      <RefreshCw size={20} />
+                    </motion.div>
+                    Re-rolling: {reRollingName}
                   </div>
-
-                  {/* ── right: controls ── */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', width: '210px', flexShrink: 0 }}>
-                    <div>
-                      <label style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '4px' }}>
-                        {type === 'winner' ? 'Prize Tag' : 'Backup Label'}
-                      </label>
-                      <input
-                        type="text"
-                        className="input-premium"
-                        style={{ padding: '6px 10px', fontSize: '0.8rem' }}
-                        value={item.prizeTag || ''}
-                        onChange={e => onPrizeTagChange(type, idx, e.target.value)}
-                        placeholder={type === 'winner' ? 'e.g. Grand Prize' : 'e.g. Backup #1'}
+                ) : (
+                  /* normal card */
+                  <div style={{
+                    display: 'flex', justifyContent: 'space-between',
+                    alignItems: 'flex-start', flexWrap: 'wrap', gap: '20px',
+                  }}>
+                    {/* ── left: user info ── */}
+                    <div style={{ display: 'flex', gap: '16px', flex: 1, minWidth: '240px' }}>
+                      <img
+                        src={item.authorAvatar || `https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(item.author)}`}
+                        alt={item.author}
+                        onError={e => {
+                          e.currentTarget.src = `https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(item.author)}`;
+                        }}
+                        style={{
+                          width: '56px', height: '56px',
+                          borderRadius: '50%',
+                          border: `2px solid ${titleColor}`,
+                          flexShrink: 0,
+                          objectFit: 'cover'
+                        }}
                       />
+                      <div style={{ minWidth: 0 }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+                          <span style={{ fontWeight: 600, color: 'var(--text-primary)', fontSize: '1.1rem' }}>
+                            {item.author}
+                          </span>
+                          <span style={{
+                            fontSize: '0.8rem', color: 'var(--text-muted)',
+                            display: 'flex', alignItems: 'center', gap: '4px',
+                            background: 'var(--glass-bg-hover)',
+                            padding: '2px 8px',
+                            borderRadius: 'var(--radius-full)'
+                          }}>
+                            <ThumbsUp size={12} /> {item.likes ?? 0}
+                          </span>
+                        </div>
+
+                        <p style={{
+                          fontSize: '0.95rem', color: 'var(--text-secondary)',
+                          marginTop: '8px', fontStyle: 'italic',
+                          wordBreak: 'break-word',
+                          lineHeight: 1.4
+                        }}>
+                          "{item.text}"
+                        </p>
+
+                        <div style={{
+                          display: 'flex', alignItems: 'center', gap: '10px',
+                          marginTop: '10px', fontSize: '0.75rem', color: 'var(--text-muted)',
+                          flexWrap: 'wrap',
+                        }}>
+                          <Calendar size={12} />
+                          {formatDate(item.timestamp)}
+                          <span>•</span>
+                          <span style={{ color: titleColor, fontFamily: 'monospace', fontWeight: '500' }}>
+                            {item.serialCode}
+                          </span>
+                        </div>
+                      </div>
                     </div>
 
-                    <div style={{ display: 'flex', gap: '6px' }}>
-                      <button
-                        type="button"
-                        className="btn-secondary"
-                        onClick={() => onReRoll(type, idx)}
-                        style={{ padding: '6px 8px', flex: 1, fontSize: '0.73rem',
-                                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}
-                        title="Re-roll this slot"
-                      >
-                        <RefreshCw size={11} /> Re-roll
-                      </button>
-                      <button
-                        type="button"
-                        className="btn-secondary"
-                        onClick={() => onCopy(item)}
-                        style={{ padding: '6px 8px', flex: 1, fontSize: '0.73rem',
-                                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}
-                        title="Copy congratulations text"
-                      >
-                        {copiedId === item.id
-                          ? <><Check size={11} color="#10b981" /> Copied</>
-                          : <><Copy size={11} /> Copy</>}
-                      </button>
-                      <button
-                        type="button"
-                        className="btn-primary"
-                        onClick={() => onCertificate(item)}
-                        style={{ padding: '6px 10px', flex: 1.4, fontSize: '0.73rem',
-                                 boxShadow: 'none',
-                                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}
-                        title="Generate certificate"
-                      >
-                        <Award size={11} /> Cert
-                      </button>
+                    {/* ── right: controls ── */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '220px', flexShrink: 0 }}>
+                      <div>
+                        <label style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '6px', fontWeight: '500' }}>
+                          {type === 'winner' ? 'Prize Tag' : 'Backup Label'}
+                        </label>
+                        <input
+                          type="text"
+                          className="input-premium"
+                          style={{ padding: '8px 12px', fontSize: '0.85rem' }}
+                          value={item.prizeTag || ''}
+                          onChange={e => onPrizeTagChange(type, idx, e.target.value)}
+                          placeholder={type === 'winner' ? 'e.g. Grand Prize' : 'e.g. Backup #1'}
+                        />
+                      </div>
+
+                      <div style={{ display: 'flex', gap: '8px' }}>
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          type="button"
+                          className="liquid-glass"
+                          onClick={() => onReRoll(type, idx)}
+                          style={{ padding: '8px 10px', flex: 1, fontSize: '0.8rem',
+                                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', border: 'none', color: 'var(--text-primary)', cursor: 'pointer' }}
+                          title="Re-roll this slot"
+                        >
+                          <RefreshCw size={14} /> Re-roll
+                        </motion.button>
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          type="button"
+                          className="liquid-glass"
+                          onClick={() => onCopy(item)}
+                          style={{ padding: '8px 10px', flex: 1, fontSize: '0.8rem',
+                                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', border: 'none', color: 'var(--text-primary)', cursor: 'pointer' }}
+                          title="Copy congratulations text"
+                        >
+                          {copiedId === item.id
+                            ? <><Check size={14} color="#10b981" /> Copied</>
+                            : <><Copy size={14} /> Copy</>}
+                        </motion.button>
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          type="button"
+                          className="liquid-glass"
+                          onClick={() => onCertificate(item)}
+                          style={{ padding: '8px 12px', flex: 1.2, fontSize: '0.8rem',
+                                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', border: 'none', background: 'var(--glow-primary)', color: '#fff', cursor: 'pointer' }}
+                          title="Generate certificate"
+                        >
+                          <Award size={14} /> Cert
+                        </motion.button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              )}
-            </div>
-          );
-        })}
+                )}
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
       </div>
     </div>
   );
