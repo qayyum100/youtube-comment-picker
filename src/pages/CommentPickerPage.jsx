@@ -30,7 +30,15 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
 
   // Initialize filters from localStorage or default
   const [filters, setFilters] = useState(() => {
-    const defaultFilters = {
+    const saved = localStorage.getItem('draw_filters');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error('Error parsing filters from local storage', e);
+      }
+    }
+    return {
       keyword: '',
       minTags: 0,
       minLikes: 0,
@@ -39,17 +47,6 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
       subscribersOnly: false,
       firstCommentBonus: false
     };
-
-    const saved = localStorage.getItem('draw_filters');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        return { ...defaultFilters, ...parsed };
-      } catch (e) {
-        console.error('Error parsing filters from local storage', e);
-      }
-    }
-    return defaultFilters;
   });
 
   // Save filters to local storage
@@ -107,7 +104,7 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
 
     let result = [...comments];
 
-    if ((filters.keyword || '').trim()) {
+    if (filters.keyword.trim()) {
       const query = filters.keyword.toLowerCase().trim();
       result = result.filter(c => {
         const text = c.text || '';
@@ -128,8 +125,8 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
       result = result.filter(c => (c.likes || 0) >= filters.minLikes);
     }
 
-    if ((filters.excludeList || '').trim()) {
-      const blacklist = (filters.excludeList || '')
+    if (filters.excludeList.trim()) {
+      const blacklist = filters.excludeList
         .toLowerCase()
         .split(/[\n,]+/)
         .map(term => term.trim())
