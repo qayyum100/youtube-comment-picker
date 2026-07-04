@@ -62,17 +62,15 @@ function PlatformButton({ currentPlatform, targetPlatform, to, icon, label }) {
         {label}
       </motion.div>
       {isActive && (
-        <motion.div
-          layoutId="activePlatformBackground"
-          initial={false}
-          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+        <div
           style={{
             position: 'absolute',
             inset: 0,
             background: 'var(--glow-primary)',
             borderRadius: 'var(--radius-full)',
             boxShadow: '0 4px 15px var(--glow-primary)',
-            zIndex: 0
+            zIndex: 0,
+            transition: 'opacity 0.2s',
           }}
         />
       )}

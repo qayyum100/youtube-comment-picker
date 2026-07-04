@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import PrivacyModal from './components/PrivacyModal';
 import TermsModal from './components/TermsModal';
 import DisclaimerModal from './components/DisclaimerModal';
@@ -72,85 +72,25 @@ function CursorGlowTracker() {
   return null;
 }
 
-const pageVariants = {
-  initial: { opacity: 0, scale: 0.96, filter: 'blur(10px)' },
-  in: { opacity: 1, scale: 1, filter: 'blur(0px)' },
-  out: { opacity: 0, scale: 1.04, filter: 'blur(10px)' }
-};
-
-const pageTransition = {
-  type: 'spring',
-  stiffness: 100,
-  damping: 20,
-  mass: 1
-};
-
 function AnimatedRoutes() {
-  const location = useLocation();
-
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={location.pathname}
-        initial="initial"
-        animate="in"
-        exit="out"
-        variants={pageVariants}
-        transition={pageTransition}
-        style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 'calc(100vh - 148px)' }}
-      >
-        <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}><motion.div animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }} transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }} style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--glow-primary)', filter: 'blur(10px)' }} /></div>}>
-          <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<CommentPickerPage defaultPlatform="youtube" />} />
-            <Route path="/youtube-comment-picker" element={<CommentPickerPage defaultPlatform="youtube" />} />
-            <Route path="/instagram-comment-picker" element={<CommentPickerPage defaultPlatform="instagram" />} />
-            <Route path="/tiktok-comment-picker" element={<CommentPickerPage defaultPlatform="tiktok" />} />
-            <Route path="/thumbnail-downloader" element={<ThumbnailDownloaderPage />} />
-            <Route path="/blogs" element={<BlogIndexPage />} />
-            <Route path="/blog/:slug" element={<BlogPostPage />} />
-          </Routes>
-        </Suspense>
-      </motion.div>
-    </AnimatePresence>
-  );
-}
-
-function FloatingParticles() {
-  const particles = Array.from({ length: 15 });
-  return (
-    <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', pointerEvents: 'none', zIndex: 0, overflow: 'hidden' }}>
-      {particles.map((_, i) => (
-        <motion.div
-          key={i}
-          initial={{ 
-            x: Math.random() * window.innerWidth, 
-            y: Math.random() * window.innerHeight,
-            opacity: Math.random() * 0.5 + 0.2,
-            scale: Math.random() * 0.5 + 0.5
-          }}
-          animate={{
-            y: [null, Math.random() * window.innerHeight],
-            x: [null, Math.random() * window.innerWidth],
-          }}
-          transition={{
-            duration: Math.random() * 20 + 20,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "linear"
-          }}
-          style={{
-            position: 'absolute',
-            width: Math.random() * 200 + 50,
-            height: Math.random() * 200 + 50,
-            borderRadius: '50%',
-            background: i % 2 === 0 ? 'var(--glow-primary)' : 'var(--glow-success)',
-            filter: 'blur(80px)',
-          }}
-        />
-      ))}
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 'calc(100vh - 148px)' }}>
+      <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}><div style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--glow-primary)', filter: 'blur(10px)' }} /></div>}>
+        <Routes>
+          <Route path="/" element={<CommentPickerPage defaultPlatform="youtube" />} />
+          <Route path="/youtube-comment-picker" element={<CommentPickerPage defaultPlatform="youtube" />} />
+          <Route path="/instagram-comment-picker" element={<CommentPickerPage defaultPlatform="instagram" />} />
+          <Route path="/tiktok-comment-picker" element={<CommentPickerPage defaultPlatform="tiktok" />} />
+          <Route path="/thumbnail-downloader" element={<ThumbnailDownloaderPage />} />
+          <Route path="/blogs" element={<BlogIndexPage />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
+        </Routes>
+      </Suspense>
     </div>
   );
 }
+
+// FloatingParticles removed — caused scroll jank (15 fixed blurred blobs force GPU repaints on every scroll)
 
 export default function App() {
   const [showPrivacy, setShowPrivacy] = useState(false);
@@ -171,7 +111,6 @@ export default function App() {
   return (
     <BrowserRouter>
       <CursorGlowTracker />
-      <FloatingParticles />
       
       <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 1 }}>
         
@@ -188,15 +127,16 @@ export default function App() {
         }}>
           <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
             <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <motion.img 
-                whileHover={{ scale: 1.1, rotate: 5 }}
+              <img 
                 src="/images/app_logo_56.webp" 
                 srcSet="/images/app_logo_32.webp 32w, /images/app_logo_56.webp 56w, /images/app_logo_128.webp 128w"
                 sizes="32px"
                 width="32"
                 height="32"
                 alt="Youtube Comment Picker Logo" 
-                style={{ width: '32px', height: '32px', borderRadius: '10px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }} 
+                style={{ width: '32px', height: '32px', borderRadius: '10px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)', transition: 'transform 0.2s', cursor: 'pointer' }}
+                onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.1) rotate(5deg)'}
+                onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
               />
               <span style={{ fontSize: '1.2rem', fontWeight: '600', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>
                 Youtube Comment Picker
@@ -206,9 +146,7 @@ export default function App() {
             {/* Navigation links & Theme Toggle */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
               <Navigation isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
-              <motion.button 
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+              <button 
                 onClick={toggleTheme} 
                 className="liquid-glass"
                 style={{
@@ -221,12 +159,15 @@ export default function App() {
                   borderRadius: '50%',
                   cursor: 'pointer',
                   border: 'none',
+                  transition: 'transform 0.15s',
                 }}
+                onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.1)'}
+                onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
                 title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
                 aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
               >
                 {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
-              </motion.button>
+              </button>
               <button 
                 className="mobile-menu-btn liquid-glass"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
