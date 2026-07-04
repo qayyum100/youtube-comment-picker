@@ -243,3 +243,13 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: 1fr;
   }
 }
+
+/* Footer stability for CLS prevention */
+footer.liquid-glass {
+  min-height: 80px;
+}
+@media (max-width: 768px) {
+  footer.liquid-glass {
+    min-height: 120px;
+  }
+}

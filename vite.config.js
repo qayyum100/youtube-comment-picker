@@ -16,7 +16,8 @@ export default defineConfig({
     }),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.png', 'robots.txt', 'sitemap.xml', 'images/app_logo.png'],
+      injectRegister: 'inline',
+      includeAssets: ['favicon.png', 'robots.txt', 'sitemap.xml', 'images/app_logo_192.png'],
       manifest: {
         name: 'Youtube Comment Picker',
         short_name: 'Comment Picker',
@@ -26,12 +27,12 @@ export default defineConfig({
         display: 'standalone',
         icons: [
           {
-            src: 'images/app_logo.png',
+            src: 'images/app_logo_192.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: 'images/app_logo.png',
+            src: 'images/app_logo_512.png',
             sizes: '512x512',
             type: 'image/png'
           }

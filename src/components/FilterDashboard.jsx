@@ -34,14 +34,12 @@ export default function FilterDashboard({ filters, setFilters, totalComments, fi
 
   return (
     <motion.section 
-      layout
       className="liquid-glass" 
       style={{ marginBottom: '32px', padding: '24px', borderRadius: 'var(--radius-xl)' }}
       aria-labelledby="filter-dashboard-title"
     >
       {/* Header Accordion Trigger */}
       <motion.div 
-        layout="position"
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.01 }}
         style={{ 
