@@ -55,11 +55,18 @@ function Navigation({ isMobileMenuOpen, setIsMobileMenuOpen }) {
 // Global Cursor Interaction logic
 function CursorGlowTracker() {
   useEffect(() => {
+    let ticking = false;
     const handleMouseMove = (e) => {
-      document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
-      document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+          document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
   return null;
@@ -90,7 +97,7 @@ function AnimatedRoutes() {
         exit="out"
         variants={pageVariants}
         transition={pageTransition}
-        style={{ flex: 1, display: 'flex', flexDirection: 'column' }}
+        style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 'calc(100vh - 148px)' }}
       >
         <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}><motion.div animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }} transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }} style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--glow-primary)', filter: 'blur(10px)' }} /></div>}>
           <Routes location={location} key={location.pathname}>
@@ -183,7 +190,11 @@ export default function App() {
             <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
               <motion.img 
                 whileHover={{ scale: 1.1, rotate: 5 }}
-                src="/images/app_logo.png" 
+                src="/images/app_logo_56.webp" 
+                srcSet="/images/app_logo_32.webp 32w, /images/app_logo_56.webp 56w, /images/app_logo_128.webp 128w"
+                sizes="32px"
+                width="32"
+                height="32"
                 alt="Youtube Comment Picker Logo" 
                 style={{ width: '32px', height: '32px', borderRadius: '10px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }} 
               />

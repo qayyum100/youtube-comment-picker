@@ -149,6 +149,8 @@ export default function ThumbnailDownloaderPage() {
                       <img 
                         src={thumbnails[0].url} 
                         alt="Highest quality thumbnail preview"
+                        width="640"
+                        height="360"
                         style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover' }}
                         onError={(e) => {
                           if (!e.target.dataset.failed) {

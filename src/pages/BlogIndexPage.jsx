@@ -59,7 +59,14 @@ export default function BlogIndexPage() {
                     overflow: 'hidden'
                   }}>
                     {blog.image ? (
-                      <img src={blog.image} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img 
+                        src={blog.image} 
+                        alt={blog.title} 
+                        width="320" 
+                        height="160" 
+                        loading="lazy" 
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                      />
                     ) : (
                       <BookOpen size={48} opacity={0.5} />
                     )}

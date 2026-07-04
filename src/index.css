@@ -179,7 +179,7 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: var(--glass-inner-glow), var(--glass-shadow);
   position: relative;
   overflow: hidden;
-  transition: all var(--transition-liquid);
+  transition: transform var(--transition-liquid), opacity var(--transition-liquid), filter var(--transition-liquid), box-shadow var(--transition-liquid);
   /* Optional slight chromatic dispersion feel via multiple subtle box-shadows if needed */
 }
 
@@ -216,7 +216,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-main);
   font-size: 16px;
   width: 100%;
-  transition: all var(--transition-liquid);
+  transition: transform var(--transition-liquid), opacity var(--transition-liquid), background-color var(--transition-liquid), border-color var(--transition-liquid), box-shadow var(--transition-liquid);
   outline: none;
   box-shadow: inset 0 2px 6px rgba(0,0,0,0.05), var(--glass-inner-glow);
 }

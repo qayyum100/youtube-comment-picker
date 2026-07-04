@@ -543,6 +543,9 @@ function ResultSection({
                       <img
                         src={item.authorAvatar || `https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(item.author)}`}
                         alt={item.author}
+                        width="56"
+                        height="56"
+                        loading="lazy"
                         onError={e => {
                           e.currentTarget.src = `https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(item.author)}`;
                         }}

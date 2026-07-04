@@ -65,7 +65,13 @@ export default function BlogPostPage() {
                 overflow: 'hidden'
               }}>
                 {blog.image ? (
-                  <img src={blog.image} alt={blog.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <img 
+                    src={blog.image} 
+                    alt={blog.title} 
+                    width="800" 
+                    height="300" 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                  />
                 ) : (
                   <span style={{ fontSize: '1.2rem' }}>Featured Image Placeholder</span>
                 )}
