@@ -10,6 +10,10 @@ const CommentPickerPage = lazy(() => import('./pages/CommentPickerPage'));
 const ThumbnailDownloaderPage = lazy(() => import('./pages/ThumbnailDownloaderPage'));
 const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
+
+import CookieConsent from './components/CookieConsent';
 
 function Navigation({ isMobileMenuOpen, setIsMobileMenuOpen }) {
   const location = useLocation();
@@ -84,6 +88,8 @@ function AnimatedRoutes() {
           <Route path="/thumbnail-downloader" element={<ThumbnailDownloaderPage />} />
           <Route path="/blogs" element={<BlogIndexPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </Suspense>
     </div>
@@ -197,6 +203,8 @@ export default function App() {
           <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
             <span>© 2026 Youtube Comment Picker. All rights reserved.</span>
             <div style={{ display: 'flex', gap: '20px', alignItems: 'center', fontWeight: '500' }}>
+              <Link to="/about" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}>About</Link>
+              <Link to="/contact" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}>Contact</Link>
               <Link to="/blogs" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}>Blogs</Link>
               <span role="button" tabIndex={0} style={{ cursor: 'pointer', transition: 'color 0.2s' }} onClick={() => setShowDisclaimer(true)} onKeyDown={(e) => e.key === 'Enter' && setShowDisclaimer(true)}>Disclaimer</span>
               <span role="button" tabIndex={0} style={{ cursor: 'pointer', transition: 'color 0.2s' }} onClick={() => setShowPrivacy(true)} onKeyDown={(e) => e.key === 'Enter' && setShowPrivacy(true)}>Privacy Policy</span>
@@ -212,6 +220,7 @@ export default function App() {
           {showDisclaimer && <DisclaimerModal onClose={() => setShowDisclaimer(false)} />}
         </AnimatePresence>
 
+        <CookieConsent />
       </div>
     </BrowserRouter>
   );
