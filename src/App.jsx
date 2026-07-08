@@ -129,7 +129,8 @@ export default function App() {
           borderRadius: 0,
           borderTop: 'none',
           borderLeft: 'none',
-          borderRight: 'none'
+          borderRight: 'none',
+          overflow: 'visible'
         }}>
           <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
             <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
