@@ -28,6 +28,29 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
   // Modal certificate state
   const [activeCertificate, setActiveCertificate] = useState(null);
 
+  // History state
+  const [history, setHistory] = useState(() => {
+    const saved = localStorage.getItem('draw_history');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const handleDrawComplete = (drawnWinners) => {
+    if (drawnWinners.length === 0) return;
+    setHistory(prev => {
+      const next = [
+        {
+          id: Math.random().toString(36).substring(2, 9),
+          date: new Date().toISOString(),
+          platform,
+          winners: drawnWinners.map(w => ({ author: w.author, prize: w.prizeTag || 'Winner', serial: w.serialCode }))
+        },
+        ...prev
+      ].slice(0, 50);
+      localStorage.setItem('draw_history', JSON.stringify(next));
+      return next;
+    });
+  };
+
   // Initialize filters from localStorage or default
   const [filters, setFilters] = useState(() => {
     const defaultFilters = {
@@ -274,12 +297,42 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
               standbys={standbys}
               setStandbys={setStandbys}
               onGenerateCertificate={setActiveCertificate}
+              onDrawComplete={handleDrawComplete}
             />
           )}
 
           <CompetitorContent />
           
           <FaqSection />
+
+          {history.length > 0 && (
+            <motion.section 
+              className="liquid-glass"
+              style={{ marginTop: '48px', padding: '32px', borderRadius: 'var(--radius-xl)' }}
+            >
+              <h2 style={{ fontSize: '1.4rem', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-primary)' }}>
+                📜 Drawn Winner History
+              </h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {history.map((run) => (
+                  <div key={run.id} style={{ background: 'var(--glass-bg-base)', padding: '20px', borderRadius: 'var(--radius-md)', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px', border: '1px solid var(--border-light)' }}>
+                    <div>
+                      <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
+                        {new Date(run.date).toLocaleString()} • Platform: <strong style={{ textTransform: 'capitalize' }}>{run.platform}</strong>
+                      </div>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '10px' }}>
+                        {run.winners.map((w, idx) => (
+                          <span key={idx} style={{ padding: '6px 12px', background: 'var(--bg-dark)', border: '1px solid var(--border-light)', borderRadius: '20px', fontSize: '0.9rem', color: 'var(--text-primary)' }}>
+                            🏆 <strong>{w.author}</strong> ({w.prize})
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.section>
+          )}
 
         </div>
       </main>

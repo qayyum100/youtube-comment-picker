@@ -6,8 +6,17 @@ import TermsModal from './components/TermsModal';
 import DisclaimerModal from './components/DisclaimerModal';
 import { Download, Gift, BookOpen, Sun, Moon, Menu, X } from 'lucide-react';
 
+const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 const CommentPickerPage = lazy(() => import('./pages/CommentPickerPage'));
 const ThumbnailDownloaderPage = lazy(() => import('./pages/ThumbnailDownloaderPage'));
+const TagExtractorPage = lazy(() => import('./pages/TagExtractorPage'));
+const SEOCheckerPage = lazy(() => import('./pages/SEOCheckerPage'));
+const ChannelAnalyzerPage = lazy(() => import('./pages/ChannelAnalyzerPage'));
+const TitleGeneratorPage = lazy(() => import('./pages/TitleGeneratorPage'));
+const DescriptionGeneratorPage = lazy(() => import('./pages/DescriptionGeneratorPage'));
+const HashtagGeneratorPage = lazy(() => import('./pages/HashtagGeneratorPage'));
+const MoneyCalculatorPage = lazy(() => import('./pages/MoneyCalculatorPage'));
+const CommentAnalyzerPage = lazy(() => import('./pages/CommentAnalyzerPage'));
 const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
@@ -42,11 +51,11 @@ function Navigation({ isMobileMenuOpen, setIsMobileMenuOpen }) {
     <nav className={`nav-container ${isMobileMenuOpen ? 'open' : ''}`}>
       <Link to="/youtube-comment-picker" style={navLinkStyle('/youtube-comment-picker')} className="liquid-glass hover:scale-105 transition-transform">
         <Gift size={16} />
-        Comment Picker
+        Tools
       </Link>
-      <Link to="/thumbnail-downloader" style={navLinkStyle('/thumbnail-downloader')} className="liquid-glass hover:scale-105 transition-transform">
+      <Link to="/youtube-seo-checker" style={navLinkStyle('/youtube-seo-checker')} className="liquid-glass hover:scale-105 transition-transform">
         <Download size={16} />
-        Thumbnail Downloader
+        SEO
       </Link>
       <Link to="/blogs" style={navLinkStyle(location.pathname.startsWith('/blog') ? location.pathname : '/blogs')} className="liquid-glass hover:scale-105 transition-transform">
         <BookOpen size={16} />
@@ -81,11 +90,20 @@ function AnimatedRoutes() {
     <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 'calc(100vh - 148px)' }}>
       <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}><div style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--glow-primary)', filter: 'blur(10px)' }} /></div>}>
         <Routes>
-          <Route path="/" element={<CommentPickerPage defaultPlatform="youtube" />} />
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="/tools" element={<DashboardPage />} />
           <Route path="/youtube-comment-picker" element={<CommentPickerPage defaultPlatform="youtube" />} />
           <Route path="/instagram-comment-picker" element={<CommentPickerPage defaultPlatform="instagram" />} />
           <Route path="/tiktok-comment-picker" element={<CommentPickerPage defaultPlatform="tiktok" />} />
           <Route path="/thumbnail-downloader" element={<ThumbnailDownloaderPage />} />
+          <Route path="/youtube-tag-extractor" element={<TagExtractorPage />} />
+          <Route path="/youtube-seo-checker" element={<SEOCheckerPage />} />
+          <Route path="/youtube-channel-analyzer" element={<ChannelAnalyzerPage />} />
+          <Route path="/youtube-title-generator" element={<TitleGeneratorPage />} />
+          <Route path="/youtube-description-generator" element={<DescriptionGeneratorPage />} />
+          <Route path="/youtube-hashtag-generator" element={<HashtagGeneratorPage />} />
+          <Route path="/youtube-money-calculator" element={<MoneyCalculatorPage />} />
+          <Route path="/youtube-comment-analyzer" element={<CommentAnalyzerPage />} />
           <Route path="/blogs" element={<BlogIndexPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route path="/about" element={<AboutPage />} />

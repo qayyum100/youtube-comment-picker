@@ -129,6 +129,7 @@ export default function DrawingDesk({
   standbys,
   setStandbys,
   onGenerateCertificate,
+  onDrawComplete,
 }) {
   const [numWinners,  setNumWinners]  = useState(1);
   const [numStandbys, setNumStandbys] = useState(0);
@@ -222,6 +223,9 @@ export default function DrawingDesk({
       setShufflingName('');
 
       fireConfetti();
+      if (typeof onDrawComplete === 'function') {
+        onDrawComplete(drawnWinners);
+      }
     }, 2500);
   };
 
