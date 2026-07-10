@@ -17,6 +17,29 @@ const DescriptionGeneratorPage = lazy(() => import('./pages/DescriptionGenerator
 const HashtagGeneratorPage = lazy(() => import('./pages/HashtagGeneratorPage'));
 const MoneyCalculatorPage = lazy(() => import('./pages/MoneyCalculatorPage'));
 const CommentAnalyzerPage = lazy(() => import('./pages/CommentAnalyzerPage'));
+
+// New Phase 2 Pages
+const TranscriptGeneratorPage = lazy(() => import('./pages/TranscriptGeneratorPage'));
+const VideoSummarizerPage = lazy(() => import('./pages/VideoSummarizerPage'));
+const ThumbnailAnalyzerPage = lazy(() => import('./pages/ThumbnailAnalyzerPage'));
+const ThumbnailGeneratorPage = lazy(() => import('./pages/ThumbnailGeneratorPage'));
+const ShortsIdeaGeneratorPage = lazy(() => import('./pages/ShortsIdeaGeneratorPage'));
+const ScriptGeneratorPage = lazy(() => import('./pages/ScriptGeneratorPage'));
+const HookGeneratorPage = lazy(() => import('./pages/HookGeneratorPage'));
+const VideoIdeasGeneratorPage = lazy(() => import('./pages/VideoIdeasGeneratorPage'));
+const ChannelNameGeneratorPage = lazy(() => import('./pages/ChannelNameGeneratorPage'));
+const HandleCheckerPage = lazy(() => import('./pages/HandleCheckerPage'));
+const BannerMakerPage = lazy(() => import('./pages/BannerMakerPage'));
+const ProfilePictureMakerPage = lazy(() => import('./pages/ProfilePictureMakerPage'));
+const TimestampGeneratorPage = lazy(() => import('./pages/TimestampGeneratorPage'));
+const PlaylistAnalyzerPage = lazy(() => import('./pages/PlaylistAnalyzerPage'));
+const WatchTimeCalculatorPage = lazy(() => import('./pages/WatchTimeCalculatorPage'));
+const MonetizationCheckerPage = lazy(() => import('./pages/MonetizationCheckerPage'));
+const RankTrackerPage = lazy(() => import('./pages/RankTrackerPage'));
+const QRCodeGeneratorPage = lazy(() => import('./pages/QRCodeGeneratorPage'));
+const EmbedGeneratorPage = lazy(() => import('./pages/EmbedGeneratorPage'));
+const KeywordToolPage = lazy(() => import('./pages/KeywordToolPage'));
+
 const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
@@ -104,6 +127,29 @@ function AnimatedRoutes() {
           <Route path="/youtube-hashtag-generator" element={<HashtagGeneratorPage />} />
           <Route path="/youtube-money-calculator" element={<MoneyCalculatorPage />} />
           <Route path="/youtube-comment-analyzer" element={<CommentAnalyzerPage />} />
+
+          {/* Phase 2 Routes */}
+          <Route path="/youtube-transcript-generator" element={<TranscriptGeneratorPage />} />
+          <Route path="/youtube-video-summarizer" element={<VideoSummarizerPage />} />
+          <Route path="/youtube-thumbnail-analyzer" element={<ThumbnailAnalyzerPage />} />
+          <Route path="/youtube-thumbnail-generator" element={<ThumbnailGeneratorPage />} />
+          <Route path="/youtube-shorts-idea-generator" element={<ShortsIdeaGeneratorPage />} />
+          <Route path="/youtube-script-generator" element={<ScriptGeneratorPage />} />
+          <Route path="/youtube-hook-generator" element={<HookGeneratorPage />} />
+          <Route path="/youtube-video-ideas-generator" element={<VideoIdeasGeneratorPage />} />
+          <Route path="/youtube-channel-name-generator" element={<ChannelNameGeneratorPage />} />
+          <Route path="/youtube-handle-checker" element={<HandleCheckerPage />} />
+          <Route path="/youtube-banner-maker" element={<BannerMakerPage />} />
+          <Route path="/youtube-profile-picture-maker" element={<ProfilePictureMakerPage />} />
+          <Route path="/youtube-timestamp-generator" element={<TimestampGeneratorPage />} />
+          <Route path="/youtube-playlist-analyzer" element={<PlaylistAnalyzerPage />} />
+          <Route path="/youtube-watch-time-calculator" element={<WatchTimeCalculatorPage />} />
+          <Route path="/youtube-monetization-checker" element={<MonetizationCheckerPage />} />
+          <Route path="/youtube-rank-tracker" element={<RankTrackerPage />} />
+          <Route path="/youtube-qr-code-generator" element={<QRCodeGeneratorPage />} />
+          <Route path="/youtube-embed-generator" element={<EmbedGeneratorPage />} />
+          <Route path="/youtube-keyword-tool" element={<KeywordToolPage />} />
+
           <Route path="/blogs" element={<BlogIndexPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
           <Route path="/about" element={<AboutPage />} />

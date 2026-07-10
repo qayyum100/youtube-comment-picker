@@ -186,3 +186,206 @@ export const generateHashtags = async (req, res) => {
         return res.status(500).json({ error: 'Failed to generate hashtags' });
     }
 };
+
+export const generateScript = async (req, res) => {
+    const { topic, length = '5 minutes', style = 'Educational' } = req.body;
+    if (!topic) return res.status(400).json({ error: 'Topic is required' });
+    try {
+        const genAI = getGeminiClient();
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const prompt = `Write a YouTube video script for a video about "${topic}". The length should be around "${length}" and the tone/style should be "${style}".
+        Format the script with clear sections:
+        - "hook" (first 5-10 seconds)
+        - "intro" (introduction)
+        - "body" (main points with script and visual suggestions)
+        - "cta" (call to action)
+        - "outro" (closing remarks)
+        Return ONLY valid JSON with keys: "hook", "intro", "body" (array of strings/sections), "cta", "outro".`;
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        const jsonMatch = text.match(/\{.*\}/s);
+        let script = {};
+        if (jsonMatch) {
+            script = JSON.parse(jsonMatch[0]);
+        } else {
+            script = JSON.parse(text.replace(/```json/g, '').replace(/```/g, '').trim());
+        }
+        return res.json({ script });
+    } catch (error) {
+        console.error("Gemini API Error:", error);
+        return res.status(500).json({ error: 'Failed to generate script' });
+    }
+};
+
+export const generateShortsIdeas = async (req, res) => {
+    const { niche, topic } = req.body;
+    if (!niche) return res.status(400).json({ error: 'Niche is required' });
+    try {
+        const genAI = getGeminiClient();
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const prompt = `Generate 5 viral YouTube Shorts ideas for the niche "${niche}"${topic ? ` on the topic of "${topic}"` : ''}.
+        Provide the output as a JSON array of 5 objects, where each object contains:
+        - "title" (string, short punchy title)
+        - "viralScore" (number 0-100)
+        - "difficulty" (string: Easy, Medium, Hard)
+        - "hook" (string, first sentence hook)
+        - "caption" (string, suggested short caption)
+        - "hashtags" (array of strings)
+        Return ONLY valid JSON.`;
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        const jsonMatch = text.match(/\[.*\]/s);
+        let ideas = [];
+        if (jsonMatch) {
+            ideas = JSON.parse(jsonMatch[0]);
+        } else {
+            ideas = JSON.parse(text.replace(/```json/g, '').replace(/```/g, '').trim());
+        }
+        return res.json({ ideas });
+    } catch (error) {
+        console.error("Gemini API Error:", error);
+        return res.status(500).json({ error: 'Failed to generate shorts ideas' });
+    }
+};
+
+export const generateVideoIdeas = async (req, res) => {
+    const { niche } = req.body;
+    if (!niche) return res.status(400).json({ error: 'Niche is required' });
+    try {
+        const genAI = getGeminiClient();
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const prompt = `Generate 10 video ideas for a YouTube channel in the niche "${niche}".
+        Provide the output as a JSON array of 10 objects, where each object contains:
+        - "title" (string)
+        - "competition" (string: Low, Medium, High)
+        - "difficulty" (string: Easy, Medium, Hard)
+        - "viralPotential" (number 0-100)
+        - "seoOpportunity" (number 0-100)
+        Return ONLY valid JSON.`;
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        const jsonMatch = text.match(/\[.*\]/s);
+        let ideas = [];
+        if (jsonMatch) {
+            ideas = JSON.parse(jsonMatch[0]);
+        } else {
+            ideas = JSON.parse(text.replace(/```json/g, '').replace(/```/g, '').trim());
+        }
+        return res.json({ ideas });
+    } catch (error) {
+        console.error("Gemini API Error:", error);
+        return res.status(500).json({ error: 'Failed to generate video ideas' });
+    }
+};
+
+export const generateChannelNames = async (req, res) => {
+    const { niche } = req.body;
+    if (!niche) return res.status(400).json({ error: 'Niche is required' });
+    try {
+        const genAI = getGeminiClient();
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const prompt = `Generate YouTube channel names for the niche "${niche}".
+        Provide the output as a JSON object containing 4 arrays:
+        - "creative" (array of 5 strings)
+        - "professional" (array of 5 strings)
+        - "gaming" (array of 5 strings)
+        - "brand" (array of 5 strings)
+        Return ONLY valid JSON.`;
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        const jsonMatch = text.match(/\{.*\}/s);
+        let names = {};
+        if (jsonMatch) {
+            names = JSON.parse(jsonMatch[0]);
+        } else {
+            names = JSON.parse(text.replace(/```json/g, '').replace(/```/g, '').trim());
+        }
+        return res.json({ names });
+    } catch (error) {
+        console.error("Gemini API Error:", error);
+        return res.status(500).json({ error: 'Failed to generate channel names' });
+    }
+};
+
+export const suggestKeywords = async (req, res) => {
+    const { keyword } = req.body;
+    if (!keyword) return res.status(400).json({ error: 'Keyword is required' });
+    try {
+        const genAI = getGeminiClient();
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const prompt = `Perform YouTube keyword research for the keyword "${keyword}".
+        Provide the output as a JSON object containing:
+        - "suggestions" (array of 5 related keyword objects with keys: "keyword", "seoScore" (0-100), "competition" (Low/Medium/High), "demand" (Low/Medium/High))
+        - "longtail" (array of 5 longtail keyword objects with the same keys)
+        Return ONLY valid JSON.`;
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        const jsonMatch = text.match(/\{.*\}/s);
+        let data = {};
+        if (jsonMatch) {
+            data = JSON.parse(jsonMatch[0]);
+        } else {
+            data = JSON.parse(text.replace(/```json/g, '').replace(/```/g, '').trim());
+        }
+        return res.json({ data });
+    } catch (error) {
+        console.error("Gemini API Error:", error);
+        return res.status(500).json({ error: 'Failed to suggest keywords' });
+    }
+};
+
+export const generateTimestamps = async (req, res) => {
+    const { transcript } = req.body;
+    if (!transcript) return res.status(400).json({ error: 'Transcript is required' });
+    try {
+        const genAI = getGeminiClient();
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const prompt = `Based on this video transcript: "${transcript.slice(0, 4000)}", generate a YouTube chapter timeline.
+        Provide the output as a JSON array of objects, where each object contains:
+        - "time" (string, e.g. "01:20")
+        - "title" (string, e.g. "Topic Discussion")
+        Return ONLY valid JSON.`;
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        const jsonMatch = text.match(/\[.*\]/s);
+        let timestamps = [];
+        if (jsonMatch) {
+            timestamps = JSON.parse(jsonMatch[0]);
+        } else {
+            timestamps = JSON.parse(text.replace(/```json/g, '').replace(/```/g, '').trim());
+        }
+        return res.json({ timestamps });
+    } catch (error) {
+        console.error("Gemini API Error:", error);
+        return res.status(500).json({ error: 'Failed to generate timestamps' });
+    }
+};
+
+export const summarizeVideo = async (req, res) => {
+    const { transcript, format = 'bullet' } = req.body;
+    if (!transcript) return res.status(400).json({ error: 'Transcript is required' });
+    try {
+        const genAI = getGeminiClient();
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const prompt = `Summarize this YouTube transcript: "${transcript.slice(0, 4000)}" using the format: "${format}".
+        Provide the output as a JSON object containing:
+        - "shortSummary" (string, quick 2-sentence summary)
+        - "detailedSummary" (string or array of strings, in-depth breakdown matching the requested format)
+        - "keyPoints" (array of strings)
+        - "actionItems" (array of strings)
+        Return ONLY valid JSON.`;
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        const jsonMatch = text.match(/\{.*\}/s);
+        let summary = {};
+        if (jsonMatch) {
+            summary = JSON.parse(jsonMatch[0]);
+        } else {
+            summary = JSON.parse(text.replace(/```json/g, '').replace(/```/g, '').trim());
+        }
+        return res.json({ summary });
+    } catch (error) {
+        console.error("Gemini API Error:", error);
+        return res.status(500).json({ error: 'Failed to summarize video' });
+    }
+};

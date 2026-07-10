@@ -168,3 +168,64 @@ export const getYouTubeChannelDetails = async (req, res) => {
     return res.status(500).json({ error: 'Failed to fetch channel details' });
   }
 };
+
+export const checkVideoRank = async (req, res) => {
+  const { url, keyword } = req.query;
+  const videoId = extractYouTubeId(url);
+
+  if (!url || !keyword) return res.status(400).json({ error: 'URL and keyword are required' });
+  if (!videoId) return res.status(400).json({ error: 'Invalid YouTube URL' });
+
+  const apiKey = process.env.YOUTUBE_API_KEY;
+
+  if (!apiKey) {
+    // Simulated rank
+    const mockRank = Math.floor(Math.random() * 20) + 1;
+    return res.json({
+      simulated: true,
+      videoId,
+      keyword,
+      rank: mockRank,
+      competition: 'Medium',
+      difficulty: 'Medium'
+    });
+  }
+
+  try {
+    // Fetch top search results for keyword
+    const searchResponse = await axios.get('https://www.googleapis.com/youtube/v3/search', {
+      params: {
+        part: 'id,snippet',
+        q: keyword,
+        maxResults: 50,
+        type: 'video',
+        key: apiKey
+      }
+    });
+
+    const items = searchResponse.data.items || [];
+    const index = items.findIndex(item => item.id?.videoId === videoId);
+    const rank = index === -1 ? 'Not in top 50' : index + 1;
+
+    return res.json({
+      simulated: false,
+      videoId,
+      keyword,
+      rank,
+      competition: items.length > 30 ? 'High' : 'Low',
+      difficulty: items.length > 35 ? 'Hard' : 'Easy'
+    });
+  } catch (error) {
+    console.error('Rank Tracker Error:', error.message);
+    const mockRank = Math.floor(Math.random() * 15) + 3;
+    return res.json({
+      simulated: true,
+      error: 'API failed, using simulated rank.',
+      videoId,
+      keyword,
+      rank: mockRank,
+      competition: 'Medium',
+      difficulty: 'Medium'
+    });
+  }
+};
