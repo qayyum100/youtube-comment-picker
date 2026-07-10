@@ -79,7 +79,7 @@ export const getTranscript = async (req, res) => {
     // 2. Scraper failed or no captions -> Fallback to Gemini generator using video metadata
     const apiKey = process.env.GEMINI_API_KEY;
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+    const model = genAI.getGenerativeModel({ model: 'gemini-flash-latest' });
 
     // Fetch video title and details to inform Gemini
     let videoTitle = "YouTube Video";

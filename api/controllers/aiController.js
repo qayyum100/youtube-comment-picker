@@ -15,7 +15,7 @@ export const generateTitles = async (req, res) => {
 
     try {
         const genAI = getGeminiClient();
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
 
         const prompt = `Generate 10 viral YouTube video titles about "${topic}" in the category of "${category || 'General'}" with a "${tone || 'Exciting'}" tone. 
         Format the output as a JSON array of objects, where each object has:
@@ -52,7 +52,7 @@ export const generateDescription = async (req, res) => {
 
     try {
         const genAI = getGeminiClient();
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
 
         const prompt = `Write an SEO-optimized YouTube video description for a video about "${topic}". The video title is "${title || ''}".
         Include:
@@ -76,7 +76,7 @@ export const analyzeSEO = async (req, res) => {
     
     try {
         const genAI = getGeminiClient();
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
 
         const prompt = `Analyze the following YouTube video data for SEO optimization:
         Title: "${title}"
@@ -119,7 +119,7 @@ export const analyzeComments = async (req, res) => {
 
     try {
         const genAI = getGeminiClient();
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
         
         const sampleComments = comments.slice(0, 50).map(c => c.text).join(' | ');
 
@@ -160,7 +160,7 @@ export const generateHashtags = async (req, res) => {
 
     try {
         const genAI = getGeminiClient();
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
 
         const prompt = `Generate a JSON object of YouTube hashtags for the topic "${topic}".
         Include 3 arrays:
@@ -192,7 +192,7 @@ export const generateScript = async (req, res) => {
     if (!topic) return res.status(400).json({ error: 'Topic is required' });
     try {
         const genAI = getGeminiClient();
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
         const prompt = `Write a YouTube video script for a video about "${topic}". The length should be around "${length}" and the tone/style should be "${style}".
         Format the script with clear sections:
         - "hook" (first 5-10 seconds)
@@ -222,7 +222,7 @@ export const generateShortsIdeas = async (req, res) => {
     if (!niche) return res.status(400).json({ error: 'Niche is required' });
     try {
         const genAI = getGeminiClient();
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
         const prompt = `Generate 5 viral YouTube Shorts ideas for the niche "${niche}"${topic ? ` on the topic of "${topic}"` : ''}.
         Provide the output as a JSON array of 5 objects, where each object contains:
         - "title" (string, short punchy title)
@@ -253,7 +253,7 @@ export const generateVideoIdeas = async (req, res) => {
     if (!niche) return res.status(400).json({ error: 'Niche is required' });
     try {
         const genAI = getGeminiClient();
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
         const prompt = `Generate 10 video ideas for a YouTube channel in the niche "${niche}".
         Provide the output as a JSON array of 10 objects, where each object contains:
         - "title" (string)
@@ -283,7 +283,7 @@ export const generateChannelNames = async (req, res) => {
     if (!niche) return res.status(400).json({ error: 'Niche is required' });
     try {
         const genAI = getGeminiClient();
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
         const prompt = `Generate YouTube channel names for the niche "${niche}".
         Provide the output as a JSON object containing 4 arrays:
         - "creative" (array of 5 strings)
@@ -312,7 +312,7 @@ export const suggestKeywords = async (req, res) => {
     if (!keyword) return res.status(400).json({ error: 'Keyword is required' });
     try {
         const genAI = getGeminiClient();
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
         const prompt = `Perform YouTube keyword research for the keyword "${keyword}".
         Provide the output as a JSON object containing:
         - "suggestions" (array of 5 related keyword objects with keys: "keyword", "seoScore" (0-100), "competition" (Low/Medium/High), "demand" (Low/Medium/High))
@@ -339,7 +339,7 @@ export const generateTimestamps = async (req, res) => {
     if (!transcript) return res.status(400).json({ error: 'Transcript is required' });
     try {
         const genAI = getGeminiClient();
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
         const prompt = `Based on this video transcript: "${transcript.slice(0, 4000)}", generate a YouTube chapter timeline.
         Provide the output as a JSON array of objects, where each object contains:
         - "time" (string, e.g. "01:20")
@@ -366,7 +366,7 @@ export const summarizeVideo = async (req, res) => {
     if (!transcript) return res.status(400).json({ error: 'Transcript is required' });
     try {
         const genAI = getGeminiClient();
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
         const prompt = `Summarize this YouTube transcript: "${transcript.slice(0, 4000)}" using the format: "${format}".
         Provide the output as a JSON object containing:
         - "shortSummary" (string, quick 2-sentence summary)
