@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-import { faqs } from '../data/faqs';
+import { faqs as defaultFaqs } from '../data/faqs';
 import { ChevronDown, MessageCircleQuestion } from 'lucide-react';
 
-export default function FaqSection() {
+export default function FaqSection({ faqsData, customTitle, customDescription }) {
   const [openIndex, setOpenIndex] = useState(null);
   const [activeCategory, setActiveCategory] = useState('All');
 
-  const categories = ['All', ...new Set(faqs.map(f => f.category))];
+  const faqsToUse = faqsData || defaultFaqs;
+  const categories = ['All', ...new Set(faqsToUse.map(f => f.category).filter(Boolean))];
+  const hasCategories = categories.length > 1;
 
   const filteredFaqs = activeCategory === 'All' 
-    ? faqs 
-    : faqs.filter(f => f.category === activeCategory);
+    ? faqsToUse 
+    : faqsToUse.filter(f => f.category === activeCategory);
 
   const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -20,35 +22,37 @@ export default function FaqSection() {
     <section style={{ marginTop: '60px', marginBottom: '60px' }}>
       <div style={{ textAlign: 'center', marginBottom: '40px' }} className="animate-fade-in">
         <h2 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '10px' }}>
-          Frequently Asked Questions
+          {customTitle || 'Frequently Asked Questions'}
         </h2>
         <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto', lineHeight: '1.6' }}>
-          Everything you need to know about our comment picker for youtube, youtube giveaway picker, and youtube random comment picker tools. We also explain how youtube random comment picker works to help you run fair and secure drawings.
+          {customDescription || 'Everything you need to know about our comment picker for youtube, youtube giveaway picker, and youtube random comment picker tools. We also explain how youtube random comment picker works to help you run fair and secure drawings.'}
         </p>
       </div>
 
       {/* Category Tabs */}
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '30px' }} className="animate-fade-in">
-        {categories.map(cat => (
-          <button
-            key={cat}
-            onClick={() => { setActiveCategory(cat); setOpenIndex(null); }}
-            style={{
-              padding: '8px 16px',
-              borderRadius: '20px',
-              border: activeCategory === cat ? '1px solid var(--brand-indigo)' : '1px solid var(--border-dark)',
-              background: activeCategory === cat ? 'rgba(99, 102, 241, 0.1)' : 'var(--bg-panel)',
-              color: activeCategory === cat ? 'var(--brand-indigo)' : 'var(--text-secondary)',
-              cursor: 'pointer',
-              fontWeight: '600',
-              transition: 'all 0.2s ease',
-              fontSize: '0.9rem'
-            }}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
+      {hasCategories && (
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '30px' }} className="animate-fade-in">
+          {categories.map(cat => (
+            <button
+              key={cat}
+              onClick={() => { setActiveCategory(cat); setOpenIndex(null); }}
+              style={{
+                padding: '8px 16px',
+                borderRadius: '20px',
+                border: activeCategory === cat ? '1px solid var(--brand-indigo)' : '1px solid var(--border-dark)',
+                background: activeCategory === cat ? 'rgba(99, 102, 241, 0.1)' : 'var(--bg-panel)',
+                color: activeCategory === cat ? 'var(--brand-indigo)' : 'var(--text-secondary)',
+                cursor: 'pointer',
+                fontWeight: '600',
+                transition: 'all 0.2s ease',
+                fontSize: '0.9rem'
+              }}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Accordion List */}
       <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>

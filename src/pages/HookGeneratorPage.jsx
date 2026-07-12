@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { Sparkles, Copy, AlertCircle, Quote } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function HookGeneratorPage() {
   const [topic, setTopic] = useState('');
@@ -108,6 +110,12 @@ export default function HookGeneratorPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.hookGenerator}
+        customTitle="YouTube Hook Generator FAQs"
+        customDescription="Learn how to write irresistible YouTube opening lines that dramatically boost audience retention."
+      />
     </div>
   );
 }

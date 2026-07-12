@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
-import { Sparkles, Copy, Hash } from 'lucide-react';
+import { Hash, Sparkles, Copy, Check } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function HashtagGeneratorPage() {
   const [topic, setTopic] = useState('');
@@ -119,6 +121,12 @@ export default function HashtagGeneratorPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.hashtagGenerator}
+        customTitle="YouTube Hashtag Generator FAQs"
+        customDescription="Find out how to choose the best YouTube hashtags to get your videos and Shorts seen by more people."
+      />
     </div>
   );
 }

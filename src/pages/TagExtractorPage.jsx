@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
-import { Search, Tag, Copy, Download } from 'lucide-react';
+import { Search, Tag, Copy, Sparkles, Youtube } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function TagExtractorPage() {
   const [url, setUrl] = useState('');
@@ -118,6 +120,12 @@ export default function TagExtractorPage() {
           <li>View, copy, or export the tags to use in your own video SEO strategy.</li>
         </ol>
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.tagExtractor}
+        customTitle="YouTube Tag Extractor FAQs"
+        customDescription="Learn how to find and use the best YouTube tags from other videos."
+      />
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import SEO from '../components/SEO';
 import { Upload, Download, Crop, Users } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function ProfilePictureMakerPage() {
   const canvasRef = useRef(null);
@@ -159,6 +161,12 @@ export default function ProfilePictureMakerPage() {
         </section>
 
       </div>
+
+      <FaqSection 
+        faqsData={toolFaqs.profilePictureMaker}
+        customTitle="YouTube Profile Picture Maker FAQs"
+        customDescription="Learn how to design the perfect YouTube channel logo and profile image."
+      />
     </div>
   );
 }

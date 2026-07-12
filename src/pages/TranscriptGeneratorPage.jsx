@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { Search, FileText, Download, Copy, Languages } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function TranscriptGeneratorPage() {
   const [url, setUrl] = useState('');
@@ -139,6 +141,12 @@ export default function TranscriptGeneratorPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.transcriptGenerator}
+        customTitle="YouTube Transcript Generator FAQs"
+        customDescription="Learn how to extract YouTube video transcripts and use them for SEO and content repurposing."
+      />
     </div>
   );
 }

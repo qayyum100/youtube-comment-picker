@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { Search, Sparkles, AlertCircle, MessageSquare } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function CommentAnalyzerPage() {
   const [url, setUrl] = useState('');
@@ -141,6 +143,12 @@ export default function CommentAnalyzerPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.commentAnalyzer}
+        customTitle="YouTube Comment Analyzer FAQs"
+        customDescription="Find out how analyzing your comments can boost your engagement and video ideas."
+      />
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
-import { Search, CheckCircle, XCircle, RefreshCw } from 'lucide-react';
+import { Search, CheckCircle, XCircle, RefreshCw, AtSign } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function HandleCheckerPage() {
   const [handle, setHandle] = useState('');
@@ -137,6 +139,12 @@ export default function HandleCheckerPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.handleChecker}
+        customTitle="YouTube Handle Checker FAQs"
+        customDescription="Learn everything you need to know about choosing and checking your YouTube handle."
+      />
     </div>
   );
 }

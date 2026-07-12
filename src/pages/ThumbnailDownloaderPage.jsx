@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SeoHead from '../components/SeoHead';
 import { Link2, Image as ImageIcon, Download, ExternalLink, AlertCircle } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function ThumbnailDownloaderPage() {
   const [url, setUrl] = useState('');
@@ -171,6 +173,12 @@ export default function ThumbnailDownloaderPage() {
 
         </div>
       </main>
+
+      <FaqSection 
+        faqsData={toolFaqs.thumbnailDownloader}
+        customTitle="YouTube Thumbnail Downloader FAQs"
+        customDescription="Learn how to download high-resolution YouTube thumbnails instantly."
+      />
     </>
   );
 }

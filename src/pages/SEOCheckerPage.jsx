@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { Search, CheckCircle, AlertTriangle, TrendingUp } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function SEOCheckerPage() {
   const [url, setUrl] = useState('');
@@ -126,6 +128,12 @@ export default function SEOCheckerPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.seoChecker}
+        customTitle="YouTube SEO Checker FAQs"
+        customDescription="Learn more about what makes a good YouTube SEO score and how to optimize your videos for maximum reach."
+      />
     </div>
   );
 }

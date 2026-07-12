@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
-import { Type, Sparkles, Copy } from 'lucide-react';
+import { Type, Sparkles, Copy, AlertCircle } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function DescriptionGeneratorPage() {
   const [topic, setTopic] = useState('');
@@ -105,6 +107,12 @@ export default function DescriptionGeneratorPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.descriptionGenerator}
+        customTitle="YouTube Description Generator FAQs"
+        customDescription="Learn how to write SEO-optimized YouTube descriptions that increase your video views and search rankings."
+      />
     </div>
   );
 }

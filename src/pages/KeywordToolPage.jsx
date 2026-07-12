@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { Search, Sparkles, Copy, Tag } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function KeywordToolPage() {
   const [keyword, setKeyword] = useState('');
@@ -123,6 +125,12 @@ export default function KeywordToolPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.keywordTool}
+        customTitle="YouTube Keyword Tool FAQs"
+        customDescription="Learn how to find and use the best YouTube keywords to rank your videos higher."
+      />
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
-import { Type, Sparkles, Copy } from 'lucide-react';
+import { Type, Sparkles, Copy, AlertCircle } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function TitleGeneratorPage() {
   const [topic, setTopic] = useState('');
@@ -133,6 +135,12 @@ export default function TitleGeneratorPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.titleGenerator}
+        customTitle="YouTube Title Generator FAQs"
+        customDescription="Learn more about writing clickable YouTube titles and how our AI generator works."
+      />
     </div>
   );
 }

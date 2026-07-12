@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import SEO from '../components/SEO';
 import { DollarSign, Sliders, Info } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function MoneyCalculatorPage() {
   const [views, setViews] = useState(10000);
@@ -136,6 +138,12 @@ export default function MoneyCalculatorPage() {
         </section>
 
       </div>
+
+      <FaqSection 
+        faqsData={toolFaqs.moneyCalculator}
+        customTitle="YouTube Money Calculator FAQs"
+        customDescription="Find out how much money YouTubers actually make and how to calculate your potential earnings."
+      />
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { Search, Sparkles, CheckCircle2, TrendingUp } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function RankTrackerPage() {
   const [url, setUrl] = useState('');
@@ -109,6 +111,12 @@ export default function RankTrackerPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.rankTracker}
+        customTitle="YouTube Rank Tracker FAQs"
+        customDescription="Learn how to track your YouTube video rankings and understand what affects them."
+      />
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { Search, CheckCircle2, ShieldAlert } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function MonetizationCheckerPage() {
   const [subscribers, setSubscribers] = useState(500);
@@ -127,6 +129,12 @@ export default function MonetizationCheckerPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.monetizationChecker}
+        customTitle="YouTube Monetization Checker FAQs"
+        customDescription="Find out how to check if a channel is monetized and what it means for their earnings."
+      />
     </div>
   );
 }

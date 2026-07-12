@@ -1,6 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { QrCode, Download, Settings } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function QRCodeGeneratorPage() {
   const [url, setUrl] = useState('');
@@ -125,6 +127,12 @@ export default function QRCodeGeneratorPage() {
         </section>
 
       </div>
+
+      <FaqSection 
+        faqsData={toolFaqs.qrCodeGenerator}
+        customTitle="YouTube QR Code Generator FAQs"
+        customDescription="Find out how to use QR codes to grow your YouTube channel offline and online."
+      />
     </div>
   );
 }

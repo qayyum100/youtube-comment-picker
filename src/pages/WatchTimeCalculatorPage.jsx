@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { Sliders, Clock, DollarSign, Award } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function WatchTimeCalculatorPage() {
   const [views, setViews] = useState(10000);
@@ -91,6 +93,12 @@ export default function WatchTimeCalculatorPage() {
         </section>
 
       </div>
+
+      <FaqSection 
+        faqsData={toolFaqs.watchTimeCalculator}
+        customTitle="YouTube Watch Time Calculator FAQs"
+        customDescription="Understand how YouTube's 4,000 watch hours monetization threshold works and how to reach it faster."
+      />
     </div>
   );
 }

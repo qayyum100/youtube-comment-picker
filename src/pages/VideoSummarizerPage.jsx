@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { Search, Sparkles, BookOpen, Clock, AlertCircle } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function VideoSummarizerPage() {
   const [url, setUrl] = useState('');
@@ -139,6 +141,25 @@ export default function VideoSummarizerPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={[
+          {
+            question: "How do I get a summary of a YouTube video without watching it?",
+            answer: "You can get an instant AI-generated summary of any YouTube video using our free Video Summarizer tool. Paste the video URL, choose your preferred summary format (bullet points or paragraph), and our AI will extract and condense the key information from the transcript in seconds."
+          },
+          {
+            question: "Does the YouTube video summarizer work on any video?",
+            answer: "Our summarizer works on any YouTube video that has closed captions or auto-generated subtitles enabled. The vast majority of English-language YouTube videos have these enabled by default. Videos without any captions cannot be summarized."
+          },
+          {
+            question: "Can I use a YouTube video summary for my blog?",
+            answer: "Yes! This is one of the most popular use cases. After summarizing a YouTube video, you can use the AI-generated text as the foundation for a blog post or article, dramatically speeding up your content creation workflow."
+          }
+        ]}
+        customTitle="YouTube Video Summarizer FAQs"
+        customDescription="Find out how to get instant AI summaries of any YouTube video to save you time."
+      />
     </div>
   );
 }

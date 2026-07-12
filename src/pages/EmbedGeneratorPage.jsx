@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { Code, Copy, Settings } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function EmbedGeneratorPage() {
   const [url, setUrl] = useState('');
@@ -48,7 +50,7 @@ export default function EmbedGeneratorPage() {
         </p>
       </section>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', alignItems: 'start' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px', alignItems: 'start', marginBottom: '60px' }}>
         
         {/* Settings */}
         <section className="card liquid-glass" style={{ padding: '30px', borderRadius: 'var(--radius-lg)', display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -117,6 +119,12 @@ export default function EmbedGeneratorPage() {
         </section>
 
       </div>
+
+      <FaqSection 
+        faqsData={toolFaqs.embedGenerator}
+        customTitle="YouTube Embed Code Generator FAQs"
+        customDescription="Learn how to embed YouTube videos on any website with advanced customization options."
+      />
     </div>
   );
 }

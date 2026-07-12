@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { Sparkles, Copy, User } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function ChannelNameGeneratorPage() {
   const [niche, setNiche] = useState('');
@@ -91,6 +93,12 @@ export default function ChannelNameGeneratorPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.channelName}
+        customTitle="YouTube Channel Name Generator FAQs"
+        customDescription="Learn how to pick the perfect channel name and why it matters."
+      />
     </div>
   );
 }

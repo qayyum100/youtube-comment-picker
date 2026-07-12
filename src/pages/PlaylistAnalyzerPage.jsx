@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { Search, Eye, Clock, Video, BarChart2 } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function PlaylistAnalyzerPage() {
   const [url, setUrl] = useState('');
@@ -116,6 +118,12 @@ export default function PlaylistAnalyzerPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.playlistAnalyzer}
+        customTitle="YouTube Playlist Analyzer FAQs"
+        customDescription="Learn how to get the most out of your YouTube playlists and increase your watch time."
+      />
     </div>
   );
 }

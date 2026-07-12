@@ -1,6 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import SEO from '../components/SEO';
 import { Palette, Download, Image as ImageIcon, Type } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function BannerMakerPage() {
   const canvasRef = useRef(null);
@@ -173,6 +175,12 @@ export default function BannerMakerPage() {
         </section>
 
       </div>
+
+      <FaqSection 
+        faqsData={toolFaqs.bannerMaker}
+        customTitle="YouTube Banner Maker FAQs"
+        customDescription="Learn how to create professional YouTube channel art that attracts subscribers."
+      />
     </div>
   );
 }

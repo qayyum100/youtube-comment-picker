@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { Search, Users, Video, Eye, DollarSign, TrendingUp } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function ChannelAnalyzerPage() {
   const [url, setUrl] = useState('');
@@ -159,6 +161,12 @@ export default function ChannelAnalyzerPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.channelAnalyzer}
+        customTitle="YouTube Channel Analyzer FAQs"
+        customDescription="Learn how to analyze any YouTube channel and understand what metrics matter most for growth."
+      />
     </div>
   );
 }

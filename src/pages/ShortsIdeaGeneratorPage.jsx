@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
-import { Sparkles, Copy, Scissors, HelpCircle } from 'lucide-react';
+import { Smartphone, Sparkles, Copy, AlertCircle, TrendingUp, Scissors, HelpCircle } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function ShortsIdeaGeneratorPage() {
   const [niche, setNiche] = useState('');
@@ -129,6 +131,12 @@ export default function ShortsIdeaGeneratorPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.shortsIdeas}
+        customTitle="YouTube Shorts Idea Generator FAQs"
+        customDescription="Learn how to generate viral ideas and concepts for YouTube Shorts."
+      />
     </div>
   );
 }

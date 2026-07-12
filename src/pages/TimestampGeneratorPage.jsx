@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { Sparkles, Copy, FileText } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function TimestampGeneratorPage() {
   const [transcript, setTranscript] = useState('');
@@ -97,6 +99,12 @@ export default function TimestampGeneratorPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.timestampGenerator}
+        customTitle="YouTube Timestamp Generator FAQs"
+        customDescription="Learn how to properly format and use timestamps to improve your video SEO and retention."
+      />
     </div>
   );
 }

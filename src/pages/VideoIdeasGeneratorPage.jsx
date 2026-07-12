@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { Sparkles, Copy, BarChart2 } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function VideoIdeasGeneratorPage() {
   const [niche, setNiche] = useState('');
@@ -95,6 +97,12 @@ export default function VideoIdeasGeneratorPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.videoIdeas}
+        customTitle="YouTube Video Ideas Generator FAQs"
+        customDescription="Find out how to come up with viral YouTube video ideas using our AI idea generator."
+      />
     </div>
   );
 }

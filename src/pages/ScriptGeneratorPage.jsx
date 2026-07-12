@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { FileText, Sparkles, Copy, Download } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function ScriptGeneratorPage() {
   const [topic, setTopic] = useState('');
@@ -153,6 +155,12 @@ export default function ScriptGeneratorPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.scriptGenerator}
+        customTitle="YouTube Script Generator FAQs"
+        customDescription="Find out how AI can help you write better YouTube scripts to improve watch time and viewer retention."
+      />
     </div>
   );
 }

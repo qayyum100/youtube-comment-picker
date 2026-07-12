@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { Upload, Sparkles, CheckCircle, AlertTriangle, Image as ImageIcon } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function ThumbnailAnalyzerPage() {
   const [image, setImage] = useState(null);
@@ -142,6 +144,12 @@ export default function ThumbnailAnalyzerPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.thumbnailAnalyzer}
+        customTitle="YouTube Thumbnail Analyzer FAQs"
+        customDescription="Find out how to improve your thumbnail CTR with AI analysis."
+      />
     </div>
   );
 }

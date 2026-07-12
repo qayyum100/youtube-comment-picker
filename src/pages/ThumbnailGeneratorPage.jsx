@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { Type, Sparkles, Copy, Palette, Eye } from 'lucide-react';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 
 export default function ThumbnailGeneratorPage() {
   const [topic, setTopic] = useState('');
@@ -157,6 +159,12 @@ export default function ThumbnailGeneratorPage() {
           </div>
         )}
       </section>
+
+      <FaqSection 
+        faqsData={toolFaqs.thumbnailGenerator}
+        customTitle="YouTube Thumbnail Generator FAQs"
+        customDescription="Learn how to create stunning AI-generated YouTube thumbnails that maximize your Click-Through Rate."
+      />
     </div>
   );
 }
