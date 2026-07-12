@@ -119,7 +119,10 @@ export const analyzeComments = async (req, res) => {
 
     try {
         const genAI = getGeminiClient();
-        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-1.5-flash",
+            generationConfig: { responseMimeType: "application/json" }
+        });
         
         const sampleComments = comments.slice(0, 50).map(c => c.text).join(' | ');
 
@@ -138,12 +141,17 @@ export const analyzeComments = async (req, res) => {
         const result = await model.generateContent(prompt);
         const responseText = result.response.text();
         
-        const jsonMatch = responseText.match(/\{.*\}/s);
         let analysis = {};
-        if (jsonMatch) {
-            analysis = JSON.parse(jsonMatch[0]);
-        } else {
-            analysis = JSON.parse(responseText.replace(/```json/g, '').replace(/```/g, '').trim());
+        try {
+            analysis = JSON.parse(responseText);
+        } catch (e) {
+            console.error("JSON parse error, attempting regex fallback.", e);
+            const jsonMatch = responseText.match(/\{.*\}/s);
+            if (jsonMatch) {
+                analysis = JSON.parse(jsonMatch[0]);
+            } else {
+                analysis = JSON.parse(responseText.replace(/```json/g, '').replace(/```/g, '').trim());
+            }
         }
 
         return res.json({ analysis });
