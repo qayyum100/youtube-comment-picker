@@ -239,10 +239,10 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
                 display: 'inline-block'
               }}
             >
-              {platform === 'youtube' ? 'YouTube Comment Random Picker' : `${platform} Comment Picker`} - Random Winner Generator
+              {platform === 'youtube' ? 'Comment Picker for YouTube & YouTube Giveaway Picker' : `${platform} Comment Picker`}
             </motion.h1>
             <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '700px', margin: '0 auto', letterSpacing: '-0.01em' }}>
-              The premium liquid drawing suite for giveaways. Unbiased, fast, and secure. Run verification certs instantly.
+              The premium comment picker for youtube and giveaway picker youtube. Unbiased, fast, and secure random comment picker youtube tool.
             </p>
           </motion.div>
 

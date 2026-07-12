@@ -57,6 +57,11 @@ app.post('/api/channel-names', generateChannelNames);
 app.post('/api/keyword-research', suggestKeywords);
 app.post('/api/timestamps', generateTimestamps);
 app.get('/api/rank-checker', checkVideoRank);
+app.post('/api/ai/hashtag-generator', generateHashtags);
+app.post('/api/ai/title-generator', generateTitles);
+app.post('/api/ai/description-generator', generateDescription);
+app.post('/api/ai/seo-analysis', analyzeSEO);
+app.post('/api/ai/comment-analysis', analyzeComments);
 
 app.get('/api/tools', (req, res) => {
   res.json({ status: "healthy", activeTools: 30 });

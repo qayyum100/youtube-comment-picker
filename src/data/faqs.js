@@ -2,13 +2,13 @@ export const faqs = [
   // General
   {
     category: "General",
-    question: "What is a YouTube random comment picker?",
-    answer: "A YouTube random comment picker is a tool designed to help content creators randomly select winners for their giveaways from the comments section of their YouTube videos. It ensures fairness and transparency by picking a completely random comment without bias."
+    question: "What is a comment picker for youtube?",
+    answer: "A comment picker for youtube is a tool designed to help content creators randomly select winners for their giveaways from the comments section of their YouTube videos. It ensures fairness and transparency by picking a completely random comment without bias."
   },
   {
     category: "General",
-    question: "How do I use the youtube comment picker?",
-    answer: "Simply copy the URL of your YouTube video, paste it into the search bar on our site, and click 'Fetch Comments'. Once loaded, you can apply filters like duplicate removals or keyword searches, and then hit 'Start Draw' to pick a random winner."
+    question: "How do I use the comment picker for youtube?",
+    answer: "Simply copy the URL of your YouTube video, paste it into the search bar on our site, and click 'Fetch Comments'. Once loaded, you can apply filters like duplicate removals or keyword searches, and then hit 'Start Draw' to pick a random winner. We also provide a guide on how youtube random comment picker works."
   },
   {
     category: "General",
@@ -23,7 +23,7 @@ export const faqs = [
   {
     category: "General",
     question: "Do I need to download any software?",
-    answer: "No, this is a web-based youtube comment picker. You do not need to install or download anything to your computer or mobile device. Everything works directly in your browser."
+    answer: "No, this is a web-based comment picker for youtube. You do not need to install or download anything to your computer or mobile device. Everything works directly in your browser as a secure youtube comment picker hack."
   },
   {
     category: "General",
@@ -82,7 +82,7 @@ export const faqs = [
   {
     category: "Filtering and Features",
     question: "Can I filter comments by a specific word or hashtag?",
-    answer: "Yes. You can use the 'Required Keyword' filter. Enter a word like #giveaway or a specific phrase, and the youtube comment picker will only select winners from comments containing that exact text."
+    answer: "Yes. You can use the 'Required Keyword' filter. Enter a word like #giveaway or a specific phrase, and the comment picker for youtube will only select winners from comments containing that exact text."
   },
   {
     category: "Filtering and Features",
@@ -113,7 +113,7 @@ export const faqs = [
   // Privacy and Security
   {
     category: "Privacy and Security",
-    question: "Is it safe to use this youtube comment picker?",
+    question: "Is it safe to use this comment picker for youtube?",
     answer: "Absolutely. Our platform is 100% secure. We do not ask for your YouTube password or require you to authenticate via OAuth. We only read publicly available data."
   },
   {

@@ -16,8 +16,8 @@ export default function SeoHead({ pageType, platform, blogData }) {
       description = blogData.excerpt;
     } else {
       if (platform === 'youtube') {
-        title = 'YouTube Comment Random Picker — Free Giveaway Winner Generator';
-        description = 'Use our free YouTube Comment Random Picker to easily extract and select a random winner for your YouTube giveaways, contests, and sweepstakes.';
+        title = 'Comment Picker for YouTube — Free YouTube Giveaway Picker';
+        description = 'Use our free comment picker for youtube to easily extract and select a random winner for your giveaways. The best youtube random comment picker and yt random comment picker tool.';
       } else {
         const platformLabel = 'Instagram Posts & Reels';
         title = `${platformLabel} Picker — Premium Giveaway Drawing Desk`;

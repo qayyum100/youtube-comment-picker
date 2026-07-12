@@ -23,7 +23,7 @@ export default function FaqSection() {
           Frequently Asked Questions
         </h2>
         <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto', lineHeight: '1.6' }}>
-          Everything you need to know about our YouTube Random Comment Picker and Giveaway tools. We've compiled the most common questions to help you run fair and secure drawings.
+          Everything you need to know about our comment picker for youtube, youtube giveaway picker, and youtube random comment picker tools. We also explain how youtube random comment picker works to help you run fair and secure drawings.
         </p>
       </div>
 
