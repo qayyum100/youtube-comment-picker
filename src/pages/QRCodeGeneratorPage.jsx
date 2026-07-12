@@ -1,42 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import SEO from '../components/SEO';
+import QRCode from 'qrcode';
 import { QrCode, Download, Settings } from 'lucide-react';
 import FaqSection from '../components/FaqSection';
 import { toolFaqs } from '../data/toolFaqs';
 
 export default function QRCodeGeneratorPage() {
   const [url, setUrl] = useState('');
-  const [color, setColor] = useState('#ef4444');
-  const [size, setSize] = useState(250);
-  const [qrCodeUrl, setQrCodeUrl] = useState('');
+  const [color, setColor] = useState('#6366f1');
+  const [size, setSize] = useState(300);
   const [loading, setLoading] = useState(false);
+  const [generated, setGenerated] = useState(false);
+  const canvasRef = useRef(null);
 
-  const handleGenerate = (e) => {
+  const handleGenerate = async (e) => {
     e.preventDefault();
     if (!url) return;
-
     setLoading(true);
-    // Utilizing standard Google Chart API or standard QR public API for instant custom styles
-    const cleanUrl = encodeURIComponent(url);
-    const googleChartApiUrl = `https://chart.googleapis.com/chart?cht=qr&chs=${size}x${size}&chl=${cleanUrl}&chco=${color.replace('#', '')}`;
-    
-    setQrCodeUrl(googleChartApiUrl);
-    setLoading(false);
+    try {
+      await QRCode.toCanvas(canvasRef.current, url, {
+        width: size,
+        margin: 2,
+        color: {
+          dark: color,
+          light: '#ffffff',
+        },
+      });
+      setGenerated(true);
+    } catch (err) {
+      console.error('QR Generation failed:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleDownload = async () => {
-    if (!qrCodeUrl) return;
-    try {
-      const response = await fetch(qrCodeUrl);
-      const blob = await response.blob();
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(blob);
-      link.download = 'youtube_channel_qr.png';
-      link.click();
-    } catch (err) {
-      // Fallback: open in new tab
-      window.open(qrCodeUrl, '_blank');
-    }
+  const handleDownload = () => {
+    if (!canvasRef.current || !generated) return;
+    const link = document.createElement('a');
+    link.href = canvasRef.current.toDataURL('image/png');
+    link.download = 'youtube_qr_code.png';
+    link.click();
   };
 
   return (
@@ -93,9 +96,9 @@ export default function QRCodeGeneratorPage() {
                   className="input-premium"
                   style={{ padding: '12px 15px' }}
                 >
-                  <option value={200}>Small (200x200)</option>
-                  <option value={300}>Medium (300x300)</option>
-                  <option value={500}>Large (500x500)</option>
+                  <option value={200}>Small (200×200)</option>
+                  <option value={300}>Medium (300×300)</option>
+                  <option value={500}>Large (500×500)</option>
                 </select>
               </div>
             </div>
@@ -109,21 +112,25 @@ export default function QRCodeGeneratorPage() {
         {/* Preview */}
         <section className="card liquid-glass" style={{ padding: '30px', borderRadius: 'var(--radius-lg)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '340px' }}>
           <h3 style={{ fontSize: '1.3rem', marginBottom: '20px' }}>QR Code Preview</h3>
-          {qrCodeUrl ? (
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-              <div style={{ background: '#ffffff', padding: '15px', borderRadius: '12px', border: '1px solid var(--border-light)', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }}>
-                 <img src={qrCodeUrl} alt="Generated QR Code" style={{ display: 'block', width: '200px', height: '200px' }} />
+          
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
+            <div style={{ background: '#ffffff', padding: '15px', borderRadius: '12px', border: '1px solid var(--border-light)', boxShadow: '0 4px 15px rgba(0,0,0,0.1)', display: generated ? 'block' : 'none' }}>
+              <canvas ref={canvasRef} style={{ display: 'block' }} />
+            </div>
+
+            {!generated && (
+              <div style={{ textAlign: 'center', color: 'var(--text-muted)' }}>
+                <QrCode size={64} style={{ color: 'var(--text-muted)', marginBottom: '15px' }} />
+                <p style={{ margin: 0 }}>Input URL and generate to preview QR Code</p>
               </div>
+            )}
+
+            {generated && (
               <button onClick={handleDownload} style={{ padding: '10px 20px', background: 'var(--bg-surface)', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-sm)', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer' }}>
                 <Download size={16} /> Download QR Code (PNG)
               </button>
-            </div>
-          ) : (
-            <div style={{ textAlign: 'center', color: 'var(--text-muted)' }}>
-               <QrCode size={64} style={{ color: 'var(--text-muted)', marginBottom: '15px' }} />
-               <p style={{ margin: 0 }}>Input URL and generate to preview QR Code</p>
-            </div>
-          )}
+            )}
+          </div>
         </section>
 
       </div>
