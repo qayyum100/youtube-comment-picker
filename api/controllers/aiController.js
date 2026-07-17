@@ -322,9 +322,19 @@ export const suggestKeywords = async (req, res) => {
         const genAI = getGeminiClient();
         const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
         const prompt = `Perform YouTube keyword research for the keyword "${keyword}".
+        Estimate and simulate realistic granular SEO metrics based on typical search data.
         Provide the output as a JSON object containing:
-        - "suggestions" (array of 5 related keyword objects with keys: "keyword", "seoScore" (0-100), "competition" (Low/Medium/High), "demand" (Low/Medium/High))
-        - "longtail" (array of 5 longtail keyword objects with the same keys)
+        - "suggestions" (array of 5 related keyword objects)
+        - "longtail" (array of 5 longtail keyword objects)
+        
+        Each keyword object must have the following exact keys:
+        - "keyword" (string): the keyword phrase
+        - "searchVolume" (number): estimated monthly search volume
+        - "trend" (string): trend visualization (e.g., "📈 +12%" or "📉 -5%" or "➡️ Flat")
+        - "difficultyScore" (number): Keyword Golden Ratio/difficulty (0 to 100, 100 being hardest)
+        - "cpc" (number): estimated cost per click in USD (e.g., 1.45)
+        - "intent" (string): search intent ("Informational", "Commercial", or "Transactional")
+        
         Return ONLY valid JSON.`;
         const result = await model.generateContent(prompt);
         const text = result.response.text();
@@ -395,5 +405,42 @@ export const summarizeVideo = async (req, res) => {
     } catch (error) {
         console.error("Gemini API Error:", error);
         return res.status(500).json({ error: 'Failed to summarize video' });
+    }
+};
+
+export const generateVideoOutline = async (req, res) => {
+    const { keywords } = req.body;
+    if (!keywords || !Array.isArray(keywords) || keywords.length === 0) {
+        return res.status(400).json({ error: 'Array of keywords is required' });
+    }
+    try {
+        const genAI = getGeminiClient();
+        const model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
+        const prompt = `Act as an expert YouTube strategist. I have selected the following keywords for a video:
+        [${keywords.join(', ')}]
+        
+        Generate a highly structured video script outline tailored to maximize watch time based on these keywords.
+        Provide the output as a JSON object containing:
+        - "title" (string): A suggested working title
+        - "hook" (string): The critical first 5-second hook
+        - "introduction" (string): Establishing the value proposition
+        - "corePoints" (array of strings): 3-5 main talking points
+        - "callToAction" (string): Outro and engagement prompt
+        
+        Return ONLY valid JSON.`;
+        
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        const jsonMatch = text.match(/\{.*\}/s);
+        let data = {};
+        if (jsonMatch) {
+            data = JSON.parse(jsonMatch[0]);
+        } else {
+            data = JSON.parse(text.replace(/```json/g, '').replace(/```/g, '').trim());
+        }
+        return res.json({ data });
+    } catch (error) {
+        console.error("Gemini API Error:", error);
+        return res.status(500).json({ error: 'Failed to generate video outline' });
     }
 };

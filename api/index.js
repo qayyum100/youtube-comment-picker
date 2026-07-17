@@ -8,7 +8,8 @@ import {
   getYouTubeComments, 
   getYouTubeVideoDetails, 
   getYouTubeChannelDetails,
-  checkVideoRank 
+  checkVideoRank,
+  getYouTubeChannelTags
 } from './controllers/youtubeController.js';
 
 import { 
@@ -23,7 +24,8 @@ import {
   generateChannelNames,
   suggestKeywords,
   generateTimestamps,
-  summarizeVideo
+  summarizeVideo,
+  generateVideoOutline
 } from './controllers/aiController.js';
 
 import { getTranscript } from './controllers/transcriptController.js';
@@ -44,6 +46,7 @@ app.use(express.json({ limit: '10mb' }));
 app.get('/api/youtube/comments', getYouTubeComments);
 app.get('/api/youtube/video', getYouTubeVideoDetails);
 app.get('/api/youtube/channel', getYouTubeChannelDetails);
+app.get('/api/youtube/channel-tags', getYouTubeChannelTags);
 
 // Phase 2 Direct endpoints
 app.get('/api/transcript', getTranscript);
@@ -62,6 +65,7 @@ app.post('/api/ai/title-generator', generateTitles);
 app.post('/api/ai/description-generator', generateDescription);
 app.post('/api/ai/seo-analysis', analyzeSEO);
 app.post('/api/ai/comment-analysis', analyzeComments);
+app.post('/api/ai/outline-generator', generateVideoOutline);
 
 app.get('/api/tools', (req, res) => {
   res.json({ status: "healthy", activeTools: 30 });

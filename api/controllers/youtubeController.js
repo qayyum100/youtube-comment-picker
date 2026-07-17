@@ -229,3 +229,75 @@ export const checkVideoRank = async (req, res) => {
     });
   }
 };
+
+export const getYouTubeChannelTags = async (req, res) => {
+  const { url } = req.query;
+  const channelId = await extractChannelId(url);
+
+  if (!url || !channelId) return res.status(400).json({ error: 'Valid YouTube Channel URL is required' });
+
+  const apiKey = process.env.YOUTUBE_API_KEY;
+  if (!apiKey) {
+    return res.json({
+      simulated: true,
+      tags: ["mock tag 1", "mock tag 2", "mock tag 3", "competitor strategy", "viral"],
+      topKeywords: ["viral", "competitor strategy"]
+    });
+  }
+
+  try {
+    // 1. Get channel uploads playlist
+    const channelRes = await axios.get('https://www.googleapis.com/youtube/v3/channels', {
+      params: { part: 'contentDetails', id: channelId, key: apiKey }
+    });
+    
+    if (!channelRes.data.items || channelRes.data.items.length === 0) {
+      return res.status(404).json({ error: 'Channel not found' });
+    }
+
+    const uploadsPlaylistId = channelRes.data.items[0].contentDetails.relatedPlaylists.uploads;
+
+    // 2. Get latest 5 videos from uploads
+    const playlistRes = await axios.get('https://www.googleapis.com/youtube/v3/playlistItems', {
+      params: { part: 'contentDetails', playlistId: uploadsPlaylistId, maxResults: 5, key: apiKey }
+    });
+
+    const videoIds = playlistRes.data.items.map(item => item.contentDetails.videoId).join(',');
+
+    if (!videoIds) {
+       return res.json({ tags: [], topKeywords: [] });
+    }
+
+    // 3. Get tags for those videos
+    const videosRes = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
+      params: { part: 'snippet', id: videoIds, key: apiKey }
+    });
+
+    let allTags = [];
+    videosRes.data.items.forEach(video => {
+      if (video.snippet.tags) {
+        allTags = allTags.concat(video.snippet.tags);
+      }
+    });
+
+    // Count tag frequencies
+    const tagCounts = {};
+    allTags.forEach(tag => {
+      const lowerTag = tag.toLowerCase();
+      tagCounts[lowerTag] = (tagCounts[lowerTag] || 0) + 1;
+    });
+
+    const sortedTags = Object.entries(tagCounts)
+      .sort((a, b) => b[1] - a[1])
+      .map(entry => entry[0]);
+
+    return res.json({
+      simulated: false,
+      tags: sortedTags.slice(0, 20),
+      topKeywords: sortedTags.slice(0, 5)
+    });
+  } catch (error) {
+    console.error('Channel Tags Error:', error.message);
+    return res.status(500).json({ error: 'Failed to fetch competitor tags' });
+  }
+};
