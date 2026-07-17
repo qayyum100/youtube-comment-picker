@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { faqs as defaultFaqs } from '../data/faqs';
-import { ChevronDown, MessageCircleQuestion } from 'lucide-react';
+import { ChevronDown, HelpCircle } from 'lucide-react';
 
 export default function FaqSection({ faqsData, customTitle, customDescription }) {
   const [openIndex, setOpenIndex] = useState(null);
@@ -10,8 +10,8 @@ export default function FaqSection({ faqsData, customTitle, customDescription })
   const categories = ['All', ...new Set(faqsToUse.map(f => f.category).filter(Boolean))];
   const hasCategories = categories.length > 1;
 
-  const filteredFaqs = activeCategory === 'All' 
-    ? faqsToUse 
+  const filteredFaqs = activeCategory === 'All'
+    ? faqsToUse
     : faqsToUse.filter(f => f.category === activeCategory);
 
   const toggleAccordion = (index) => {
@@ -19,34 +19,25 @@ export default function FaqSection({ faqsData, customTitle, customDescription })
   };
 
   return (
-    <section style={{ marginTop: '60px', marginBottom: '60px' }}>
-      <div style={{ textAlign: 'center', marginBottom: '40px' }} className="animate-fade-in">
-        <h2 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '10px' }}>
+    <section style={{ marginTop: '64px', marginBottom: '64px' }}>
+      {/* Heading */}
+      <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+        <h2 className="section-heading" style={{ marginBottom: '12px' }}>
           {customTitle || 'Frequently Asked Questions'}
         </h2>
-        <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', margin: '0 auto', lineHeight: '1.6' }}>
+        <p className="section-subheading" style={{ maxWidth: '600px', margin: '0 auto' }}>
           {customDescription || 'Everything you need to know about our comment picker for youtube, youtube giveaway picker, and youtube random comment picker tools. We also explain how youtube random comment picker works to help you run fair and secure drawings.'}
         </p>
       </div>
 
-      {/* Category Tabs */}
+      {/* Category tabs */}
       {hasCategories && (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', flexWrap: 'wrap', marginBottom: '30px' }} className="animate-fade-in">
+        <div className="filter-tabs" style={{ justifyContent: 'center', marginBottom: '24px' }}>
           {categories.map(cat => (
             <button
               key={cat}
               onClick={() => { setActiveCategory(cat); setOpenIndex(null); }}
-              style={{
-                padding: '8px 16px',
-                borderRadius: '20px',
-                border: activeCategory === cat ? '1px solid var(--brand-indigo)' : '1px solid var(--border-dark)',
-                background: activeCategory === cat ? 'rgba(99, 102, 241, 0.1)' : 'var(--bg-panel)',
-                color: activeCategory === cat ? 'var(--brand-indigo)' : 'var(--text-secondary)',
-                cursor: 'pointer',
-                fontWeight: '600',
-                transition: 'all 0.2s ease',
-                fontSize: '0.9rem'
-              }}
+              className={`filter-tab ${activeCategory === cat ? 'active' : ''}`}
             >
               {cat}
             </button>
@@ -54,70 +45,47 @@ export default function FaqSection({ faqsData, customTitle, customDescription })
         </div>
       )}
 
-      {/* Accordion List */}
-      <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+      {/* Accordion */}
+      <div style={{ maxWidth: '760px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '8px' }}>
         {filteredFaqs.map((faq, index) => {
           const isOpen = openIndex === index;
           return (
-            <div 
+            <div
               key={index}
-              style={{
-                background: 'var(--bg-panel)',
-                border: '1px solid var(--border-dark)',
-                borderRadius: 'var(--radius-lg)',
-                overflow: 'hidden',
-                transition: 'all 0.3s ease',
-                boxShadow: isOpen ? '0 4px 12px rgba(0,0,0,0.05)' : 'none',
-                animationDelay: `${index * 0.05}s`
-              }}
-              className="animate-fade-in"
+              className={`accordion-item ${isOpen ? 'open' : ''}`}
             >
               <button
                 onClick={() => toggleAccordion(index)}
-                style={{
-                  width: '100%',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  padding: '18px 24px',
-                  background: 'transparent',
-                  border: 'none',
-                  color: 'var(--text-primary)',
-                  fontSize: '1.05rem',
-                  fontWeight: '600',
-                  cursor: 'pointer',
-                  textAlign: 'left'
-                }}
+                className="accordion-trigger"
+                aria-expanded={isOpen}
+                aria-controls={`faq-answer-${index}`}
+                id={`faq-question-${index}`}
               >
-                <span style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, paddingRight: '16px' }}>
-                  <MessageCircleQuestion size={20} style={{ color: 'var(--brand-indigo)', flexShrink: 0 }} />
-                  {faq.question}
+                <span style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: 1, paddingRight: '12px' }}>
+                  <HelpCircle size={16} style={{ color: 'var(--primary)', flexShrink: 0 }} />
+                  <span>{faq.question}</span>
                 </span>
-                <ChevronDown 
-                  size={20} 
-                  style={{ 
-                    color: 'var(--text-muted)', 
+                <ChevronDown
+                  size={16}
+                  style={{
+                    color: 'var(--text-muted)',
                     transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                    transition: 'transform 0.3s ease',
-                    flexShrink: 0
-                  }} 
+                    transition: 'transform 0.25s ease-out',
+                    flexShrink: 0,
+                  }}
                 />
               </button>
-              
-              <div 
+              <div
+                id={`faq-answer-${index}`}
+                role="region"
+                aria-labelledby={`faq-question-${index}`}
+                className="accordion-body"
                 style={{
                   maxHeight: isOpen ? '400px' : '0',
                   opacity: isOpen ? 1 : 0,
-                  overflow: 'hidden',
-                  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                 }}
               >
-                <div style={{
-                  padding: '0 24px 24px 56px',
-                  color: 'var(--text-secondary)',
-                  lineHeight: '1.6',
-                  fontSize: '0.95rem'
-                }}>
+                <div className="accordion-content">
                   {faq.answer}
                 </div>
               </div>

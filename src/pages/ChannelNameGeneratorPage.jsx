@@ -37,53 +37,65 @@ export default function ChannelNameGeneratorPage() {
   };
 
   return (
-    <div className="page-container" style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto' }}>
+    <div className="page-wrapper">
       <SEO 
         title="AI YouTube Channel Name Generator | Free Brand Names"
         description="Discover creative, professional, gaming, and brand YouTube channel names instantly using AI."
         url="/youtube-channel-name-generator"
       />
 
-      <section className="hero-section" style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '3rem', background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-          YouTube Channel Name Generator
-        </h1>
-        <p style={{ fontSize: '1.2rem', color: 'var(--text-muted)', marginTop: '10px' }}>
-          Brainstorm creative and brandable channel name suggestions instantly using AI.
-        </p>
-      </section>
+      <div className="page-hero">
+        <h1>YouTube Channel Name Generator</h1>
+        <p>Brainstorm creative and brandable channel name suggestions instantly using AI.</p>
+      </div>
 
-      <section className="tool-area card liquid-glass" style={{ padding: '30px', borderRadius: 'var(--radius-lg)', marginBottom: '40px' }}>
-        <form onSubmit={handleGenerate} style={{ display: 'flex', gap: '10px' }}>
-          <div style={{ flex: 1, position: 'relative' }}>
-            <User size={20} style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+      <div className="card card-lg" style={{ marginBottom: '40px' }}>
+        <form onSubmit={handleGenerate} style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <div className="input-group" style={{ flex: 1, minWidth: '240px' }}>
+            <span className="input-group-icon">
+              <User size={16} />
+            </span>
             <input 
               type="text" 
+              className="input-field"
               placeholder="What is your channel niche/theme (e.g. personal finance, coding guides)..." 
               value={niche}
               onChange={(e) => setNiche(e.target.value)}
-              style={{ width: '100%', padding: '15px 15px 15px 45px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)', background: 'var(--bg-surface)', color: 'var(--text-primary)', fontSize: '1rem' }}
               required
             />
           </div>
-          <button type="submit" disabled={loading} style={{ padding: '15px 30px', borderRadius: 'var(--radius-md)', background: 'var(--gradient-primary)', color: 'white', border: 'none', fontSize: '1rem', fontWeight: '600', cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Sparkles size={18} /> {loading ? 'Brainstorming...' : 'Generate Names'}
+          <button type="submit" disabled={loading} className="btn btn-primary" style={{ flexShrink: 0 }}>
+            {loading ? (
+              <span className="btn-spinner" role="status" aria-label="Loading" />
+            ) : (
+              <>
+                <Sparkles size={16} /> Generate Names
+              </>
+            )}
           </button>
         </form>
 
-        {error && <div style={{ marginTop: '20px', padding: '15px', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderRadius: 'var(--radius-md)' }}>{error}</div>}
+        {error && (
+          <div className="alert alert-error" style={{ marginTop: '16px' }}>
+            {error}
+          </div>
+        )}
 
         {names && (
-          <div style={{ marginTop: '40px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '20px' }}>
+          <div style={{ marginTop: '32px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
             {Object.keys(names).map((category) => (
-              <div key={category} style={{ background: 'var(--bg-surface)', padding: '25px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
-                <h4 style={{ margin: 0, marginBottom: '15px', textTransform: 'capitalize', fontWeight: '600', color: 'var(--glow-primary)' }}>{category} Names</h4>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <div key={category} className="card" style={{ padding: '20px' }}>
+                <h4 style={{ margin: 0, marginBottom: '16px', textTransform: 'capitalize', fontWeight: '700', color: 'var(--primary)', fontSize: '14px' }}>{category} Names</h4>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   {names[category].map((name, i) => (
-                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-dark)', padding: '8px 12px', borderRadius: '4px' }}>
-                      <span style={{ fontSize: '0.95rem' }}>{name}</span>
-                      <button onClick={() => navigator.clipboard.writeText(name)} style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer' }}>
-                        <Copy size={14} />
+                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-secondary)', padding: '10px 12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }}>
+                      <span style={{ fontSize: '13px', fontWeight: '600', color: 'var(--text-primary)' }}>{name}</span>
+                      <button 
+                        onClick={() => navigator.clipboard.writeText(name)} 
+                        className="copy-btn" 
+                        style={{ padding: '4px', border: 'none', background: 'transparent' }}
+                      >
+                        <Copy size={13} />
                       </button>
                     </div>
                   ))}
@@ -92,7 +104,7 @@ export default function ChannelNameGeneratorPage() {
             ))}
           </div>
         )}
-      </section>
+      </div>
 
       <FaqSection 
         faqsData={toolFaqs.channelName}

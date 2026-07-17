@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
-import { Search, Tag, Copy, Sparkles, Youtube } from 'lucide-react';
+import { Search, Tag, Copy } from 'lucide-react';
 import FaqSection from '../components/FaqSection';
 import { toolFaqs } from '../data/toolFaqs';
 
@@ -13,7 +13,7 @@ export default function TagExtractorPage() {
   const handleExtract = async (e) => {
     e.preventDefault();
     if (!url) return;
-    
+
     setLoading(true);
     setError(null);
     setData(null);
@@ -21,9 +21,9 @@ export default function TagExtractorPage() {
     try {
       const response = await fetch(`/api/youtube/video?url=${encodeURIComponent(url)}`);
       const result = await response.json();
-      
+
       if (!response.ok) throw new Error(result.error || 'Failed to fetch video data');
-      
+
       setData(result);
     } catch (err) {
       setError(err.message);
@@ -34,86 +34,80 @@ export default function TagExtractorPage() {
 
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
-    // You'd ideally trigger a toast notification here
   };
 
   return (
-    <div className="page-container" style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto' }}>
-      <SEO 
+    <div className="page-wrapper">
+      <SEO
         title="Free YouTube Tag Extractor Online | Extract Tags instantly"
         description="Extract YouTube video tags instantly and improve your YouTube SEO ranking with our Free YouTube Tag Extractor tool."
         url="/youtube-tag-extractor"
       />
-      
-      {/* Hero Section */}
-      <section className="hero-section" style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '3rem', background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-          Free YouTube Tag Extractor Online
-        </h1>
-        <p style={{ fontSize: '1.2rem', color: 'var(--text-muted)', marginTop: '10px' }}>
-          Extract YouTube video tags instantly and improve your YouTube SEO ranking.
-        </p>
-      </section>
 
-      {/* Tool Area */}
-      <section className="tool-area card liquid-glass" style={{ padding: '30px', borderRadius: 'var(--radius-lg)', marginBottom: '40px' }}>
-        <form onSubmit={handleExtract} style={{ display: 'flex', gap: '10px' }}>
-          <div style={{ flex: 1, position: 'relative' }}>
-            <Search size={20} style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
-            <input 
-              type="text" 
-              placeholder="Paste YouTube Video URL here..." 
+      <div className="page-hero">
+        <h1>Free YouTube Tag Extractor Online</h1>
+        <p>Extract YouTube video tags instantly and improve your YouTube SEO ranking.</p>
+      </div>
+
+      {/* Tool */}
+      <div className="card card-lg" style={{ marginBottom: '40px' }}>
+        <form onSubmit={handleExtract} style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <div className="input-group" style={{ flex: 1, minWidth: '240px' }}>
+            <span className="input-group-icon"><Search size={16} /></span>
+            <input
+              type="text"
+              className="input-field"
+              placeholder="Paste YouTube Video URL here..."
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              style={{ width: '100%', padding: '15px 15px 15px 45px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)', background: 'var(--bg-surface)', color: 'var(--text-primary)', fontSize: '1rem' }}
+              aria-label="YouTube video URL"
             />
           </div>
-          <button type="submit" disabled={loading} style={{ padding: '15px 30px', borderRadius: 'var(--radius-md)', background: 'var(--gradient-primary)', color: 'white', border: 'none', fontSize: '1rem', fontWeight: '600', cursor: loading ? 'not-allowed' : 'pointer' }}>
-            {loading ? 'Extracting...' : 'Extract Tags'}
+          <button type="submit" disabled={loading} className="btn btn-primary" style={{ flexShrink: 0 }}>
+            {loading ? <span className="btn-spinner" /> : 'Extract Tags'}
           </button>
         </form>
 
-        {error && <div style={{ marginTop: '20px', padding: '15px', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderRadius: 'var(--radius-md)' }}>{error}</div>}
+        {error && <div className="alert alert-error" style={{ marginTop: '16px' }}>{error}</div>}
 
         {data && (
-          <div style={{ marginTop: '30px' }}>
-            <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+          <div style={{ marginTop: '28px' }}>
+            {/* Video info */}
+            <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', marginBottom: '24px' }}>
               {data.thumbnails?.high?.url && (
-                <img src={data.thumbnails.high.url} alt={data.title} style={{ width: '320px', borderRadius: 'var(--radius-md)', objectFit: 'cover' }} />
+                <img src={data.thumbnails.high.url} alt={data.title} className="thumbnail-img" style={{ width: '280px', flexShrink: 0 }} />
               )}
-              <div style={{ flex: 1 }}>
-                <h3 style={{ fontSize: '1.5rem', marginBottom: '10px' }}>{data.title}</h3>
-                <p style={{ color: 'var(--text-muted)', marginBottom: '5px' }}>Channel: <strong>{data.channelTitle}</strong></p>
-                <p style={{ color: 'var(--text-muted)', marginBottom: '20px' }}>Total Tags: <strong>{data.tags?.length || 0}</strong></p>
-                
-                <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
-                   <button onClick={() => copyToClipboard(data.tags?.join(', '))} style={{ padding: '8px 15px', background: 'var(--bg-surface)', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-sm)', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer' }}>
-                     <Copy size={16} /> Copy All Tags
-                   </button>
-                </div>
+              <div style={{ flex: 1, minWidth: '200px' }}>
+                <h3 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '8px', color: 'var(--text-primary)' }}>{data.title}</h3>
+                <p style={{ color: 'var(--text-muted)', marginBottom: '4px', fontSize: '14px' }}>Channel: <strong style={{ color: 'var(--text-secondary)' }}>{data.channelTitle}</strong></p>
+                <p style={{ color: 'var(--text-muted)', marginBottom: '16px', fontSize: '14px' }}>Total Tags: <strong style={{ color: 'var(--primary)' }}>{data.tags?.length || 0}</strong></p>
+                <button onClick={() => copyToClipboard(data.tags?.join(', '))} className="copy-btn">
+                  <Copy size={14} /> Copy All Tags
+                </button>
               </div>
             </div>
 
-            <div style={{ marginTop: '30px' }}>
-              <h4 style={{ marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}><Tag size={18} /> Extracted Tags</h4>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+            {/* Tags */}
+            <div>
+              <h4 style={{ marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '15px', fontWeight: '700', color: 'var(--text-primary)' }}>
+                <Tag size={16} style={{ color: 'var(--primary)' }} /> Extracted Tags
+              </h4>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                 {data.tags && data.tags.length > 0 ? data.tags.map((tag, index) => (
-                  <span key={index} style={{ padding: '8px 12px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6', borderRadius: '20px', fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '5px' }}>
-                    {tag}
-                  </span>
+                  <span key={index} className="tag">{tag}</span>
                 )) : (
-                  <p style={{ color: 'var(--text-muted)' }}>No tags found for this video.</p>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '14px' }}>No tags found for this video.</p>
                 )}
               </div>
             </div>
           </div>
         )}
-      </section>
+      </div>
 
-      {/* Feature & Info Sections */}
-      <section style={{ marginBottom: '40px' }}>
-        <h2>How to Use YouTube Tag Extractor</h2>
-        <ol style={{ paddingLeft: '20px', marginTop: '15px', color: 'var(--text-muted)', lineHeight: '1.6' }}>
+      {/* How to Use */}
+      <section className="card card-lg" style={{ marginBottom: '40px' }}>
+        <h2 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '16px', color: 'var(--text-primary)' }}>How to Use YouTube Tag Extractor</h2>
+        <ol style={{ paddingLeft: '20px', color: 'var(--text-secondary)', lineHeight: '1.8', fontSize: '14px' }}>
           <li>Copy the YouTube video URL from your browser or app.</li>
           <li>Paste the video link into the search bar above.</li>
           <li>Click the "Extract Tags" button.</li>
@@ -121,7 +115,7 @@ export default function TagExtractorPage() {
         </ol>
       </section>
 
-      <FaqSection 
+      <FaqSection
         faqsData={toolFaqs.tagExtractor}
         customTitle="YouTube Tag Extractor FAQs"
         customDescription="Learn how to find and use the best YouTube tags from other videos."

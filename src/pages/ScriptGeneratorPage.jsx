@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
-import { FileText, Sparkles, Copy, Download } from 'lucide-react';
+import { FileText, Sparkles, Copy } from 'lucide-react';
 import FaqSection from '../components/FaqSection';
 import { toolFaqs } from '../data/toolFaqs';
 
@@ -45,42 +45,40 @@ export default function ScriptGeneratorPage() {
   };
 
   return (
-    <div className="page-container" style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto' }}>
+    <div className="page-wrapper">
       <SEO 
         title="AI YouTube Video Script Generator | Write Scripts Online"
         description="Write highly engaging, structured YouTube video scripts using AI. Generate hooks, main points, visual outlines, CTAs, and outros."
         url="/youtube-script-generator"
       />
 
-      <section className="hero-section" style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '3rem', background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-          AI YouTube Script Generator
-        </h1>
-        <p style={{ fontSize: '1.2rem', color: 'var(--text-muted)', marginTop: '10px' }}>
-          Generate custom scripts with visual outline suggestions instantly.
-        </p>
-      </section>
+      <div className="page-hero">
+        <h1>AI YouTube Script Generator</h1>
+        <p>Generate custom scripts with visual outline suggestions instantly.</p>
+      </div>
 
-      <section className="tool-area card liquid-glass" style={{ padding: '30px', borderRadius: 'var(--radius-lg)', marginBottom: '40px' }}>
+      <div className="card card-lg" style={{ marginBottom: '40px' }}>
         <form onSubmit={handleGenerate} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: '15px' }}>
-            <div>
-              <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-muted)' }}>Video Topic</label>
+          <div className="grid-cols-3" style={{ gap: '16px' }}>
+            <div style={{ gridColumn: 'span 1' }}>
+              <label htmlFor="script-topic" className="field-label">Video Topic</label>
               <input 
+                id="script-topic"
                 type="text" 
+                className="input-field"
                 placeholder="e.g. History of Bitcoin, 5 Cooking Hacks" 
                 value={topic}
                 onChange={(e) => setTopic(e.target.value)}
-                style={{ width: '100%', padding: '12px 15px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)', background: 'var(--bg-surface)', color: 'var(--text-primary)' }}
                 required
               />
             </div>
             <div>
-              <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-muted)' }}>Target Length</label>
+              <label htmlFor="script-length" className="field-label">Target Length</label>
               <select 
+                id="script-length"
                 value={length} 
                 onChange={(e) => setLength(e.target.value)}
-                style={{ width: '100%', padding: '12px 15px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)', background: 'var(--bg-surface)', color: 'var(--text-primary)' }}
+                className="select-field"
               >
                 <option value="1 minute (Short)">1 minute</option>
                 <option value="5 minutes">5 minutes</option>
@@ -89,11 +87,12 @@ export default function ScriptGeneratorPage() {
               </select>
             </div>
             <div>
-              <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-muted)' }}>Script Style / Tone</label>
+              <label htmlFor="script-tone" className="field-label">Script Style / Tone</label>
               <select 
+                id="script-tone"
                 value={style} 
                 onChange={(e) => setStyle(e.target.value)}
-                style={{ width: '100%', padding: '12px 15px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)', background: 'var(--bg-surface)', color: 'var(--text-primary)' }}
+                className="select-field"
               >
                 <option value="Educational">Educational</option>
                 <option value="Storytelling">Storytelling</option>
@@ -103,58 +102,70 @@ export default function ScriptGeneratorPage() {
             </div>
           </div>
 
-          <button type="submit" disabled={loading} style={{ padding: '15px 30px', borderRadius: 'var(--radius-md)', background: 'var(--gradient-primary)', color: 'white', border: 'none', fontSize: '1rem', fontWeight: '600', cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}>
-            <Sparkles size={18} /> {loading ? 'Writing Script...' : 'Generate Full Script'}
+          <button type="submit" disabled={loading} className="btn btn-primary" style={{ alignSelf: 'flex-start' }}>
+            {loading ? (
+              <span className="btn-spinner" role="status" aria-label="Loading" />
+            ) : (
+              <>
+                <Sparkles size={16} /> Generate Full Script
+              </>
+            )}
           </button>
         </form>
 
-        {error && <div style={{ marginTop: '20px', padding: '15px', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderRadius: 'var(--radius-md)' }}>{error}</div>}
+        {error && (
+          <div className="alert alert-error" style={{ marginTop: '16px' }}>
+            {error}
+          </div>
+        )}
 
         {script && (
-          <div style={{ marginTop: '45px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-              <h3 style={{ margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}><FileText /> Video Script</h3>
-              <button onClick={copyScript} style={{ padding: '8px 16px', background: 'var(--bg-surface)', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-sm)', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer' }}>
-                <Copy size={16} /> Copy Script
+          <div style={{ marginTop: '32px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: '700', margin: 0, display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-primary)' }}>
+                <FileText size={18} style={{ color: 'var(--primary)' }} /> Video Script
+              </h3>
+              <button onClick={copyScript} className="copy-btn">
+                <Copy size={13} /> Copy Script
               </button>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '25px', background: 'var(--bg-dark)', padding: '25px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', background: 'var(--bg-secondary)', padding: '24px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
               <div>
-                <span style={{ color: '#ef4444', fontWeight: 'bold', fontSize: '0.85rem', letterSpacing: '0.05em' }}>[0:00 - 0:10] HOOK:</span>
-                <p style={{ margin: '5px 0 0 0', fontStyle: 'italic', color: 'var(--text-primary)' }}>{script.hook}</p>
+                <span className="badge badge-error" style={{ fontSize: '11px', padding: '3px 8px', marginBottom: '8px' }}>[0:00 - 0:10] HOOK</span>
+                <p style={{ margin: 0, fontStyle: 'italic', color: 'var(--text-primary)', fontSize: '14px', lineHeight: '1.6' }}>{script.hook}</p>
               </div>
               
-              <div>
-                <span style={{ color: '#3b82f6', fontWeight: 'bold', fontSize: '0.85rem', letterSpacing: '0.05em' }}>INTRODUCTION:</span>
-                <p style={{ margin: '5px 0 0 0', color: 'var(--text-primary)' }}>{script.intro}</p>
+              <div style={{ borderTop: '1px solid var(--border)', paddingTop: '16px' }}>
+                <span className="badge badge-primary" style={{ fontSize: '11px', padding: '3px 8px', marginBottom: '8px' }}>INTRODUCTION</span>
+                <p style={{ margin: 0, color: 'var(--text-primary)', fontSize: '14px', lineHeight: '1.6' }}>{script.intro}</p>
               </div>
 
-              <div>
-                <span style={{ color: '#8b5cf6', fontWeight: 'bold', fontSize: '0.85rem', letterSpacing: '0.05em' }}>BODY SECTION:</span>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '10px' }}>
+              <div style={{ borderTop: '1px solid var(--border)', paddingTop: '16px' }}>
+                <span className="badge badge-warning" style={{ fontSize: '11px', padding: '3px 8px', marginBottom: '8px' }}>BODY SECTION</span>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '8px' }}>
                   {script.body?.map((section, idx) => (
-                    <div key={idx} style={{ background: 'var(--bg-surface)', padding: '15px', borderRadius: 'var(--radius-sm)' }}>
-                       <p style={{ margin: 0 }}>{section}</p>
+                    <div key={idx} className="card" style={{ padding: '16px', background: 'var(--surface)' }}>
+                      <p style={{ margin: 0, fontSize: '14px', color: 'var(--text-secondary)', lineHeight: '1.6' }}>{section}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+              <div className="grid-cols-2" style={{ gap: '16px', borderTop: '1px solid var(--border)', paddingTop: '16px' }}>
                 <div>
-                  <span style={{ color: '#10b981', fontWeight: 'bold', fontSize: '0.85rem', letterSpacing: '0.05em' }}>CALL TO ACTION (CTA):</span>
-                  <p style={{ margin: '5px 0 0 0' }}>{script.cta}</p>
+                  <span className="badge badge-success" style={{ fontSize: '11px', padding: '3px 8px', marginBottom: '8px' }}>CALL TO ACTION (CTA)</span>
+                  <p style={{ margin: 0, fontSize: '13px', color: 'var(--text-secondary)', lineHeight: '1.6' }}>{script.cta}</p>
                 </div>
                 <div>
-                  <span style={{ color: 'var(--text-muted)', fontWeight: 'bold', fontSize: '0.85rem', letterSpacing: '0.05em' }}>OUTRO / END CARD:</span>
-                  <p style={{ margin: '5px 0 0 0' }}>{script.outro}</p>
+                  <span className="badge badge-neutral" style={{ fontSize: '11px', padding: '3px 8px', marginBottom: '8px' }}>OUTRO / END CARD</span>
+                  <p style={{ margin: 0, fontSize: '13px', color: 'var(--text-secondary)', lineHeight: '1.6' }}>{script.outro}</p>
                 </div>
               </div>
             </div>
           </div>
         )}
-      </section>
+      </div>
 
       <FaqSection 
         faqsData={toolFaqs.scriptGenerator}

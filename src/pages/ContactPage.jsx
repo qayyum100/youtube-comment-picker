@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, MessageSquare, Clock, CheckCircle2, Send, Youtube, Github } from 'lucide-react';
+import { Mail, MessageSquare, Clock, CheckCircle2, Send, Youtube } from 'lucide-react';
 
 const contactReasons = [
   'Bug Report',
@@ -35,164 +35,133 @@ export default function ContactPage() {
       setErrors(errs);
       return;
     }
-    // mailto fallback — opens the user's email client with pre-filled data
     const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`);
     const subject = encodeURIComponent(`[${form.subject}] - YouTube Comment Picker Contact`);
     window.location.href = `mailto:support@youtubecommentpickerthumbnaildownload.online?subject=${subject}&body=${body}`;
     setSubmitted(true);
   };
 
-  const inputStyle = (hasError) => ({
-    width: '100%',
-    padding: '12px 16px',
-    borderRadius: 'var(--radius-md)',
-    border: `1.5px solid ${hasError ? '#ef4444' : 'var(--border-light)'}`,
-    background: 'var(--bg-surface)',
-    color: 'var(--text-primary)',
-    fontSize: '1rem',
-    outline: 'none',
-    boxSizing: 'border-box',
-    transition: 'border-color 0.2s',
-    fontFamily: 'inherit',
-  });
+  const infoCards = [
+    {
+      icon: <Mail size={18} />,
+      color: 'var(--primary)',
+      bg: 'var(--primary-light)',
+      title: 'Email Support',
+      content: <a href="mailto:support@youtubecommentpickerthumbnaildownload.online" style={{ fontSize: '13px', color: 'var(--primary)', textDecoration: 'none', fontWeight: '500', wordBreak: 'break-all' }}>support@youtubecommentpicker<wbr />thumbnaildownload.online</a>,
+    },
+    {
+      icon: <Clock size={18} />,
+      color: 'var(--success)',
+      bg: 'rgba(16,185,129,0.08)',
+      title: 'Response Time',
+      content: <p style={{ margin: 0, fontSize: '13px', color: 'var(--text-secondary)', lineHeight: '1.6' }}>We typically respond within <strong style={{ color: 'var(--text-primary)' }}>24 hours</strong> on weekdays. Weekend replies may take until Monday.</p>,
+    },
+    {
+      icon: <Youtube size={18} />,
+      color: '#ef4444',
+      bg: 'rgba(239,68,68,0.08)',
+      title: 'Business Inquiries',
+      content: <p style={{ margin: 0, fontSize: '13px', color: 'var(--text-secondary)', lineHeight: '1.6' }}>For partnerships and advertising, select "Partnership / Advertising" in the form subject and include your brand details.</p>,
+    },
+    {
+      icon: <MessageSquare size={18} />,
+      color: '#f59e0b',
+      bg: 'rgba(245,158,11,0.08)',
+      title: 'FAQ First',
+      content: <p style={{ margin: 0, fontSize: '13px', color: 'var(--text-secondary)', lineHeight: '1.6' }}>Common questions about tools and giveaways are answered in our <a href="/blogs" style={{ color: 'var(--primary)', textDecoration: 'none', fontWeight: '600' }}>Creator Guides</a>.</p>,
+    },
+  ];
 
   return (
-    <main style={{ padding: '40px 24px', maxWidth: '900px', margin: '0 auto' }}>
+    <main className="page-wrapper" style={{ maxWidth: '960px' }}>
       <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-        <h1 style={{ fontSize: '2.8rem', fontWeight: '800', color: 'var(--text-primary)', margin: '0 0 12px 0', lineHeight: 1.2 }}>
+        <h1 style={{ fontSize: '2.4rem', fontWeight: '800', color: 'var(--text-primary)', margin: '0 0 12px 0', lineHeight: 1.2 }}>
           Contact Us
         </h1>
-        <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', lineHeight: '1.7', maxWidth: '560px', margin: '0 auto' }}>
+        <p style={{ fontSize: '1.05rem', color: 'var(--text-secondary)', lineHeight: '1.7', maxWidth: '520px', margin: '0 auto' }}>
           We are a small, creator-focused team. We read every message personally and aim to respond within 24 hours on business days.
         </p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '32px', alignItems: 'start' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(240px, 1fr) 2fr', gap: '24px', alignItems: 'start' }}>
 
         {/* Left: Contact Info */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-
-          <div className="liquid-glass" style={{ padding: '24px', borderRadius: 'var(--radius-lg)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-              <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(99,102,241,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6366f1' }}>
-                <Mail size={20} />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+          {infoCards.map((card, i) => (
+            <div key={i} className="card" style={{ padding: '20px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+                <div style={{ width: '36px', height: '36px', borderRadius: '9px', background: card.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', color: card.color, flexShrink: 0 }}>
+                  {card.icon}
+                </div>
+                <h3 style={{ margin: 0, fontSize: '13px', fontWeight: '700', color: 'var(--text-primary)' }}>{card.title}</h3>
               </div>
-              <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: '700', color: 'var(--text-primary)' }}>Email Support</h3>
+              {card.content}
             </div>
-            <a
-              href="mailto:support@youtubecommentpickerthumbnaildownload.online"
-              style={{ fontSize: '0.85rem', color: 'var(--glow-primary)', textDecoration: 'none', fontWeight: '500', wordBreak: 'break-all' }}
-            >
-              support@youtubecommentpicker<wbr />thumbnaildownload.online
-            </a>
-          </div>
-
-          <div className="liquid-glass" style={{ padding: '24px', borderRadius: 'var(--radius-lg)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-              <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(16,185,129,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#10b981' }}>
-                <Clock size={20} />
-              </div>
-              <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: '700', color: 'var(--text-primary)' }}>Response Time</h3>
-            </div>
-            <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
-              We typically respond within <strong style={{ color: 'var(--text-primary)' }}>24 hours</strong> on weekdays. Weekend replies may take until Monday.
-            </p>
-          </div>
-
-          <div className="liquid-glass" style={{ padding: '24px', borderRadius: 'var(--radius-lg)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-              <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(239,68,68,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ef4444' }}>
-                <Youtube size={20} />
-              </div>
-              <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: '700', color: 'var(--text-primary)' }}>Business Inquiries</h3>
-            </div>
-            <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
-              For partnerships and advertising, select "Partnership / Advertising" in the form subject and include your channel or brand details.
-            </p>
-          </div>
-
-          <div className="liquid-glass" style={{ padding: '24px', borderRadius: 'var(--radius-lg)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-              <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: 'rgba(245,158,11,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#f59e0b' }}>
-                <MessageSquare size={20} />
-              </div>
-              <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: '700', color: 'var(--text-primary)' }}>FAQ First</h3>
-            </div>
-            <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
-              Common questions about tools and giveaways are answered in our <a href="/blogs" style={{ color: 'var(--glow-primary)', textDecoration: 'none', fontWeight: '500' }}>Creator Guides</a>.
-            </p>
-          </div>
+          ))}
         </div>
 
         {/* Right: Form */}
-        <div className="liquid-glass" style={{ padding: '36px', borderRadius: 'var(--radius-xl)' }}>
+        <div className="card card-lg">
           {submitted ? (
             <div style={{ textAlign: 'center', padding: '40px 0' }}>
-              <CheckCircle2 size={56} style={{ color: '#10b981', marginBottom: '20px' }} />
-              <h2 style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '12px' }}>
+              <CheckCircle2 size={48} style={{ color: 'var(--success)', marginBottom: '16px' }} />
+              <h2 style={{ fontSize: '1.4rem', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '12px' }}>
                 Your email client is opening...
               </h2>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '24px' }}>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '24px', fontSize: '14px' }}>
                 Your message has been pre-filled in your email app. Simply click Send to reach us. We'll reply within 24 hours.
               </p>
               <button
                 onClick={() => { setSubmitted(false); setForm({ name: '', email: '', subject: contactReasons[0], message: '' }); }}
-                style={{ padding: '10px 24px', borderRadius: 'var(--radius-full)', border: '1.5px solid var(--border-light)', background: 'transparent', color: 'var(--text-primary)', cursor: 'pointer', fontWeight: '500' }}
+                className="btn btn-secondary"
               >
                 Send another message
               </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }} noValidate>
-              <h2 style={{ margin: '0 0 4px 0', fontSize: '1.4rem', fontWeight: '700', color: 'var(--text-primary)' }}>
+              <h2 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '700', color: 'var(--text-primary)' }}>
                 Send Us a Message
               </h2>
 
-              {/* Name */}
-              <div>
-                <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-primary)' }}>
-                  Your Name <span style={{ color: '#ef4444' }}>*</span>
-                </label>
-                <input
-                  type="text"
-                  value={form.name}
-                  onChange={e => handleChange('name', e.target.value)}
-                  placeholder="e.g. Alex Johnson"
-                  style={inputStyle(!!errors.name)}
-                  onFocus={e => e.target.style.borderColor = 'var(--glow-primary)'}
-                  onBlur={e => e.target.style.borderColor = errors.name ? '#ef4444' : 'var(--border-light)'}
-                />
-                {errors.name && <p style={{ color: '#ef4444', fontSize: '0.8rem', margin: '6px 0 0 0' }}>{errors.name}</p>}
-              </div>
+              <div className="grid-cols-2" style={{ gap: '16px' }}>
+                {/* Name */}
+                <div>
+                  <label htmlFor="contact-name" className="field-label">Your Name <span style={{ color: 'var(--error)' }}>*</span></label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    className={`input-field${errors.name ? ' input-error' : ''}`}
+                    value={form.name}
+                    onChange={e => handleChange('name', e.target.value)}
+                    placeholder="e.g. Alex Johnson"
+                  />
+                  {errors.name && <p style={{ color: 'var(--error)', fontSize: '12px', margin: '4px 0 0 0' }}>{errors.name}</p>}
+                </div>
 
-              {/* Email */}
-              <div>
-                <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-primary)' }}>
-                  Email Address <span style={{ color: '#ef4444' }}>*</span>
-                </label>
-                <input
-                  type="email"
-                  value={form.email}
-                  onChange={e => handleChange('email', e.target.value)}
-                  placeholder="you@example.com"
-                  style={inputStyle(!!errors.email)}
-                  onFocus={e => e.target.style.borderColor = 'var(--glow-primary)'}
-                  onBlur={e => e.target.style.borderColor = errors.email ? '#ef4444' : 'var(--border-light)'}
-                />
-                {errors.email && <p style={{ color: '#ef4444', fontSize: '0.8rem', margin: '6px 0 0 0' }}>{errors.email}</p>}
+                {/* Email */}
+                <div>
+                  <label htmlFor="contact-email" className="field-label">Email Address <span style={{ color: 'var(--error)' }}>*</span></label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    className={`input-field${errors.email ? ' input-error' : ''}`}
+                    value={form.email}
+                    onChange={e => handleChange('email', e.target.value)}
+                    placeholder="you@example.com"
+                  />
+                  {errors.email && <p style={{ color: 'var(--error)', fontSize: '12px', margin: '4px 0 0 0' }}>{errors.email}</p>}
+                </div>
               </div>
 
               {/* Subject */}
               <div>
-                <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-primary)' }}>
-                  Subject
-                </label>
+                <label htmlFor="contact-subject" className="field-label">Subject</label>
                 <select
+                  id="contact-subject"
+                  className="select-field"
                   value={form.subject}
                   onChange={e => handleChange('subject', e.target.value)}
-                  style={{ ...inputStyle(false), cursor: 'pointer' }}
-                  onFocus={e => e.target.style.borderColor = 'var(--glow-primary)'}
-                  onBlur={e => e.target.style.borderColor = 'var(--border-light)'}
                 >
                   {contactReasons.map(r => <option key={r} value={r}>{r}</option>)}
                 </select>
@@ -200,53 +169,32 @@ export default function ContactPage() {
 
               {/* Message */}
               <div>
-                <label style={{ display: 'block', marginBottom: '6px', fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-primary)' }}>
-                  Message <span style={{ color: '#ef4444' }}>*</span>
-                </label>
+                <label htmlFor="contact-message" className="field-label">Message <span style={{ color: 'var(--error)' }}>*</span></label>
                 <textarea
+                  id="contact-message"
+                  className={`input-textarea${errors.message ? ' input-error' : ''}`}
                   value={form.message}
                   onChange={e => handleChange('message', e.target.value)}
                   placeholder="Describe your question, bug, or request in detail. The more context you provide, the faster we can help."
                   rows={6}
-                  style={{ ...inputStyle(!!errors.message), resize: 'vertical', minHeight: '140px' }}
-                  onFocus={e => e.target.style.borderColor = 'var(--glow-primary)'}
-                  onBlur={e => e.target.style.borderColor = errors.message ? '#ef4444' : 'var(--border-light)'}
+                  style={{ resize: 'vertical', minHeight: '140px' }}
                 />
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '4px' }}>
                   {errors.message
-                    ? <p style={{ color: '#ef4444', fontSize: '0.8rem', margin: 0 }}>{errors.message}</p>
+                    ? <p style={{ color: 'var(--error)', fontSize: '12px', margin: 0 }}>{errors.message}</p>
                     : <span />}
-                  <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{form.message.length} chars</span>
+                  <span style={{ fontSize: '12px', color: 'var(--text-muted)' }}>{form.message.length} chars</span>
                 </div>
               </div>
 
-              <button
-                type="submit"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '10px',
-                  padding: '14px 28px',
-                  borderRadius: 'var(--radius-md)',
-                  background: 'var(--gradient-primary)',
-                  color: 'white',
-                  border: 'none',
-                  fontSize: '1rem',
-                  fontWeight: '700',
-                  cursor: 'pointer',
-                  transition: 'opacity 0.15s',
-                }}
-                onMouseEnter={e => e.currentTarget.style.opacity = '0.9'}
-                onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-              >
-                <Send size={18} />
-                Send Message
-              </button>
-
-              <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-muted)', textAlign: 'center' }}>
-                This will open your email client with the message pre-filled. We never store your data.
-              </p>
+              <div>
+                <button type="submit" className="btn btn-primary">
+                  <Send size={16} /> Send Message
+                </button>
+                <p style={{ margin: '12px 0 0 0', fontSize: '12px', color: 'var(--text-muted)' }}>
+                  This will open your email client with the message pre-filled. We never store your data.
+                </p>
+              </div>
             </form>
           )}
         </div>

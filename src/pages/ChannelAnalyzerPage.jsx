@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
-import { Search, Users, Video, Eye, DollarSign, TrendingUp } from 'lucide-react';
+import { Search, Users, Video, Eye, DollarSign, TrendingUp, Globe } from 'lucide-react';
 import FaqSection from '../components/FaqSection';
 import { toolFaqs } from '../data/toolFaqs';
 
@@ -13,7 +13,7 @@ export default function ChannelAnalyzerPage() {
   const handleAnalyze = async (e) => {
     e.preventDefault();
     if (!url) return;
-    
+
     setLoading(true);
     setError(null);
     setData(null);
@@ -21,17 +21,17 @@ export default function ChannelAnalyzerPage() {
     try {
       const response = await fetch(`/api/youtube/channel?url=${encodeURIComponent(url)}`);
       const result = await response.json();
-      
+
       if (!response.ok) throw new Error(result.error || 'Failed to fetch channel data');
-      
+
       // Perform manual calculations
       const subs = parseInt(result.subscriberCount) || 0;
       const views = parseInt(result.viewCount) || 0;
       const videosCount = parseInt(result.videoCount) || 0;
-      
+
       const avgViewsPerVideo = videosCount > 0 ? Math.round(views / videosCount) : 0;
       const engagementRate = subs > 0 ? ((avgViewsPerVideo / subs) * 100).toFixed(2) : '0.00';
-      
+
       // Estimated earnings (using RPM range $0.50 - $4.00 per 1000 views)
       const monthlyViews = views / 24; // Simple estimate
       const minMonthlyEarnings = Math.round((monthlyViews * 0.5) / 1000);
@@ -43,7 +43,7 @@ export default function ChannelAnalyzerPage() {
         engagementRate,
         minMonthlyEarnings,
         maxMonthlyEarnings,
-        growthScore: Math.min(100, Math.round((views / 1000000) + (subs / 50000))) // Simple mock growth score
+        growthScore: Math.min(100, Math.round((views / 1000000) + (subs / 50000)))
       });
     } catch (err) {
       setError(err.message);
@@ -58,111 +58,124 @@ export default function ChannelAnalyzerPage() {
     return num;
   };
 
+  const metrics = data ? [
+    { label: 'Subscribers', value: formatNumber(data.subscriberCount), icon: <Users size={20} />, color: 'var(--primary)', bgColor: 'var(--primary-light)' },
+    { label: 'Total Views', value: formatNumber(data.viewCount), icon: <Eye size={20} />, color: 'var(--info)', bgColor: 'var(--info-light)' },
+    { label: 'Total Videos', value: formatNumber(data.videoCount), icon: <Video size={20} />, color: 'var(--warning)', bgColor: 'var(--warning-light)' },
+    { label: 'Est. Monthly Earnings', value: `$${data.minMonthlyEarnings} – $${data.maxMonthlyEarnings}`, icon: <DollarSign size={20} />, color: 'var(--success)', bgColor: 'var(--success-light)' },
+  ] : [];
+
   return (
-    <div className="page-container" style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto' }}>
-      <SEO 
+    <div className="page-wrapper">
+      <SEO
         title="YouTube Channel Analyzer | Free Channel Audit & Analytics Tool"
         description="Analyze any YouTube channel handle or URL. Get instant subscriber count, engagement metrics, average views, and estimated earnings."
         url="/youtube-channel-analyzer"
       />
-      
-      <section className="hero-section" style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '3rem', background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-          YouTube Channel Analyzer
-        </h1>
-        <p style={{ fontSize: '1.2rem', color: 'var(--text-muted)', marginTop: '10px' }}>
-          Audit any YouTube channel instantly. Track stats, growth, and estimated earnings.
-        </p>
-      </section>
 
-      <section className="tool-area card liquid-glass" style={{ padding: '30px', borderRadius: 'var(--radius-lg)', marginBottom: '40px' }}>
-        <form onSubmit={handleAnalyze} style={{ display: 'flex', gap: '10px' }}>
-          <div style={{ flex: 1, position: 'relative' }}>
-            <Search size={20} style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
-            <input 
-              type="text" 
-              placeholder="Enter YouTube Channel URL or @handle..." 
+      {/* Hero */}
+      <div className="page-hero">
+        <h1>YouTube Channel Analyzer</h1>
+        <p>Audit any YouTube channel instantly. Track stats, growth, and estimated earnings.</p>
+      </div>
+
+      {/* Input */}
+      <div className="card card-lg" style={{ marginBottom: '24px' }}>
+        <form onSubmit={handleAnalyze} style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <div className="input-group" style={{ flex: 1, minWidth: '240px' }}>
+            <span className="input-group-icon"><Search size={16} /></span>
+            <input
+              type="text"
+              className="input-field"
+              placeholder="Enter YouTube Channel URL or @handle..."
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              style={{ width: '100%', padding: '15px 15px 15px 45px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)', background: 'var(--bg-surface)', color: 'var(--text-primary)', fontSize: '1rem' }}
               required
+              aria-label="YouTube channel URL or handle"
             />
           </div>
-          <button type="submit" disabled={loading} style={{ padding: '15px 30px', borderRadius: 'var(--radius-md)', background: 'var(--gradient-primary)', color: 'white', border: 'none', fontSize: '1rem', fontWeight: '600', cursor: loading ? 'not-allowed' : 'pointer' }}>
-            {loading ? 'Analyzing...' : 'Analyze Channel'}
+          <button type="submit" disabled={loading} className="btn btn-primary" style={{ flexShrink: 0 }}>
+            {loading ? <span className="btn-spinner" /> : 'Analyze Channel'}
           </button>
         </form>
 
-        {error && <div style={{ marginTop: '20px', padding: '15px', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderRadius: 'var(--radius-md)' }}>{error}</div>}
-
-        {data && (
-          <div style={{ marginTop: '40px' }}>
-            <div style={{ display: 'flex', gap: '20px', alignItems: 'center', marginBottom: '30px', flexWrap: 'wrap' }}>
-              {data.thumbnails?.high?.url && (
-                <img src={data.thumbnails.high.url} alt={data.title} style={{ width: '120px', height: '120px', borderRadius: '50%', objectFit: 'cover', border: '3px solid var(--glow-primary)' }} />
-              )}
-              <div>
-                <h3 style={{ fontSize: '2rem', marginBottom: '5px' }}>{data.title}</h3>
-                <p style={{ color: 'var(--text-muted)', maxWidth: '600px' }}>{data.description}</p>
-                {data.country && <span style={{ display: 'inline-block', marginTop: '10px', padding: '4px 10px', background: 'var(--bg-dark)', borderRadius: '12px', fontSize: '0.85rem' }}>Country: {data.country}</span>}
-              </div>
-            </div>
-
-            {/* Metrics Dashboard */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px', marginBottom: '40px' }}>
-                <div style={{ background: 'var(--bg-surface)', padding: '20px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)', display: 'flex', alignItems: 'center', gap: '15px' }}>
-                    <Users size={32} style={{ color: 'var(--glow-primary)' }} />
-                    <div>
-                        <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Subscribers</span>
-                        <h4 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{formatNumber(data.subscriberCount)}</h4>
-                    </div>
-                </div>
-                <div style={{ background: 'var(--bg-surface)', padding: '20px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)', display: 'flex', alignItems: 'center', gap: '15px' }}>
-                    <Eye size={32} style={{ color: 'var(--glow-primary)' }} />
-                    <div>
-                        <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Total Views</span>
-                        <h4 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{formatNumber(data.viewCount)}</h4>
-                    </div>
-                </div>
-                <div style={{ background: 'var(--bg-surface)', padding: '20px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)', display: 'flex', alignItems: 'center', gap: '15px' }}>
-                    <Video size={32} style={{ color: 'var(--glow-primary)' }} />
-                    <div>
-                        <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Total Videos</span>
-                        <h4 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{formatNumber(data.videoCount)}</h4>
-                    </div>
-                </div>
-                <div style={{ background: 'var(--bg-surface)', padding: '20px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)', display: 'flex', alignItems: 'center', gap: '15px' }}>
-                    <DollarSign size={32} style={{ color: '#10b981' }} />
-                    <div>
-                        <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Est. Monthly Earnings</span>
-                        <h4 style={{ fontSize: '1.3rem', fontWeight: 'bold', color: '#10b981' }}>${data.minMonthlyEarnings} - ${data.maxMonthlyEarnings}</h4>
-                    </div>
-                </div>
-            </div>
-
-            {/* Calculations Row */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
-                <div style={{ background: 'var(--bg-surface)', padding: '25px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
-                    <h4 style={{ marginBottom: '15px', fontWeight: '600' }}>Engagement Statistics</h4>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-                        <span style={{ color: 'var(--text-muted)' }}>Avg. Views per Video:</span>
-                        <strong>{formatNumber(data.avgViewsPerVideo)}</strong>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-                        <span style={{ color: 'var(--text-muted)' }}>Engagement Rate:</span>
-                        <strong>{data.engagementRate}%</strong>
-                    </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ color: 'var(--text-muted)' }}>Growth Score:</span>
-                        <strong style={{ color: 'var(--glow-primary)' }}>{data.growthScore}/100</strong>
-                    </div>
-                </div>
-            </div>
+        {error && (
+          <div className="alert alert-error" style={{ marginTop: '16px' }}>
+            {error}
           </div>
         )}
-      </section>
+      </div>
 
-      <FaqSection 
+      {/* Results */}
+      {data && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '40px' }}>
+
+          {/* Channel Profile */}
+          <div className="card card-lg">
+            <div style={{ display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap' }}>
+              {data.thumbnails?.high?.url && (
+                <img
+                  src={data.thumbnails.high.url}
+                  alt={data.title}
+                  className="avatar"
+                  style={{ width: '80px', height: '80px', flexShrink: 0 }}
+                />
+              )}
+              <div style={{ flex: 1, minWidth: '200px' }}>
+                <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '6px', color: 'var(--text-primary)' }}>
+                  {data.title}
+                </h2>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '14px', lineHeight: '1.5', maxWidth: '600px' }}>
+                  {data.description}
+                </p>
+                {data.country && (
+                  <span className="badge badge-neutral" style={{ marginTop: '10px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                    <Globe size={12} /> {data.country}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+
+          {/* Metric Cards */}
+          <div className="grid-cols-4">
+            {metrics.map((m, i) => (
+              <div key={i} className="stat-card">
+                <div className="stat-icon" style={{ background: m.bgColor, color: m.color }}>
+                  {m.icon}
+                </div>
+                <div>
+                  <div className="stat-label">{m.label}</div>
+                  <div className="stat-value" style={{ fontSize: '20px', marginTop: '4px' }}>{m.value}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Engagement Stats */}
+          <div className="card card-lg">
+            <h3 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '16px', color: 'var(--text-primary)' }}>
+              Engagement Statistics
+            </h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+              {[
+                { label: 'Avg. Views per Video', value: formatNumber(data.avgViewsPerVideo) },
+                { label: 'Engagement Rate', value: `${data.engagementRate}%` },
+                { label: 'Growth Score', value: `${data.growthScore} / 100`, accent: true },
+              ].map((row, i) => (
+                <div key={i} className="result-row">
+                  <span className="result-label">{row.label}</span>
+                  <span className="result-value" style={row.accent ? { color: 'var(--primary)' } : {}}>
+                    {row.value}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <FaqSection
         faqsData={toolFaqs.channelAnalyzer}
         customTitle="YouTube Channel Analyzer FAQs"
         customDescription="Learn how to analyze any YouTube channel and understand what metrics matter most for growth."

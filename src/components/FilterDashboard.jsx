@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { SlidersHorizontal, ChevronDown, ChevronUp, UserCheck, RefreshCw, Hash, Users, ThumbsUp, ShieldAlert } from 'lucide-react';
+import { SlidersHorizontal, ChevronDown, UserCheck, RefreshCw, Hash, Users, ThumbsUp, ShieldAlert } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function FilterDashboard({ filters, setFilters, totalComments, filteredCount }) {
   const [isOpen, setIsOpen] = useState(true);
 
-  // Compute number of active filters
   const activeFiltersCount = [
     (filters?.keyword || '').trim() !== '',
     (filters?.minTags || 0) > 0,
@@ -14,10 +13,7 @@ export default function FilterDashboard({ filters, setFilters, totalComments, fi
   ].filter(Boolean).length;
 
   const handleFilterChange = (key, value) => {
-    setFilters(prev => ({
-      ...prev,
-      [key]: value
-    }));
+    setFilters(prev => ({ ...prev, [key]: value }));
   };
 
   const handleResetFilters = () => {
@@ -33,168 +29,155 @@ export default function FilterDashboard({ filters, setFilters, totalComments, fi
   };
 
   return (
-    <motion.section 
-      className="liquid-glass" 
-      style={{ marginBottom: '32px', padding: '24px', borderRadius: 'var(--radius-xl)' }}
+    <section
+      className="card"
+      style={{ marginBottom: '24px' }}
       aria-labelledby="filter-dashboard-title"
     >
-      {/* Header Accordion Trigger */}
-      <motion.div 
+      {/* Header */}
+      <button
         onClick={() => setIsOpen(!isOpen)}
-        whileHover={{ scale: 1.01 }}
-        style={{ 
-          display: 'flex', 
-          justifyContent: 'space-between', 
-          alignItems: 'center', 
+        style={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
           cursor: 'pointer',
-          userSelect: 'none',
-          paddingBottom: isOpen ? '16px' : '0',
-          borderBottom: isOpen ? '1px solid var(--glass-border-bottom)' : 'none'
+          background: 'transparent',
+          border: 'none',
+          padding: 0,
+          paddingBottom: isOpen ? '16px' : 0,
+          borderBottom: isOpen ? '1px solid var(--border)' : 'none',
+          textAlign: 'left',
         }}
-        role="button"
         aria-expanded={isOpen}
+        aria-controls="filter-body"
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <motion.div animate={{ rotate: isOpen ? 180 : 0 }}>
-            <SlidersHorizontal size={22} style={{ color: 'var(--glow-primary)' }} />
-          </motion.div>
-          <h2 id="filter-dashboard-title" style={{ fontSize: '1.25rem', color: 'var(--text-primary)', margin: 0 }}>Advanced Algorithmic Filters</h2>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <SlidersHorizontal size={18} style={{ color: 'var(--primary)', flexShrink: 0 }} />
+          <span
+            id="filter-dashboard-title"
+            style={{ fontSize: '16px', fontWeight: '700', color: 'var(--text-primary)' }}
+          >
+            Advanced Filters
+          </span>
           <AnimatePresence>
             {activeFiltersCount > 0 && (
-              <motion.span 
+              <motion.span
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
-                style={{
-                  backgroundColor: 'rgba(100, 150, 255, 0.15)',
-                  border: '1px solid rgba(100, 150, 255, 0.3)',
-                  color: 'var(--glow-primary)',
-                  padding: '4px 10px',
-                  borderRadius: 'var(--radius-full)',
-                  fontSize: '0.75rem',
-                  fontWeight: '600',
-                  backdropFilter: 'blur(10px)'
-                }}>
-                Active: {activeFiltersCount}
+                transition={{ duration: 0.15 }}
+                className="badge badge-primary"
+              >
+                {activeFiltersCount} active
               </motion.span>
             )}
           </AnimatePresence>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           {totalComments > 0 && (
-            <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-              Pool: <strong style={{ color: 'var(--glow-primary)' }}>{filteredCount}</strong> / {totalComments}
+            <span style={{ fontSize: '13px', color: 'var(--text-muted)' }}>
+              Pool: <strong style={{ color: 'var(--primary)', fontWeight: '700' }}>{filteredCount}</strong>
+              <span style={{ color: 'var(--text-muted)' }}> / {totalComments}</span>
             </span>
           )}
-          <motion.div animate={{ rotate: isOpen ? 180 : 0 }}>
-            <ChevronDown size={20} color="var(--text-secondary)" />
-          </motion.div>
+          <ChevronDown
+            size={16}
+            style={{
+              color: 'var(--text-muted)',
+              transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+              transition: 'transform 0.2s ease-out',
+              flexShrink: 0,
+            }}
+          />
         </div>
-      </motion.div>
+      </button>
 
       {/* Filter Body */}
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {isOpen && (
-          <motion.div 
+          <motion.div
+            id="filter-body"
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
             style={{ overflow: 'hidden' }}
           >
-            <div style={{ marginTop: '24px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-              <div className="grid-cols-2" style={{ gap: '32px' }}>
-                
-                {/* Left Column: Duplicate Mode and Keyword Hurdle */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                  
-                  {/* Duplicate Entry Mode */}
+            <div style={{ paddingTop: '20px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              <div className="grid-cols-2" style={{ gap: '24px' }}>
+
+                {/* Left Column */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+
+                  {/* Duplicate Mode */}
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.9rem', fontWeight: '500', color: 'var(--text-secondary)', marginBottom: '12px' }}>
-                      Duplicate Control Mode
+                    <label className="field-label" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <RefreshCw size={14} style={{ color: 'var(--primary)' }} />
+                      Entry Mode
                     </label>
-                    <div className="liquid-glass" style={{ width: '100%', display: 'flex', padding: '6px', borderRadius: 'var(--radius-full)', gap: '4px' }}>
-                      <motion.button
-                        whileTap={{ scale: 0.95 }}
+                    <div className="segmented-control" style={{ width: '100%', display: 'flex' }}>
+                      <button
                         type="button"
                         onClick={() => handleFilterChange('duplicateMode', 'fair')}
-                        style={{ 
-                          flexGrow: 1, 
-                          display: 'flex', 
-                          alignItems: 'center', 
-                          justifyContent: 'center', 
-                          gap: '8px', 
-                          padding: '10px', 
-                          borderRadius: 'var(--radius-full)', 
-                          border: 'none', 
-                          background: filters.duplicateMode === 'fair' ? 'var(--glow-primary)' : 'transparent',
-                          color: filters.duplicateMode === 'fair' ? '#fff' : 'var(--text-secondary)',
-                          cursor: 'pointer',
-                          transition: 'all var(--transition-liquid)',
-                          fontWeight: '500'
-                        }}
+                        className={`segmented-btn ${filters.duplicateMode === 'fair' ? 'active' : ''}`}
+                        style={{ flex: 1 }}
                       >
-                        <UserCheck size={16} />
-                        Fair Mode
-                      </motion.button>
-                      <motion.button
-                        whileTap={{ scale: 0.95 }}
+                        <UserCheck size={14} />
+                        Fair
+                      </button>
+                      <button
                         type="button"
                         onClick={() => handleFilterChange('duplicateMode', 'boost')}
-                        style={{ 
-                          flexGrow: 1, 
-                          display: 'flex', 
-                          alignItems: 'center', 
-                          justifyContent: 'center', 
-                          gap: '8px', 
-                          padding: '10px', 
-                          borderRadius: 'var(--radius-full)', 
-                          border: 'none', 
-                          background: filters.duplicateMode === 'boost' ? 'var(--glow-primary)' : 'transparent',
-                          color: filters.duplicateMode === 'boost' ? '#fff' : 'var(--text-secondary)',
-                          cursor: 'pointer',
-                          transition: 'all var(--transition-liquid)',
-                          fontWeight: '500'
-                        }}
+                        className={`segmented-btn ${filters.duplicateMode === 'boost' ? 'active' : ''}`}
+                        style={{ flex: 1 }}
                       >
                         <RefreshCw size={14} />
-                        Boost Mode
-                      </motion.button>
+                        Boost
+                      </button>
                     </div>
                   </div>
 
                   {/* Subscribers Only */}
                   <div>
-                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', fontWeight: '500', color: 'var(--text-secondary)', marginBottom: '12px' }}>
-                      <UserCheck size={16} style={{ color: 'var(--glow-primary)' }} />
+                    <label className="field-label" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <UserCheck size={14} style={{ color: 'var(--primary)' }} />
                       Subscribers Only
                     </label>
-                    <motion.div 
-                      whileHover={{ scale: 1.02 }}
-                      className="liquid-glass" 
-                      style={{ padding: '16px', display: 'flex', alignItems: 'center', gap: '12px', borderRadius: 'var(--radius-md)' }}
+                    <label
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '10px',
+                        padding: '12px 14px',
+                        background: 'var(--bg-secondary)',
+                        border: '1px solid var(--border)',
+                        borderRadius: 'var(--radius-md)',
+                        cursor: 'pointer',
+                      }}
                     >
                       <input
                         type="checkbox"
                         id="filter-subscribers"
                         checked={filters.subscribersOnly}
                         onChange={(e) => handleFilterChange('subscribersOnly', e.target.checked)}
-                        style={{ width: '20px', height: '20px', accentColor: 'var(--glow-primary)', cursor: 'pointer' }}
                       />
-                      <label htmlFor="filter-subscribers" style={{ fontSize: '0.9rem', color: 'var(--text-primary)', cursor: 'pointer', flexGrow: 1 }}>
+                      <span style={{ fontSize: '14px', color: 'var(--text-primary)', userSelect: 'none' }}>
                         Require public channel subscription
-                      </label>
-                    </motion.div>
+                      </span>
+                    </label>
                   </div>
 
-                  {/* Keyword / Hashtag filter */}
+                  {/* Keyword Hurdle */}
                   <div>
-                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', fontWeight: '500', color: 'var(--text-secondary)', marginBottom: '12px' }}>
-                      <Hash size={16} style={{ color: 'var(--glow-primary)' }} />
-                      Keyword Hurdle
+                    <label htmlFor="filter-keyword" className="field-label" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <Hash size={14} style={{ color: 'var(--primary)' }} />
+                      Keyword Filter
                     </label>
                     <input
                       type="text"
-                      className="input-premium"
+                      className="input-field"
                       placeholder="e.g. #giveaway or specific word"
                       value={filters.keyword}
                       onChange={(e) => handleFilterChange('keyword', e.target.value)}
@@ -204,67 +187,106 @@ export default function FilterDashboard({ filters, setFilters, totalComments, fi
 
                   {/* First Commenter Bonus */}
                   <div>
-                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', fontWeight: '500', color: 'var(--text-secondary)', marginBottom: '12px' }}>
-                      <Users size={16} style={{ color: 'var(--glow-primary)' }} />
+                    <label className="field-label" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <Users size={14} style={{ color: 'var(--primary)' }} />
                       First Commenter Bonus
                     </label>
-                    <motion.div 
-                      whileHover={{ scale: 1.02 }}
-                      className="liquid-glass" 
-                      style={{ padding: '16px', display: 'flex', alignItems: 'center', gap: '12px', borderRadius: 'var(--radius-md)' }}
+                    <label
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '10px',
+                        padding: '12px 14px',
+                        background: 'var(--bg-secondary)',
+                        border: '1px solid var(--border)',
+                        borderRadius: 'var(--radius-md)',
+                        cursor: 'pointer',
+                      }}
                     >
                       <input
                         type="checkbox"
                         id="filter-first-comment"
                         checked={filters.firstCommentBonus}
                         onChange={(e) => handleFilterChange('firstCommentBonus', e.target.checked)}
-                        style={{ width: '20px', height: '20px', accentColor: 'var(--glow-primary)', cursor: 'pointer' }}
                       />
-                      <label htmlFor="filter-first-comment" style={{ fontSize: '0.9rem', color: 'var(--text-primary)', cursor: 'pointer', flexGrow: 1 }}>
+                      <span style={{ fontSize: '14px', color: 'var(--text-primary)', userSelect: 'none' }}>
                         Grant +5 entries to the earliest commenter
-                      </label>
-                    </motion.div>
+                      </span>
+                    </label>
                   </div>
                 </div>
 
-                {/* Right Column: Tags, Likes, and Exclusions */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                  
-                  <div className="grid-cols-2" style={{ gap: '24px' }}>
-                    {/* Min Tag Count */}
+                {/* Right Column */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+
+                  <div className="grid-cols-2" style={{ gap: '16px' }}>
+                    {/* Min Tags */}
                     <div>
-                      <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', fontWeight: '500', color: 'var(--text-secondary)', marginBottom: '12px' }}>
-                        <Users size={16} style={{ color: 'var(--glow-primary)' }} />
+                      <label className="field-label" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <Users size={14} style={{ color: 'var(--primary)' }} />
                         Min @Tags
                       </label>
-                      <div className="liquid-glass" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px', borderRadius: 'var(--radius-md)' }}>
-                        <motion.button
-                          whileTap={{ scale: 0.9 }}
+                      <div style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        background: 'var(--surface)',
+                        border: '1px solid var(--border)',
+                        borderRadius: 'var(--radius-md)',
+                        overflow: 'hidden',
+                      }}>
+                        <button
                           type="button"
                           onClick={() => handleFilterChange('minTags', Math.max(0, filters.minTags - 1))}
-                          style={{ padding: '10px 16px', fontSize: '1.2rem', borderRadius: 'var(--radius-sm)', border: 'none', background: 'var(--glass-bg-hover)', color: 'var(--text-primary)', cursor: 'pointer' }}
-                        >-</motion.button>
-                        <span style={{ fontSize: '1.2rem', fontWeight: '600', width: '40px', textAlign: 'center', color: 'var(--text-primary)' }}>
+                          style={{
+                            padding: '12px 16px',
+                            fontSize: '18px',
+                            fontWeight: '600',
+                            background: 'var(--bg-secondary)',
+                            border: 'none',
+                            color: 'var(--text-secondary)',
+                            cursor: 'pointer',
+                            lineHeight: 1,
+                            transition: 'background 0.15s',
+                          }}
+                          aria-label="Decrease min tags"
+                        >−</button>
+                        <span style={{
+                          flex: 1,
+                          textAlign: 'center',
+                          fontSize: '16px',
+                          fontWeight: '700',
+                          color: 'var(--text-primary)',
+                        }}>
                           {filters.minTags}
                         </span>
-                        <motion.button
-                          whileTap={{ scale: 0.9 }}
+                        <button
                           type="button"
                           onClick={() => handleFilterChange('minTags', Math.min(5, filters.minTags + 1))}
-                          style={{ padding: '10px 16px', fontSize: '1.2rem', borderRadius: 'var(--radius-sm)', border: 'none', background: 'var(--glass-bg-hover)', color: 'var(--text-primary)', cursor: 'pointer' }}
-                        >+</motion.button>
+                          style={{
+                            padding: '12px 16px',
+                            fontSize: '18px',
+                            fontWeight: '600',
+                            background: 'var(--bg-secondary)',
+                            border: 'none',
+                            color: 'var(--text-secondary)',
+                            cursor: 'pointer',
+                            lineHeight: 1,
+                            transition: 'background 0.15s',
+                          }}
+                          aria-label="Increase min tags"
+                        >+</button>
                       </div>
                     </div>
 
-                    {/* Min Likes Count */}
+                    {/* Min Likes */}
                     <div>
-                      <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', fontWeight: '500', color: 'var(--text-secondary)', marginBottom: '12px' }}>
-                        <ThumbsUp size={16} style={{ color: 'var(--glow-primary)' }} />
+                      <label htmlFor="filter-min-likes" className="field-label" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <ThumbsUp size={14} style={{ color: 'var(--primary)' }} />
                         Min Likes
                       </label>
                       <input
                         type="number"
-                        className="input-premium"
+                        className="input-field"
                         min="0"
                         value={filters.minLikes}
                         onChange={(e) => handleFilterChange('minLikes', Math.max(0, parseInt(e.target.value) || 0))}
@@ -273,43 +295,45 @@ export default function FilterDashboard({ filters, setFilters, totalComments, fi
                     </div>
                   </div>
 
-                  {/* Exclusion Lists */}
-                  <div>
-                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', fontWeight: '500', color: 'var(--text-secondary)', marginBottom: '12px' }}>
-                      <ShieldAlert size={16} style={{ color: 'var(--glow-primary)' }} />
+                  {/* Exclusion List */}
+                  <div style={{ flex: 1 }}>
+                    <label htmlFor="filter-exclude-list" className="field-label" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <ShieldAlert size={14} style={{ color: 'var(--primary)' }} />
                       Exclusion & Spam Filter
                     </label>
                     <textarea
-                      className="input-premium"
+                      className="input-textarea"
                       rows={5}
                       placeholder="Exclude words or usernames (comma or newline separated, e.g. spam, bot, @competitor)"
                       value={filters.excludeList}
                       onChange={(e) => handleFilterChange('excludeList', e.target.value)}
                       id="filter-exclude-list"
-                      style={{ resize: 'vertical' }}
+                      style={{ minHeight: '120px', height: '100%', boxSizing: 'border-box' }}
                     />
                   </div>
                 </div>
 
               </div>
 
-              {/* Action Footer */}
-              <div style={{ display: 'flex', justifyContent: 'flex-end', borderTop: '1px solid var(--glass-border-bottom)', paddingTop: '24px', marginTop: '8px' }}>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+              {/* Footer */}
+              <div style={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                borderTop: '1px solid var(--border)',
+                paddingTop: '16px',
+              }}>
+                <button
                   type="button"
                   onClick={handleResetFilters}
-                  className="liquid-glass"
-                  style={{ padding: '12px 24px', fontSize: '0.9rem', border: 'none', cursor: 'pointer', color: 'var(--text-primary)', fontWeight: '500' }}
+                  className="btn btn-ghost btn-sm"
                 >
                   Reset All Filters
-                </motion.button>
+                </button>
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.section>
+    </section>
   );
 }

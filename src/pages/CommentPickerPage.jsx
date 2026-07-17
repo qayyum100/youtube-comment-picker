@@ -7,7 +7,7 @@ import CertificateModal from '../components/CertificateModal';
 import CompetitorContent from '../components/CompetitorContent';
 import FaqSection from '../components/FaqSection';
 import SeoHead from '../components/SeoHead';
-import { AlertCircle } from 'lucide-react';
+import { AlertCircle, Trophy } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
@@ -99,7 +99,7 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
       let endpoint = '/api/youtube/comments';
       if (platform === 'instagram') endpoint = '/api/instagram/comments';
       if (platform === 'tiktok') endpoint = '/api/tiktok/comments';
-      
+
       const encodedUrl = encodeURIComponent(url);
 
       const response = await fetch(`${endpoint}?url=${encodedUrl}`);
@@ -213,62 +213,45 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
     <>
       <SeoHead pageType="picker" platform={platform} />
 
-      <main style={{ flexGrow: 1, padding: '60px 0' }}>
+      <main style={{ flexGrow: 1, padding: '48px 0' }}>
         <div className="container">
 
-          {/* Welcome Banner */}
-          <motion.div 
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            style={{ textAlign: 'center', marginBottom: '48px' }}
-          >
-            <motion.h1 
-              animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
-              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-              style={{ 
-                fontSize: '3rem', 
-                fontWeight: '600', 
-                marginBottom: '16px', 
-                lineHeight: '1.2', 
-                textTransform: 'capitalize',
-                background: 'linear-gradient(90deg, var(--text-primary), var(--glow-primary), var(--text-primary))',
-                backgroundSize: '200% auto',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                display: 'inline-block'
-              }}
-            >
-              {platform === 'youtube' ? 'Comment Picker for YouTube & YouTube Giveaway Picker' : `${platform} Comment Picker`}
-            </motion.h1>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', maxWidth: '700px', margin: '0 auto', letterSpacing: '-0.01em' }}>
+          {/* Hero */}
+          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+            <h1 style={{
+              fontSize: '36px',
+              fontWeight: '700',
+              color: 'var(--text-primary)',
+              marginBottom: '12px',
+              letterSpacing: '-0.02em',
+              lineHeight: '1.2',
+              textTransform: 'capitalize',
+            }}>
+              {platform === 'youtube'
+                ? 'Comment Picker for YouTube & YouTube Giveaway Picker'
+                : `${platform} Comment Picker`}
+            </h1>
+            <p style={{
+              color: 'var(--text-secondary)',
+              fontSize: '16px',
+              maxWidth: '600px',
+              margin: '0 auto',
+              lineHeight: '1.6',
+            }}>
               The premium comment picker for youtube and giveaway picker youtube. Unbiased, fast, and secure random comment picker youtube tool.
             </p>
-          </motion.div>
+          </div>
 
           <PlatformSwitcher platform={platform} />
 
+          {/* API Error */}
           {apiError && (
-            <motion.div 
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="liquid-glass"
-              style={{
-                borderColor: 'var(--glow-error)',
-                padding: '16px 20px',
-                marginBottom: '24px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '12px',
-                fontSize: '0.9rem',
-                color: 'var(--text-primary)'
-              }}
-            >
-              <AlertCircle size={20} color="var(--glow-error)" style={{ flexShrink: 0 }} />
+            <div className="alert alert-error" style={{ marginBottom: '20px' }}>
+              <AlertCircle size={16} style={{ flexShrink: 0 }} />
               <div>
-                <strong style={{ color: 'var(--glow-error)' }}>System Notice:</strong> {apiError}
+                <strong>Notice:</strong> {apiError}
               </div>
-            </motion.div>
+            </div>
           )}
 
           <MediaFetcher
@@ -302,36 +285,50 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
           )}
 
           <CompetitorContent />
-          
+
           <FaqSection />
 
+          {/* Draw History */}
           {history.length > 0 && (
-            <motion.section 
-              className="liquid-glass"
-              style={{ marginTop: '48px', padding: '32px', borderRadius: 'var(--radius-xl)' }}
-            >
-              <h2 style={{ fontSize: '1.4rem', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-primary)' }}>
-                📜 Drawn Winner History
+            <section className="card card-lg" style={{ marginTop: '48px' }}>
+              <h2 style={{
+                fontSize: '18px',
+                fontWeight: '700',
+                marginBottom: '20px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                color: 'var(--text-primary)',
+              }}>
+                <Trophy size={20} style={{ color: 'var(--primary)' }} />
+                Draw History
               </h2>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {history.map((run) => (
-                  <div key={run.id} style={{ background: 'var(--glass-bg-base)', padding: '20px', borderRadius: 'var(--radius-md)', display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '16px', border: '1px solid var(--border-light)' }}>
-                    <div>
-                      <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-                        {new Date(run.date).toLocaleString()} • Platform: <strong style={{ textTransform: 'capitalize' }}>{run.platform}</strong>
-                      </div>
-                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '10px' }}>
-                        {run.winners.map((w, idx) => (
-                          <span key={idx} style={{ padding: '6px 12px', background: 'var(--bg-dark)', border: '1px solid var(--border-light)', borderRadius: '20px', fontSize: '0.9rem', color: 'var(--text-primary)' }}>
-                            🏆 <strong>{w.author}</strong> ({w.prize})
-                          </span>
-                        ))}
-                      </div>
+                  <div
+                    key={run.id}
+                    style={{
+                      background: 'var(--bg-secondary)',
+                      padding: '16px',
+                      borderRadius: 'var(--radius-md)',
+                      border: '1px solid var(--border)',
+                    }}
+                  >
+                    <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginBottom: '10px', fontWeight: '500' }}>
+                      {new Date(run.date).toLocaleString()} · Platform:{' '}
+                      <span style={{ textTransform: 'capitalize', color: 'var(--text-secondary)' }}>{run.platform}</span>
+                    </div>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                      {run.winners.map((w, idx) => (
+                        <span key={idx} className="badge badge-primary" style={{ fontSize: '13px', padding: '5px 12px' }}>
+                          🏆 <strong>{w.author}</strong> ({w.prize})
+                        </span>
+                      ))}
                     </div>
                   </div>
                 ))}
               </div>
-            </motion.section>
+            </section>
           )}
 
         </div>

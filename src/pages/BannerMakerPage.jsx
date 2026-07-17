@@ -87,67 +87,66 @@ export default function BannerMakerPage() {
   };
 
   return (
-    <div className="page-container" style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto' }}>
+    <div className="page-wrapper">
       <SEO 
         title="Free YouTube Banner Maker Online | 2560x1440 Banner Designer"
         description="Design and download custom YouTube channel banners (2560x1440) instantly. Choose templates, modify channel text, background colors, and export high-resolution PNGs."
         url="/youtube-banner-maker"
       />
 
-      <section className="hero-section" style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '3rem', background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-          Free YouTube Banner Maker
-        </h1>
-        <p style={{ fontSize: '1.2rem', color: 'var(--text-muted)', marginTop: '10px' }}>
-          Design professional 2560x1440 YouTube channel banners instantly.
-        </p>
-      </section>
+      <div className="page-hero">
+        <h1>Free YouTube Banner Maker</h1>
+        <p>Design professional 2560x1440 YouTube channel banners instantly.</p>
+      </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '30px', alignItems: 'start' }}>
         
         {/* Editor controls */}
-        <section className="card liquid-glass" style={{ padding: '25px', borderRadius: 'var(--radius-lg)', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <h3 style={{ fontSize: '1.3rem', display: 'flex', alignItems: 'center', gap: '8px' }}><Palette size={20} /> Design controls</h3>
+        <div className="card card-lg" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <h3 style={{ fontSize: '15px', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-primary)', margin: 0 }}><Palette size={16} style={{ color: 'var(--primary)' }} /> Design Controls</h3>
           
           <div>
-            <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>Channel Name</label>
+            <label htmlFor="banner-text" className="field-label">Channel Name</label>
             <input 
+              id="banner-text"
               type="text" 
               value={text} 
               onChange={(e) => setText(e.target.value)} 
-              className="input-premium"
+              className="input-field"
               maxLength={20}
             />
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+          <div className="grid-cols-2" style={{ gap: '16px' }}>
             <div>
-              <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>Bg Color</label>
+              <label htmlFor="banner-bg" className="field-label">Background Color</label>
               <input 
+                id="banner-bg"
                 type="color" 
                 value={bgColor} 
                 onChange={(e) => setBgColor(e.target.value)} 
-                style={{ width: '100%', height: '45px', border: '1px solid var(--border-light)', borderRadius: '8px', cursor: 'pointer', background: 'none' }}
+                style={{ width: '100%', height: '44px', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', cursor: 'pointer', background: 'none', padding: '4px' }}
               />
             </div>
             <div>
-              <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>Text Color</label>
+              <label htmlFor="banner-tc" className="field-label">Text Color</label>
               <input 
+                id="banner-tc"
                 type="color" 
                 value={textColor} 
                 onChange={(e) => setTextColor(e.target.value)} 
-                style={{ width: '100%', height: '45px', border: '1px solid var(--border-light)', borderRadius: '8px', cursor: 'pointer', background: 'none' }}
+                style={{ width: '100%', height: '44px', border: '1px solid var(--border)', borderRadius: 'var(--radius-sm)', cursor: 'pointer', background: 'none', padding: '4px' }}
               />
             </div>
           </div>
 
           <div>
-            <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>Style Template</label>
+            <label htmlFor="banner-tmpl" className="field-label">Style Template</label>
             <select 
+              id="banner-tmpl"
               value={template} 
               onChange={(e) => setTemplate(e.target.value)}
-              className="input-premium"
-              style={{ padding: '12px 15px' }}
+              className="select-field"
             >
               <option value="dark">Dark Gradient</option>
               <option value="glow">Neon Glow</option>
@@ -155,24 +154,24 @@ export default function BannerMakerPage() {
             </select>
           </div>
 
-          <button onClick={handleDownload} style={{ padding: '15px', borderRadius: 'var(--radius-md)', background: 'var(--gradient-primary)', color: 'white', border: 'none', fontWeight: '600', cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '8px', marginTop: '10px' }}>
-            <Download size={18} /> Export Banner (PNG)
+          <button onClick={handleDownload} className="btn btn-primary">
+            <Download size={16} /> Export Banner (PNG)
           </button>
-        </section>
+        </div>
 
         {/* Canvas Display */}
-        <section className="card liquid-glass" style={{ padding: '20px', borderRadius: 'var(--radius-lg)' }}>
-          <h3 style={{ fontSize: '1.3rem', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}><ImageIcon size={20} /> Preview</h3>
-          <div style={{ display: 'flex', justifyContent: 'center', background: '#f3f4f6', padding: '10px', borderRadius: '8px', border: '1px solid var(--border-light)' }}>
+        <div className="card card-lg">
+          <h3 style={{ fontSize: '15px', fontWeight: '700', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-primary)', margin: '0 0 16px 0' }}><ImageIcon size={16} style={{ color: 'var(--primary)' }} /> Preview</h3>
+          <div style={{ display: 'flex', justifyContent: 'center', background: 'var(--bg-secondary)', padding: '12px', borderRadius: 'var(--radius-sm)', border: '1px solid var(--border)' }}>
             <canvas 
               ref={canvasRef} 
-              style={{ width: '100%', height: 'auto', maxHeight: '400px', borderRadius: '4px', boxShadow: '0 4px 15px rgba(0,0,0,0.1)' }} 
+              style={{ width: '100%', height: 'auto', maxHeight: '400px', borderRadius: '4px' }} 
             />
           </div>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '10px', textAlign: 'center' }}>
+          <p style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '10px', textAlign: 'center' }}>
             Banners are generated in full 2560x1440 YouTube TV resolution. The center area is desktop-safe.
           </p>
-        </section>
+        </div>
 
       </div>
 

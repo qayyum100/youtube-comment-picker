@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
-import { Search, CheckCircle2, ShieldAlert } from 'lucide-react';
 import FaqSection from '../components/FaqSection';
 import { toolFaqs } from '../data/toolFaqs';
 
 export default function MonetizationCheckerPage() {
   const [subscribers, setSubscribers] = useState(500);
   const [watchHours, setWatchHours] = useState(2000);
-  const [shortsViews, setShortsViews] = useState(5); // Millions
+  const [shortsViews, setShortsViews] = useState(5);
   const [status, setStatus] = useState(null);
 
   const handleCheck = (e) => {
@@ -26,109 +25,98 @@ export default function MonetizationCheckerPage() {
   };
 
   return (
-    <div className="page-container" style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto' }}>
+    <div className="page-wrapper">
       <SEO 
         title="YouTube Monetization Checker | Channel Eligibility Tool"
         description="Check your channel Partner Program monetization readiness score. Input subscriber counts and watch time values to audit eligibility status."
         url="/youtube-monetization-checker"
       />
 
-      <section className="hero-section" style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '3rem', background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-          YouTube Monetization Checker
-        </h1>
-        <p style={{ fontSize: '1.2rem', color: 'var(--text-muted)', marginTop: '10px' }}>
-          Verify your channel's Partner Program eligibility status and monetization readiness score.
-        </p>
-      </section>
+      <div className="page-hero">
+        <h1>YouTube Monetization Checker</h1>
+        <p>Verify your channel's Partner Program eligibility status and monetization readiness score.</p>
+      </div>
 
-      <section className="tool-area card liquid-glass" style={{ padding: '30px', borderRadius: 'var(--radius-lg)', marginBottom: '40px' }}>
-        <form onSubmit={handleCheck} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px', alignItems: 'end', marginBottom: '30px' }}>
-          <div>
-            <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-muted)' }}>Subscriber Count</label>
-            <input 
-              type="number" 
-              value={subscribers} 
-              onChange={(e) => setSubscribers(Number(e.target.value))} 
-              className="input-premium"
-              min="0"
-            />
+      <div className="card card-lg" style={{ marginBottom: '40px' }}>
+        <form onSubmit={handleCheck} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div className="grid-cols-3" style={{ gap: '16px' }}>
+            <div>
+              <label htmlFor="mon-subs" className="field-label">Subscriber Count</label>
+              <input 
+                id="mon-subs"
+                type="number" 
+                value={subscribers} 
+                onChange={(e) => setSubscribers(Number(e.target.value))} 
+                className="input-field"
+                min="0"
+              />
+            </div>
+            <div>
+              <label htmlFor="mon-hours" className="field-label">Watch Hours (Last 365 Days)</label>
+              <input 
+                id="mon-hours"
+                type="number" 
+                value={watchHours} 
+                onChange={(e) => setWatchHours(Number(e.target.value))} 
+                className="input-field"
+                min="0"
+              />
+            </div>
+            <div>
+              <label htmlFor="mon-shorts" className="field-label">Shorts Views (Last 90 Days - Millions)</label>
+              <input 
+                id="mon-shorts"
+                type="number" 
+                value={shortsViews} 
+                onChange={(e) => setShortsViews(Number(e.target.value))} 
+                className="input-field"
+                min="0"
+              />
+            </div>
           </div>
-          <div>
-            <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-muted)' }}>Watch Hours (Last 365 Days)</label>
-            <input 
-              type="number" 
-              value={watchHours} 
-              onChange={(e) => setWatchHours(Number(e.target.value))} 
-              className="input-premium"
-              min="0"
-            />
-          </div>
-          <div>
-            <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-muted)' }}>Shorts Views (Last 90 Days - Millions)</label>
-            <input 
-              type="number" 
-              value={shortsViews} 
-              onChange={(e) => setShortsViews(Number(e.target.value))} 
-              className="input-premium"
-              min="0"
-            />
-          </div>
-          <button type="submit" style={{ gridColumn: 'span 3', padding: '15px', borderRadius: 'var(--radius-md)', background: 'var(--gradient-primary)', color: 'white', border: 'none', fontWeight: '600', cursor: 'pointer' }}>
+          <button type="submit" className="btn btn-primary" style={{ alignSelf: 'flex-start' }}>
             Check Monetization Status
           </button>
         </form>
 
         {status && (
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '30px', marginTop: '40px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '24px', marginTop: '32px', alignItems: 'start' }}>
             
-            {/* Status Card */}
-            <div style={{ background: 'var(--bg-surface)', padding: '30px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-light)', textAlign: 'center' }}>
-              <h3 style={{ marginBottom: '20px', color: 'var(--text-muted)' }}>Readiness Score</h3>
-              <div style={{ position: 'relative', width: '150px', height: '150px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', background: `conic-gradient(#10b981 ${status.score}%, #3f3f46 0)` }}>
-                <div style={{ position: 'absolute', width: '130px', height: '130px', background: 'var(--bg-surface)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <span style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>{status.score}%</span>
+            {/* Score Ring */}
+            <div className="card" style={{ padding: '24px', textAlign: 'center', minWidth: '180px' }}>
+              <p style={{ fontSize: '12px', color: 'var(--text-muted)', fontWeight: '600', marginBottom: '16px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Readiness Score</p>
+              <div style={{ position: 'relative', width: '120px', height: '120px', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', background: `conic-gradient(${status.isPartnerReady ? 'var(--success)' : 'var(--primary)'} ${status.score * 3.6}deg, var(--border) 0)` }}>
+                <div style={{ position: 'absolute', width: '100px', height: '100px', background: 'var(--surface)', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span style={{ fontSize: '22px', fontWeight: '800', color: 'var(--text-primary)' }}>{status.score}%</span>
                 </div>
               </div>
-              <p style={{ marginTop: '20px', fontSize: '1.1rem', fontWeight: '500', color: status.isPartnerReady ? '#10b981' : '#f59e0b' }}>
-                {status.isPartnerReady ? 'Ready for Partnership!' : 'In Progress'}
+              <p style={{ marginTop: '16px', fontSize: '13px', fontWeight: '700', color: status.isPartnerReady ? 'var(--success)' : 'var(--warning)' }}>
+                {status.isPartnerReady ? '✓ Ready for Partnership!' : 'In Progress'}
               </p>
             </div>
 
-            {/* Threshold Progress */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', marginBottom: '5px' }}>
-                  <span>Subscribers (Goal: 1,000)</span>
-                  <strong>{status.subscribersProgress}%</strong>
+            {/* Threshold Progress Bars */}
+            <div className="card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+              {[
+                { label: 'Subscribers', goal: '1,000', progress: status.subscribersProgress, color: 'var(--success)' },
+                { label: 'Watch Hours', goal: '4,000', progress: status.hoursProgress, color: 'var(--primary)' },
+                { label: 'Shorts Views', goal: '10 Million', progress: status.shortsProgress, color: '#ec4899' },
+              ].map((bar) => (
+                <div key={bar.label}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', marginBottom: '8px' }}>
+                    <span style={{ color: 'var(--text-secondary)', fontWeight: '500' }}>{bar.label} <span style={{ color: 'var(--text-muted)', fontSize: '12px' }}>(Goal: {bar.goal})</span></span>
+                    <strong style={{ color: 'var(--text-primary)' }}>{bar.progress}%</strong>
+                  </div>
+                  <div style={{ width: '100%', height: '8px', background: 'var(--border)', borderRadius: '4px', overflow: 'hidden' }}>
+                    <div style={{ width: `${bar.progress}%`, height: '100%', background: bar.color, borderRadius: '4px', transition: 'width 0.4s ease' }} />
+                  </div>
                 </div>
-                <div style={{ width: '100%', height: '8px', background: 'var(--border-light)', borderRadius: '4px' }}>
-                  <div style={{ width: `${status.subscribersProgress}%`, height: '100%', background: '#10b981', borderRadius: '4px' }} />
-                </div>
-              </div>
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', marginBottom: '5px' }}>
-                  <span>Watch Hours (Goal: 4,000)</span>
-                  <strong>{status.hoursProgress}%</strong>
-                </div>
-                <div style={{ width: '100%', height: '8px', background: 'var(--border-light)', borderRadius: '4px' }}>
-                  <div style={{ width: `${status.hoursProgress}%`, height: '100%', background: '#3b82f6', borderRadius: '4px' }} />
-                </div>
-              </div>
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', marginBottom: '5px' }}>
-                  <span>Shorts Views (Goal: 10 Million)</span>
-                  <strong>{status.shortsProgress}%</strong>
-                </div>
-                <div style={{ width: '100%', height: '8px', background: 'var(--border-light)', borderRadius: '4px' }}>
-                  <div style={{ width: `${status.shortsProgress}%`, height: '100%', background: '#ec4899', borderRadius: '4px' }} />
-                </div>
-              </div>
+              ))}
             </div>
 
           </div>
         )}
-      </section>
+      </div>
 
       <FaqSection 
         faqsData={toolFaqs.monetizationChecker}

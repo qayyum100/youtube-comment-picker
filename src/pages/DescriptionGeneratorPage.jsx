@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SEO from '../components/SEO';
-import { Type, Sparkles, Copy, AlertCircle } from 'lucide-react';
+import { Sparkles, Copy } from 'lucide-react';
 import FaqSection from '../components/FaqSection';
 import { toolFaqs } from '../data/toolFaqs';
 
@@ -14,7 +14,7 @@ export default function DescriptionGeneratorPage() {
   const handleGenerate = async (e) => {
     e.preventDefault();
     if (!topic) return;
-    
+
     setLoading(true);
     setError(null);
     setDescription('');
@@ -26,9 +26,9 @@ export default function DescriptionGeneratorPage() {
         body: JSON.stringify({ topic, title })
       });
       const result = await response.json();
-      
+
       if (!response.ok) throw new Error(result.error || 'Failed to generate description');
-      
+
       setDescription(result.description);
     } catch (err) {
       setError(err.message);
@@ -42,73 +42,72 @@ export default function DescriptionGeneratorPage() {
   };
 
   return (
-    <div className="page-container" style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto' }}>
-      <SEO 
+    <div className="page-wrapper">
+      <SEO
         title="AI YouTube Description Generator | Free SEO Descriptions"
         description="Generate SEO-optimized YouTube descriptions with chapters, call to action, and hashtags automatically using AI."
         url="/youtube-description-generator"
       />
-      
-      <section className="hero-section" style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '3rem', background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-          AI YouTube Description Generator
-        </h1>
-        <p style={{ fontSize: '1.2rem', color: 'var(--text-muted)', marginTop: '10px' }}>
-          Generate SEO-optimized descriptions with keywords, timestamps, and social CTAs instantly.
-        </p>
-      </section>
 
-      <section className="tool-area card liquid-glass" style={{ padding: '30px', borderRadius: 'var(--radius-lg)', marginBottom: '40px' }}>
+      <div className="page-hero">
+        <h1>AI YouTube Description Generator</h1>
+        <p>Generate SEO-optimized descriptions with keywords, timestamps, and social CTAs instantly.</p>
+      </div>
+
+      <div className="card card-lg" style={{ marginBottom: '40px' }}>
         <form onSubmit={handleGenerate} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
-              <div>
-                  <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-muted)' }}>Video Title (Optional)</label>
-                  <input 
-                    type="text" 
-                    placeholder="e.g. How to Bake Sourdough Bread" 
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    style={{ width: '100%', padding: '12px 15px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)', background: 'var(--bg-surface)', color: 'var(--text-primary)' }}
-                  />
-              </div>
-              <div>
-                  <label style={{ display: 'block', marginBottom: '8px', color: 'var(--text-muted)' }}>What is the video about? (Topic/Keywords)</label>
-                  <input 
-                    type="text" 
-                    placeholder="e.g. step by step sourdough guide, baking tips, sourdough starter" 
-                    value={topic}
-                    onChange={(e) => setTopic(e.target.value)}
-                    style={{ width: '100%', padding: '12px 15px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)', background: 'var(--bg-surface)', color: 'var(--text-primary)' }}
-                    required
-                  />
-              </div>
+          <div className="grid-cols-2" style={{ gap: '16px' }}>
+            <div>
+              <label htmlFor="desc-title" className="field-label">Video Title (Optional)</label>
+              <input
+                id="desc-title"
+                type="text"
+                className="input-field"
+                placeholder="e.g. How to Bake Sourdough Bread"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="desc-topic" className="field-label">What is the video about? (Topic/Keywords)</label>
+              <input
+                id="desc-topic"
+                type="text"
+                className="input-field"
+                placeholder="e.g. step by step sourdough guide, baking tips"
+                value={topic}
+                onChange={(e) => setTopic(e.target.value)}
+                required
+              />
+            </div>
           </div>
-          
-          <button type="submit" disabled={loading} style={{ padding: '15px 30px', borderRadius: 'var(--radius-md)', background: 'var(--gradient-primary)', color: 'white', border: 'none', fontSize: '1rem', fontWeight: '600', cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px' }}>
-            <Sparkles size={18} /> {loading ? 'Writing SEO Description...' : 'Generate Description'}
+
+          <button type="submit" disabled={loading} className="btn btn-primary">
+            <Sparkles size={16} /> {loading ? 'Writing SEO Description...' : 'Generate Description'}
           </button>
         </form>
 
-        {error && <div style={{ marginTop: '20px', padding: '15px', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderRadius: 'var(--radius-md)' }}>{error}</div>}
+        {error && <div className="alert alert-error" style={{ marginTop: '16px' }}>{error}</div>}
 
         {description && (
-          <div style={{ marginTop: '40px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
-                <h3 style={{ margin: 0 }}>Generated Description</h3>
-                <button onClick={copyToClipboard} style={{ padding: '8px 15px', background: 'var(--bg-surface)', border: '1px solid var(--border-light)', borderRadius: 'var(--radius-sm)', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '5px', cursor: 'pointer' }}>
-                     <Copy size={16} /> Copy Description
-                </button>
+          <div style={{ marginTop: '32px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+              <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '700', color: 'var(--text-primary)' }}>Generated Description</h3>
+              <button onClick={copyToClipboard} className="copy-btn">
+                <Copy size={14} /> Copy Description
+              </button>
             </div>
-            <textarea 
-                value={description}
-                readOnly
-                style={{ width: '100%', height: '350px', padding: '20px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)', background: 'var(--bg-dark)', color: 'var(--text-primary)', fontFamily: 'monospace', fontSize: '0.95rem', resize: 'vertical', lineHeight: '1.6' }}
+            <textarea
+              value={description}
+              readOnly
+              className="input-textarea"
+              style={{ height: '350px', fontFamily: 'monospace', fontSize: '14px' }}
             />
           </div>
         )}
-      </section>
+      </div>
 
-      <FaqSection 
+      <FaqSection
         faqsData={toolFaqs.descriptionGenerator}
         customTitle="YouTube Description Generator FAQs"
         customDescription="Learn how to write SEO-optimized YouTube descriptions that increase your video views and search rankings."

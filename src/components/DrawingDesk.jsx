@@ -383,7 +383,7 @@ export default function DrawingDesk({
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            style={{ textAlign: 'center', color: '#f97316', fontSize: '0.9rem', padding: '12px 0' }}
+            style={{ textAlign: 'center', color: 'var(--warning)', fontSize: '0.9rem', padding: '12px 0' }}
           >
             No comments match your filters — adjust them to draw.
           </motion.p>

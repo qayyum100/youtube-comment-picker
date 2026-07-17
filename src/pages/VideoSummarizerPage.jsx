@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import SEO from '../components/SEO';
 import { Search, Sparkles, BookOpen, Clock, AlertCircle } from 'lucide-react';
 import FaqSection from '../components/FaqSection';
-import { toolFaqs } from '../data/toolFaqs';
 
 export default function VideoSummarizerPage() {
   const [url, setUrl] = useState('');
@@ -45,92 +44,109 @@ export default function VideoSummarizerPage() {
   };
 
   return (
-    <div className="page-container" style={{ padding: '40px 20px', maxWidth: '1200px', margin: '0 auto' }}>
+    <div className="page-wrapper">
       <SEO 
         title="AI YouTube Video Summarizer | Summarize YouTube Video instantly"
         description="Summarize any YouTube video instantly. Get key takeaways, study outlines, important timestamps, and action items using AI."
         url="/youtube-video-summarizer"
       />
 
-      <section className="hero-section" style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <h1 style={{ fontSize: '3rem', background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-          AI YouTube Video Summarizer
-        </h1>
-        <p style={{ fontSize: '1.2rem', color: 'var(--text-muted)', marginTop: '10px' }}>
-          Get instant key takeaways and detailed bullet outlines using AI.
-        </p>
-      </section>
+      <div className="page-hero">
+        <h1>AI YouTube Video Summarizer</h1>
+        <p>Get instant key takeaways and detailed bullet outlines using AI.</p>
+      </div>
 
-      <section className="tool-area card liquid-glass" style={{ padding: '30px', borderRadius: 'var(--radius-lg)', marginBottom: '40px' }}>
-        <form onSubmit={handleSummarize} style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-          <div style={{ flex: 1, position: 'relative', minWidth: '280px' }}>
-            <Search size={20} style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+      <div className="card card-lg" style={{ marginBottom: '40px' }}>
+        <form onSubmit={handleSummarize} style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <div className="input-group" style={{ flex: 1, minWidth: '240px' }}>
+            <span className="input-group-icon">
+              <Search size={16} />
+            </span>
             <input 
               type="text" 
+              className="input-field"
               placeholder="Paste YouTube Video URL here..." 
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              style={{ width: '100%', padding: '15px 15px 15px 45px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)', background: 'var(--bg-surface)', color: 'var(--text-primary)', fontSize: '1rem' }}
               required
             />
           </div>
-          <div style={{ display: 'flex', gap: '10px' }}>
+          <div style={{ display: 'flex', gap: '12px', flexShrink: 0 }}>
             <select 
               value={format} 
               onChange={(e) => setFormat(e.target.value)}
-              style={{ padding: '15px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)', background: 'var(--bg-surface)', color: 'var(--text-primary)', fontSize: '1rem', cursor: 'pointer' }}
+              className="select-field"
+              style={{ width: '180px' }}
             >
               <option value="bullet">Bullet Outline</option>
               <option value="paragraph">Paragraph Summary</option>
               <option value="notes">Student Notes Format</option>
             </select>
-            <button type="submit" disabled={loading} style={{ padding: '15px 30px', borderRadius: 'var(--radius-md)', background: 'var(--gradient-primary)', color: 'white', border: 'none', fontSize: '1rem', fontWeight: '600', cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Sparkles size={18} /> {loading ? 'Summarizing...' : 'Summarize'}
+            <button type="submit" className="btn btn-primary" disabled={loading}>
+              {loading ? (
+                <span className="btn-spinner" role="status" aria-label="Loading" />
+              ) : (
+                <>
+                  <Sparkles size={16} /> Summarize
+                </>
+              )}
             </button>
           </div>
         </form>
 
-        {error && <div style={{ marginTop: '20px', padding: '15px', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', borderRadius: 'var(--radius-md)' }}>{error}</div>}
+        {error && (
+          <div className="alert alert-error" style={{ marginTop: '16px' }}>
+            {error}
+          </div>
+        )}
 
         {summary && (
-          <div style={{ marginTop: '45px', display: 'flex', flexDirection: 'column', gap: '30px' }}>
+          <div style={{ marginTop: '32px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
             
             {/* Quick Takeaway */}
-            <div style={{ background: 'rgba(99, 102, 241, 0.05)', padding: '25px', borderRadius: 'var(--radius-md)', border: '1px solid rgba(99, 102, 241, 0.1)' }}>
-              <h4 style={{ margin: 0, marginBottom: '10px', color: '#818cf8', display: 'flex', alignItems: 'center', gap: '8px' }}><Sparkles size={18} /> Quick Takeaway</h4>
-              <p style={{ color: 'var(--text-primary)', margin: 0, fontSize: '1.05rem', lineHeight: '1.6' }}>{summary.shortSummary}</p>
+            <div className="card" style={{ padding: '24px', borderColor: 'rgba(99, 102, 241, 0.2)', background: 'rgba(99, 102, 241, 0.05)' }}>
+              <h4 style={{ margin: 0, marginBottom: '8px', color: 'var(--primary)', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px', fontWeight: '700' }}>
+                <Sparkles size={16} /> Quick Takeaway
+              </h4>
+              <p style={{ color: 'var(--text-primary)', margin: 0, fontSize: '15px', lineHeight: '1.6' }}>{summary.shortSummary}</p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '25px' }}>
+            <div className="grid-cols-2" style={{ gap: '24px' }}>
               
               {/* Detailed Breakdown */}
-              <div style={{ background: 'var(--bg-surface)', padding: '25px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
-                <h4 style={{ margin: 0, marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}><BookOpen size={18} /> Detailed Breakdown</h4>
-                <div style={{ color: 'var(--text-secondary)', lineHeight: '1.6' }}>
+              <div className="card" style={{ padding: '24px' }}>
+                <h4 style={{ margin: 0, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px', fontWeight: '700', color: 'var(--text-primary)' }}>
+                  <BookOpen size={16} style={{ color: 'var(--primary)' }} /> Detailed Breakdown
+                </h4>
+                <div style={{ color: 'var(--text-secondary)', lineHeight: '1.6', fontSize: '13px' }}>
                   {typeof summary.detailedSummary === 'string' ? (
                      <p style={{ margin: 0 }}>{summary.detailedSummary}</p>
                   ) : (
                      <ul style={{ paddingLeft: '20px', margin: 0 }}>
-                       {summary.detailedSummary?.map((point, idx) => <li key={idx} style={{ marginBottom: '10px' }}>{point}</li>)}
+                       {summary.detailedSummary?.map((point, idx) => <li key={idx} style={{ marginBottom: '8px' }}>{point}</li>)}
                      </ul>
                   )}
                 </div>
               </div>
 
               {/* Key Takeaways & Action Items */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
-                <div style={{ background: 'var(--bg-surface)', padding: '25px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
-                  <h4 style={{ margin: 0, marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '8px' }}><Clock size={18} /> Key Takeaways</h4>
-                  <ul style={{ paddingLeft: '20px', color: 'var(--text-secondary)', margin: 0 }}>
-                    {summary.keyPoints?.map((item, idx) => <li key={idx} style={{ marginBottom: '8px' }}>{item}</li>)}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                <div className="card" style={{ padding: '24px' }}>
+                  <h4 style={{ margin: 0, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px', fontWeight: '700', color: 'var(--text-primary)' }}>
+                    <Clock size={16} style={{ color: 'var(--primary)' }} /> Key Takeaways
+                  </h4>
+                  <ul style={{ paddingLeft: '20px', color: 'var(--text-secondary)', margin: 0, fontSize: '13px', lineHeight: '1.6' }}>
+                    {summary.keyPoints?.map((item, idx) => <li key={idx} style={{ marginBottom: '6px' }}>{item}</li>)}
                   </ul>
                 </div>
                 
                 {summary.actionItems && summary.actionItems.length > 0 && (
-                  <div style={{ background: 'var(--bg-surface)', padding: '25px', borderRadius: 'var(--radius-md)', border: '1px solid var(--border-light)' }}>
-                    <h4 style={{ margin: 0, marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '8px', color: '#10b981' }}><AlertCircle size={18} /> Action Items</h4>
-                    <ul style={{ paddingLeft: '20px', color: 'var(--text-secondary)', margin: 0 }}>
-                      {summary.actionItems.map((item, idx) => <li key={idx} style={{ marginBottom: '8px' }}>{item}</li>)}
+                  <div className="card" style={{ padding: '24px' }}>
+                    <h4 style={{ margin: 0, marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px', fontWeight: '700', color: 'var(--success)' }}>
+                      <AlertCircle size={16} /> Action Items
+                    </h4>
+                    <ul style={{ paddingLeft: '20px', color: 'var(--text-secondary)', margin: 0, fontSize: '13px', lineHeight: '1.6' }}>
+                      {summary.actionItems.map((item, idx) => <li key={idx} style={{ marginBottom: '6px' }}>{item}</li>)}
                     </ul>
                   </div>
                 )}
@@ -140,7 +156,7 @@ export default function VideoSummarizerPage() {
 
           </div>
         )}
-      </section>
+      </div>
 
       <FaqSection 
         faqsData={[

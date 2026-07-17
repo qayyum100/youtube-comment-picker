@@ -1,99 +1,105 @@
 import React from 'react';
-import { ShieldCheck, EyeOff, HardDrive, HelpCircle } from 'lucide-react';
+import { ShieldCheck, EyeOff, HardDrive } from 'lucide-react';
 
 export default function EeatGrid() {
+  const trustCards = [
+    {
+      icon: <ShieldCheck size={20} style={{ color: 'var(--primary)' }} />,
+      title: 'Unbiased Cryptographic Rolls',
+      description: (
+        <>
+          Winner selections are calculated using JavaScript's cryptographically secure
+          pseudo-random number generator API (<code style={{ fontFamily: 'monospace', fontSize: '12px', background: 'var(--bg-tertiary)', padding: '1px 5px', borderRadius: '4px' }}>window.crypto.getRandomValues</code>),
+          guaranteeing unbiased drawing chance for every participant.
+        </>
+      ),
+    },
+    {
+      icon: <EyeOff size={20} style={{ color: 'var(--primary)' }} />,
+      title: 'No OAuth or Passwords Needed',
+      description: 'We prioritize creator security. This platform never asks you to log in with your social accounts, nor does it request write scopes, passwords, or session cookies, keeping your channels safe from hijacking.',
+    },
+    {
+      icon: <HardDrive size={20} style={{ color: 'var(--primary)' }} />,
+      title: 'Local-Storage Bound',
+      description: 'All draw histories, custom prize designations, and configuration parameters are cached inside your browser\'s local sandbox. We do not transmit user entries to external analytics databases.',
+    },
+  ];
+
   return (
-    <div style={{ marginTop: '40px', borderTop: '1px solid var(--border-dark)', paddingTop: '40px', paddingBottom: '60px' }} className="animate-fade-in">
+    <div style={{ marginTop: '48px', borderTop: '1px solid var(--border)', paddingTop: '48px', paddingBottom: '48px' }}>
+      {/* Heading */}
       <div style={{ textAlign: 'center', marginBottom: '32px' }}>
-        <h2 style={{ fontSize: '1.5rem', marginBottom: '8px' }}>Security & Transparency Framework</h2>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', maxWidth: '600px', margin: '0 auto' }}>
-          This Picker is built following strict E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness) industry standards.
+        <h2 className="section-heading" style={{ marginBottom: '10px' }}>
+          Security & Transparency Framework
+        </h2>
+        <p className="section-subheading" style={{ maxWidth: '580px', margin: '0 auto' }}>
+          Built following strict E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness) industry standards.
         </p>
       </div>
 
-      <div className="eeat-grid">
-        {/* Card 1: Unbiased Randomness */}
-        <div className="card-premium">
-          <div style={{
-            width: '40px',
-            height: '40px',
-            borderRadius: '50%',
-            backgroundColor: '#eef2ff',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: '16px'
-          }}>
-            <ShieldCheck size={20} color="var(--brand-indigo)" />
-          </div>
-          <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Unbiased Cryptographic Rolls</h3>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6' }}>
-            Winner selections are calculated using JavaScript's cryptographically secure pseudo-random number generator API 
-            (<code>window.crypto.getRandomValues</code>), guaranteeing unbiased drawing chance for every participant.
-          </p>
-        </div>
-
-        {/* Card 2: Zero Password Collection */}
-        <div className="card-premium">
-          <div style={{
-            width: '40px',
-            height: '40px',
-            borderRadius: '50%',
-            backgroundColor: '#eef2ff',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: '16px'
-          }}>
-            <EyeOff size={20} color="var(--brand-indigo)" />
-          </div>
-          <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>No OAuth or Passwords Needed</h3>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6' }}>
-            We prioritize creator security. This platform never asks you to log in with your social accounts, 
-            nor does it request write scopes, passwords, or session cookies, keeping your channels safe from hijacking.
-          </p>
-        </div>
-
-        {/* Card 3: Browser-Bound Storage */}
-        <div className="card-premium">
-          <div style={{
-            width: '40px',
-            height: '40px',
-            borderRadius: '50%',
-            backgroundColor: '#eef2ff',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginBottom: '16px'
-          }}>
-            <HardDrive size={20} color="var(--brand-indigo)" />
-          </div>
-          <h3 style={{ fontSize: '1.1rem', marginBottom: '8px' }}>Local-Storage Bound</h3>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.6' }}>
-            All draw histories, custom prize designations, and configuration parameters are cached inside your browser's local sandbox. 
-            We do not transmit user entries to external analytics databases.
-          </p>
-        </div>
-      </div>
-
-      {/* FAQ Grid */}
-      <div style={{ marginTop: '50px' }}>
-        <h3 style={{ fontSize: '1.3rem', textAlign: 'center', marginBottom: '24px' }}>Raffle Picker Knowledge Base</h3>
-        <div className="grid-cols-2">
-          <div style={{ border: '1px solid var(--border-dark)', borderLeft: '3px solid var(--brand-indigo)', padding: '20px', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--bg-card)' }}>
-            <h4 style={{ fontSize: '1rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
-              How do I use keyword filters?
-            </h4>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.5' }}>
-              Simply enter a required word or hashtag (e.g. <code>#giveaway</code>) into the filter panel. Comments that do not contain this precise string will be ignored from the final drawing.
+      {/* Cards */}
+      <div className="grid-cols-3">
+        {trustCards.map((item, i) => (
+          <div key={i} className="card" style={{ padding: '24px' }}>
+            <div style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: 'var(--radius-md)',
+              backgroundColor: 'var(--primary-light)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: '16px',
+              flexShrink: 0,
+            }}>
+              {item.icon}
+            </div>
+            <h3 style={{ fontSize: '15px', fontWeight: '700', marginBottom: '8px', color: 'var(--text-primary)' }}>
+              {item.title}
+            </h3>
+            <p style={{ fontSize: '13px', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
+              {item.description}
             </p>
           </div>
-          <div style={{ border: '1px solid var(--border-dark)', borderLeft: '3px solid var(--brand-indigo)', padding: '20px', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--bg-card)' }}>
-            <h4 style={{ fontSize: '1rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
+        ))}
+      </div>
+
+      {/* Knowledge Base */}
+      <div style={{ marginTop: '40px' }}>
+        <h3 style={{ fontSize: '20px', fontWeight: '700', textAlign: 'center', marginBottom: '24px', color: 'var(--text-primary)' }}>
+          Raffle Picker Knowledge Base
+        </h3>
+        <div className="grid-cols-2">
+          <div style={{
+            border: '1px solid var(--border)',
+            borderLeft: '3px solid var(--primary)',
+            padding: '20px',
+            borderRadius: 'var(--radius-md)',
+            backgroundColor: 'var(--bg-secondary)',
+          }}>
+            <h4 style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '8px' }}>
+              How do I use keyword filters?
+            </h4>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '13px', lineHeight: '1.6' }}>
+              Simply enter a required word or hashtag (e.g.{' '}
+              <code style={{ fontFamily: 'monospace', fontSize: '12px', background: 'var(--bg-tertiary)', padding: '1px 5px', borderRadius: '4px' }}>#giveaway</code>)
+              into the filter panel. Comments that do not contain this precise string will be ignored from the final drawing.
+            </p>
+          </div>
+          <div style={{
+            border: '1px solid var(--border)',
+            borderLeft: '3px solid var(--primary)',
+            padding: '20px',
+            borderRadius: 'var(--radius-md)',
+            backgroundColor: 'var(--bg-secondary)',
+          }}>
+            <h4 style={{ fontSize: '14px', fontWeight: '700', color: 'var(--text-primary)', marginBottom: '8px' }}>
               What is the difference between Fair and Boost modes?
             </h4>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', lineHeight: '1.5' }}>
-              <strong>Fair Mode</strong> registers exactly one entry per user handle (filtering out duplicate comments). <strong>Boost Mode</strong> allows a user's comments to count multiple times, acting as extra lottery tickets.
+            <p style={{ color: 'var(--text-secondary)', fontSize: '13px', lineHeight: '1.6' }}>
+              <strong>Fair Mode</strong> registers exactly one entry per user handle (filtering out duplicate comments).{' '}
+              <strong>Boost Mode</strong> allows a user's comments to count multiple times, acting as extra lottery tickets.
             </p>
           </div>
         </div>

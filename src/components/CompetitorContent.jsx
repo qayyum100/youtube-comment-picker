@@ -8,7 +8,7 @@ export default function CompetitorContent() {
       {/* Content Sections */}
       <section className="grid-cols-2" style={{ alignItems: 'center' }}>
         <div>
-          <h2 style={{ fontSize: '2rem', marginBottom: '16px', color: 'var(--text-primary)' }}>Random Comment Picker for Youtube</h2>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '16px', color: 'var(--text-primary)' }}>Random Comment Picker for Youtube</h2>
           <p style={{ color: 'var(--text-secondary)', marginBottom: '16px' }}>
             Our YouTube Comment Random Picker offers a simple and efficient method to select a random winner from all comments (first 500) on your YouTube video. Perfect for determining winners in YouTube giveaways, promotions, sweepstakes, or contests.
           </p>
@@ -20,7 +20,7 @@ export default function CompetitorContent() {
 
       <section className="grid-cols-2" style={{ alignItems: 'center', direction: 'rtl' }}>
         <div style={{ direction: 'ltr' }}>
-          <h2 style={{ fontSize: '2rem', marginBottom: '16px', color: 'var(--text-primary)' }}>How do I select a winner for a YouTube giveaway contest?</h2>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '16px', color: 'var(--text-primary)' }}>How do I select a winner for a YouTube giveaway contest?</h2>
           <p style={{ color: 'var(--text-secondary)', marginBottom: '16px' }}>Selecting a winner for a YouTube giveaway contest is easy with our YouTube Comment Random Picker. Simply follow these steps:</p>
           <ul style={{ color: 'var(--text-secondary)', paddingLeft: '24px', lineHeight: 1.8 }}>
             <li>Find the URL of your YouTube video</li>
@@ -34,30 +34,30 @@ export default function CompetitorContent() {
 
       {/* Features Grid */}
       <section>
-        <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '32px' }}>Features</h2>
-        <div className="grid-cols-2" style={{ gap: '24px' }}>
-          <div className="card-premium">
-            <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>Unique Authors</h3>
+        <h2 style={{ textAlign: 'center', fontSize: '1.75rem', fontWeight: '800', marginBottom: '28px', color: 'var(--text-primary)' }}>Features</h2>
+        <div className="grid-cols-2" style={{ gap: '16px' }}>
+          <div className="card" style={{ padding: '20px' }}>
+            <h3 style={{ fontSize: '14px', fontWeight: '700', marginBottom: '8px', color: 'var(--text-primary)' }}>Unique Authors</h3>
             <p style={{ color: 'var(--text-secondary)' }}>The Unique Authors filter (no duplicate users) allows you to select a random winner from all unique authors who commented on your YouTube video. This is perfect for giveaways, promotions, sweepstakes, and contests where you want to ensure that each participant only has one entry.</p>
           </div>
-          <div className="card-premium">
-            <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>Include Replies</h3>
+          <div className="card" style={{ padding: '20px' }}>
+            <h3 style={{ fontSize: '14px', fontWeight: '700', marginBottom: '8px', color: 'var(--text-primary)' }}>Include Replies</h3>
             <p style={{ color: 'var(--text-secondary)' }}>The Include Replies filter allows you to select a random winner from all comments and replies on your YouTube video.</p>
           </div>
-          <div className="card-premium">
-            <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>Number of Winners</h3>
+          <div className="card" style={{ padding: '20px' }}>
+            <h3 style={{ fontSize: '14px', fontWeight: '700', marginBottom: '8px', color: 'var(--text-primary)' }}>Number of Winners</h3>
             <p style={{ color: 'var(--text-secondary)' }}>The Number of Winners filter allows you to select multiple winners from all comments on your YouTube video. Instead of running a single draw, you can run multiple draws to select multiple winners. Select up to 50!</p>
           </div>
-          <div className="card-premium">
-            <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>Text Search</h3>
+          <div className="card" style={{ padding: '20px' }}>
+            <h3 style={{ fontSize: '14px', fontWeight: '700', marginBottom: '8px', color: 'var(--text-primary)' }}>Text Search</h3>
             <p style={{ color: 'var(--text-secondary)' }}>The Text Search filter allows you to select a random winner from all comments on your YouTube video that contain a specific word or phrase. You can even use hash tags, links, and emojis! 🔥</p>
           </div>
-          <div className="card-premium">
-            <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>Subscribers Only</h3>
+          <div className="card" style={{ padding: '20px' }}>
+            <h3 style={{ fontSize: '14px', fontWeight: '700', marginBottom: '8px', color: 'var(--text-primary)' }}>Subscribers Only</h3>
             <p style={{ color: 'var(--text-secondary)' }}>Our YouTube Comment Random Picker can verify public subscriptions, ensuring you only reward true fans who are subscribed to your channel.</p>
           </div>
-          <div className="card-premium">
-            <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>Raffle Wheel UI</h3>
+          <div className="card" style={{ padding: '20px' }}>
+            <h3 style={{ fontSize: '14px', fontWeight: '700', marginBottom: '8px', color: 'var(--text-primary)' }}>Raffle Wheel UI</h3>
             <p style={{ color: 'var(--text-secondary)' }}>Experience our interactive Wheel of Fortune animation. This ensures a transparent, exciting, and highly visual winner selection process directly inside the YouTube Comment Random Picker.</p>
           </div>
         </div>
@@ -66,7 +66,7 @@ export default function CompetitorContent() {
       {/* More Content Sections */}
       <section className="grid-cols-2" style={{ alignItems: 'center' }}>
         <div>
-          <h2 style={{ fontSize: '2rem', marginBottom: '16px', color: 'var(--text-primary)' }}>Benefits of Using a YouTube Comment Random Picker</h2>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '16px', color: 'var(--text-primary)' }}>Benefits of Using a YouTube Comment Random Picker</h2>
           <p style={{ color: 'var(--text-secondary)' }}>
             Utilizing a YouTube Comment Random Picker has many benefits for content creators and businesses. It streamlines the process of conducting fair and impartial giveaways or contests, enhances audience engagement, and incentivizes viewers to participate in the community. By automating winner selection, you not only save time but also provide transparency to your audience, which can lead to increased trust and channel growth.
           </p>
@@ -75,7 +75,7 @@ export default function CompetitorContent() {
 
       <section className="grid-cols-2" style={{ alignItems: 'center', direction: 'rtl' }}>
         <div style={{ direction: 'ltr' }}>
-          <h2 style={{ fontSize: '2rem', marginBottom: '16px', color: 'var(--text-primary)' }}>Tips for Conducting Effective YouTube Giveaways</h2>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '16px', color: 'var(--text-primary)' }}>Tips for Conducting Effective YouTube Giveaways</h2>
           <p style={{ color: 'var(--text-secondary)', marginBottom: '16px' }}>A successful YouTube giveaway can significantly boost your channel's interaction rates. Here are some tips for conducting effective YouTube giveaways:</p>
           <ul style={{ color: 'var(--text-secondary)', paddingLeft: '24px', lineHeight: 1.8, marginBottom: '16px' }}>
             <li>Start by defining clear rules and a compelling prize</li>
@@ -91,7 +91,7 @@ export default function CompetitorContent() {
       </section>
 
       <section>
-        <h2 style={{ fontSize: '2rem', marginBottom: '16px', color: 'var(--text-primary)' }}>How to prevent cheating in YouTube giveaways</h2>
+        <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '16px', color: 'var(--text-primary)' }}>How to prevent cheating in YouTube giveaways</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: '16px' }}>Cheating in YouTube giveaways is a common concern for content creators and businesses. Cheating on YouTube giveaways can take many forms, including:</p>
         <ul style={{ color: 'var(--text-secondary)', paddingLeft: '24px', lineHeight: 1.8, marginBottom: '16px' }}>
           <li>Using multiple accounts to submit multiple entries in the giveaway</li>

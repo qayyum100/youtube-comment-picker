@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SeoHead from '../components/SeoHead';
-import { Link2, Image as ImageIcon, Download, ExternalLink, AlertCircle } from 'lucide-react';
+import { Link2, Image as ImageIcon, Download, AlertCircle } from 'lucide-react';
 import FaqSection from '../components/FaqSection';
 import { toolFaqs } from '../data/toolFaqs';
 
@@ -21,8 +21,6 @@ export default function ThumbnailDownloaderPage() {
     } catch (e) {
       // Invalid URL
     }
-    
-    // Fallback regex
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = inputUrl.match(regExp);
     return (match && match[2].length === 11) ? match[2] : null;
@@ -35,7 +33,6 @@ export default function ThumbnailDownloaderPage() {
       setError('Please enter a YouTube video URL.');
       return;
     }
-
     const id = extractVideoId(url);
     if (!id) {
       setError('Could not extract a valid YouTube video ID from the provided URL.');
@@ -55,130 +52,108 @@ export default function ThumbnailDownloaderPage() {
   return (
     <>
       <SeoHead pageType="thumbnail" />
-
-      <main style={{ flexGrow: 1, padding: '40px 0' }}>
-        <div className="container">
-          
-          <div style={{ textAlign: 'center', marginBottom: '40px' }} className="animate-fade-in">
-            <h1 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '8px', lineHeight: '1.2' }}>
-              YouTube <span style={{ color: 'var(--brand-indigo)' }}>Thumbnail Downloader</span>
-            </h1>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', maxWidth: '600px', margin: '0 auto' }}>
-              Extract and download high-quality thumbnails (up to 4K/1080p) from any public YouTube video instantly. No login required.
-            </p>
+      <main style={{ flexGrow: 1 }}>
+        <div className="page-wrapper">
+          <div className="page-hero">
+            <h1>YouTube Thumbnail Downloader</h1>
+            <p>Extract and download high-quality thumbnails (up to 4K/1080p) from any public YouTube video instantly. No login required.</p>
           </div>
 
-          {/* Input Box */}
-          <div className="card-premium active-border animate-fade-in" style={{ marginBottom: '40px', maxWidth: '800px', margin: '0 auto 40px auto' }}>
-            <h2 style={{ fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-              <Link2 size={20} style={{ color: 'var(--brand-indigo)' }} />
+          {/* Input */}
+          <div className="card card-lg" style={{ marginBottom: '32px', maxWidth: '800px', margin: '0 auto 32px auto' }}>
+            <h2 style={{ fontSize: '16px', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px', color: 'var(--text-primary)' }}>
+              <Link2 size={18} style={{ color: 'var(--primary)' }} />
               Paste Video URL
             </h2>
-
-            <form onSubmit={handleFetch} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              <div style={{ display: 'flex', gap: '12px', width: '100%', flexWrap: 'wrap' }}>
-                <div style={{ flexGrow: 1, minWidth: '280px' }}>
-                  <input
-                    type="text"
-                    className="input-premium"
-                    placeholder="e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-                    value={url}
-                    onChange={(e) => {
-                      setUrl(e.target.value);
-                      if (error) setError('');
-                    }}
-                  />
-                </div>
-                <button type="submit" className="btn-primary" disabled={!url}>
-                  <ImageIcon size={18} />
-                  Get Thumbnails
-                </button>
+            <form onSubmit={handleFetch} style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              <div className="input-group" style={{ flex: 1, minWidth: '240px' }}>
+                <span className="input-group-icon"><Link2 size={16} /></span>
+                <input
+                  type="text"
+                  className="input-field"
+                  placeholder="e.g. https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+                  value={url}
+                  onChange={(e) => { setUrl(e.target.value); if (error) setError(''); }}
+                  aria-label="YouTube video URL"
+                />
               </div>
-
-              {error && (
-                <div style={{ color: '#ef4444', fontSize: '0.85rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <AlertCircle size={14} />
-                  {error}
-                </div>
-              )}
+              <button type="submit" className="btn btn-primary" disabled={!url} style={{ flexShrink: 0 }}>
+                <ImageIcon size={16} /> Get Thumbnails
+              </button>
             </form>
+            {error && (
+              <div className="alert alert-error" style={{ marginTop: '12px' }}>
+                <AlertCircle size={14} style={{ flexShrink: 0 }} /> {error}
+              </div>
+            )}
           </div>
 
-          {/* Results Area */}
+          {/* Results */}
           {videoId && (
-            <div className="animate-fade-in" style={{ maxWidth: '1000px', margin: '0 auto' }}>
-              <h3 style={{ fontSize: '1.4rem', marginBottom: '24px', textAlign: 'center', color: 'var(--text-primary)' }}>
+            <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+              <h3 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '20px', textAlign: 'center', color: 'var(--text-primary)' }}>
                 Available Thumbnail Resolutions
               </h3>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-                <div className="card-premium" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                  
-                  {/* Quality Selector Buttons */}
-                  <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'center', paddingBottom: '16px', borderBottom: '1px solid var(--border-dark)' }}>
-                    {thumbnails.map((thumb) => (
-                      <a 
-                        key={thumb.quality}
-                        href={thumb.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
-                        className={thumb.quality === 'maxresdefault' ? 'btn-primary' : 'btn-secondary'}
-                        style={{ padding: '10px 16px', fontSize: '0.9rem', textDecoration: 'none' }}
-                      >
-                        <Download size={16} /> {thumb.label}
-                      </a>
-                    ))}
-                  </div>
-
-                  {/* Primary Preview */}
-                  <div>
-                    <h4 style={{ fontSize: '1.1rem', fontWeight: '600', marginBottom: '12px', textAlign: 'center' }}>
-                      Primary Preview (Max Resolution)
-                    </h4>
-                    
-                    <div style={{ 
-                      width: '100%', 
-                      backgroundColor: 'var(--bg-dark)', 
-                      borderRadius: 'var(--radius-md)', 
-                      overflow: 'hidden',
-                      border: '1px solid var(--border-dark)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      minHeight: '360px',
-                      aspectRatio: '16/9'
-                    }}>
-                      <img 
-                        src={thumbnails[0].url} 
-                        alt="Highest quality thumbnail preview"
-                        width="640"
-                        height="360"
-                        style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover' }}
-                        onError={(e) => {
-                          if (!e.target.dataset.failed) {
-                            e.target.dataset.failed = true;
-                            e.target.src = thumbnails[2].url; // fallback to hqdefault
-                          }
-                        }}
-                      />
-                    </div>
-                    <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', textAlign: 'center', marginTop: '12px' }}>
-                      Right-click the image and select "Save image as..." to download directly, or use the buttons above.
-                    </p>
-                  </div>
+              <div className="card card-lg">
+                {/* Quality buttons */}
+                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center', paddingBottom: '16px', borderBottom: '1px solid var(--border)', marginBottom: '20px' }}>
+                  {thumbnails.map((thumb) => (
+                    <a
+                      key={thumb.quality}
+                      href={thumb.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`btn btn-sm ${thumb.quality === 'maxresdefault' ? 'btn-primary' : 'btn-secondary'}`}
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <Download size={14} /> {thumb.label}
+                    </a>
+                  ))}
                 </div>
+
+                {/* Preview */}
+                <h4 style={{ fontSize: '14px', fontWeight: '600', marginBottom: '12px', textAlign: 'center', color: 'var(--text-secondary)' }}>
+                  Primary Preview (Max Resolution)
+                </h4>
+                <div style={{
+                  width: '100%',
+                  backgroundColor: 'var(--bg-secondary)',
+                  borderRadius: 'var(--radius-md)',
+                  overflow: 'hidden',
+                  border: '1px solid var(--border)',
+                  aspectRatio: '16/9',
+                }}>
+                  <img
+                    src={thumbnails[0].url}
+                    alt="Highest quality thumbnail preview"
+                    width="640"
+                    height="360"
+                    style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover' }}
+                    onError={(e) => {
+                      if (!e.target.dataset.failed) {
+                        e.target.dataset.failed = true;
+                        e.target.src = thumbnails[2].url;
+                      }
+                    }}
+                  />
+                </div>
+                <p style={{ fontSize: '13px', color: 'var(--text-muted)', textAlign: 'center', marginTop: '12px' }}>
+                  Right-click the image and select "Save image as..." to download directly, or use the buttons above.
+                </p>
               </div>
             </div>
           )}
-
         </div>
       </main>
 
-      <FaqSection 
-        faqsData={toolFaqs.thumbnailDownloader}
-        customTitle="YouTube Thumbnail Downloader FAQs"
-        customDescription="Learn how to download high-resolution YouTube thumbnails instantly."
-      />
+      <div className="container">
+        <FaqSection
+          faqsData={toolFaqs.thumbnailDownloader}
+          customTitle="YouTube Thumbnail Downloader FAQs"
+          customDescription="Learn how to download high-resolution YouTube thumbnails instantly."
+        />
+      </div>
     </>
   );
 }

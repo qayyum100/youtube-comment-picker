@@ -4,7 +4,7 @@ import { AnimatePresence } from 'framer-motion';
 import PrivacyModal from './components/PrivacyModal';
 import TermsModal from './components/TermsModal';
 import DisclaimerModal from './components/DisclaimerModal';
-import { Download, Gift, BookOpen, Sun, Moon, Menu, X } from 'lucide-react';
+import { Sun, Moon, Menu, X } from 'lucide-react';
 
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 const CommentPickerPage = lazy(() => import('./pages/CommentPickerPage'));
@@ -54,64 +54,52 @@ function Navigation({ isMobileMenuOpen, setIsMobileMenuOpen }) {
     setIsMobileMenuOpen(false);
   }, [location.pathname, setIsMobileMenuOpen]);
 
-  const navLinkStyle = (path) => ({
-    textDecoration: 'none',
-    fontSize: '0.9rem',
-    fontWeight: '500',
-    padding: '8px 16px',
-    borderRadius: 'var(--radius-md)',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '6px',
-    color: location.pathname === path ? '#ffffff' : 'var(--text-secondary)',
-    backgroundColor: location.pathname === path ? 'var(--glow-primary)' : 'transparent',
-    transition: 'all var(--transition-liquid)',
-    position: 'relative',
-    overflow: 'hidden'
-  });
+  const isActive = (path) => location.pathname === path || (path === '/blogs' && location.pathname.startsWith('/blog'));
 
   return (
-    <nav className={`nav-container ${isMobileMenuOpen ? 'open' : ''}`}>
-      <Link to="/youtube-comment-picker" style={navLinkStyle('/youtube-comment-picker')} className="liquid-glass hover:scale-105 transition-transform">
-        <Gift size={16} />
+    <nav className={`nav-container ${isMobileMenuOpen ? 'open' : ''}`} aria-label="Main navigation">
+      <Link
+        to="/youtube-comment-picker"
+        className={`nav-link ${isActive('/youtube-comment-picker') ? 'active' : ''}`}
+      >
         Tools
       </Link>
-      <Link to="/youtube-seo-checker" style={navLinkStyle('/youtube-seo-checker')} className="liquid-glass hover:scale-105 transition-transform">
-        <Download size={16} />
+      <Link
+        to="/youtube-seo-checker"
+        className={`nav-link ${isActive('/youtube-seo-checker') ? 'active' : ''}`}
+      >
         SEO
       </Link>
-      <Link to="/blogs" style={navLinkStyle(location.pathname.startsWith('/blog') ? location.pathname : '/blogs')} className="liquid-glass hover:scale-105 transition-transform">
-        <BookOpen size={16} />
-        Blogs
+      <Link
+        to="/blogs"
+        className={`nav-link ${isActive('/blogs') ? 'active' : ''}`}
+      >
+        Blog
+      </Link>
+      <Link
+        to="/about"
+        className={`nav-link ${isActive('/about') ? 'active' : ''}`}
+      >
+        About
       </Link>
     </nav>
   );
 }
 
-// Global Cursor Interaction logic
-function CursorGlowTracker() {
-  useEffect(() => {
-    let ticking = false;
-    const handleMouseMove = (e) => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
-          document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-  return null;
-}
-
 function AnimatedRoutes() {
   return (
-    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 'calc(100vh - 148px)' }}>
-      <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: 1 }}><div style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--glow-primary)', filter: 'blur(10px)' }} /></div>}>
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+      <Suspense fallback={
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flex: 1,
+          minHeight: '60vh'
+        }}>
+          <div className="spinner" role="status" aria-label="Loading..." />
+        </div>
+      }>
         <Routes>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/tools" element={<DashboardPage />} />
@@ -160,8 +148,6 @@ function AnimatedRoutes() {
   );
 }
 
-// FloatingParticles removed — caused scroll jank (15 fixed blurred blobs force GPU repaints on every scroll)
-
 export default function App() {
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
@@ -180,105 +166,150 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <CursorGlowTracker />
-      
-      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', position: 'relative', zIndex: 1 }}>
-        
-        {/* Shared Premium Header */}
-        <header className="liquid-glass" style={{
-          padding: '16px 0',
+      <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--bg)' }}>
+
+        {/* ── Sticky Header ── */}
+        <header style={{
           position: 'sticky',
           top: 0,
           zIndex: 50,
-          borderRadius: 0,
-          borderTop: 'none',
-          borderLeft: 'none',
-          borderRight: 'none',
-          overflow: 'visible'
+          background: 'var(--surface)',
+          borderBottom: '1px solid var(--border)',
+          height: 'var(--nav-height)',
+          display: 'flex',
+          alignItems: 'center',
         }}>
-          <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
-            <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <img 
-                src="/images/app_logo_56.webp" 
+          <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+
+            {/* Logo */}
+            <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
+              <img
+                src="/images/app_logo_56.webp"
                 srcSet="/images/app_logo_32.webp 32w, /images/app_logo_56.webp 56w, /images/app_logo_128.webp 128w"
                 sizes="32px"
                 width="32"
                 height="32"
-                alt="Youtube Comment Picker Logo" 
-                style={{ width: '32px', height: '32px', borderRadius: '10px', boxShadow: '0 4px 10px rgba(0,0,0,0.1)', transition: 'transform 0.2s', cursor: 'pointer' }}
-                onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.1) rotate(5deg)'}
-                onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                alt="Youtube Comment Picker Logo"
+                style={{ width: '32px', height: '32px', borderRadius: '8px', display: 'block' }}
               />
-              <span style={{ fontSize: '1.2rem', fontWeight: '600', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>
+              <span style={{
+                fontSize: '15px',
+                fontWeight: '700',
+                letterSpacing: '-0.02em',
+                color: 'var(--text-primary)',
+              }}>
                 Youtube Comment Picker
               </span>
             </Link>
 
-            {/* Navigation links & Theme Toggle */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+            {/* Nav + Controls */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <Navigation isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
-              <button 
-                onClick={toggleTheme} 
-                className="liquid-glass"
-                style={{
-                  color: 'var(--text-primary)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  width: '40px',
-                  height: '40px',
-                  borderRadius: '50%',
-                  cursor: 'pointer',
-                  border: 'none',
-                  transition: 'transform 0.15s',
-                }}
-                onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.1)'}
-                onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+
+              {/* Separator */}
+              <div style={{ width: '1px', height: '24px', background: 'var(--border)', margin: '0 4px' }} aria-hidden="true" />
+
+              {/* Theme toggle */}
+              <button
+                onClick={toggleTheme}
+                className="btn btn-ghost btn-icon"
+                style={{ border: '1px solid var(--border)', borderRadius: '8px', flexShrink: 0 }}
                 title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
                 aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
               >
-                {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+                {theme === 'light' ? <Moon size={16} /> : <Sun size={16} />}
               </button>
-              <button 
-                className="mobile-menu-btn liquid-glass"
+
+              {/* Mobile menu toggle */}
+              <button
+                className="mobile-menu-btn"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                aria-label="Toggle Menu"
-                style={{ border: 'none', borderRadius: 'var(--radius-sm)' }}
+                aria-label="Toggle menu"
+                aria-expanded={isMobileMenuOpen}
+                style={{ border: 'none', cursor: 'pointer', color: 'var(--text-primary)', background: 'transparent' }}
               >
-                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
+
           </div>
         </header>
 
-        {/* Dynamic Route Content */}
+        {/* ── Main Content ── */}
         <AnimatedRoutes />
 
-        {/* Shared Footer */}
-        <footer className="liquid-glass" style={{
+        {/* ── Footer ── */}
+        <footer style={{
+          background: 'var(--surface)',
+          borderTop: '1px solid var(--border)',
           padding: '24px 0',
-          fontSize: '0.85rem',
-          color: 'var(--text-muted)',
           marginTop: 'auto',
-          borderRadius: 0,
-          borderBottom: 'none',
-          borderLeft: 'none',
-          borderRight: 'none'
         }}>
-          <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
-            <span>© 2026 Youtube Comment Picker. All rights reserved.</span>
-            <div style={{ display: 'flex', gap: '20px', alignItems: 'center', fontWeight: '500' }}>
-              <Link to="/about" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}>About</Link>
-              <Link to="/contact" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}>Contact</Link>
-              <Link to="/blogs" style={{ color: 'inherit', textDecoration: 'none', transition: 'color 0.2s' }}>Blogs</Link>
-              <span role="button" tabIndex={0} style={{ cursor: 'pointer', transition: 'color 0.2s' }} onClick={() => setShowDisclaimer(true)} onKeyDown={(e) => e.key === 'Enter' && setShowDisclaimer(true)}>Disclaimer</span>
-              <span role="button" tabIndex={0} style={{ cursor: 'pointer', transition: 'color 0.2s' }} onClick={() => setShowPrivacy(true)} onKeyDown={(e) => e.key === 'Enter' && setShowPrivacy(true)}>Privacy Policy</span>
-              <span role="button" tabIndex={0} style={{ cursor: 'pointer', transition: 'color 0.2s' }} onClick={() => setShowTerms(true)} onKeyDown={(e) => e.key === 'Enter' && setShowTerms(true)}>Terms of Service</span>
-            </div>
+          <div className="container" style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            gap: '16px',
+          }}>
+            <span style={{ fontSize: '13px', color: 'var(--text-muted)', fontWeight: '500' }}>
+              © 2026 Youtube Comment Picker. All rights reserved.
+            </span>
+            <nav aria-label="Footer navigation" style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', alignItems: 'center' }}>
+              {[
+                { label: 'About', to: '/about', isLink: true },
+                { label: 'Contact', to: '/contact', isLink: true },
+                { label: 'Blog', to: '/blogs', isLink: true },
+              ].map(item => (
+                <Link
+                  key={item.label}
+                  to={item.to}
+                  style={{
+                    fontSize: '13px',
+                    fontWeight: '500',
+                    color: 'var(--text-muted)',
+                    textDecoration: 'none',
+                    padding: '6px 10px',
+                    borderRadius: '6px',
+                    transition: 'color 0.15s, background-color 0.15s',
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--text-primary)'; e.currentTarget.style.background = 'var(--bg-secondary)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.background = 'transparent'; }}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              {[
+                { label: 'Disclaimer', onClick: () => setShowDisclaimer(true) },
+                { label: 'Privacy Policy', onClick: () => setShowPrivacy(true) },
+                { label: 'Terms of Service', onClick: () => setShowTerms(true) },
+              ].map(item => (
+                <span
+                  key={item.label}
+                  role="button"
+                  tabIndex={0}
+                  onClick={item.onClick}
+                  onKeyDown={e => e.key === 'Enter' && item.onClick()}
+                  style={{
+                    fontSize: '13px',
+                    fontWeight: '500',
+                    color: 'var(--text-muted)',
+                    cursor: 'pointer',
+                    padding: '6px 10px',
+                    borderRadius: '6px',
+                    transition: 'color 0.15s, background-color 0.15s',
+                  }}
+                  onMouseEnter={e => { e.currentTarget.style.color = 'var(--text-primary)'; e.currentTarget.style.background = 'var(--bg-secondary)'; }}
+                  onMouseLeave={e => { e.currentTarget.style.color = 'var(--text-muted)'; e.currentTarget.style.background = 'transparent'; }}
+                >
+                  {item.label}
+                </span>
+              ))}
+            </nav>
           </div>
         </footer>
 
-        {/* Modals */}
+        {/* ── Modals ── */}
         <AnimatePresence>
           {showPrivacy && <PrivacyModal onClose={() => setShowPrivacy(false)} />}
           {showTerms && <TermsModal onClose={() => setShowTerms(false)} />}
