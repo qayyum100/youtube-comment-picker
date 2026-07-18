@@ -424,7 +424,7 @@ export default function KeywordToolPage() {
       <SEO title="YouTube Keyword & Competitor SEO Tool" url="/youtube-keyword-tool" schema={schemaObject} />
 
       {/* Main Content Area */}
-      <div className="flex-1 w-full lg:max-w-[calc(100%-320px)] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
@@ -655,7 +655,7 @@ export default function KeywordToolPage() {
       </div>
 
       {/* TubeBuddy Workflow Checklist Sidebar (Desktop Only) */}
-      <div className="hidden xl:block w-[320px] bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 min-h-screen p-6 fixed right-0 top-0 overflow-y-auto">
+      <div className="hidden xl:block w-[320px] bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 p-6 overflow-y-auto shrink-0 self-stretch">
         <h3 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-6">
           <CheckCircle2 className="w-5 h-5 text-indigo-500" /> Upload Checklist
         </h3>
