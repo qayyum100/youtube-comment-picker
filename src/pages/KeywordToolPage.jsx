@@ -420,7 +420,7 @@ export default function KeywordToolPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans pb-32 flex">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans pb-32 flex flex-col xl:flex-row">
       <SEO title="YouTube Keyword & Competitor SEO Tool" url="/youtube-keyword-tool" schema={schemaObject} />
 
       {/* Main Content Area */}
@@ -447,13 +447,13 @@ export default function KeywordToolPage() {
           
           <div className="flex border-b border-gray-200 dark:border-gray-700">
             <button 
-              className={`flex-1 py-4 px-6 text-sm font-medium flex justify-center items-center gap-2 transition-colors ${activeTab === 'keyword' ? 'border-b-2 border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50'}`}
+              className={`flex-1 py-3 sm:py-4 px-3 sm:px-6 text-xs sm:text-sm font-semibold flex justify-center items-center gap-1.5 sm:gap-2 transition-colors ${activeTab === 'keyword' ? 'border-b-2 border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50'}`}
               onClick={() => { setActiveTab('keyword'); setHasSearched(false); setCompType('none'); }}
             >
               <Search className="w-4 h-4" /> Keyword Brainstorming
             </button>
             <button 
-              className={`flex-1 py-4 px-6 text-sm font-medium flex justify-center items-center gap-2 transition-colors ${activeTab === 'competitor' ? 'border-b-2 border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50'}`}
+              className={`flex-1 py-3 sm:py-4 px-3 sm:px-6 text-xs sm:text-sm font-semibold flex justify-center items-center gap-1.5 sm:gap-2 transition-colors ${activeTab === 'competitor' ? 'border-b-2 border-indigo-500 text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20' : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50'}`}
               onClick={() => { setActiveTab('competitor'); setHasSearched(false); setCompType('none'); }}
             >
               <Target className="w-4 h-4" /> Competitor Gap Analysis
@@ -469,7 +469,7 @@ export default function KeywordToolPage() {
                 </div>
                 <input
                   type="text"
-                  className="block w-full pl-10 pr-32 py-4 border border-gray-300 dark:border-gray-600 rounded-xl leading-5 bg-white dark:bg-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-md transition-shadow shadow-sm"
+                  className="block w-full pl-9 sm:pl-10 pr-24 sm:pr-32 py-3 sm:py-4 border border-gray-300 dark:border-gray-600 rounded-xl leading-5 bg-white dark:bg-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-sm sm:text-base transition-shadow shadow-sm"
                   placeholder={activeTab === 'keyword' ? "Enter seed keyword (e.g. faceless channel)..." : "Paste YouTube Video or Channel URL..."}
                   value={searchInput}
                   onChange={(e) => {
@@ -480,8 +480,8 @@ export default function KeywordToolPage() {
                     if (searchInput.length > 2 && activeTab === 'keyword') setShowAutocomplete(true);
                   }}
                 />
-                <div className="absolute inset-y-0 right-2 flex items-center">
-                  <button type="submit" disabled={loading} className="inline-flex items-center px-6 py-2 border border-transparent text-sm font-medium rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50">
+                <div className="absolute inset-y-0 right-1.5 sm:right-2 flex items-center">
+                  <button type="submit" disabled={loading} className="inline-flex items-center px-3 sm:px-6 py-1.5 sm:py-2 border border-transparent text-xs sm:text-sm font-semibold rounded-lg shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50">
                     {loading ? 'Analyzing...' : 'Analyze'}
                   </button>
                 </div>
