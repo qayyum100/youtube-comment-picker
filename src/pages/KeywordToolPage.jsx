@@ -34,73 +34,7 @@ import {
 } from 'lucide-react';
 import SEO from '../components/SEO';
 
-// --- MOCK DATA ---
-const MOCK_AUTOCOMPLETE = [
-  { term: "faceless youtube channel ideas", relevance: "Highly Relevant", score: 98 },
-  { term: "faceless youtube channel automation", relevance: "Trending", score: 95 },
-  { term: "how to start a faceless youtube channel", relevance: "Core Audience", score: 90 },
-  { term: "faceless youtube channel niches 2026", relevance: "Rising", score: 85 },
-  { term: "faceless youtube channel income", relevance: "Moderate", score: 60 }
-];
 
-const MOCK_CLUSTERS = ["automation", "niches", "step-by-step", "free tools", "without talking", "for beginners", "monetization", "cash cow"];
-
-const TOP_CHANNELS_MOCK = [
-  { name: "MrBeast", subs: "300M", views: "45M" },
-  { name: "Think Media", subs: "2.8M", views: "1.2M" },
-  { name: "Channel Makers", subs: "800K", views: "300K" }
-];
-
-const MOCK_KEYWORDS = [
-  { id: 1, keyword: "how to start a youtube channel", intent: "Informational", searchVolume: 125000, difficultyScore: 85, estimatedRPM: 4.50, affiliateViability: "High", viewVelocity: "High", trendHistory: [100, 105, 110, 115, 120, 118, 125, 130, 135, 140, 145, 150], isTrending: true, region: "Global", lang: "English", cps: 1.8, ctr: 72, topChannels: TOP_CHANNELS_MOCK },
-  { id: 2, keyword: "best video editing software", intent: "Commercial", searchVolume: 85000, difficultyScore: 92, estimatedRPM: 8.20, affiliateViability: "High", viewVelocity: "Medium", trendHistory: [80, 85, 82, 88, 90, 89, 85, 88, 90, 85, 82, 80], isTrending: false, region: "United States", lang: "English", cps: 1.2, ctr: 55, topChannels: TOP_CHANNELS_MOCK },
-  { id: 3, keyword: "youtube shorts tutorial 2026", intent: "Informational", searchVolume: 45000, difficultyScore: 45, estimatedRPM: 1.80, affiliateViability: "Medium", viewVelocity: "High", trendHistory: [20, 25, 30, 45, 50, 60, 75, 80, 95, 100, 120, 140], isTrending: true, region: "Global", lang: "English", cps: 2.1, ctr: 88, topChannels: TOP_CHANNELS_MOCK },
-  { id: 4, keyword: "vlogging camera under 500", intent: "Transactional", searchVolume: 32000, difficultyScore: 68, estimatedRPM: 6.10, affiliateViability: "High", viewVelocity: "Low", trendHistory: [50, 48, 45, 50, 52, 55, 50, 48, 45, 42, 40, 38], isTrending: false, region: "United Kingdom", lang: "English", cps: 0.9, ctr: 40, topChannels: TOP_CHANNELS_MOCK },
-  { id: 5, keyword: "faceless youtube channel ideas", intent: "Informational", searchVolume: 95000, difficultyScore: 35, estimatedRPM: 5.10, affiliateViability: "Medium", viewVelocity: "High", trendHistory: [30, 35, 40, 55, 60, 65, 70, 75, 85, 90, 95, 100], isTrending: true, region: "India", lang: "English", cps: 1.5, ctr: 65, topChannels: TOP_CHANNELS_MOCK },
-];
-
-const MOCK_QUESTIONS = [
-  { id: 101, keyword: "how much do faceless channels make?", intent: "Informational", searchVolume: 45000, difficultyScore: 25, estimatedRPM: 6.50, affiliateViability: "Medium", viewVelocity: "High", trendHistory: [20, 30, 40, 50, 60, 70, 75, 80, 85, 90, 95, 100], isTrending: true, region: "Global", lang: "English", cps: 1.4, ctr: 70, topChannels: TOP_CHANNELS_MOCK },
-  { id: 102, keyword: "what is a youtube cash cow channel?", intent: "Informational", searchVolume: 22000, difficultyScore: 18, estimatedRPM: 4.20, affiliateViability: "Low", viewVelocity: "Medium", trendHistory: [40, 40, 45, 45, 40, 42, 45, 48, 50, 55, 55, 60], isTrending: false, region: "Global", lang: "English", cps: 1.1, ctr: 55, topChannels: TOP_CHANNELS_MOCK },
-  { id: 103, keyword: "can you monetize faceless youtube shorts?", intent: "Informational", searchVolume: 35000, difficultyScore: 40, estimatedRPM: 1.50, affiliateViability: "High", viewVelocity: "High", trendHistory: [10, 15, 20, 35, 45, 55, 65, 85, 95, 105, 120, 130], isTrending: true, region: "Global", lang: "English", cps: 1.6, ctr: 82, topChannels: TOP_CHANNELS_MOCK },
-];
-
-const MOCK_COMPETITOR_TAGS = ["youtube growth", "how to get views", "seo tutorial", "algorithm secrets", "mrbeast hook", "retention strategy", "thumbnails", "ctr", "youtube shorts", "monetization"];
-
-const MOCK_GAP_ANALYSIS = [
-  { keyword: "youtube algorithm 2026", compRank: 2, yourRank: 45, status: "Missing Content" },
-  { keyword: "how to write a script", compRank: 5, yourRank: 3, status: "Ranks Higher" },
-  { keyword: "best microphone for youtube", compRank: 1, yourRank: null, status: "Missing Content" },
-];
-
-const MOCK_AI_RESPONSE = {
-  titles: [
-    "I Tried Faceless YouTube For 30 Days (Here's What Happened)",
-    "The ONLY Faceless YouTube Channel Guide You Need in 2026",
-    "How To Start A Faceless Channel & Make $1,000/Week",
-    "Stop Making This Mistake On Your Faceless Channel"
-  ],
-  description: "Want to start a YouTube channel without showing your face? In this video, I reveal the ultimate blueprint for building a highly profitable faceless channel in 2026. \n\n[Intro Hooks: Share your biggest struggle here]\n\nIn this tutorial, we cover:\n- Choosing the perfect high-CPM niche\n- Scriptwriting secrets that hook viewers instantly\n- The best free AI tools for voiceovers and editing\n\nDon't forget to subscribe for more YouTube growth tips! \n\n[Social Links: Twitter/X, Instagram, Discord]",
-  chapters: [
-    { time: "0:00", text: "The Secret to Faceless Channels" },
-    { time: "1:15", text: "Picking a High-Profit Niche" },
-    { time: "3:40", text: "Scripting for Maximum Retention" },
-    { time: "6:20", text: "Creating Visuals & AI Voiceovers" },
-    { time: "9:05", text: "SEO & Upload Strategy" }
-  ],
-  shortsHooks: [
-    "Most faceless channels fail in 30 days. Here is why you won't.",
-    "Do NOT start a YouTube channel in 2026 until you watch this.",
-    "This AI tool just made faceless channels 10x easier."
-  ],
-  shortsSeries: [
-    { part: "Part 1", title: "Finding a Profitable Niche Using AI", format: "Fast-paced screen recording" },
-    { part: "Part 2", title: "Writing a Viral Script in 5 Minutes", format: "Step-by-step tutorial format" },
-    { part: "Part 3", title: "Generating Realistic Voiceovers", format: "Audio comparison hook" },
-    { part: "Part 4", title: "Sourcing Free B-Roll Footage", format: "Listicle quick-cuts" },
-    { part: "Part 5", title: "The SEO Trick to Get Your First 1,000 Views", format: "Graph/Stats reveal hook" },
-  ]
-};
 
 // --- COMPONENTS ---
 
@@ -284,6 +218,7 @@ export default function KeywordToolPage() {
   const [seedScore, setSeedScore] = useState(0); // TubeBuddy Score Gauge
   const [searchResults, setSearchResults] = useState([]);
   const [questionResults, setQuestionResults] = useState([]);
+  const [clusters, setClusters] = useState([]);
   const [error, setError] = useState(null);
   
   // Competitor State
@@ -352,6 +287,7 @@ export default function KeywordToolPage() {
         
         const suggestionsData = result.data?.suggestions || [];
         const longtailData = result.data?.longtail || [];
+        const clustersData = result.data?.clusters || [];
         
         // Helper map to use dynamic data from AI
         const mapper = (kw, indexOffset) => ({
@@ -377,6 +313,7 @@ export default function KeywordToolPage() {
         
         setSearchResults(mappedSuggestions);
         setQuestionResults(mappedLongtails);
+        setClusters(clustersData);
         
         // Calculate dynamic overall score
         if (mappedSuggestions.length > 0) {
@@ -710,7 +647,7 @@ export default function KeywordToolPage() {
                     </h3>
                     <p className="text-sm text-indigo-700 dark:text-indigo-400 mb-4">Secondary groupings highly correlated with your seed keyword based on platform clickstreams.</p>
                     <div className="flex flex-wrap gap-2">
-                      {MOCK_CLUSTERS.map((cluster, i) => (
+                      {clusters.map((cluster, i) => (
                         <button key={i} className="px-3 py-1.5 bg-white dark:bg-gray-800 border border-indigo-200 dark:border-indigo-700 text-indigo-600 dark:text-indigo-300 rounded-lg text-sm font-semibold hover:bg-indigo-100 dark:hover:bg-indigo-900 transition-colors shadow-sm">
                           {cluster}
                         </button>

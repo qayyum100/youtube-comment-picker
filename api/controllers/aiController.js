@@ -15,7 +15,10 @@ export const generateTitles = async (req, res) => {
 
     try {
         const genAI = getGeminiClient();
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-1.5-flash",
+            generationConfig: { responseMimeType: "application/json" }
+        });
 
         const prompt = `Generate 10 viral YouTube video titles about "${topic}" in the category of "${category || 'General'}" with a "${tone || 'Exciting'}" tone. 
         Format the output as a JSON array of objects, where each object has:
@@ -28,14 +31,14 @@ export const generateTitles = async (req, res) => {
         const result = await model.generateContent(prompt);
         const responseText = result.response.text();
         
-        // Extract JSON array from text
-        const jsonMatch = responseText.match(/\[.*\]/s);
         let titles = [];
-        if (jsonMatch) {
-            titles = JSON.parse(jsonMatch[0]);
-        } else {
-             // Fallback
-            titles = JSON.parse(responseText.replace(/```json/g, '').replace(/```/g, '').trim());
+        try {
+            titles = JSON.parse(responseText);
+        } catch(e) {
+            console.error("JSON parse error:", e);
+            const jsonMatch = responseText.match(/\[.*\]/s);
+            if (jsonMatch) titles = JSON.parse(jsonMatch[0]);
+            else titles = JSON.parse(responseText.replace(/\`\`\`json/g, '').replace(/\`\`\`/g, '').trim());
         }
 
         return res.json({ titles });
@@ -230,7 +233,10 @@ export const generateShortsIdeas = async (req, res) => {
     if (!niche) return res.status(400).json({ error: 'Niche is required' });
     try {
         const genAI = getGeminiClient();
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-1.5-flash",
+            generationConfig: { responseMimeType: "application/json" }
+        });
         const prompt = `Generate 5 viral YouTube Shorts ideas for the niche "${niche}"${topic ? ` on the topic of "${topic}"` : ''}.
         Provide the output as a JSON array of 5 objects, where each object contains:
         - "title" (string, short punchy title)
@@ -242,12 +248,14 @@ export const generateShortsIdeas = async (req, res) => {
         Return ONLY valid JSON.`;
         const result = await model.generateContent(prompt);
         const text = result.response.text();
-        const jsonMatch = text.match(/\[.*\]/s);
         let ideas = [];
-        if (jsonMatch) {
-            ideas = JSON.parse(jsonMatch[0]);
-        } else {
-            ideas = JSON.parse(text.replace(/```json/g, '').replace(/```/g, '').trim());
+        try {
+            ideas = JSON.parse(text);
+        } catch(e) {
+            console.error("JSON parse error:", e);
+            const jsonMatch = text.match(/\[.*\]/s);
+            if (jsonMatch) ideas = JSON.parse(jsonMatch[0]);
+            else ideas = JSON.parse(text.replace(/\`\`\`json/g, '').replace(/\`\`\`/g, '').trim());
         }
         return res.json({ ideas });
     } catch (error) {
@@ -329,6 +337,7 @@ export const suggestKeywords = async (req, res) => {
         Provide the output as a JSON object containing:
         - "suggestions" (array of 5 related keyword objects)
         - "longtail" (array of 5 longtail keyword objects)
+        - "clusters" (array of 5-8 short strings related to the niche)
         
         Each keyword object must have the following exact keys:
         - "keyword" (string): the keyword phrase
@@ -425,7 +434,10 @@ export const generateVideoOutline = async (req, res) => {
     }
     try {
         const genAI = getGeminiClient();
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-1.5-flash",
+            generationConfig: { responseMimeType: "application/json" }
+        });
         const prompt = `Act as an expert YouTube strategist. I have selected the following keywords for a video:
         [${keywords.join(', ')}]
         
@@ -441,12 +453,14 @@ export const generateVideoOutline = async (req, res) => {
         
         const result = await model.generateContent(prompt);
         const text = result.response.text();
-        const jsonMatch = text.match(/\{.*\}/s);
         let data = {};
-        if (jsonMatch) {
-            data = JSON.parse(jsonMatch[0]);
-        } else {
-            data = JSON.parse(text.replace(/```json/g, '').replace(/```/g, '').trim());
+        try {
+            data = JSON.parse(text);
+        } catch(e) {
+            console.error("JSON parse error:", e);
+            const jsonMatch = text.match(/\{.*\}/s);
+            if (jsonMatch) data = JSON.parse(jsonMatch[0]);
+            else data = JSON.parse(text.replace(/\`\`\`json/g, '').replace(/\`\`\`/g, '').trim());
         }
         return res.json({ data });
     } catch (error) {
