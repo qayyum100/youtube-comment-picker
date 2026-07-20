@@ -9,7 +9,8 @@ import {
   getYouTubeVideoDetails, 
   getYouTubeChannelDetails,
   checkVideoRank,
-  getYouTubeChannelTags
+  getYouTubeChannelTags,
+  getYouTubeSuggestions
 } from './controllers/youtubeController.js';
 
 import { 
@@ -47,6 +48,7 @@ app.get('/api/youtube/comments', getYouTubeComments);
 app.get('/api/youtube/video', getYouTubeVideoDetails);
 app.get('/api/youtube/channel', getYouTubeChannelDetails);
 app.get('/api/youtube/channel-tags', getYouTubeChannelTags);
+app.get('/api/youtube/suggest', getYouTubeSuggestions);
 
 // Phase 2 Direct endpoints
 app.get('/api/transcript', getTranscript);

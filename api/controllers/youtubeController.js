@@ -17,6 +17,20 @@ function extractChannelId(url) {
   return match ? match[1] : null;
 }
 
+export const getYouTubeSuggestions = async (req, res) => {
+    const { q } = req.query;
+    if (!q) return res.status(400).json({ error: 'Query is required' });
+    try {
+        const response = await axios.get(`https://suggestqueries.google.com/complete/search`, {
+            params: { client: 'firefox', ds: 'yt', q }
+        });
+        return res.json(response.data);
+    } catch (error) {
+        console.error("YouTube Suggest Error:", error.message);
+        return res.status(500).json({ error: 'Failed to fetch suggestions' });
+    }
+};
+
 export const getYouTubeComments = async (req, res) => {
   const { url } = req.query;
   const videoId = extractYouTubeId(url);

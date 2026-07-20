@@ -568,7 +568,7 @@ export default function KeywordToolPage() {
                     if (activeTab === 'keyword' && val.length > 2) {
                       setShowAutocomplete(true);
                       try {
-                        const res = await fetch(`https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${encodeURIComponent(val)}`);
+                        const res = await fetch(`/api/youtube/suggest?q=${encodeURIComponent(val)}`);
                         const data = await res.json();
                         if (data && data[1]) {
                           setAutocompleteSuggestions(data[1].slice(0, 5).map(term => ({ term, relevance: 'Suggested', score: 90 })));
