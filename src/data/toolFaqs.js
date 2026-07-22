@@ -207,6 +207,66 @@ export const toolFaqs = {
       answer: "A keyword cluster is a group of related subtopics built around a core pillar topic. Creating content clusters establishes deep topical authority for your channel."
     }
   ],
+  competitorThumbnailAnalyzer: [
+    {
+      question: "How do I analyze competitor thumbnails?",
+      answer: "Use our Competitor Thumbnail Analyzer to evaluate contrast ratios, facial expressions, color palettes, and text readability on high-performing competitor thumbnails."
+    }
+  ],
+  competitorTitleExtractor: [
+    {
+      question: "How do I extract competitor YouTube video titles?",
+      answer: "Paste any YouTube channel link in our Competitor Title Extractor to scrape title history and analyze curiosity gaps, emotional power words, and structure."
+    }
+  ],
+  competitorDescriptionExtractor: [
+    {
+      question: "How do I inspect a competitor's YouTube description?",
+      answer: "Our Competitor Description Extractor tool scrapes full description text, affiliate links, video chapter timestamps, and hashtags used by competing channels."
+    }
+  ],
+  competitorHashtagExtractor: [
+    {
+      question: "How do I see hashtags used by competitor channels?",
+      answer: "Paste a competitor video link into our Hashtag Extractor to discover the category and search hashtags driving their video recommendations."
+    }
+  ],
+  competitorUploadTimeAnalyzer: [
+    {
+      question: "How do I find out when a competitor uploads on YouTube?",
+      answer: "Our Competitor Upload Time Analyzer inspects historic upload timestamps to reveal peak publishing days and optimal hours."
+    }
+  ],
+  competitorEngagementAnalyzer: [
+    {
+      question: "What is a good engagement rate on competitor videos?",
+      answer: "A good like-to-view ratio is 4%-5%, and a strong comment ratio is 0.5%. Use our Engagement Analyzer to measure competitor community velocity."
+    }
+  ],
+  competitorGrowthEstimator: [
+    {
+      question: "How do I estimate a competitor channel's monthly growth?",
+      answer: "Our Growth Estimator projects daily subscriber velocity, monthly view counts, and estimated AdSense earnings based on view trajectories."
+    }
+  ],
+  similarChannelFinder: [
+    {
+      question: "How do I find channels similar to mine on YouTube?",
+      answer: "Use our Similar Channel Finder to uncover channels sharing overlapping viewer bases for collaboration and market research."
+    }
+  ],
+  viralVideoFinder: [
+    {
+      question: "How do I find outlier viral videos in my niche?",
+      answer: "Our Viral Video Finder identifies videos performing 5x-20x above a channel's normal view average to highlight breakout topics."
+    }
+  ],
+  channelComparisonTool: [
+    {
+      question: "How do I compare two YouTube channels side-by-side?",
+      answer: "Enter two channel names in our Channel Comparison Tool to compare subscriber counts, monthly view velocity, average video duration, and upload frequency."
+    }
+  ],
   videoIdeas: [
     {
       question: "How do I come up with YouTube video ideas?",

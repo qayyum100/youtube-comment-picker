@@ -409,6 +409,86 @@ export default function DashboardPage() {
       category: "SEO & Optimization"
     },
     {
+      name: "Competitor Thumbnail Analyzer",
+      description: "Analyze competitor thumbnails for contrast, face expressions, color palettes, and text.",
+      path: "/youtube-competitor-thumbnail-analyzer",
+      icon: <Image size={22} />,
+      color: "#EF4444",
+      category: "Creator Graphics & Extras"
+    },
+    {
+      name: "Competitor Title Extractor",
+      description: "Extract all video titles from any competitor channel to model click-worthy patterns.",
+      path: "/youtube-competitor-title-extractor",
+      icon: <Type size={22} />,
+      color: "#3B82F6",
+      category: "SEO & Optimization"
+    },
+    {
+      name: "Competitor Description Extractor",
+      description: "Extract full video descriptions, affiliate links, chapter timestamps, and hashtags.",
+      path: "/youtube-competitor-description-extractor",
+      icon: <FileText size={22} />,
+      color: "#10B981",
+      category: "SEO & Optimization"
+    },
+    {
+      name: "Competitor Hashtag Extractor",
+      description: "Extract hashtags used by competitor channels to categorize videos for algorithms.",
+      path: "/youtube-competitor-hashtag-extractor",
+      icon: <Tag size={22} />,
+      color: "#F59E0B",
+      category: "SEO & Optimization"
+    },
+    {
+      name: "Competitor Upload Time Analyzer",
+      description: "Analyze publishing schedules and upload consistency across competing channels.",
+      path: "/youtube-competitor-upload-time-analyzer",
+      icon: <BarChart2 size={22} />,
+      color: "#8B5CF6",
+      category: "Analytics & Calculators"
+    },
+    {
+      name: "Competitor Engagement Analyzer",
+      description: "Calculate like-to-view ratios, comment density, and audience interaction metrics.",
+      path: "/youtube-competitor-engagement-analyzer",
+      icon: <Users size={22} />,
+      color: "#EC4899",
+      category: "Analytics & Calculators"
+    },
+    {
+      name: "Competitor Growth Estimator",
+      description: "Project daily subscriber gains, monthly views, and AdSense revenue trajectories.",
+      path: "/youtube-competitor-growth-estimator",
+      icon: <DollarSign size={22} />,
+      color: "#06B6D4",
+      category: "Analytics & Calculators"
+    },
+    {
+      name: "Similar Channel Finder",
+      description: "Find channels with overlapping audiences for collaboration and market research.",
+      path: "/youtube-similar-channel-finder",
+      icon: <Users size={22} />,
+      color: "#F43F5E",
+      category: "SEO & Optimization"
+    },
+    {
+      name: "Viral Video Finder",
+      description: "Uncover outlier videos performing 5x-20x above a channel's baseline view average.",
+      path: "/youtube-viral-video-finder",
+      icon: <Sparkles size={22} />,
+      color: "#14B8A6",
+      category: "SEO & Optimization"
+    },
+    {
+      name: "Channel Comparison Tool",
+      description: "Compare two YouTube channels side-by-side across subscribers, views, and cadence.",
+      path: "/youtube-channel-comparison-tool",
+      icon: <BarChart2 size={22} />,
+      color: "#22C55E",
+      category: "Analytics & Calculators"
+    },
+    {
       name: "YouTube Keyword Tool",
       description: "Search keyword competition, volumes, longtail tags, and SEO opportunity scores.",
       path: "/youtube-keyword-tool",

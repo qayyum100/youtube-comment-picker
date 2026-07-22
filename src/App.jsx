@@ -63,6 +63,18 @@ const QuestionKeywordFinderPage = lazy(() => import('./pages/QuestionKeywordFind
 const KeywordGrouperPage = lazy(() => import('./pages/KeywordGrouperPage'));
 const KeywordClusterGeneratorPage = lazy(() => import('./pages/KeywordClusterGeneratorPage'));
 
+// 10 Competitor Analysis Tools
+const CompetitorThumbnailAnalyzerPage = lazy(() => import('./pages/CompetitorThumbnailAnalyzerPage'));
+const CompetitorTitleExtractorPage = lazy(() => import('./pages/CompetitorTitleExtractorPage'));
+const CompetitorDescriptionExtractorPage = lazy(() => import('./pages/CompetitorDescriptionExtractorPage'));
+const CompetitorHashtagExtractorPage = lazy(() => import('./pages/CompetitorHashtagExtractorPage'));
+const CompetitorUploadTimeAnalyzerPage = lazy(() => import('./pages/CompetitorUploadTimeAnalyzerPage'));
+const CompetitorEngagementAnalyzerPage = lazy(() => import('./pages/CompetitorEngagementAnalyzerPage'));
+const CompetitorGrowthEstimatorPage = lazy(() => import('./pages/CompetitorGrowthEstimatorPage'));
+const SimilarChannelFinderPage = lazy(() => import('./pages/SimilarChannelFinderPage'));
+const ViralVideoFinderPage = lazy(() => import('./pages/ViralVideoFinderPage'));
+const ChannelComparisonToolPage = lazy(() => import('./pages/ChannelComparisonToolPage'));
+
 const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
@@ -184,6 +196,18 @@ function AnimatedRoutes() {
           <Route path="/youtube-question-keyword-finder" element={<QuestionKeywordFinderPage />} />
           <Route path="/youtube-keyword-grouper" element={<KeywordGrouperPage />} />
           <Route path="/youtube-keyword-cluster-generator" element={<KeywordClusterGeneratorPage />} />
+
+          {/* 10 Competitor Analysis Tool Routes */}
+          <Route path="/youtube-competitor-thumbnail-analyzer" element={<CompetitorThumbnailAnalyzerPage />} />
+          <Route path="/youtube-competitor-title-extractor" element={<CompetitorTitleExtractorPage />} />
+          <Route path="/youtube-competitor-description-extractor" element={<CompetitorDescriptionExtractorPage />} />
+          <Route path="/youtube-competitor-hashtag-extractor" element={<CompetitorHashtagExtractorPage />} />
+          <Route path="/youtube-competitor-upload-time-analyzer" element={<CompetitorUploadTimeAnalyzerPage />} />
+          <Route path="/youtube-competitor-engagement-analyzer" element={<CompetitorEngagementAnalyzerPage />} />
+          <Route path="/youtube-competitor-growth-estimator" element={<CompetitorGrowthEstimatorPage />} />
+          <Route path="/youtube-similar-channel-finder" element={<SimilarChannelFinderPage />} />
+          <Route path="/youtube-viral-video-finder" element={<ViralVideoFinderPage />} />
+          <Route path="/youtube-channel-comparison-tool" element={<ChannelComparisonToolPage />} />
 
           <Route path="/blogs" element={<BlogIndexPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
