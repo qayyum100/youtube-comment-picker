@@ -38,6 +38,7 @@ const MonetizationCheckerPage = lazy(() => import('./pages/MonetizationCheckerPa
 const RankTrackerPage = lazy(() => import('./pages/RankTrackerPage'));
 const QRCodeGeneratorPage = lazy(() => import('./pages/QRCodeGeneratorPage'));
 const KeywordToolPage = lazy(() => import('./pages/KeywordToolPage'));
+const EmbedGeneratorPage = lazy(() => import('./pages/EmbedGeneratorPage'));
 
 // Priority 1 Tool Pages
 const BestTimeToUploadPage = lazy(() => import('./pages/BestTimeToUploadPage'));
