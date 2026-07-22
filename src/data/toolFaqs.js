@@ -327,6 +327,22 @@ export const toolFaqs = {
       answer: "YouTube evaluates Average Percentage Viewed (retention >100%) and Swipe-Away Ratio (<20%). High retention triggers wider distribution cycles."
     }
   ],
+  channelHealthChecker: [{ question: "How do I check my YouTube channel health?", answer: "Our Channel Health Checker audits upload consistency, SEO optimization, thumbnail branding, and engagement rates to give you an overall channel health score." }],
+  channelSeoAuditor: [{ question: "How do I audit my YouTube channel SEO?", answer: "A complete YouTube channel SEO audit checks your channel name for keywords, about section quality, channel tags, trailer video, and external links." }],
+  subscriberGrowthAnalyzer: [{ question: "How do I track my subscriber growth on YouTube?", answer: "Use our Subscriber Growth Analyzer to project daily, monthly, and yearly subscriber velocity based on your current channel momentum." }],
+  videoPerformanceAuditor: [{ question: "How do I analyze individual YouTube video performance?", answer: "Our Video Performance Auditor measures CTR, average view duration, and view velocity compared to your channel baseline, then suggests actionable improvements." }],
+  uploadConsistencyTracker: [{ question: "How does upload consistency affect YouTube growth?", answer: "Consistent uploads signal reliability to the YouTube algorithm. Gaps over 7 days can reduce algorithm momentum and recommendation frequency." }],
+  channelNicheFinder: [{ question: "How do I find a profitable YouTube niche?", answer: "Use our Channel Niche Finder to identify high-CPM, low-competition niches based on your existing skills, interests, and current market demand." }],
+  channelRevenueEstimator: [{ question: "How do I calculate my YouTube channel revenue?", answer: "Channel revenue is calculated as (Total Views / 1000) × RPM. Use our Channel Revenue Estimator to get monthly and yearly AdSense projections." }],
+  channelAgeCalculator: [{ question: "How do I find out how old my YouTube channel is?", answer: "Use our Channel Age Calculator by entering your channel creation date to see the exact age in years, months, and days along with your milestone tier." }],
+  channelScoreCalculator: [{ question: "How do I rate my YouTube channel performance?", answer: "Our Channel Score Calculator rates your channel 0-100 based on subscribers, average views per video, and total content volume to gauge overall performance." }],
+  liveStreamTitleGenerator: [{ question: "What makes a good YouTube live stream title?", answer: "Great live stream titles include 'LIVE' or '🔴' indicator, a clear topic, and urgency triggers like 'NOW', 'TONIGHT', or 'Q&A'." }],
+  communityPostGenerator: [{ question: "What should I post on YouTube Community tab?", answer: "The best community posts include hot-take questions, polls, exclusive announcements, and personal behind-the-scenes updates that invite comment responses." }],
+  streamScheduleBuilder: [{ question: "When is the best time to go live on YouTube?", answer: "Peak live stream times are 7-9 PM on weekdays and 12-3 PM on weekends in your audience's primary timezone for highest concurrent viewer counts." }],
+  clipTitleGenerator: [{ question: "How do I name YouTube Clips from streams?", answer: "Name YouTube Clips with attention-grabbing phrases that highlight the funniest, most surprising, or most emotional moment in the live stream highlight." }],
+  membershipPerksGenerator: [{ question: "What are good YouTube channel membership perks?", answer: "Effective YouTube membership perks include member badges, early video access, exclusive Q&A livestreams, Discord community access, and personal shoutouts." }],
+  endScreenOptimizer: [{ question: "How should I set up my YouTube end screen?", answer: "Add your end screen in the final 20 seconds with a subscribe button, 'best for viewer' video recommendation, and your latest upload for maximum CTR." }],
+  cardsCtaGenerator: [{ question: "How do I use YouTube cards effectively?", answer: "Place YouTube cards at 40% and 70% of video duration, linking to related playlists or companion videos to increase session watch time." }],
   videoIdeas: [
     {
       question: "How do I come up with YouTube video ideas?",

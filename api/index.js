@@ -26,7 +26,13 @@ import {
   suggestKeywords,
   generateTimestamps,
   summarizeVideo,
-  generateVideoOutline
+  generateVideoOutline,
+  generateShortsHashtags,
+  generateShortsTitles,
+  generateShortsCaptions,
+  analyzeShortsHook,
+  generateCommunityPosts,
+  generateLiveStreamTitles
 } from './controllers/aiController.js';
 
 import { getTranscript } from './controllers/transcriptController.js';
@@ -68,6 +74,12 @@ app.post('/api/ai/description-generator', generateDescription);
 app.post('/api/ai/seo-analysis', analyzeSEO);
 app.post('/api/ai/comment-analysis', analyzeComments);
 app.post('/api/ai/outline-generator', generateVideoOutline);
+app.post('/api/ai/shorts-hashtags', generateShortsHashtags);
+app.post('/api/ai/shorts-titles', generateShortsTitles);
+app.post('/api/ai/shorts-captions', generateShortsCaptions);
+app.post('/api/ai/shorts-hook-analysis', analyzeShortsHook);
+app.post('/api/ai/community-posts', generateCommunityPosts);
+app.post('/api/ai/livestream-titles', generateLiveStreamTitles);
 
 app.get('/api/tools', (req, res) => {
   res.json({ status: "healthy", activeTools: 30 });

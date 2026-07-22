@@ -6,7 +6,7 @@ import {
   Sparkles, Hash, DollarSign, MessageSquare,
   FileText, BarChart2, Eye, ShieldAlert, Sparkle,
   Image, Scissors, ImagePlay, UserMinus, QrCode, Code,
-  ArrowRight
+  ArrowRight, Activity, Calendar
 } from 'lucide-react';
 
 export default function DashboardPage() {
@@ -568,6 +568,22 @@ export default function DashboardPage() {
       color: "#22C55E",
       category: "Analytics & Calculators"
     },
+    { name: "Channel Health Checker", description: "Full audit of upload consistency, SEO health, thumbnails, and engagement.", path: "/youtube-channel-health-checker", icon: <Activity size={22} />, color: "#10B981", category: "Analytics & Calculators" },
+    { name: "Channel SEO Auditor", description: "Audit channel name, about section, tags, trailer, and links for SEO.", path: "/youtube-channel-seo-auditor", icon: <Search size={22} />, color: "#3B82F6", category: "SEO & Optimization" },
+    { name: "Subscriber Growth Analyzer", description: "Project daily, monthly, and yearly subscriber velocity.", path: "/youtube-subscriber-growth-analyzer", icon: <Users size={22} />, color: "#8B5CF6", category: "Analytics & Calculators" },
+    { name: "Video Performance Auditor", description: "Deep-audit individual video CTR, retention, and velocity.", path: "/youtube-video-performance-auditor", icon: <BarChart2 size={22} />, color: "#F59E0B", category: "Analytics & Calculators" },
+    { name: "Upload Consistency Tracker", description: "Track upload schedule gaps and consistency score.", path: "/youtube-upload-consistency-tracker", icon: <Calendar size={22} />, color: "#EC4899", category: "Analytics & Calculators" },
+    { name: "Channel Niche Finder", description: "Discover profitable, low-competition YouTube niches with high CPM.", path: "/youtube-channel-niche-finder", icon: <Search size={22} />, color: "#14B8A6", category: "SEO & Optimization" },
+    { name: "Channel Revenue Estimator", description: "Estimate monthly and yearly AdSense earnings from views and CPM.", path: "/youtube-channel-revenue-estimator", icon: <DollarSign size={22} />, color: "#22C55E", category: "Analytics & Calculators" },
+    { name: "Channel Age Calculator", description: "Calculate exactly how old your YouTube channel is and your milestone tier.", path: "/youtube-channel-age-calculator", icon: <Calendar size={22} />, color: "#F43F5E", category: "Analytics & Calculators" },
+    { name: "Channel Score Calculator", description: "Rate your channel 0-100 based on subscribers, views, and content volume.", path: "/youtube-channel-score-calculator", icon: <BarChart2 size={22} />, color: "#6366F1", category: "Analytics & Calculators" },
+    { name: "Live Stream Title Generator", description: "Generate attention-grabbing YouTube live stream titles.", path: "/youtube-live-stream-title-generator", icon: <Type size={22} />, color: "#EF4444", category: "AI Generators" },
+    { name: "Community Post Generator", description: "Generate viral YouTube Community tab posts that drive comments.", path: "/youtube-community-post-generator", icon: <FileText size={22} />, color: "#F59E0B", category: "AI Generators" },
+    { name: "Stream Schedule Builder", description: "Build an optimized recurring live stream schedule.", path: "/youtube-stream-schedule-builder", icon: <Calendar size={22} />, color: "#10B981", category: "Analytics & Calculators" },
+    { name: "Clip Title Generator", description: "Generate viral clip titles for YouTube Clips from live stream highlights.", path: "/youtube-clip-title-generator", icon: <Type size={22} />, color: "#8B5CF6", category: "AI Generators" },
+    { name: "Membership Perks Generator", description: "Generate YouTube membership tier names, perks, and pricing.", path: "/youtube-membership-perks-generator", icon: <Sparkles size={22} />, color: "#EC4899", category: "AI Generators" },
+    { name: "End Screen Optimizer", description: "Plan your end screen layout with timing and element placement.", path: "/youtube-end-screen-optimizer", icon: <BarChart2 size={22} />, color: "#06B6D4", category: "SEO & Optimization" },
+    { name: "Cards & CTA Generator", description: "Generate a card and CTA strategy with timestamps to boost watch time.", path: "/youtube-cards-cta-generator", icon: <Tag size={22} />, color: "#3B82F6", category: "SEO & Optimization" },
     {
       name: "YouTube Keyword Tool",
       description: "Search keyword competition, volumes, longtail tags, and SEO opportunity scores.",

@@ -8,12 +8,25 @@ export default function ShortsHashtagGeneratorPage() {
   const [topic, setTopic] = useState('');
   const [hashtags, setHashtags] = useState([]);
 
-  const handleGenerate = (e) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleGenerate = async (e) => {
     e.preventDefault();
     if (!topic.trim()) return;
-    setHashtags([
-      '#Shorts', '#YouTubeShorts', `#${topic.replace(/\s+/g, '')}`, '#ShortsViral', '#ShortsFeed', '#TrendingShorts'
-    ]);
+    setLoading(true);
+    try {
+      const response = await fetch('/api/ai/shorts-hashtags', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ topic })
+      });
+      const data = await response.json();
+      setHashtags(data.hashtags || []);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -39,7 +52,9 @@ export default function ShortsHashtagGeneratorPage() {
                 onChange={(e) => setTopic(e.target.value)}
                 style={{ flex: 1, padding: '12px', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg)' }}
               />
-              <button type="submit" className="btn btn-primary">Generate Hashtags</button>
+              <button type="submit" className="btn btn-primary">
+                {loading ? 'Generating...' : 'Generate Hashtags'}
+              </button>
             </form>
 
             {hashtags.length > 0 && (

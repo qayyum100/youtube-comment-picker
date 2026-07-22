@@ -8,15 +8,25 @@ export default function ShortsHookAnalyzerPage() {
   const [hook, setHook] = useState('');
   const [analysis, setAnalysis] = useState(null);
 
-  const handleAnalyze = (e) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleAnalyze = async (e) => {
     e.preventDefault();
     if (!hook.trim()) return;
-    setAnalysis({
-      score: '92/100 (Strong Retention)',
-      curiosityGap: 'High Curiosity Trigger',
-      wordCount: `${hook.trim().split(/\s+/).length} words (First 3 seconds)`,
-      verdict: 'Excellent initial hook. Triggers immediate viewer interest before swiping.'
-    });
+    setLoading(true);
+    try {
+      const response = await fetch('/api/ai/shorts-hook-analysis', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ hook })
+      });
+      const data = await response.json();
+      setAnalysis(data.analysis || null);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -42,7 +52,9 @@ export default function ShortsHookAnalyzerPage() {
                 onChange={(e) => setHook(e.target.value)}
                 style={{ flex: 1, padding: '12px', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg)' }}
               />
-              <button type="submit" className="btn btn-primary">Analyze Hook</button>
+              <button type="submit" className="btn btn-primary">
+                {loading ? 'Analyzing...' : 'Analyze Hook'}
+              </button>
             </form>
 
             {analysis && (

@@ -8,15 +8,25 @@ export default function ShortsTitleGeneratorPage() {
   const [topic, setTopic] = useState('');
   const [titles, setTitles] = useState([]);
 
-  const handleGenerate = (e) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleGenerate = async (e) => {
     e.preventDefault();
     if (!topic.trim()) return;
-    setTitles([
-      `Do THIS to master ${topic} in 15 seconds! #Shorts`,
-      `The 1 secret about ${topic} nobody tells you #Shorts`,
-      `Stop doing ${topic} like this! #Shorts`,
-      `Crazy ${topic} hack you need to try #Shorts`
-    ]);
+    setLoading(true);
+    try {
+      const response = await fetch('/api/ai/shorts-titles', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ topic })
+      });
+      const data = await response.json();
+      setTitles(data.titles || []);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -42,7 +52,9 @@ export default function ShortsTitleGeneratorPage() {
                 onChange={(e) => setTopic(e.target.value)}
                 style={{ flex: 1, padding: '12px', borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--bg)' }}
               />
-              <button type="submit" className="btn btn-primary">Generate Titles</button>
+              <button type="submit" className="btn btn-primary">
+                {loading ? 'Generating...' : 'Generate Titles'}
+              </button>
             </form>
 
             {titles.length > 0 && (

@@ -468,3 +468,134 @@ export const generateVideoOutline = async (req, res) => {
         return res.status(500).json({ error: 'Failed to generate video outline' });
     }
 };
+
+export const generateShortsHashtags = async (req, res) => {
+    const { topic } = req.body;
+    if (!topic) return res.status(400).json({ error: 'Topic is required' });
+    try {
+        const genAI = getGeminiClient();
+        const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
+        const prompt = `Generate a list of 8 viral and high-converting YouTube Shorts hashtags for a video about "${topic}".
+        Include #Shorts, #YouTubeShorts, and the rest should be highly relevant. Return as a JSON array of strings (e.g. ["#Shorts", "#YouTubeShorts", ...]). Return ONLY valid JSON.`;
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        const jsonMatch = text.match(/\[.*\]/s);
+        let hashtags = [];
+        if (jsonMatch) hashtags = JSON.parse(jsonMatch[0]);
+        else hashtags = JSON.parse(text.replace(/```json/g, '').replace(/```/g, '').trim());
+        return res.json({ hashtags });
+    } catch (error) {
+        console.error("Gemini API Error:", error);
+        return res.status(500).json({ error: 'Failed to generate Shorts hashtags' });
+    }
+};
+
+export const generateShortsTitles = async (req, res) => {
+    const { topic } = req.body;
+    if (!topic) return res.status(400).json({ error: 'Topic is required' });
+    try {
+        const genAI = getGeminiClient();
+        const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
+        const prompt = `Generate 5 viral, click-worthy titles for a YouTube Short about "${topic}". They must be under 50 characters, punchy, and emotional/curious. Add '#Shorts' at the end of each.
+        Return as a JSON array of strings. Return ONLY valid JSON.`;
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        const jsonMatch = text.match(/\[.*\]/s);
+        let titles = [];
+        if (jsonMatch) titles = JSON.parse(jsonMatch[0]);
+        else titles = JSON.parse(text.replace(/```json/g, '').replace(/```/g, '').trim());
+        return res.json({ titles });
+    } catch (error) {
+        console.error("Gemini API Error:", error);
+        return res.status(500).json({ error: 'Failed to generate Shorts titles' });
+    }
+};
+
+export const generateShortsCaptions = async (req, res) => {
+    const { topic } = req.body;
+    if (!topic) return res.status(400).json({ error: 'Topic is required' });
+    try {
+        const genAI = getGeminiClient();
+        const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
+        const prompt = `Write 3 engaging YouTube Shorts description captions with calls-to-action (like "wait till the end", "comment your thoughts") for the topic "${topic}".
+        Return as a JSON array of strings. Return ONLY valid JSON.`;
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        const jsonMatch = text.match(/\[.*\]/s);
+        let captions = [];
+        if (jsonMatch) captions = JSON.parse(jsonMatch[0]);
+        else captions = JSON.parse(text.replace(/```json/g, '').replace(/```/g, '').trim());
+        return res.json({ captions });
+    } catch (error) {
+        console.error("Gemini API Error:", error);
+        return res.status(500).json({ error: 'Failed to generate Shorts captions' });
+    }
+};
+
+export const analyzeShortsHook = async (req, res) => {
+    const { hook } = req.body;
+    if (!hook) return res.status(400).json({ error: 'Hook text is required' });
+    try {
+        const genAI = getGeminiClient();
+        const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
+        const prompt = `Analyze this opening line/hook for a YouTube Short: "${hook}".
+        Evaluate:
+        1. Score out of 100
+        2. Curiosity level (e.g. High, Medium, Low)
+        3. Word count/length feedback
+        4. Brief suggestions for improvements.
+        Return as a JSON object with keys: "score" (number), "curiosityGap" (string), "wordCount" (string), "verdict" (string). Return ONLY valid JSON.`;
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        const jsonMatch = text.match(/\{.*\}/s);
+        let analysis = {};
+        if (jsonMatch) analysis = JSON.parse(jsonMatch[0]);
+        else analysis = JSON.parse(text.replace(/```json/g, '').replace(/```/g, '').trim());
+        return res.json({ analysis });
+    } catch (error) {
+        console.error("Gemini API Error:", error);
+        return res.status(500).json({ error: 'Failed to analyze Shorts hook' });
+    }
+};
+
+export const generateCommunityPosts = async (req, res) => {
+    const { topic, type } = req.body;
+    if (!topic) return res.status(400).json({ error: 'Topic is required' });
+    try {
+        const genAI = getGeminiClient();
+        const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
+        const prompt = `Write a viral YouTube Community post about "${topic}" of type "${type || 'engagement'}". Include emojis and call-to-actions.
+        Return the result as a JSON object with key "post" containing the formatted text. Return ONLY valid JSON.`;
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        const jsonMatch = text.match(/\{.*\}/s);
+        let post = {};
+        if (jsonMatch) post = JSON.parse(jsonMatch[0]);
+        else post = JSON.parse(text.replace(/```json/g, '').replace(/```/g, '').trim());
+        return res.json(post);
+    } catch (error) {
+        console.error("Gemini API Error:", error);
+        return res.status(500).json({ error: 'Failed to generate community post' });
+    }
+};
+
+export const generateLiveStreamTitles = async (req, res) => {
+    const { topic } = req.body;
+    if (!topic) return res.status(400).json({ error: 'Topic is required' });
+    try {
+        const genAI = getGeminiClient();
+        const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash" });
+        const prompt = `Generate 4 click-worthy titles for a YouTube Live Stream about "${topic}". Include live indicators like "🔴 LIVE" or "LIVE NOW".
+        Return as a JSON array of strings. Return ONLY valid JSON.`;
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        const jsonMatch = text.match(/\[.*\]/s);
+        let titles = [];
+        if (jsonMatch) titles = JSON.parse(jsonMatch[0]);
+        else titles = JSON.parse(text.replace(/```json/g, '').replace(/```/g, '').trim());
+        return res.json({ titles });
+    } catch (error) {
+        console.error("Gemini API Error:", error);
+        return res.status(500).json({ error: 'Failed to generate live stream titles' });
+    }
+};

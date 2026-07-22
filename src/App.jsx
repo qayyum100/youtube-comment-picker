@@ -87,6 +87,26 @@ const ShortsSeoCheckerPage = lazy(() => import('./pages/ShortsSeoCheckerPage'));
 const ShortsKeywordFinderPage = lazy(() => import('./pages/ShortsKeywordFinderPage'));
 const ShortsPerformancePredictorPage = lazy(() => import('./pages/ShortsPerformancePredictorPage'));
 
+// Channel Audit Tools (Priority 5)
+const ChannelHealthCheckerPage = lazy(() => import('./pages/ChannelHealthCheckerPage'));
+const ChannelSeoAuditorPage = lazy(() => import('./pages/ChannelSeoAuditorPage'));
+const SubscriberGrowthAnalyzerPage = lazy(() => import('./pages/SubscriberGrowthAnalyzerPage'));
+const VideoPerformanceAuditorPage = lazy(() => import('./pages/VideoPerformanceAuditorPage'));
+const UploadConsistencyTrackerPage = lazy(() => import('./pages/UploadConsistencyTrackerPage'));
+const ChannelNicheFinderPage = lazy(() => import('./pages/ChannelNicheFinderPage'));
+const ChannelRevenueEstimatorPage = lazy(() => import('./pages/ChannelRevenueEstimatorPage'));
+const ChannelAgeCalculatorPage = lazy(() => import('./pages/ChannelAgeCalculatorPage'));
+const ChannelScoreCalculatorPage = lazy(() => import('./pages/ChannelScoreCalculatorPage'));
+
+// Live Stream & Community Tools (Priority 6)
+const LiveStreamTitleGeneratorPage = lazy(() => import('./pages/LiveStreamTitleGeneratorPage'));
+const CommunityPostGeneratorPage = lazy(() => import('./pages/CommunityPostGeneratorPage'));
+const StreamScheduleBuilderPage = lazy(() => import('./pages/StreamScheduleBuilderPage'));
+const ClipTitleGeneratorPage = lazy(() => import('./pages/ClipTitleGeneratorPage'));
+const MembershipPerksGeneratorPage = lazy(() => import('./pages/MembershipPerksGeneratorPage'));
+const EndScreenOptimizerPage = lazy(() => import('./pages/EndScreenOptimizerPage'));
+const CardsCtaGeneratorPage = lazy(() => import('./pages/CardsCtaGeneratorPage'));
+
 const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
@@ -232,6 +252,26 @@ function AnimatedRoutes() {
           <Route path="/youtube-shorts-seo-checker" element={<ShortsSeoCheckerPage />} />
           <Route path="/youtube-shorts-keyword-finder" element={<ShortsKeywordFinderPage />} />
           <Route path="/youtube-shorts-performance-predictor" element={<ShortsPerformancePredictorPage />} />
+
+          {/* Channel Audit Tool Routes (Priority 5) */}
+          <Route path="/youtube-channel-health-checker" element={<ChannelHealthCheckerPage />} />
+          <Route path="/youtube-channel-seo-auditor" element={<ChannelSeoAuditorPage />} />
+          <Route path="/youtube-subscriber-growth-analyzer" element={<SubscriberGrowthAnalyzerPage />} />
+          <Route path="/youtube-video-performance-auditor" element={<VideoPerformanceAuditorPage />} />
+          <Route path="/youtube-upload-consistency-tracker" element={<UploadConsistencyTrackerPage />} />
+          <Route path="/youtube-channel-niche-finder" element={<ChannelNicheFinderPage />} />
+          <Route path="/youtube-channel-revenue-estimator" element={<ChannelRevenueEstimatorPage />} />
+          <Route path="/youtube-channel-age-calculator" element={<ChannelAgeCalculatorPage />} />
+          <Route path="/youtube-channel-score-calculator" element={<ChannelScoreCalculatorPage />} />
+
+          {/* Live Stream & Community Tool Routes (Priority 6) */}
+          <Route path="/youtube-live-stream-title-generator" element={<LiveStreamTitleGeneratorPage />} />
+          <Route path="/youtube-community-post-generator" element={<CommunityPostGeneratorPage />} />
+          <Route path="/youtube-stream-schedule-builder" element={<StreamScheduleBuilderPage />} />
+          <Route path="/youtube-clip-title-generator" element={<ClipTitleGeneratorPage />} />
+          <Route path="/youtube-membership-perks-generator" element={<MembershipPerksGeneratorPage />} />
+          <Route path="/youtube-end-screen-optimizer" element={<EndScreenOptimizerPage />} />
+          <Route path="/youtube-cards-cta-generator" element={<CardsCtaGeneratorPage />} />
 
           <Route path="/blogs" element={<BlogIndexPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
