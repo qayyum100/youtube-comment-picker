@@ -75,6 +75,18 @@ const SimilarChannelFinderPage = lazy(() => import('./pages/SimilarChannelFinder
 const ViralVideoFinderPage = lazy(() => import('./pages/ViralVideoFinderPage'));
 const ChannelComparisonToolPage = lazy(() => import('./pages/ChannelComparisonToolPage'));
 
+// 10 Shorts Tools
+const ShortsHashtagGeneratorPage = lazy(() => import('./pages/ShortsHashtagGeneratorPage'));
+const ShortsTitleGeneratorPage = lazy(() => import('./pages/ShortsTitleGeneratorPage'));
+const ShortsCaptionGeneratorPage = lazy(() => import('./pages/ShortsCaptionGeneratorPage'));
+const ShortsHookAnalyzerPage = lazy(() => import('./pages/ShortsHookAnalyzerPage'));
+const ShortsTrendFinderPage = lazy(() => import('./pages/ShortsTrendFinderPage'));
+const ShortsDurationOptimizerPage = lazy(() => import('./pages/ShortsDurationOptimizerPage'));
+const ShortsUploadTimeCalculatorPage = lazy(() => import('./pages/ShortsUploadTimeCalculatorPage'));
+const ShortsSeoCheckerPage = lazy(() => import('./pages/ShortsSeoCheckerPage'));
+const ShortsKeywordFinderPage = lazy(() => import('./pages/ShortsKeywordFinderPage'));
+const ShortsPerformancePredictorPage = lazy(() => import('./pages/ShortsPerformancePredictorPage'));
+
 const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
@@ -208,6 +220,18 @@ function AnimatedRoutes() {
           <Route path="/youtube-similar-channel-finder" element={<SimilarChannelFinderPage />} />
           <Route path="/youtube-viral-video-finder" element={<ViralVideoFinderPage />} />
           <Route path="/youtube-channel-comparison-tool" element={<ChannelComparisonToolPage />} />
+
+          {/* 10 Shorts Tool Routes */}
+          <Route path="/youtube-shorts-hashtag-generator" element={<ShortsHashtagGeneratorPage />} />
+          <Route path="/youtube-shorts-title-generator" element={<ShortsTitleGeneratorPage />} />
+          <Route path="/youtube-shorts-caption-generator" element={<ShortsCaptionGeneratorPage />} />
+          <Route path="/youtube-shorts-hook-analyzer" element={<ShortsHookAnalyzerPage />} />
+          <Route path="/youtube-shorts-trend-finder" element={<ShortsTrendFinderPage />} />
+          <Route path="/youtube-shorts-duration-optimizer" element={<ShortsDurationOptimizerPage />} />
+          <Route path="/youtube-shorts-upload-time-calculator" element={<ShortsUploadTimeCalculatorPage />} />
+          <Route path="/youtube-shorts-seo-checker" element={<ShortsSeoCheckerPage />} />
+          <Route path="/youtube-shorts-keyword-finder" element={<ShortsKeywordFinderPage />} />
+          <Route path="/youtube-shorts-performance-predictor" element={<ShortsPerformancePredictorPage />} />
 
           <Route path="/blogs" element={<BlogIndexPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />

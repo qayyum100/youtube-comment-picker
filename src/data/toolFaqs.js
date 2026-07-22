@@ -267,6 +267,66 @@ export const toolFaqs = {
       answer: "Enter two channel names in our Channel Comparison Tool to compare subscriber counts, monthly view velocity, average video duration, and upload frequency."
     }
   ],
+  shortsHashtagGenerator: [
+    {
+      question: "What are the best hashtags for YouTube Shorts?",
+      answer: "The best hashtags for YouTube Shorts include #Shorts, #YouTubeShorts, and 2-3 niche-specific tags. Use our Shorts Hashtag Generator for viral recommendations."
+    }
+  ],
+  shortsTitleGenerator: [
+    {
+      question: "How long should a YouTube Shorts title be?",
+      answer: "YouTube Shorts titles should be under 50 characters so they don't get truncated on mobile screens. Keep them punchy and include curiosity gaps."
+    }
+  ],
+  shortsCaptionGenerator: [
+    {
+      question: "Do captions help YouTube Shorts views?",
+      answer: "Yes, engaging Shorts captions with calls-to-action (like 'comment below' or 'wait till the end') significantly increase viewer engagement signals."
+    }
+  ],
+  shortsHookAnalyzer: [
+    {
+      question: "How important is the first 3 seconds of a YouTube Short?",
+      answer: "The first 3 seconds determine whether a viewer swipes away or stays. A strong hook prevents swipe-aways and boosts retention past 100%."
+    }
+  ],
+  shortsTrendFinder: [
+    {
+      question: "How do I find trending sounds and formats for Shorts?",
+      answer: "Our Shorts Trend Finder identifies breakout audio tracks, viral challenge formats, and meme templates currently favored by the algorithm."
+    }
+  ],
+  shortsDurationOptimizer: [
+    {
+      question: "What is the best duration for YouTube Shorts?",
+      answer: "The optimal Shorts duration is 15-30 seconds for quick tips and memes, and 30-45 seconds for mini-tutorials to maintain >80% retention."
+    }
+  ],
+  shortsUploadTimeCalculator: [
+    {
+      question: "When is the best time to post YouTube Shorts?",
+      answer: "The best time to post YouTube Shorts is between 12:00 PM and 3:00 PM EST on weekdays and 9:00 AM to 11:00 AM EST on weekends."
+    }
+  ],
+  shortsSeoChecker: [
+    {
+      question: "How do I optimize YouTube Shorts for SEO?",
+      answer: "Ensure your Short includes #Shorts in the title/description, uses concise target keywords, and has optimized closed captions."
+    }
+  ],
+  shortsKeywordFinder: [
+    {
+      question: "How do keywords work for YouTube Shorts?",
+      answer: "Shorts rely on mobile search queries and algorithm topic clustering. Using targeted keywords helps the algorithm seed your Short to relevant feeds."
+    }
+  ],
+  shortsPerformancePredictor: [
+    {
+      question: "How does YouTube decide if a Short goes viral?",
+      answer: "YouTube evaluates Average Percentage Viewed (retention >100%) and Swipe-Away Ratio (<20%). High retention triggers wider distribution cycles."
+    }
+  ],
   videoIdeas: [
     {
       question: "How do I come up with YouTube video ideas?",

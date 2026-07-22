@@ -489,6 +489,86 @@ export default function DashboardPage() {
       category: "Analytics & Calculators"
     },
     {
+      name: "Shorts Hashtag Generator",
+      description: "Generate viral, high-converting hashtags optimized specifically for YouTube Shorts.",
+      path: "/youtube-shorts-hashtag-generator",
+      icon: <Hash size={22} />,
+      color: "#F43F5E",
+      category: "AI Generators"
+    },
+    {
+      name: "Shorts Title Generator",
+      description: "Generate short, punchy titles tailored for fast scrolling on the Shorts shelf.",
+      path: "/youtube-shorts-title-generator",
+      icon: <Type size={22} />,
+      color: "#EC4899",
+      category: "AI Generators"
+    },
+    {
+      name: "Shorts Caption Generator",
+      description: "Create engaging YouTube Shorts description captions with calls-to-action.",
+      path: "/youtube-shorts-caption-generator",
+      icon: <FileText size={22} />,
+      color: "#14B8A6",
+      category: "AI Generators"
+    },
+    {
+      name: "Shorts Hook Analyzer",
+      description: "Evaluate the first 3-second visual and spoken hook of your Short to prevent swipe-aways.",
+      path: "/youtube-shorts-hook-analyzer",
+      icon: <Sparkle size={22} />,
+      color: "#8B5CF6",
+      category: "SEO & Optimization"
+    },
+    {
+      name: "Shorts Trend Finder",
+      description: "Discover trending audio, viral formats, and challenge concepts on YouTube Shorts.",
+      path: "/youtube-shorts-trend-finder",
+      icon: <Sparkles size={22} />,
+      color: "#EF4444",
+      category: "SEO & Optimization"
+    },
+    {
+      name: "Shorts Duration Optimizer",
+      description: "Optimize your Short's exact video duration (15s, 30s, 60s) for maximum retention.",
+      path: "/youtube-shorts-duration-optimizer",
+      icon: <BarChart2 size={22} />,
+      color: "#3B82F6",
+      category: "Analytics & Calculators"
+    },
+    {
+      name: "Shorts Upload Time Calculator",
+      description: "Find the highest traffic hours for publishing YouTube Shorts to get into the feed.",
+      path: "/youtube-shorts-upload-time-calculator",
+      icon: <BarChart2 size={22} />,
+      color: "#10B981",
+      category: "Analytics & Calculators"
+    },
+    {
+      name: "Shorts SEO Checker",
+      description: "Audit your Short's title, description, and hashtags for maximum Shorts feed distribution.",
+      path: "/youtube-shorts-seo-checker",
+      icon: <Search size={22} />,
+      color: "#F59E0B",
+      category: "SEO & Optimization"
+    },
+    {
+      name: "Shorts Keyword Finder",
+      description: "Find high-converting keywords searched specifically on mobile in the Shorts player.",
+      path: "/youtube-shorts-keyword-finder",
+      icon: <Search size={22} />,
+      color: "#06B6D4",
+      category: "SEO & Optimization"
+    },
+    {
+      name: "Shorts Performance Predictor",
+      description: "Forecast view velocity and algorithm seeding based on retention % and swipe-away rates.",
+      path: "/youtube-shorts-performance-predictor",
+      icon: <BarChart2 size={22} />,
+      color: "#22C55E",
+      category: "Analytics & Calculators"
+    },
+    {
       name: "YouTube Keyword Tool",
       description: "Search keyword competition, volumes, longtail tags, and SEO opportunity scores.",
       path: "/youtube-keyword-tool",
