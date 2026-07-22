@@ -6,22 +6,22 @@ export default function SeoHead({ pageType, platform, blogData }) {
     const url = window.location.href.split('?')[0]; // Canonical should generally ignore query params
 
     if (pageType === 'thumbnail') {
-      title = 'YouTube Thumbnail Downloader — Extract High Quality Images';
-      description = 'Download high-resolution (HD, 4K, 1080p) thumbnails from any YouTube video instantly. Free YouTube thumbnail grabber tool.';
+      title = 'YouTube Thumbnail Downloader — Free YouTube Giveaway Picker Tools';
+      description = 'Download high-resolution (HD, 4K, 1080p) thumbnails from any YouTube video instantly. Free YouTube thumbnail grabber and YouTube giveaway picker suite.';
     } else if (pageType === 'blog') {
-      title = 'Creator Resources & Guides — YouTube Comment Picker';
-      description = 'Master the art of social media growth. Learn how to run viral giveaways, optimize your thumbnails, and build an engaged audience.';
+      title = 'YouTube Giveaway Picker Blog & Creator Guides — YouTube Comment Picker';
+      description = 'Master running successful giveaways with our YouTube giveaway picker guide. Learn how to pick random comment winners, optimize thumbnails, and grow your channel.';
     } else if (pageType === 'blog-post' && blogData) {
-      title = `${blogData.title} | Creator Guides`;
+      title = `${blogData.title} | Free YouTube Giveaway Picker Guide`;
       description = blogData.excerpt;
     } else {
       if (platform === 'youtube') {
-        title = 'Comment Picker for YouTube — Free YouTube Giveaway Picker';
-        description = 'Use our free comment picker for youtube to easily extract and select a random winner for your giveaways. The best youtube random comment picker and yt random comment picker tool.';
+        title = 'YouTube Giveaway Picker — Free YouTube Comment Picker & Winner Generator';
+        description = 'The ultimate free YouTube giveaway picker tool. Easily pick random comment winners for your YouTube giveaways with fair, duplicate-filtered comment selection.';
       } else {
         const platformLabel = 'Instagram Posts & Reels';
-        title = `${platformLabel} Picker — Premium Giveaway Drawing Desk`;
-        description = `Extract and pick random giveaway winners from your ${platformLabel}. Apply advanced criteria like friend mentions, minimum likes, duplicate comment controls, and keyword filters.`;
+        title = `${platformLabel} Picker — Free Giveaway & Comment Picker Suite`;
+        description = `Extract and pick random giveaway winners from your ${platformLabel}. Works seamlessly alongside our YouTube giveaway picker tool with advanced filters.`;
       }
     }
 
@@ -113,10 +113,10 @@ export default function SeoHead({ pageType, platform, blogData }) {
     addOrUpdateSchema('schema-organization', {
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "Antigravity Suite",
+      "name": "YouTube Giveaway Picker Tool",
       "url": "https://www.youtubecommentpickerthumbnaildownload.online/",
       "logo": "https://www.youtubecommentpickerthumbnaildownload.online/images/app_logo.png",
-      "description": "Premium drawing suite built for content creators to run giveaways."
+      "description": "Free YouTube Giveaway Picker tool to select random comment winners for YouTube giveaways."
     });
 
     // 2. BreadcrumbList Schema
@@ -185,11 +185,11 @@ export default function SeoHead({ pageType, platform, blogData }) {
         "image": image,
         "author": {
           "@type": "Person",
-          "name": blogData.author || "Antigravity Suite"
+          "name": blogData.author || "YouTube Giveaway Picker"
         },
         "publisher": {
           "@type": "Organization",
-          "name": "Antigravity Suite",
+          "name": "YouTube Giveaway Picker",
           "logo": {
             "@type": "ImageObject",
             "url": "https://www.youtubecommentpickerthumbnaildownload.online/images/app_logo.png"
@@ -210,13 +210,13 @@ export default function SeoHead({ pageType, platform, blogData }) {
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Is this Comment Picker free and safe?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes, our tool is 100% free and does not require account passwords. All actions are browser-bound." }
+            "name": "Is this YouTube Giveaway Picker free and safe to use?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, our YouTube giveaway picker is 100% free and completely safe. It does not require login or passwords." }
           },
           {
             "@type": "Question",
-            "name": "How are winners selected?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Winners are selected using an unbiased cryptographic algorithm (crypto.getRandomValues) ensuring absolute fairness and E-E-A-T compliance." }
+            "name": "How does the YouTube Giveaway Picker pick random winners?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Our YouTube giveaway picker selects random winners using a verified cryptographic random selection algorithm." }
           }
         ]
       });

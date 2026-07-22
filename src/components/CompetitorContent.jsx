@@ -8,26 +8,26 @@ export default function CompetitorContent() {
       {/* Content Sections */}
       <section className="grid-cols-2" style={{ alignItems: 'center' }}>
         <div>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '16px', color: 'var(--text-primary)' }}>Random Comment Picker for Youtube</h2>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '16px', color: 'var(--text-primary)' }}>Free YouTube Giveaway Picker</h2>
           <p style={{ color: 'var(--text-secondary)', marginBottom: '16px' }}>
-            Our YouTube Comment Random Picker offers a simple and efficient method to select a random winner from all comments (first 500) on your YouTube video. Perfect for determining winners in YouTube giveaways, promotions, sweepstakes, or contests.
+            Our <strong>YouTube Giveaway Picker</strong> offers a simple, fast, and transparent method to select a random winner from all comments on your YouTube video. Perfect for picking fair winners in YouTube giveaways, channel promotions, sweepstakes, or contests.
           </p>
           <p style={{ color: 'var(--text-secondary)' }}>
-            All you need to do is input your YouTube video link, choose filters and settings, retrieve comments, and begin the raffle to select a random winner. The best part is, the YouTube Comment Random Picker is available for you to use at no cost! It works with both standard YouTube videos and YouTube Shorts, so you can use it for giveaways on any type of video content.
+            Simply input your YouTube video link, choose your preferred filters, retrieve comments, and launch our free YouTube giveaway picker to select a winner. The YouTube giveaway picker works seamlessly with standard YouTube videos and YouTube Shorts.
           </p>
         </div>
       </section>
 
       <section className="grid-cols-2" style={{ alignItems: 'center', direction: 'rtl' }}>
         <div style={{ direction: 'ltr' }}>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '16px', color: 'var(--text-primary)' }}>How do I select a winner for a YouTube giveaway contest?</h2>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '16px' }}>Selecting a winner for a YouTube giveaway contest is easy with our YouTube Comment Random Picker. Simply follow these steps:</p>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: '700', marginBottom: '16px', color: 'var(--text-primary)' }}>How to Pick a Winner with YouTube Giveaway Picker</h2>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: '16px' }}>Selecting a winner for your YouTube giveaway contest is easy with our YouTube giveaway picker. Simply follow these steps:</p>
           <ul style={{ color: 'var(--text-secondary)', paddingLeft: '24px', lineHeight: 1.8 }}>
-            <li>Find the URL of your YouTube video</li>
-            <li>Enter the URL of your YouTube video into the YouTube Comment Random Picker search bar</li>
-            <li>Select filters and settings for your YouTube giveaway contest</li>
-            <li>Retrieve comments from your YouTube video</li>
-            <li>Start the raffle to select a random winner</li>
+            <li>Copy the URL of your YouTube video or YouTube Short.</li>
+            <li>Paste the URL into the YouTube giveaway picker search bar.</li>
+            <li>Select filters (e.g. duplicate comment removal or keyword search).</li>
+            <li>Fetch all video comments automatically.</li>
+            <li>Click 'Start Draw' on the YouTube giveaway picker to reveal the winner.</li>
           </ul>
         </div>
       </section>

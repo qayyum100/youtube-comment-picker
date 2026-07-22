@@ -37,8 +37,19 @@ const WatchTimeCalculatorPage = lazy(() => import('./pages/WatchTimeCalculatorPa
 const MonetizationCheckerPage = lazy(() => import('./pages/MonetizationCheckerPage'));
 const RankTrackerPage = lazy(() => import('./pages/RankTrackerPage'));
 const QRCodeGeneratorPage = lazy(() => import('./pages/QRCodeGeneratorPage'));
-const EmbedGeneratorPage = lazy(() => import('./pages/EmbedGeneratorPage'));
 const KeywordToolPage = lazy(() => import('./pages/KeywordToolPage'));
+
+// Priority 1 Tool Pages
+const BestTimeToUploadPage = lazy(() => import('./pages/BestTimeToUploadPage'));
+const CtrCalculatorPage = lazy(() => import('./pages/CtrCalculatorPage'));
+const CpmCalculatorPage = lazy(() => import('./pages/CpmCalculatorPage'));
+const RpmCalculatorPage = lazy(() => import('./pages/RpmCalculatorPage'));
+const VideoDurationCalculatorPage = lazy(() => import('./pages/VideoDurationCalculatorPage'));
+const ThumbnailDownloaderHdPage = lazy(() => import('./pages/ThumbnailDownloaderHdPage'));
+const ThumbnailPreviewPage = lazy(() => import('./pages/ThumbnailPreviewPage'));
+const VideoMetadataViewerPage = lazy(() => import('./pages/VideoMetadataViewerPage'));
+const TitleAnalyzerPage = lazy(() => import('./pages/TitleAnalyzerPage'));
+const DescriptionAnalyzerPage = lazy(() => import('./pages/DescriptionAnalyzerPage'));
 
 const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
@@ -137,6 +148,18 @@ function AnimatedRoutes() {
           <Route path="/youtube-qr-code-generator" element={<QRCodeGeneratorPage />} />
           <Route path="/youtube-embed-generator" element={<EmbedGeneratorPage />} />
           <Route path="/youtube-keyword-tool" element={<KeywordToolPage />} />
+
+          {/* Priority 1 Tool Routes */}
+          <Route path="/youtube-best-time-to-upload" element={<BestTimeToUploadPage />} />
+          <Route path="/youtube-ctr-calculator" element={<CtrCalculatorPage />} />
+          <Route path="/youtube-cpm-calculator" element={<CpmCalculatorPage />} />
+          <Route path="/youtube-rpm-calculator" element={<RpmCalculatorPage />} />
+          <Route path="/youtube-video-duration-calculator" element={<VideoDurationCalculatorPage />} />
+          <Route path="/youtube-thumbnail-downloader-hd" element={<ThumbnailDownloaderHdPage />} />
+          <Route path="/youtube-thumbnail-preview" element={<ThumbnailPreviewPage />} />
+          <Route path="/youtube-video-metadata-viewer" element={<VideoMetadataViewerPage />} />
+          <Route path="/youtube-title-analyzer" element={<TitleAnalyzerPage />} />
+          <Route path="/youtube-description-analyzer" element={<DescriptionAnalyzerPage />} />
 
           <Route path="/blogs" element={<BlogIndexPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />

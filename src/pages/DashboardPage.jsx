@@ -249,6 +249,86 @@ export default function DashboardPage() {
       category: "SEO & Optimization"
     },
     {
+      name: "YouTube Best Time to Upload Calculator",
+      description: "Find the optimal posting window for your channel to maximize initial 2-hour velocity.",
+      path: "/youtube-best-time-to-upload",
+      icon: <BarChart2 size={22} />,
+      color: "#10B981",
+      category: "Analytics & Calculators"
+    },
+    {
+      name: "YouTube CTR Calculator",
+      description: "Calculate your Click-Through Rate (CTR) and see how it compares to viral benchmarks.",
+      path: "/youtube-ctr-calculator",
+      icon: <Eye size={22} />,
+      color: "#F59E0B",
+      category: "Analytics & Calculators"
+    },
+    {
+      name: "YouTube CPM Calculator",
+      description: "Calculate gross advertising CPM and estimated creator revenue share.",
+      path: "/youtube-cpm-calculator",
+      icon: <DollarSign size={22} />,
+      color: "#22C55E",
+      category: "Analytics & Calculators"
+    },
+    {
+      name: "YouTube RPM Calculator",
+      description: "Calculate exact net revenue per 1,000 total video views (RPM).",
+      path: "/youtube-rpm-calculator",
+      icon: <DollarSign size={22} />,
+      color: "#8B5CF6",
+      category: "Analytics & Calculators"
+    },
+    {
+      name: "YouTube Video Duration Calculator",
+      description: "Calculate exact video length needed to hit target watch hours.",
+      path: "/youtube-video-duration-calculator",
+      icon: <BarChart2 size={22} />,
+      color: "#3B82F6",
+      category: "Analytics & Calculators"
+    },
+    {
+      name: "YouTube Thumbnail Downloader HD",
+      description: "Download 4K, 1080p, and HD thumbnails from any YouTube video instantly.",
+      path: "/youtube-thumbnail-downloader-hd",
+      icon: <Download size={22} />,
+      color: "#EF4444",
+      category: "Creator Graphics & Extras"
+    },
+    {
+      name: "YouTube Thumbnail Preview Tool",
+      description: "Preview thumbnail and title packaging on Desktop and Mobile feeds.",
+      path: "/youtube-thumbnail-preview",
+      icon: <Image size={22} />,
+      color: "#EC4899",
+      category: "Creator Graphics & Extras"
+    },
+    {
+      name: "YouTube Video Metadata Viewer",
+      description: "Inspect hidden YouTube video metadata, publish date, category ID, and tags.",
+      path: "/youtube-video-metadata-viewer",
+      icon: <Search size={22} />,
+      color: "#06B6D4",
+      category: "SEO & Optimization"
+    },
+    {
+      name: "YouTube Title Analyzer",
+      description: "Evaluate clickability, character limits, power words, and curiosity triggers in titles.",
+      path: "/youtube-title-analyzer",
+      icon: <Type size={22} />,
+      color: "#F43F5E",
+      category: "SEO & Optimization"
+    },
+    {
+      name: "YouTube Description Analyzer",
+      description: "Audit video description for chapters, links, hashtags, and SEO optimization.",
+      path: "/youtube-description-analyzer",
+      icon: <FileText size={22} />,
+      color: "#14B8A6",
+      category: "SEO & Optimization"
+    },
+    {
       name: "YouTube Keyword Tool",
       description: "Search keyword competition, volumes, longtail tags, and SEO opportunity scores.",
       path: "/youtube-keyword-tool",

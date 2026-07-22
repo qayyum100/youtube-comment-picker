@@ -228,8 +228,8 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
               textTransform: 'capitalize',
             }}>
               {platform === 'youtube'
-                ? 'Comment Picker for YouTube & YouTube Giveaway Picker'
-                : `${platform} Comment Picker`}
+                ? 'YouTube Giveaway Picker — Free YouTube Comment Picker'
+                : `${platform} Giveaway & Comment Picker`}
             </h1>
             <p style={{
               color: 'var(--text-secondary)',
@@ -238,7 +238,7 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
               margin: '0 auto',
               lineHeight: '1.6',
             }}>
-              The premium comment picker for youtube and giveaway picker youtube. Unbiased, fast, and secure random comment picker youtube tool.
+              The ultimate free YouTube giveaway picker tool. Pick random comment winners for your YouTube giveaways fast, fair, and hassle-free.
             </p>
           </div>
 

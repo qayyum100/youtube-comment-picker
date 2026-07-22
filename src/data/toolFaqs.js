@@ -69,6 +69,84 @@ export const toolFaqs = {
       answer: "For a 10-minute YouTube video, your script should be roughly 1,200 to 1,500 words, depending on your speaking speed (average conversational speed is 130-150 words per minute). Our tool allows you to specify the desired video length to generate the perfect script size."
     }
   ],
+  videoSummarizer: [
+    {
+      question: "How do I summarize a YouTube video using AI?",
+      answer: "Paste any YouTube video URL into our AI Video Summarizer tool to extract bulleted takeaways, key concepts, and actionable insights in seconds."
+    }
+  ],
+  bestTimeToUpload: [
+    {
+      question: "When is the best time to upload a video to YouTube?",
+      answer: "The best time to upload on YouTube is generally between 2:00 PM and 4:00 PM EST on weekdays (Thursday & Friday) and between 9:00 AM and 11:00 AM EST on weekends. Use our Best Time to Upload Calculator to pinpoint exact windows by niche and region."
+    },
+    {
+      question: "Why does YouTube upload time matter?",
+      answer: "Uploading 2 to 3 hours before your audience's peak activity allows YouTube's algorithm to index, process HD quality, and present your video during high-traffic hours for maximum initial CTR."
+    }
+  ],
+  ctrCalculator: [
+    {
+      question: "What is a good CTR on YouTube?",
+      answer: "An average YouTube Click-Through Rate (CTR) ranges between 2% and 10%. A CTR above 10% is considered high performance and viral-tier by the YouTube algorithm."
+    },
+    {
+      question: "How is YouTube CTR calculated?",
+      answer: "YouTube CTR is calculated as (Total Clicks / Total Impressions) × 100. Our CTR Calculator measures your exact percentage and provides benchmark advice."
+    }
+  ],
+  cpmCalculator: [
+    {
+      question: "How much does YouTube pay per 1,000 ad impressions (CPM)?",
+      answer: "YouTube CPM typically ranges from $2.00 to $20.00+ depending on niche, audience location, and season. Finance, Tech, and Real Estate niches command the highest CPMs."
+    },
+    {
+      question: "What is the difference between CPM and RPM?",
+      answer: "CPM is the cost advertisers pay per 1,000 ad impressions (gross), whereas RPM is the actual net earnings a creator makes per 1,000 total video views after YouTube takes its 45% revenue split."
+    }
+  ],
+  rpmCalculator: [
+    {
+      question: "How do I calculate my YouTube RPM?",
+      answer: "Calculate RPM by dividing your total estimated earnings by total views, then multiplying by 1,000: (Total Net Earnings / Total Views) × 1000."
+    }
+  ],
+  videoDurationCalculator: [
+    {
+      question: "How long should my YouTube video be to reach 4,000 watch hours?",
+      answer: "If your average viewer retention is 45% and you expect 10,000 views, your video should be at least 53 minutes long to achieve 4,000 watch hours. Use our Video Duration Calculator for custom targets."
+    }
+  ],
+  thumbnailDownloaderHd: [
+    {
+      question: "How do I download a YouTube thumbnail in 4K or 1080p?",
+      answer: "Paste the YouTube video link into our HD Thumbnail Downloader tool to retrieve 4K (maxresdefault), 1080p, HD, and SD image files instantly."
+    }
+  ],
+  thumbnailPreview: [
+    {
+      question: "How can I test my YouTube thumbnail before publishing?",
+      answer: "Use our YouTube Thumbnail Preview Tool to simulate how your thumbnail and title packaging will render across Desktop feed, Mobile dark mode, and Search results."
+    }
+  ],
+  videoMetadataViewer: [
+    {
+      question: "How do I inspect hidden YouTube video metadata?",
+      answer: "Enter any YouTube video link in our Metadata Viewer to inspect exact publication timestamps, ISO 8601 duration codes, category IDs, and competitor SEO tags."
+    }
+  ],
+  titleAnalyzer: [
+    {
+      question: "What makes a YouTube title click-worthy?",
+      answer: "Click-worthy titles stay between 40-70 characters, include emotional power words, use curiosity gaps, and incorporate relevant keywords without clickbait penalties."
+    }
+  ],
+  descriptionAnalyzer: [
+    {
+      question: "How do I optimize my YouTube description for SEO?",
+      answer: "An SEO-optimized description includes primary keywords in the first 25 words, video chapter timestamps, 3 targeted hashtags, and clear call-to-action links."
+    }
+  ],
   videoIdeas: [
     {
       question: "How do I come up with YouTube video ideas?",
