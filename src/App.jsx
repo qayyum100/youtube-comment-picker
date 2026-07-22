@@ -51,6 +51,18 @@ const VideoMetadataViewerPage = lazy(() => import('./pages/VideoMetadataViewerPa
 const TitleAnalyzerPage = lazy(() => import('./pages/TitleAnalyzerPage'));
 const DescriptionAnalyzerPage = lazy(() => import('./pages/DescriptionAnalyzerPage'));
 
+// 10 Keyword SEO Tools
+const SearchVolumeCheckerPage = lazy(() => import('./pages/SearchVolumeCheckerPage'));
+const KeywordDifficultyCheckerPage = lazy(() => import('./pages/KeywordDifficultyCheckerPage'));
+const TrendingKeywordsFinderPage = lazy(() => import('./pages/TrendingKeywordsFinderPage'));
+const RelatedKeywordsGeneratorPage = lazy(() => import('./pages/RelatedKeywordsGeneratorPage'));
+const SearchIntentAnalyzerPage = lazy(() => import('./pages/SearchIntentAnalyzerPage'));
+const SearchSuggestExplorerPage = lazy(() => import('./pages/SearchSuggestExplorerPage'));
+const AutocompleteGeneratorPage = lazy(() => import('./pages/AutocompleteGeneratorPage'));
+const QuestionKeywordFinderPage = lazy(() => import('./pages/QuestionKeywordFinderPage'));
+const KeywordGrouperPage = lazy(() => import('./pages/KeywordGrouperPage'));
+const KeywordClusterGeneratorPage = lazy(() => import('./pages/KeywordClusterGeneratorPage'));
+
 const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
@@ -160,6 +172,18 @@ function AnimatedRoutes() {
           <Route path="/youtube-video-metadata-viewer" element={<VideoMetadataViewerPage />} />
           <Route path="/youtube-title-analyzer" element={<TitleAnalyzerPage />} />
           <Route path="/youtube-description-analyzer" element={<DescriptionAnalyzerPage />} />
+
+          {/* 10 Keyword SEO Tool Routes */}
+          <Route path="/youtube-search-volume-checker" element={<SearchVolumeCheckerPage />} />
+          <Route path="/youtube-keyword-difficulty-checker" element={<KeywordDifficultyCheckerPage />} />
+          <Route path="/youtube-trending-keywords-finder" element={<TrendingKeywordsFinderPage />} />
+          <Route path="/youtube-related-keywords-generator" element={<RelatedKeywordsGeneratorPage />} />
+          <Route path="/youtube-search-intent-analyzer" element={<SearchIntentAnalyzerPage />} />
+          <Route path="/youtube-search-suggest-explorer" element={<SearchSuggestExplorerPage />} />
+          <Route path="/youtube-autocomplete-generator" element={<AutocompleteGeneratorPage />} />
+          <Route path="/youtube-question-keyword-finder" element={<QuestionKeywordFinderPage />} />
+          <Route path="/youtube-keyword-grouper" element={<KeywordGrouperPage />} />
+          <Route path="/youtube-keyword-cluster-generator" element={<KeywordClusterGeneratorPage />} />
 
           <Route path="/blogs" element={<BlogIndexPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />

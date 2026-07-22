@@ -147,6 +147,66 @@ export const toolFaqs = {
       answer: "An SEO-optimized description includes primary keywords in the first 25 words, video chapter timestamps, 3 targeted hashtags, and clear call-to-action links."
     }
   ],
+  searchVolumeChecker: [
+    {
+      question: "How do I check YouTube search volume for free?",
+      answer: "Use our YouTube Search Volume Checker tool to estimate monthly video search queries, search volume ranges, and competition metrics for free."
+    }
+  ],
+  keywordDifficultyChecker: [
+    {
+      question: "What is keyword difficulty on YouTube?",
+      answer: "YouTube keyword difficulty measures how hard it is to rank on the first page of YouTube search results for a specific query based on competitor channel authority and video SEO optimization."
+    }
+  ],
+  trendingKeywordsFinder: [
+    {
+      question: "How do I find trending keywords on YouTube?",
+      answer: "Our Trending Keywords Finder tool analyzes real-time algorithm breakout terms across gaming, tech, finance, and entertainment niches."
+    }
+  ],
+  relatedKeywordsGenerator: [
+    {
+      question: "What are LSI related keywords for YouTube?",
+      answer: "LSI (Latent Semantic Indexing) keywords are search terms semantically related to your main topic. Including related keywords in your metadata helps YouTube understand video context."
+    }
+  ],
+  searchIntentAnalyzer: [
+    {
+      question: "Why is search intent important for YouTube SEO?",
+      answer: "Search intent reveals whether viewers want an educational tutorial, product review, or entertainment vlog. Matching your video format to search intent dramatically boosts audience retention."
+    }
+  ],
+  searchSuggestExplorer: [
+    {
+      question: "How does YouTube search suggest work?",
+      answer: "YouTube search suggest uses predictive algorithms to display real-time queries based on past user search behavior. Our tool extracts these predictions instantly."
+    }
+  ],
+  autocompleteGenerator: [
+    {
+      question: "How do I generate YouTube autocomplete keywords?",
+      answer: "Enter your base keyword into our Autocomplete Generator to extract long-tail search predictions across A-Z alphabetical modifiers."
+    }
+  ],
+  questionKeywordFinder: [
+    {
+      question: "How do question keywords help YouTube ranking?",
+      answer: "Question keywords (How, Why, What) target high-intent viewers seeking solutions. Answering question queries directly helps your video rank in Google AI Overviews and YouTube search."
+    }
+  ],
+  keywordGrouper: [
+    {
+      question: "What is keyword grouping in YouTube SEO?",
+      answer: "Keyword grouping categorizes large keyword lists into logical thematic clusters, making it easy to plan playlist series and video outlines."
+    }
+  ],
+  keywordClusterGenerator: [
+    {
+      question: "What is a YouTube keyword cluster?",
+      answer: "A keyword cluster is a group of related subtopics built around a core pillar topic. Creating content clusters establishes deep topical authority for your channel."
+    }
+  ],
   videoIdeas: [
     {
       question: "How do I come up with YouTube video ideas?",
