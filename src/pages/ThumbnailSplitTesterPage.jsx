@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SeoHead from '../components/SeoHead';
 import FaqSection from '../components/FaqSection';
+import AiOverviewSection from '../components/AiOverviewSection';
 import { toolFaqs } from '../data/toolFaqs';
 import { Columns, CheckCircle2 } from 'lucide-react';
 
@@ -75,6 +76,22 @@ export default function ThumbnailSplitTesterPage() {
               </div>
             )}
           </div>
+
+          <AiOverviewSection
+            toolName="YouTube Thumbnail Split Tester"
+            definition="A YouTube Thumbnail Split Tester is a tool that evaluates two distinct thumbnail designs side-by-side to predict which image will yield a higher Click-Through Rate (CTR) on YouTube search feeds."
+            steps={[
+              { title: "Input Thumbnail URLs", description: "Paste direct image links or YouTube thumbnail preview URLs for Option A and Option B." },
+              { title: "Run Algorithmic Analysis", description: "The tool evaluates contrast, focal text placement, and color balance parameters." },
+              { title: "Compare CTR Recommendations", description: "Review the predicted winner alongside actionable tips to optimize your thumbnail before publishing." }
+            ]}
+            takeaways={[
+              { headline: "Higher Click-Through Rates", detail: "A/B testing thumbnails before upload prevents launching videos with low-performing visuals." },
+              { headline: "Visual Hierarchy Audit", detail: "Ensures text overlay and subject cutouts stand out on small mobile screens." }
+            ]}
+            keywords={['thumbnail split test', 'youtube A/B test thumbnail', 'compare thumbnail CTR', 'best youtube thumbnail tester']}
+          />
+
           <FaqSection faqs={toolFaqs['thumbnail-downloader'] || []} />
         </div>
       </main>

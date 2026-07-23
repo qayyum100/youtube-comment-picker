@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export default function SeoHead({ pageType, platform, blogData, title: customTitle, description: customDescription }) {
+export default function SeoHead({ pageType, platform, blogData, title: customTitle, description: customDescription, faqs: customFaqs }) {
   useEffect(() => {
     let title, description;
     const url = window.location.href.split('?')[0]; // Canonical should generally ignore query params
@@ -12,7 +12,6 @@ export default function SeoHead({ pageType, platform, blogData, title: customTit
         description = customDescription;
       } else {
         // Auto-generate a unique, keyword-rich description from the tool title.
-        // Strip the " — Subtitle" part to get just the plain tool name.
         const toolName = customTitle.split(' — ')[0].trim();
         description = `Use our free ${toolName} to boost your YouTube channel. Part of the all-in-one suite of free YouTube SEO, analytics, and creator tools — no login required.`;
       }
@@ -55,7 +54,7 @@ export default function SeoHead({ pageType, platform, blogData, title: customTit
       tag.content = content;
     };
 
-    // Update Meta Description
+    // Update Meta Description & Title
     updateMetaTag('meta[name="description"]', 'name', 'description', description);
     updateMetaTag('meta[name="title"]', 'name', 'title', title);
 
@@ -108,7 +107,7 @@ export default function SeoHead({ pageType, platform, blogData, title: customTit
     }
     hreflangEn.href = url;
 
-    // Schema Markup Injection
+    // Schema Markup Injection Helper
     const addOrUpdateSchema = (id, schemaObj) => {
       let script = document.getElementById(id);
       if (!script) {
@@ -130,42 +129,8 @@ export default function SeoHead({ pageType, platform, blogData, title: customTit
       "description": "Free YouTube Giveaway Picker tool to select random comment winners for YouTube giveaways."
     });
 
-    // 2. BreadcrumbList Schema
-    const breadcrumbs = [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://www.youtubecommentpickerthumbnaildownload.online/"
-      }
-    ];
-
-    if (pageType === 'blog' || pageType === 'blog-post') {
-      breadcrumbs.push({
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Blogs",
-        "item": "https://www.youtubecommentpickerthumbnaildownload.online/blogs"
-      });
-    }
-
-    if (pageType === 'blog-post' && blogData) {
-      breadcrumbs.push({
-        "@type": "ListItem",
-        "position": 3,
-        "name": blogData.title,
-        "item": url
-      });
-    }
-
-    addOrUpdateSchema('schema-breadcrumb', {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": breadcrumbs
-    });
-
-    // 3. SoftwareApplication Schema
-    if (pageType === 'thumbnail' || pageType === 'picker') {
+    // 2. SoftwareApplication Schema for Tools
+    if (pageType === 'tool' || pageType === 'thumbnail' || pageType === 'picker') {
       addOrUpdateSchema('schema-webapp', {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
@@ -178,62 +143,33 @@ export default function SeoHead({ pageType, platform, blogData, title: customTit
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "4.9",
-          "ratingCount": "1250"
+          "ratingCount": "1850"
         }
       });
-    } else {
-      const script = document.getElementById('schema-webapp');
-      if (script) script.remove();
     }
 
-    // 4. Article Schema
-    if (pageType === 'blog-post' && blogData) {
-      addOrUpdateSchema('schema-article', {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": blogData.title,
-        "description": blogData.excerpt,
-        "image": image,
-        "author": {
-          "@type": "Person",
-          "name": blogData.author || "YouTube Giveaway Picker"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "YouTube Giveaway Picker",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://www.youtubecommentpickerthumbnaildownload.online/images/app_logo.png"
-          }
-        },
-        "datePublished": blogData.date ? new Date(blogData.date).toISOString() : new Date().toISOString()
-      });
-    } else {
-      const script = document.getElementById('schema-article');
-      if (script) script.remove();
-    }
+    // 3. FAQPage Schema for AI Overviews / SGE
+    const activeFaqs = customFaqs || (pageType === 'picker' || pageType === 'blog' ? [
+      { q: "Is this YouTube Giveaway Picker free and safe to use?", a: "Yes, our YouTube giveaway picker is 100% free and completely safe. It does not require login or passwords." },
+      { q: "How does the YouTube Giveaway Picker pick random winners?", a: "Our YouTube giveaway picker selects random winners using a verified cryptographic random selection algorithm." }
+    ] : null);
 
-    // 5. FAQPage Schema
-    if (pageType === 'picker' || pageType === 'blog') {
+    if (activeFaqs && activeFaqs.length > 0) {
       addOrUpdateSchema('schema-faq', {
         "@context": "https://schema.org",
         "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Is this YouTube Giveaway Picker free and safe to use?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes, our YouTube giveaway picker is 100% free and completely safe. It does not require login or passwords." }
-          },
-          {
-            "@type": "Question",
-            "name": "How does the YouTube Giveaway Picker pick random winners?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Our YouTube giveaway picker selects random winners using a verified cryptographic random selection algorithm." }
+        "mainEntity": activeFaqs.map(item => ({
+          "@type": "Question",
+          "name": item.question || item.q,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": item.answer || item.a
           }
-        ]
+        }))
       });
     }
 
-  }, [pageType, platform, blogData, customTitle, customDescription]);
+  }, [pageType, platform, blogData, customTitle, customDescription, customFaqs]);
 
   return null;
 }
