@@ -1,11 +1,22 @@
 import { useEffect } from 'react';
 
-export default function SeoHead({ pageType, platform, blogData }) {
+export default function SeoHead({ pageType, platform, blogData, title: customTitle, description: customDescription }) {
   useEffect(() => {
     let title, description;
     const url = window.location.href.split('?')[0]; // Canonical should generally ignore query params
 
-    if (pageType === 'thumbnail') {
+    if (customTitle) {
+      // Custom title is provided by the individual tool page — use it directly.
+      title = customTitle;
+      if (customDescription) {
+        description = customDescription;
+      } else {
+        // Auto-generate a unique, keyword-rich description from the tool title.
+        // Strip the " — Subtitle" part to get just the plain tool name.
+        const toolName = customTitle.split(' — ')[0].trim();
+        description = `Use our free ${toolName} to boost your YouTube channel. Part of the all-in-one suite of free YouTube SEO, analytics, and creator tools — no login required.`;
+      }
+    } else if (pageType === 'thumbnail') {
       title = 'YouTube Thumbnail Downloader — Free YouTube Giveaway Picker Tools';
       description = 'Download high-resolution (HD, 4K, 1080p) thumbnails from any YouTube video instantly. Free YouTube thumbnail grabber and YouTube giveaway picker suite.';
     } else if (pageType === 'blog') {
@@ -222,7 +233,7 @@ export default function SeoHead({ pageType, platform, blogData }) {
       });
     }
 
-  }, [pageType, platform, blogData]);
+  }, [pageType, platform, blogData, customTitle, customDescription]);
 
   return null;
 }
