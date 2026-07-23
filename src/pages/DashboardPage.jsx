@@ -81,6 +81,49 @@ export default function DashboardPage() {
       category: "AI Generators"
     },
     {
+      name: "YouTube Cards CTA Generator",
+      description: "Generate video card call-to-actions to boost viewer engagement.",
+      path: "/youtube-cards-cta-generator",
+      icon: <ArrowRight size={22} />,
+      color: "#EC4899",
+      category: "AI Generators"
+    },
+
+    // 30 New Tools
+    { name: "Thumbnail Split Tester", description: "Compare CTR performance of two thumbnail designs side-by-side.", path: "/youtube-thumbnail-split-tester", icon: <Image size={22} />, color: "#EF4444", category: "Creator Graphics & Extras" },
+    { name: "Thumbnail Color Checker", description: "Extract dominant color palettes and HEX codes from thumbnails.", path: "/youtube-thumbnail-color-checker", icon: <Image size={22} />, color: "#F59E0B", category: "Creator Graphics & Extras" },
+    { name: "Thumbnail Contrast Checker", description: "Audit visual contrast ratios for light and dark theme legibility.", path: "/youtube-thumbnail-contrast-checker", icon: <Image size={22} />, color: "#10B981", category: "Creator Graphics & Extras" },
+    { name: "Thumbnail Text Size Checker", description: "Verify text proportion and scale for mobile feeds.", path: "/youtube-thumbnail-text-size-checker", icon: <Image size={22} />, color: "#3B82F6", category: "Creator Graphics & Extras" },
+    { name: "Thumbnail Safe Area Checker", description: "Ensure key graphics aren't hidden by duration badges or overlays.", path: "/youtube-thumbnail-safe-area-checker", icon: <ShieldAlert size={22} />, color: "#8B5CF6", category: "Creator Graphics & Extras" },
+    { name: "Mobile Thumbnail Preview", description: "Preview video thumbnail presentation on iOS and Android feeds.", path: "/youtube-mobile-thumbnail-preview", icon: <Image size={22} />, color: "#EC4899", category: "Creator Graphics & Extras" },
+    { name: "Desktop Thumbnail Preview", description: "Simulate widescreen thumbnail presentation on desktop monitors.", path: "/youtube-desktop-thumbnail-preview", icon: <Image size={22} />, color: "#14B8A6", category: "Creator Graphics & Extras" },
+    { name: "Thumbnail Compression Tool", description: "Optimize image file sizes below YouTube's strict 2MB limit.", path: "/youtube-thumbnail-compression-tool", icon: <Download size={22} />, color: "#22C55E", category: "Creator Graphics & Extras" },
+    { name: "Thumbnail Background Remover", description: "Isolate subjects and remove backgrounds for thumbnail design.", path: "/youtube-thumbnail-background-remover", icon: <Scissors size={22} />, color: "#F43F5E", category: "Creator Graphics & Extras" },
+    { name: "Thumbnail Upscaler", description: "Enhance low-resolution stills and thumbnails to 4K quality.", path: "/youtube-thumbnail-upscaler", icon: <Sparkles size={22} />, color: "#06B6D4", category: "Creator Graphics & Extras" },
+
+    { name: "AI Video Outline Generator", description: "Generate structured, high-retention video blueprints.", path: "/youtube-ai-video-outline-generator", icon: <FileText size={22} />, color: "#8B5CF6", category: "AI Generators" },
+    { name: "AI Video Chapter Generator", description: "Format YouTube-compliant timestamps for video descriptions.", path: "/youtube-ai-video-chapter-generator", icon: <Calendar size={22} />, color: "#EC4899", category: "AI Generators" },
+    { name: "AI Comment Reply Generator", description: "Generate authentic responses to viewer comments.", path: "/youtube-ai-comment-reply-generator", icon: <MessageSquare size={22} />, color: "#14B8A6", category: "AI Generators" },
+    { name: "AI Community Post Generator", description: "Draft engaging YouTube Community tab updates and polls.", path: "/youtube-ai-community-post-generator", icon: <MessageSquare size={22} />, color: "#F59E0B", category: "AI Generators" },
+    { name: "AI Pinned Comment Generator", description: "Craft call-to-action pinned comments for discussion threads.", path: "/youtube-ai-pinned-comment-generator", icon: <MessageSquare size={22} />, color: "#10B981", category: "AI Generators" },
+    { name: "AI End Screen CTA Generator", description: "Generate verbal call-to-actions to direct viewers to next videos.", path: "/youtube-ai-end-screen-cta-generator", icon: <Sparkles size={22} />, color: "#3B82F6", category: "AI Generators" },
+    { name: "AI Video Intro Generator", description: "Craft high-retention spoken video hooks.", path: "/youtube-ai-video-intro-generator", icon: <Sparkles size={22} />, color: "#EF4444", category: "AI Generators" },
+    { name: "AI Outro Generator", description: "Generate clean video outro scripts and closing CTAs.", path: "/youtube-ai-outro-generator", icon: <Sparkles size={22} />, color: "#F43F5E", category: "AI Generators" },
+    { name: "AI FAQ Generator", description: "Generate relevant Q&A blocks for video descriptions.", path: "/youtube-ai-faq-generator", icon: <Sparkles size={22} />, color: "#06B6D4", category: "AI Generators" },
+    { name: "AI Content Repurposer", description: "Turn video scripts into X threads, LinkedIn posts, and Shorts hooks.", path: "/youtube-ai-content-repurposer", icon: <Sparkles size={22} />, color: "#8B5CF6", category: "AI Generators" },
+
+    { name: "YouTube Title Case Converter", description: "Convert video titles to Title Case, UPPERCASE, or sentence case.", path: "/youtube-title-case-converter", icon: <Type size={22} />, color: "#10B981", category: "SEO & Optimization" },
+    { name: "Emoji Generator", description: "Find high-CTR emojis relevant to your video topic.", path: "/youtube-emoji-generator", icon: <Sparkles size={22} />, color: "#F59E0B", category: "SEO & Optimization" },
+    { name: "Character Counter", description: "Track character counts against YouTube's 100-char Title and 5000-char Desc limits.", path: "/youtube-character-counter", icon: <Type size={22} />, color: "#3B82F6", category: "SEO & Optimization" },
+    { name: "Tag Counter", description: "Count tags and stay within YouTube's 500-character tag box limit.", path: "/youtube-tag-counter", icon: <Tag size={22} />, color: "#8B5CF6", category: "SEO & Optimization" },
+    { name: "Description Formatter", description: "Clean up raw text into structured video descriptions.", path: "/youtube-description-formatter", icon: <FileText size={22} />, color: "#EC4899", category: "SEO & Optimization" },
+    { name: "Text Formatter", description: "Remove duplicate spaces and fix line breaks in video copy.", path: "/youtube-text-formatter", icon: <Type size={22} />, color: "#14B8A6", category: "SEO & Optimization" },
+    { name: "Markdown to Description Converter", description: "Convert Markdown notes into emoji-formatted YouTube descriptions.", path: "/youtube-markdown-to-description-converter", icon: <Code size={22} />, color: "#F43F5E", category: "SEO & Optimization" },
+    { name: "HTML to Plain Text Converter", description: "Strip HTML tags from blog posts to create clean video text.", path: "/youtube-html-to-plain-text-converter", icon: <Code size={22} />, color: "#22C55E", category: "SEO & Optimization" },
+    { name: "Timestamp Formatter", description: "Format raw timestamp notes into YouTube-recognized chapter lists.", path: "/youtube-timestamp-formatter", icon: <Activity size={22} />, color: "#06B6D4", category: "SEO & Optimization" },
+    { name: "Hashtag Formatter", description: "Format words or tags into clean #hashtag lists.", path: "/youtube-hashtag-formatter", icon: <Hash size={22} />, color: "#EF4444", category: "SEO & Optimization" },
+
+    {
       name: "YouTube Money Calculator",
       description: "Calculate potential video earnings based on views and RPM ranges.",
       path: "/youtube-money-calculator",

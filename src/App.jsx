@@ -108,6 +108,40 @@ const MembershipPerksGeneratorPage = lazy(() => import('./pages/MembershipPerksG
 const EndScreenOptimizerPage = lazy(() => import('./pages/EndScreenOptimizerPage'));
 const CardsCtaGeneratorPage = lazy(() => import('./pages/CardsCtaGeneratorPage'));
 
+// 30 New Tools (Thumbnail, AI Generators, Formatters & Utilities)
+const ThumbnailSplitTesterPage = lazy(() => import('./pages/ThumbnailSplitTesterPage'));
+const ThumbnailColorCheckerPage = lazy(() => import('./pages/ThumbnailColorCheckerPage'));
+const ThumbnailContrastCheckerPage = lazy(() => import('./pages/ThumbnailContrastCheckerPage'));
+const ThumbnailTextSizeCheckerPage = lazy(() => import('./pages/ThumbnailTextSizeCheckerPage'));
+const ThumbnailSafeAreaCheckerPage = lazy(() => import('./pages/ThumbnailSafeAreaCheckerPage'));
+const MobileThumbnailPreviewPage = lazy(() => import('./pages/MobileThumbnailPreviewPage'));
+const DesktopThumbnailPreviewPage = lazy(() => import('./pages/DesktopThumbnailPreviewPage'));
+const ThumbnailCompressionToolPage = lazy(() => import('./pages/ThumbnailCompressionToolPage'));
+const ThumbnailBackgroundRemoverPage = lazy(() => import('./pages/ThumbnailBackgroundRemoverPage'));
+const ThumbnailUpscalerPage = lazy(() => import('./pages/ThumbnailUpscalerPage'));
+
+const AiVideoOutlineGeneratorPage = lazy(() => import('./pages/AiVideoOutlineGeneratorPage'));
+const AiVideoChapterGeneratorPage = lazy(() => import('./pages/AiVideoChapterGeneratorPage'));
+const AiCommentReplyGeneratorPage = lazy(() => import('./pages/AiCommentReplyGeneratorPage'));
+const AiCommunityPostGeneratorPage = lazy(() => import('./pages/AiCommunityPostGeneratorPage'));
+const AiPinnedCommentGeneratorPage = lazy(() => import('./pages/AiPinnedCommentGeneratorPage'));
+const AiEndScreenCtaGeneratorPage = lazy(() => import('./pages/AiEndScreenCtaGeneratorPage'));
+const AiVideoIntroGeneratorPage = lazy(() => import('./pages/AiVideoIntroGeneratorPage'));
+const AiOutroGeneratorPage = lazy(() => import('./pages/AiOutroGeneratorPage'));
+const AiFaqGeneratorPage = lazy(() => import('./pages/AiFaqGeneratorPage'));
+const AiContentRepurposerPage = lazy(() => import('./pages/AiContentRepurposerPage'));
+
+const YoutubeTitleCaseConverterPage = lazy(() => import('./pages/YoutubeTitleCaseConverterPage'));
+const EmojiGeneratorPage = lazy(() => import('./pages/EmojiGeneratorPage'));
+const CharacterCounterPage = lazy(() => import('./pages/CharacterCounterPage'));
+const TagCounterPage = lazy(() => import('./pages/TagCounterPage'));
+const DescriptionFormatterPage = lazy(() => import('./pages/DescriptionFormatterPage'));
+const TextFormatterPage = lazy(() => import('./pages/TextFormatterPage'));
+const MarkdownToDescriptionConverterPage = lazy(() => import('./pages/MarkdownToDescriptionConverterPage'));
+const HtmlToPlainTextConverterPage = lazy(() => import('./pages/HtmlToPlainTextConverterPage'));
+const TimestampFormatterPage = lazy(() => import('./pages/TimestampFormatterPage'));
+const HashtagFormatterPage = lazy(() => import('./pages/HashtagFormatterPage'));
+
 const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
@@ -273,6 +307,40 @@ function AnimatedRoutes() {
           <Route path="/youtube-membership-perks-generator" element={<MembershipPerksGeneratorPage />} />
           <Route path="/youtube-end-screen-optimizer" element={<EndScreenOptimizerPage />} />
           <Route path="/youtube-cards-cta-generator" element={<CardsCtaGeneratorPage />} />
+
+          {/* 30 New Tool Routes */}
+          <Route path="/youtube-thumbnail-split-tester" element={<ThumbnailSplitTesterPage />} />
+          <Route path="/youtube-thumbnail-color-checker" element={<ThumbnailColorCheckerPage />} />
+          <Route path="/youtube-thumbnail-contrast-checker" element={<ThumbnailContrastCheckerPage />} />
+          <Route path="/youtube-thumbnail-text-size-checker" element={<ThumbnailTextSizeCheckerPage />} />
+          <Route path="/youtube-thumbnail-safe-area-checker" element={<ThumbnailSafeAreaCheckerPage />} />
+          <Route path="/youtube-mobile-thumbnail-preview" element={<MobileThumbnailPreviewPage />} />
+          <Route path="/youtube-desktop-thumbnail-preview" element={<DesktopThumbnailPreviewPage />} />
+          <Route path="/youtube-thumbnail-compression-tool" element={<ThumbnailCompressionToolPage />} />
+          <Route path="/youtube-thumbnail-background-remover" element={<ThumbnailBackgroundRemoverPage />} />
+          <Route path="/youtube-thumbnail-upscaler" element={<ThumbnailUpscalerPage />} />
+
+          <Route path="/youtube-ai-video-outline-generator" element={<AiVideoOutlineGeneratorPage />} />
+          <Route path="/youtube-ai-video-chapter-generator" element={<AiVideoChapterGeneratorPage />} />
+          <Route path="/youtube-ai-comment-reply-generator" element={<AiCommentReplyGeneratorPage />} />
+          <Route path="/youtube-ai-community-post-generator" element={<AiCommunityPostGeneratorPage />} />
+          <Route path="/youtube-ai-pinned-comment-generator" element={<AiPinnedCommentGeneratorPage />} />
+          <Route path="/youtube-ai-end-screen-cta-generator" element={<AiEndScreenCtaGeneratorPage />} />
+          <Route path="/youtube-ai-video-intro-generator" element={<AiVideoIntroGeneratorPage />} />
+          <Route path="/youtube-ai-outro-generator" element={<AiOutroGeneratorPage />} />
+          <Route path="/youtube-ai-faq-generator" element={<AiFaqGeneratorPage />} />
+          <Route path="/youtube-ai-content-repurposer" element={<AiContentRepurposerPage />} />
+
+          <Route path="/youtube-title-case-converter" element={<YoutubeTitleCaseConverterPage />} />
+          <Route path="/youtube-emoji-generator" element={<EmojiGeneratorPage />} />
+          <Route path="/youtube-character-counter" element={<CharacterCounterPage />} />
+          <Route path="/youtube-tag-counter" element={<TagCounterPage />} />
+          <Route path="/youtube-description-formatter" element={<DescriptionFormatterPage />} />
+          <Route path="/youtube-text-formatter" element={<TextFormatterPage />} />
+          <Route path="/youtube-markdown-to-description-converter" element={<MarkdownToDescriptionConverterPage />} />
+          <Route path="/youtube-html-to-plain-text-converter" element={<HtmlToPlainTextConverterPage />} />
+          <Route path="/youtube-timestamp-formatter" element={<TimestampFormatterPage />} />
+          <Route path="/youtube-hashtag-formatter" element={<HashtagFormatterPage />} />
 
           <Route path="/blogs" element={<BlogIndexPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
