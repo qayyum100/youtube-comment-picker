@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 export default function SEO({ title, description, url, image, type = 'website', schema }) {
-  const siteUrl = 'https://youtubecommentpickerthumbnaildownload.online';
+  const siteUrl = 'https://www.youtubecommentpickerthumbnaildownload.online';
   const fullUrl = url ? `${siteUrl}${url}` : siteUrl;
   const defaultImage = `${siteUrl}/og-image.jpg`;
 

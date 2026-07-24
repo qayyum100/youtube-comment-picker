@@ -63,55 +63,141 @@
 <body>
   <div id="root"></div>
 
-  <!-- No-Script Crawler & Accessibility Fallback -->
+  <!-- Static HTML Crawl Layer for Search Engine Bots -->
+  <!-- Googlebot reads this even before JavaScript rendering -->
   <noscript>
-    <div
-      style="background-color: var(--bg); color: var(--text-primary); font-family: var(--font-main); padding: 40px; max-width: 800px; margin: 0 auto;">
-      <h1 style="color: var(--primary); font-size: 2.5rem; margin-bottom: 20px;">Comment Picker for YouTube & YouTube Giveaway Picker</h1>
-      <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-secondary);">
-        Welcome to the best comment picker for youtube and youtube giveaway picker.
-        If you are seeing this, your browser has disabled JavaScript. Please enable JavaScript to access the full
-        youtube random comment picker, giveaway picker youtube tools, and see how youtube random comment picker works.
-      </p>
+    <style>
+      .seo-fallback { font-family: Arial, sans-serif; max-width: 960px; margin: 0 auto; padding: 40px 20px; color: #111; }
+      .seo-fallback h1 { font-size: 2rem; color: #FF0000; margin-bottom: 12px; }
+      .seo-fallback h2 { font-size: 1.4rem; color: #222; margin: 28px 0 10px; border-bottom: 2px solid #eee; padding-bottom: 6px; }
+      .seo-fallback p { font-size: 1rem; line-height: 1.7; color: #444; margin-bottom: 12px; }
+      .seo-fallback ul { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 6px 16px; list-style: disc; padding-left: 20px; }
+      .seo-fallback li a { color: #1a0dab; text-decoration: none; font-size: 0.92rem; }
+    </style>
+    <div class="seo-fallback">
+      <h1>YouTube Creator Tools Suite — Free YouTube SEO, Analytics & Giveaway Tools</h1>
+      <p>Welcome to the ultimate free YouTube creator toolkit. Pick random giveaway winners, download HD thumbnails, generate SEO-optimized titles and descriptions, analyze channel performance, and more — all in one place. No login required.</p>
 
-      <hr style="border: 0; border-top: 1px solid var(--border); margin: 40px 0;" />
-
-      <h2 style="font-size: 1.8rem; margin-bottom: 15px;">Frequently Asked Questions (FAQ)</h2>
-      <div style="margin-bottom: 25px;">
-        <h3 style="color: var(--warning); font-size: 1.2rem;">1. How does the picking algorithm work?</h3>
-        <p style="color: var(--text-secondary); line-height: 1.5;">
-          The app fetches comments from the entered YouTube video URL or Instagram shortcode. It then filters them based
-          on your parameters (e.g. required hashtag, minimum friends tagged, minimum likes). Finally, it selects winners
-          using a secure, unbiased crypto-random number generator (`window.crypto.getRandomValues`).
-        </p>
-      </div>
-      <div style="margin-bottom: 25px;">
-        <h3 style="color: var(--warning); font-size: 1.2rem;">2. Does this picker require OAuth login credentials?</h3>
-        <p style="color: var(--text-secondary); line-height: 1.5;">
-          No. To respect user privacy and enforce E-E-A-T guidelines, we do not collect or request private account
-          passwords or permissions. Drawing lists are compiled through our Vercel backend proxy or sandbox simulator.
-        </p>
-      </div>
-      <div style="margin-bottom: 25px;">
-        <h3 style="color: var(--warning); font-size: 1.2rem;">3. What filters can I apply?</h3>
-        <p style="color: var(--text-secondary); line-height: 1.5;">
-          You can configure Keyword Hurdles (e.g., '#giveaway'), Tagging Constraints (minimum number of friend
-          @mentions), Likes thresholds, Exclusion blacklists (spam words or competitors), and Duplicate control modes
-          (Fair vs Boost).
-        </p>
-      </div>
-
-      <hr style="border: 0; border-top: 1px solid var(--border); margin: 40px 0;" />
-
-      <h2 style="font-size: 1.8rem; margin-bottom: 15px;">Trust & Compliance E-E-A-T Guidelines</h2>
-      <ul style="list-style-type: square; color: var(--text-secondary); line-height: 1.8; padding-left: 20px;">
-        <li><strong>Unbiased Crypto Randomness:</strong> Selecting winners using standard cryptographic seeds rather
-          than pseudo-random index selectors.</li>
-        <li><strong>Zero Personal Storage:</strong> No cookies, tracker logs, or usernames are saved to any cloud
-          database. All actions are browser-bound and persisted in standard local storage.</li>
-        <li><strong>No Password Policy:</strong> Direct-fetch architectures prevent unauthorized API sessions or account
-          hijackings.</li>
+      <h2>🎁 YouTube Giveaway & Comment Pickers</h2>
+      <ul>
+        <li><a href="/youtube-comment-picker">YouTube Giveaway Picker — Pick Random Comment Winners Free</a></li>
+        <li><a href="/instagram-comment-picker">Instagram Giveaway Picker — Random Comment Winner Selector</a></li>
+        <li><a href="/tiktok-comment-picker">TikTok Giveaway Picker — Random Winner from TikTok Comments</a></li>
       </ul>
+
+      <h2>🖼️ Thumbnail Tools</h2>
+      <ul>
+        <li><a href="/youtube-thumbnail-downloader">YouTube Thumbnail Downloader — Download HD 1080p Thumbnails</a></li>
+        <li><a href="/youtube-thumbnail-downloader-hd">YouTube HD Thumbnail Downloader — 4K Quality Thumbnails</a></li>
+        <li><a href="/youtube-thumbnail-analyzer">YouTube Thumbnail Analyzer — CTR & Quality Audit Tool</a></li>
+        <li><a href="/youtube-thumbnail-generator">AI YouTube Thumbnail Generator — Free Custom Thumbnails</a></li>
+        <li><a href="/youtube-thumbnail-preview">YouTube Thumbnail Preview — Test Thumbnail Appearance</a></li>
+        <li><a href="/youtube-thumbnail-split-tester">Thumbnail Split Tester — A/B Test YouTube Thumbnails</a></li>
+        <li><a href="/youtube-thumbnail-color-checker">Thumbnail Color Checker — Extract Dominant Color Palettes</a></li>
+        <li><a href="/youtube-thumbnail-contrast-checker">Thumbnail Contrast Checker — Legibility Audit Tool</a></li>
+        <li><a href="/youtube-thumbnail-text-size-checker">Thumbnail Text Size Checker — Mobile Readability Audit</a></li>
+        <li><a href="/youtube-thumbnail-safe-area-checker">Thumbnail Safe Area Checker — Overlay Conflict Detector</a></li>
+        <li><a href="/youtube-mobile-thumbnail-preview">Mobile Thumbnail Preview — Phone Feed Simulator</a></li>
+        <li><a href="/youtube-desktop-thumbnail-preview">Desktop Thumbnail Preview — Widescreen Grid Simulator</a></li>
+        <li><a href="/youtube-thumbnail-compression-tool">Thumbnail Compression Tool — Optimize Under 2MB Free</a></li>
+        <li><a href="/youtube-thumbnail-background-remover">Thumbnail Background Remover — Free AI Subject Cutout</a></li>
+        <li><a href="/youtube-thumbnail-upscaler">Thumbnail Upscaler — Enhance to 4K Quality Free</a></li>
+      </ul>
+
+      <h2>🔍 YouTube SEO & Analytics Tools</h2>
+      <ul>
+        <li><a href="/youtube-seo-checker">YouTube SEO Checker — Audit Video Metadata</a></li>
+        <li><a href="/youtube-title-generator">YouTube Title Generator — AI SEO Title Creator</a></li>
+        <li><a href="/youtube-title-analyzer">YouTube Title Analyzer — Score and Improve Video Titles</a></li>
+        <li><a href="/youtube-description-generator">YouTube Description Generator — SEO Optimized Free</a></li>
+        <li><a href="/youtube-tag-generator">YouTube Tag Generator — Find High-Ranking Tags</a></li>
+        <li><a href="/youtube-tag-extractor">YouTube Tag Extractor — Copy Video Tags Instantly</a></li>
+        <li><a href="/youtube-hashtag-generator">YouTube Hashtag Generator — Best Hashtags for Videos</a></li>
+        <li><a href="/youtube-keyword-tool">YouTube Keyword Research Tool — Find Low Competition Keywords</a></li>
+        <li><a href="/youtube-keyword-competition-analyzer">Keyword Competition Analyzer — Keyword Difficulty Score</a></li>
+        <li><a href="/youtube-related-keywords-generator">Related Keywords Generator — Semantic SEO Expansion</a></li>
+        <li><a href="/youtube-search-volume-checker">YouTube Search Volume Checker — Keyword Demand Data</a></li>
+        <li><a href="/youtube-trending-keywords-finder">Trending Keywords Finder — Viral Topic Discovery</a></li>
+        <li><a href="/youtube-search-suggest-explorer">Search Suggest Explorer — Autocomplete Keyword Mining</a></li>
+        <li><a href="/youtube-search-intent-analyzer">Search Intent Analyzer — Query Classification Tool</a></li>
+        <li><a href="/youtube-ctr-calculator">YouTube CTR Calculator — Click-Through Rate Estimator</a></li>
+        <li><a href="/youtube-rpm-calculator">YouTube RPM Calculator — Revenue Per Mille Estimator</a></li>
+        <li><a href="/youtube-money-calculator">YouTube Money Calculator — Channel Earnings Estimator</a></li>
+      </ul>
+
+      <h2>🤖 AI Content Generators</h2>
+      <ul>
+        <li><a href="/youtube-script-generator">AI YouTube Script Generator — Full Video Scripts</a></li>
+        <li><a href="/youtube-ai-video-outline-generator">AI Video Outline Generator — Structured Video Blueprints</a></li>
+        <li><a href="/youtube-ai-video-chapter-generator">AI Video Chapter Generator — YouTube Timestamp Formatter</a></li>
+        <li><a href="/youtube-ai-comment-reply-generator">AI Comment Reply Generator — Engage Viewers Faster</a></li>
+        <li><a href="/youtube-ai-community-post-generator">AI Community Post Generator — YouTube Tab Posts</a></li>
+        <li><a href="/youtube-ai-pinned-comment-generator">AI Pinned Comment Generator — Drive First-Hour Engagement</a></li>
+        <li><a href="/youtube-ai-end-screen-cta-generator">AI End Screen CTA Generator — Maximize Session Time</a></li>
+        <li><a href="/youtube-ai-video-intro-generator">AI Video Intro Generator — Hook Viewers in 5 Seconds</a></li>
+        <li><a href="/youtube-ai-outro-generator">AI Outro Generator — Professional Video Endings</a></li>
+        <li><a href="/youtube-ai-faq-generator">AI FAQ Generator — Video Description Q&A Blocks</a></li>
+        <li><a href="/youtube-ai-content-repurposer">AI Content Repurposer — Turn Videos into Social Posts</a></li>
+        <li><a href="/youtube-video-ideas-generator">Video Ideas Generator — Find Viral YouTube Topics</a></li>
+        <li><a href="/youtube-hook-generator">YouTube Hook Generator — Attention-Grabbing Openers</a></li>
+        <li><a href="/youtube-community-post-generator">Community Post Generator — Engagement Posts & Polls</a></li>
+        <li><a href="/youtube-end-screen-optimizer">End Screen Optimizer — Maximize Click-Through</a></li>
+        <li><a href="/youtube-cards-cta-generator">Cards CTA Generator — In-Video Link Prompts</a></li>
+      </ul>
+
+      <h2>📊 Channel Analytics & Growth Tools</h2>
+      <ul>
+        <li><a href="/youtube-channel-analyzer">YouTube Channel Analyzer — Detailed Performance Audit</a></li>
+        <li><a href="/youtube-subscriber-growth-analyzer">Subscriber Growth Analyzer — Track Channel Momentum</a></li>
+        <li><a href="/youtube-video-performance-auditor">Video Performance Auditor — View & Retention Analysis</a></li>
+        <li><a href="/youtube-watch-time-calculator">Watch Time Calculator — Total Estimated Hours</a></li>
+        <li><a href="/youtube-viral-video-finder">Viral Video Finder — Discover Trending Content</a></li>
+        <li><a href="/youtube-similar-channel-finder">Similar Channel Finder — Competitor Discovery Tool</a></li>
+        <li><a href="/youtube-upload-consistency-tracker">Upload Consistency Tracker — Posting Schedule Audit</a></li>
+        <li><a href="/youtube-video-metadata-viewer">Video Metadata Viewer — Inspect Full Video Data</a></li>
+        <li><a href="/youtube-video-duration-calculator">Video Duration Calculator — Optimal Length Analysis</a></li>
+        <li><a href="/youtube-video-summarizer">AI Video Summarizer — Auto-Generate Summaries</a></li>
+        <li><a href="/youtube-transcript-generator">Transcript Generator — Download Video Transcripts</a></li>
+      </ul>
+
+      <h2>✏️ Text Formatters & Utilities</h2>
+      <ul>
+        <li><a href="/youtube-title-case-converter">YouTube Title Case Converter — Format Video Titles</a></li>
+        <li><a href="/youtube-emoji-generator">Emoji Generator — High-CTR Emojis for Titles</a></li>
+        <li><a href="/youtube-character-counter">Character Counter — Audit Title & Description Limits</a></li>
+        <li><a href="/youtube-tag-counter">Tag Counter — Audit 500-Character Tag Limit</a></li>
+        <li><a href="/youtube-description-formatter">Description Formatter — Structure Video Descriptions</a></li>
+        <li><a href="/youtube-text-formatter">Text Formatter — Clean Spaces & Line Breaks</a></li>
+        <li><a href="/youtube-markdown-to-description-converter">Markdown to Description Converter — YouTube Text Format</a></li>
+        <li><a href="/youtube-html-to-plain-text-converter">HTML to Plain Text Converter — Strip Tags Free</a></li>
+        <li><a href="/youtube-timestamp-formatter">Timestamp Formatter — YouTube Chapter Format</a></li>
+        <li><a href="/youtube-hashtag-formatter">Hashtag Formatter — Sanitize & Format Hashtags</a></li>
+        <li><a href="/youtube-timestamp-generator">Timestamp Generator — Add Chapters to Descriptions</a></li>
+      </ul>
+
+      <h2>📱 YouTube Shorts Tools</h2>
+      <ul>
+        <li><a href="/youtube-shorts-idea-generator">Shorts Idea Generator — Viral Short Video Concepts</a></li>
+        <li><a href="/youtube-shorts-title-generator">Shorts Title Generator — Optimized Short Titles</a></li>
+        <li><a href="/youtube-shorts-hashtag-generator">Shorts Hashtag Generator — Trending Hashtag Sets</a></li>
+        <li><a href="/youtube-shorts-hook-analyzer">Shorts Hook Analyzer — First 3-Second Retention Score</a></li>
+        <li><a href="/youtube-shorts-seo-checker">Shorts SEO Checker — Metadata Optimization</a></li>
+        <li><a href="/youtube-shorts-keyword-finder">Shorts Keyword Finder — Discoverability Boost</a></li>
+        <li><a href="/youtube-shorts-caption-generator">Shorts Caption Generator — Auto Captions & Subtitles</a></li>
+        <li><a href="/youtube-shorts-performance-predictor">Shorts Performance Predictor — CTR Forecast</a></li>
+        <li><a href="/youtube-shorts-trend-finder">Shorts Trend Finder — Hot Niche Discovery</a></li>
+        <li><a href="/youtube-shorts-duration-optimizer">Shorts Duration Optimizer — Optimal Length Guide</a></li>
+        <li><a href="/youtube-shorts-upload-time-calculator">Shorts Upload Time Calculator — Best Posting Times</a></li>
+      </ul>
+
+      <h2>ℹ️ Information</h2>
+      <ul>
+        <li><a href="/about">About — Our Mission and Team</a></li>
+        <li><a href="/contact">Contact Us — Get Support</a></li>
+        <li><a href="/blogs">Creator Blog — YouTube SEO Guides & Tutorials</a></li>
+      </ul>
+
+      <p style="margin-top:32px; color: #888; font-size: 0.85rem;">JavaScript is required to use the full interactive tool experience. Please enable JavaScript in your browser settings.</p>
     </div>
   </noscript>
 
