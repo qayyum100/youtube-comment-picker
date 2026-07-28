@@ -15,6 +15,7 @@ const ChannelAnalyzerPage = lazy(() => import('./pages/ChannelAnalyzerPage'));
 const TitleGeneratorPage = lazy(() => import('./pages/TitleGeneratorPage'));
 const DescriptionGeneratorPage = lazy(() => import('./pages/DescriptionGeneratorPage'));
 const HashtagGeneratorPage = lazy(() => import('./pages/HashtagGeneratorPage'));
+const BestHashtagsSuitePage = lazy(() => import('./pages/BestHashtagsSuitePage'));
 const MoneyCalculatorPage = lazy(() => import('./pages/MoneyCalculatorPage'));
 const CommentAnalyzerPage = lazy(() => import('./pages/CommentAnalyzerPage'));
 
@@ -215,6 +216,7 @@ function AnimatedRoutes() {
           <Route path="/youtube-title-generator" element={<TitleGeneratorPage />} />
           <Route path="/youtube-description-generator" element={<DescriptionGeneratorPage />} />
           <Route path="/youtube-hashtag-generator" element={<HashtagGeneratorPage />} />
+          <Route path="/best-hashtags-generator" element={<BestHashtagsSuitePage />} />
           <Route path="/youtube-money-calculator" element={<MoneyCalculatorPage />} />
           <Route path="/youtube-comment-analyzer" element={<CommentAnalyzerPage />} />
 

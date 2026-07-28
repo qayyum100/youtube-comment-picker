@@ -73,6 +73,14 @@ export default function DashboardPage() {
       category: "AI Generators"
     },
     {
+      name: "Best Hashtags Generator Suite",
+      description: "Generate & copy top 1st, 2nd, and 3rd hashtag sets for Instagram, TikTok & Shorts.",
+      path: "/best-hashtags-generator",
+      icon: <Hash size={22} />,
+      color: "#ec4899",
+      category: "SEO & Optimization"
+    },
+    {
       name: "YouTube Hashtag Generator",
       description: "Generate highly searchable hashtags tailored to your video topic.",
       path: "/youtube-hashtag-generator",
