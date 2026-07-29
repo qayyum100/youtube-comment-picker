@@ -811,6 +811,113 @@ export default function DashboardPage() {
           <p>Try adjusting your search or browse a different category.</p>
         </div>
       )}
+
+      {/* Publisher Content & Creator Resource Hub for AdSense Compliance */}
+      <section style={{ marginTop: '56px', color: 'var(--text-primary)' }}>
+        {/* Comprehensive Overview Card */}
+        <div className="card card-lg" style={{ marginBottom: '32px', lineHeight: '1.75' }}>
+          <h2 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '16px', color: 'var(--text-primary)' }}>
+            The Ultimate YouTube & Social Media Creator Suite
+          </h2>
+          <p style={{ fontSize: '15px', color: 'var(--text-secondary)', marginBottom: '16px' }}>
+            Growing a successful digital presence across YouTube, TikTok, Instagram Reels, and Shorts requires a data-driven approach to SEO, visual branding, analytics, and workflow automation. Our comprehensive suite of free creator tools provides everything you need to audit channels, extract high-performing tags, generate viral titles, download high-resolution thumbnails, and run fair comment giveaways.
+          </p>
+          <p style={{ fontSize: '15px', color: 'var(--text-secondary)', marginBottom: '24px' }}>
+            Whether you are an aspiring YouTuber looking for your first 1,000 subscribers, an established agency managing multi-channel networks, or a digital marketer analyzing competitor strategies, our browser-based tools are engineered for speed, privacy, and maximum efficiency.
+          </p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginTop: '24px' }}>
+            <div style={{ padding: '20px', borderRadius: '12px', backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border)' }}>
+              <h3 style={{ fontSize: '17px', fontWeight: '700', marginBottom: '10px', color: 'var(--text-primary)' }}>🚀 SEO & Search Visibility</h3>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0 }}>
+                Master search rankings with specialized tools for extracting hidden video tags, auditing title and description metadata, checking keyword competition, and analyzing search intent.
+              </p>
+            </div>
+
+            <div style={{ padding: '20px', borderRadius: '12px', backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border)' }}>
+              <h3 style={{ fontSize: '17px', fontWeight: '700', marginBottom: '10px', color: 'var(--text-primary)' }}>🤖 AI Content Generators</h3>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0 }}>
+                Overcome creator's block with artificial intelligence models designed for generating hooky video intros, engaging community posts, video outlines, script ideas, and optimized end screen CTAs.
+              </p>
+            </div>
+
+            <div style={{ padding: '20px', borderRadius: '12px', backgroundColor: 'var(--bg-tertiary)', border: '1px solid var(--border)' }}>
+              <h3 style={{ fontSize: '17px', fontWeight: '700', marginBottom: '10px', color: 'var(--text-primary)' }}>📊 Analytics & Calculators</h3>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0 }}>
+                Estimate revenue potential, calculate CPM/RPM benchmarks, analyze channel growth trends, check monetization eligibility, and track subscriber milestones with accuracy.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* In-Depth Creator Strategy Guide */}
+        <div className="card card-lg" style={{ marginBottom: '32px', lineHeight: '1.75' }}>
+          <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '16px' }}>
+            4 Pillars of Video Content Optimization
+          </h2>
+
+          <h3 style={{ fontSize: '17px', fontWeight: '700', marginTop: '20px', marginBottom: '8px' }}>
+            1. Click-Through Rate (CTR) & Visual Contrast
+          </h3>
+          <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '16px' }}>
+            Your thumbnail and title combination is your video's primary storefront. A high Click-Through Rate signals to YouTube's recommendation system that viewers are intrigued by your content. Use our <Link to="/thumbnail-downloader" style={{ color: 'var(--primary)', fontWeight: '600' }}>YouTube Thumbnail Downloader</Link> and preview tools to inspect competitors' visual hierarchy, typography, and color contrast.
+          </p>
+
+          <h3 style={{ fontSize: '17px', fontWeight: '700', marginTop: '20px', marginBottom: '8px' }}>
+            2. Audience Engagement & Fair Giveaways
+          </h3>
+          <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '16px' }}>
+            Fostering an active community requires transparent engagement. Hosting giveaways is a proven strategy to boost comments and subscriber loyalty. Our <Link to="/youtube-comment-picker" style={{ color: 'var(--primary)', fontWeight: '600' }}>YouTube Comment Picker</Link> uses impartial random selection algorithms with custom filters for unique users, target keywords, and reply exclusion.
+          </p>
+
+          <h3 style={{ fontSize: '17px', fontWeight: '700', marginTop: '20px', marginBottom: '8px' }}>
+            3. Metadata & Search Indexing
+          </h3>
+          <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '16px' }}>
+            YouTube is the world's second-largest search engine. Proper tag extraction, structured description formatting, and video chapter timestamps allow search bots to index your content for relevant query results, long-term evergreen views, and suggested video feeds.
+          </p>
+
+          <h3 style={{ fontSize: '17px', fontWeight: '700', marginTop: '20px', marginBottom: '8px' }}>
+            4. Short-Form Video Dominance (Shorts & Reels)
+          </h3>
+          <p style={{ fontSize: '14px', color: 'var(--text-secondary)' }}>
+            Short-form content requires fast-paced hooks within the first 3 seconds. Utilize our suite of AI Short hook analyzers, caption generators, and hashtag tools to stay ahead of short-form algorithm trends.
+          </p>
+        </div>
+
+        {/* Homepage Frequently Asked Questions */}
+        <div className="card card-lg" style={{ lineHeight: '1.75' }}>
+          <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '20px' }}>
+            Frequently Asked Questions (FAQs)
+          </h2>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div style={{ borderBottom: '1px solid var(--border)', paddingBottom: '16px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '6px' }}>Are these YouTube creator tools completely free?</h3>
+              <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: 0 }}>
+                Yes! All tools on our platform are 100% free to use with no account registration or software installation required.
+              </p>
+            </div>
+            <div style={{ borderBottom: '1px solid var(--border)', paddingBottom: '16px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '6px' }}>How does the YouTube Comment Picker ensure fairness?</h3>
+              <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: 0 }}>
+                Our picker directly connects to YouTube's Data API to fetch all public comments. It filters duplicate entries and randomly selects winners client-side to guarantee complete impartiality.
+              </p>
+            </div>
+            <div style={{ borderBottom: '1px solid var(--border)', paddingBottom: '16px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '6px' }}>Can I download HD thumbnails from any YouTube video?</h3>
+              <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: 0 }}>
+                Yes. Enter any valid public video URL, and our system fetches the highest available resolution (up to 1080p Full HD maxresdefault) directly from YouTube servers.
+              </p>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '6px' }}>Do these tools comply with YouTube's Terms of Service?</h3>
+              <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: 0 }}>
+                Absolutely. All tools access publicly available data in full compliance with YouTube's official developer guidelines and API policies.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

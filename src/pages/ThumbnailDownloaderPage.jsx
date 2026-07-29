@@ -144,16 +144,58 @@ export default function ThumbnailDownloaderPage() {
               </div>
             </div>
           )}
-        </div>
-      </main>
 
-      <div className="container">
-        <FaqSection
-          faqsData={toolFaqs.thumbnailDownloader}
-          customTitle="YouTube Thumbnail Downloader FAQs"
-          customDescription="Learn how to download high-resolution YouTube thumbnails instantly."
-        />
+          {/* Publisher Content & Guide Section for AdSense Compliance */}
+        <div style={{ maxWidth: '900px', margin: '40px auto 0 auto', color: 'var(--text-primary)' }}>
+          <div className="card card-lg" style={{ lineHeight: '1.7' }}>
+            <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '16px' }}>
+              How to Download High-Resolution YouTube Video Thumbnails
+            </h2>
+            <p style={{ marginBottom: '16px', color: 'var(--text-secondary)' }}>
+              Extracting full-size cover images from YouTube videos is essential for creators, digital marketers, graphic designers, and content archivists. Our free online YouTube Thumbnail Downloader gives you instant access to the highest image quality available (up to 1080p Full HD maxresdefault) directly from YouTube’s official image servers.
+            </p>
+
+            <h3 style={{ fontSize: '18px', fontWeight: '700', marginTop: '24px', marginBottom: '12px' }}>
+              Step-by-Step Guide to Grab Any YouTube Thumbnail
+            </h3>
+            <ol style={{ paddingLeft: '20px', marginBottom: '20px', color: 'var(--text-secondary)' }}>
+              <li style={{ marginBottom: '8px' }}><strong>Copy the Video Link:</strong> Open YouTube on your desktop or mobile app and copy the URL of the video whose thumbnail you wish to save.</li>
+              <li style={{ marginBottom: '8px' }}><strong>Paste into Input Field:</strong> Paste the link into the box above. We support standard links (<code style={{ padding: '2px 6px', background: 'var(--bg-secondary)', borderRadius: '4px' }}>youtube.com/watch?v=...</code>), short links (<code style={{ padding: '2px 6px', background: 'var(--bg-secondary)', borderRadius: '4px' }}>youtu.be/...</code>), and embed URLs.</li>
+              <li style={{ marginBottom: '8px' }}><strong>Choose Quality Resolution:</strong> Click "Get Thumbnails" to render HD, SD, HQ, and MQ preview links.</li>
+              <li style={{ marginBottom: '8px' }}><strong>Download & Save:</strong> Right-click the high-resolution image to save it or click any of the direct download buttons.</li>
+            </ol>
+
+            <h3 style={{ fontSize: '18px', fontWeight: '700', marginTop: '24px', marginBottom: '12px' }}>
+              YouTube Thumbnail Sizes & Aspect Ratio Standards
+            </h3>
+            <p style={{ marginBottom: '16px', color: 'var(--text-secondary)' }}>
+              According to official YouTube Creator guidelines, a custom video thumbnail should adhere to the following specifications for optimal display across mobile apps, desktop browsers, and Smart TVs:
+            </p>
+            <ul style={{ paddingLeft: '20px', marginBottom: '20px', color: 'var(--text-secondary)' }}>
+              <li style={{ marginBottom: '6px' }}><strong>Recommended Dimensions:</strong> 1280 x 720 pixels (minimum width of 640 pixels).</li>
+              <li style={{ marginBottom: '6px' }}><strong>Aspect Ratio:</strong> 16:9 widescreen ratio (commonly used in YouTube players and previews).</li>
+              <li style={{ marginBottom: '6px' }}><strong>Max File Size:</strong> 2 MB for standard YouTube uploads.</li>
+              <li style={{ marginBottom: '6px' }}><strong>Supported Image Formats:</strong> JPG, GIF, PNG, or WEBP.</li>
+            </ul>
+
+            <h3 style={{ fontSize: '18px', fontWeight: '700', marginTop: '24px', marginBottom: '12px' }}>
+              Why Thumbnail Design and Contrast Matter for CTR (Click-Through Rate)
+            </h3>
+            <p style={{ color: 'var(--text-secondary)' }}>
+              Your YouTube thumbnail acts as your video's movie poster. Analyzing successful competitors' thumbnails helps you identify trending visual styles, color combinations, typography choices, and facial expressions that grab attention in recommendation feeds. Use this downloader tool to analyze thumbnail designs in your niche and elevate your channel's visual branding.
+            </p>
+          </div>
+        </div>
       </div>
-    </>
-  );
+    </main>
+
+    <div className="container">
+      <FaqSection
+        faqsData={toolFaqs.thumbnailDownloader}
+        customTitle="YouTube Thumbnail Downloader FAQs"
+        customDescription="Learn how to download high-resolution YouTube thumbnails instantly."
+      />
+    </div>
+  </>
+);
 }

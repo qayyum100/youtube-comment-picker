@@ -391,6 +391,54 @@ export default function BestHashtagsSuitePage() {
             </div>
           </div>
         )}
+
+        {/* Publisher Content Section for AdSense Compliance */}
+        <div style={{ marginTop: '40px', color: 'var(--text-primary)' }}>
+          <div className="card card-lg" style={{ lineHeight: '1.7' }}>
+            <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '16px' }}>
+              Comprehensive Guide to Using Hashtags for Social Media Reach
+            </h2>
+            <p style={{ marginBottom: '16px', color: 'var(--text-secondary)' }}>
+              Hashtags remain one of the most effective organic growth mechanisms across social media platforms like Instagram, TikTok, YouTube Shorts, X (formerly Twitter), and LinkedIn. Using targeted, contextual hashtags categorizes your content for recommendation algorithms and search discovery.
+            </p>
+
+            <h3 style={{ fontSize: '18px', fontWeight: '700', marginTop: '24px', marginBottom: '12px' }}>
+              How Our Best Hashtags Generator Works
+            </h3>
+            <p style={{ marginBottom: '16px', color: 'var(--text-secondary)' }}>
+              Unlike simple random tag lists, our Best Hashtags Suite clusters hashtags into strategic sets based on competition levels and relevance:
+            </p>
+            <ul style={{ paddingLeft: '20px', marginBottom: '20px', color: 'var(--text-secondary)' }}>
+              <li style={{ marginBottom: '8px' }}><strong>High-Volume Popular Tags:</strong> Broad terms that drive rapid initial impressions from active feeds.</li>
+              <li style={{ marginBottom: '8px' }}><strong>Targeted Niche Tags:</strong> Specific community tags designed to reach engaged, targeted audiences.</li>
+              <li style={{ marginBottom: '8px' }}><strong>Keyword SEO Tags:</strong> Search-focused phrases that index your posts in long-tail search results.</li>
+            </ul>
+
+            <h3 style={{ fontSize: '18px', fontWeight: '700', marginTop: '24px', marginBottom: '12px' }}>
+              Platform Specific Hashtag Best Practices
+            </h3>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '16px', marginTop: '16px' }}>
+              <div style={{ padding: '16px', borderRadius: '8px', backgroundColor: 'var(--bg-tertiary)' }}>
+                <h4 style={{ fontSize: '15px', fontWeight: '700', marginBottom: '8px' }}>Instagram</h4>
+                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0 }}>
+                  Use 10–25 relevant tags combining high, medium, and low competition keywords. Mix them into your post caption or first comment.
+                </p>
+              </div>
+              <div style={{ padding: '16px', borderRadius: '8px', backgroundColor: 'var(--bg-tertiary)' }}>
+                <h4 style={{ fontSize: '15px', fontWeight: '700', marginBottom: '8px' }}>TikTok & Shorts</h4>
+                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0 }}>
+                  Focus on 3–6 concise, hyper-relevant hashtags directly related to the video topic to feed TikTok's For You Page (FYP) algorithm.
+                </p>
+              </div>
+              <div style={{ padding: '16px', borderRadius: '8px', backgroundColor: 'var(--bg-tertiary)' }}>
+                <h4 style={{ fontSize: '15px', fontWeight: '700', marginBottom: '8px' }}>LinkedIn & X</h4>
+                <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0 }}>
+                  Stick to 3–5 professional industry tags embedded within natural sentences or added cleanly at the bottom of the post.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <FaqSection faqs={toolFaqs.hashtagGenerator || []} />
