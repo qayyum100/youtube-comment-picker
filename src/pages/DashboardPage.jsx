@@ -13,9 +13,17 @@ export default function DashboardPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
 
-  const categories = ['All', 'SEO & Optimization', 'AI Generators', 'Analytics & Calculators', 'Creator Graphics & Extras'];
+  const categories = ['All', 'Developer Tools', 'SEO & Optimization', 'AI Generators', 'Analytics & Calculators', 'Creator Graphics & Extras'];
 
   const tools = [
+    {
+      name: "Java Online Compiler",
+      description: "Write, compile, and execute Java code in your browser with real-time output and stdin support.",
+      path: "/java-compiler",
+      icon: <Code size={22} />,
+      color: "#4F6EF7",
+      category: "Developer Tools"
+    },
     {
       name: "YouTube Comment Picker",
       description: "Pick random winners for your YouTube giveaways with advanced filters.",
