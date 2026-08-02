@@ -82,7 +82,7 @@ async function runOnPaiza(code, stdin) {
       if (isCompileError) status = 'compile_error';
       else if (isRuntimeError) status = 'runtime_error';
 
-      const compileOutput = (details.build_stdout || '') + '\n' + (details.build_stderr || '');
+      const compileOutput = (details.build_stdout || '') + (details.build_stderr ? '\n' + details.build_stderr : '');
       const stdout = details.stdout || '';
       const stderr = details.stderr || '';
 
@@ -90,8 +90,8 @@ async function runOnPaiza(code, stdin) {
         status,
         compileOutput: compileOutput.trim(),
         stdout: stdout.trim(),
-        stderr: stderr.trim(),
-        exitCode: details.exit_code ?? details.build_exit_code ?? 0,
+        stderr: stderr.trim() || (isRuntimeError ? (details.result || 'Runtime Exception') : ''),
+        exitCode: isCompileError ? (details.build_exit_code ?? 1) : (details.exit_code ?? 0),
         language: 'java',
         version: 'latest',
         runTimeMs: Math.round((parseFloat(details.time || '0')) * 1000),

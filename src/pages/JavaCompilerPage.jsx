@@ -353,7 +353,7 @@ export default function JavaCompilerPage() {
       if (!res.ok) throw new Error(data.error || 'Compilation failed');
       setResult(data);
       setExecTime(Date.now() - t0);
-      setActiveTab(data.status === 'compile_error' ? 'error' : 'output');
+      setActiveTab(data.status === 'compile_error' || data.status === 'runtime_error' ? 'error' : 'output');
     } catch (err) {
       setApiError(err.message);
     } finally {
