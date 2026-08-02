@@ -1,4 +1,26 @@
 export const toolFaqs = {
+  javaCompiler: [
+    {
+      question: "Is this Java Online Compiler completely free to use?",
+      answer: "Yes, our online Java compiler is 100% free with no registration or subscription required. You can write, compile, and execute Java code directly in your browser as many times as you need."
+    },
+    {
+      question: "Which version of Java does this online compiler support?",
+      answer: "Our online compiler runs on modern OpenJDK versions (Java 17, Java 21, and Java 26), giving you full access to modern Java features like records, pattern matching, switch expressions, sealed classes, and text blocks."
+    },
+    {
+      question: "Can I take standard input (stdin) for Scanner programs?",
+      answer: "Yes! Simply expand the 'Standard Input (stdin)' section below the editor and type your input values. When your Java code calls Scanner scanner = new Scanner(System.in);, it will read from the provided stdin."
+    },
+    {
+      question: "Does this online Java IDE support Object-Oriented Programming (OOP)?",
+      answer: "Absolutely. You can define classes, interfaces, inheritance, constructors, methods, and static inner classes. Make sure your main entry point class is named 'Main' or public."
+    },
+    {
+      question: "Is my code secure and private?",
+      answer: "Yes. Every execution is isolated in an ephemeral, sandboxed cloud environment. We do not store or share your source code on our servers."
+    }
+  ],
   titleGenerator: [
     {
       question: "What is the best YouTube title generator?",

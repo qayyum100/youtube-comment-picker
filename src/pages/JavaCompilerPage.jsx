@@ -1,5 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react';
 import SEO from '../components/SEO';
+import FaqSection from '../components/FaqSection';
+import { toolFaqs } from '../data/toolFaqs';
 import {
   Play,
   RotateCcw,
@@ -17,6 +19,8 @@ import {
   CheckCircle2,
   Clock,
   Cpu,
+  CheckCircle,
+  HelpCircle,
 } from 'lucide-react';
 
 /* ── Default starter code ── */
@@ -412,12 +416,42 @@ export default function JavaCompilerPage() {
     lineHeight: '1.7',
   };
 
+  // Structured Data (SoftwareApplication & FAQ Schema) for Rich Snippets
+  const schemaData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Java Online Compiler & IDE",
+      "operatingSystem": "All",
+      "applicationCategory": "DeveloperApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "Free online Java compiler and IDE. Write, compile, and run Java code online with syntax highlighting, stdin support, and instant execution results."
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": (toolFaqs.javaCompiler || []).map(faq => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    }
+  ];
+
   return (
     <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '40px 24px 60px' }}>
       <SEO
-        title="Java Online Compiler – Write, Run & Test Java Code Free"
-        description="Compile and run Java code online for free. No setup needed. Supports Java 17+, OOP, collections, algorithms, and more. Instant output in your browser."
+        title="Online Java Compiler – Free IDE to Run Java Code Online"
+        description="Best free Java online compiler and IDE. Write, compile, and run Java programs online with standard input (stdin), syntax highlighting, and zero setup."
         url="/java-compiler"
+        schema={schemaData}
       />
 
       {/* ── Hero ── */}
@@ -429,20 +463,20 @@ export default function JavaCompilerPage() {
           fontSize: '12px', fontWeight: '700', letterSpacing: '0.04em',
           marginBottom: '14px', textTransform: 'uppercase',
         }}>
-          <Cpu size={13}/> Online Java Compiler
+          <Cpu size={13}/> Free Online Java IDE & Compiler
         </div>
         <h1 style={{ fontSize: 'clamp(1.8rem,4vw,2.6rem)', fontWeight: '800', marginBottom: '10px', letterSpacing: '-0.03em', color: 'var(--text-primary)' }}>
-          Java Online Compiler
+          Online Java Compiler
         </h1>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '16px', maxWidth: '520px', margin: '0 auto', lineHeight: '1.6' }}>
-          Write, compile, and execute Java code directly in your browser — instant results, no setup required.
+        <p style={{ color: 'var(--text-secondary)', fontSize: '16px', maxWidth: '620px', margin: '0 auto', lineHeight: '1.6' }}>
+          Write, compile, and run Java code directly in your browser. Complete with standard input (stdin) support, real-time syntax highlighting, and instant compilation output.
         </p>
       </div>
 
       {/* ── Template chips ── */}
       <div style={{ display:'flex', gap:'8px', flexWrap:'wrap', marginBottom:'20px', alignItems:'center' }}>
         <span style={{ fontSize:'13px', fontWeight:'600', color:'var(--text-muted)', display:'flex', alignItems:'center', gap:'5px' }}>
-          <BookOpen size={13}/> Templates:
+          <BookOpen size={13}/> Code Templates:
         </span>
         {TEMPLATES.map(t => (
           <button
@@ -593,7 +627,7 @@ export default function JavaCompilerPage() {
                 {['#FF5F57','#FFBD2E','#28C840'].map((c,i) => <div key={i} style={{ width:'11px', height:'11px', borderRadius:'50%', background:c }}/>)}
               </div>
               <span style={{ fontSize:'13px', fontWeight:'600', color:'var(--text-secondary)', display:'flex', alignItems:'center', gap:'5px', marginLeft:'6px' }}>
-                <Terminal size={13}/> Output
+                <Terminal size={13}/> Execution Output
               </span>
               {result && <StatusBadge status={result.status}/>}
             </div>
@@ -718,12 +752,12 @@ export default function JavaCompilerPage() {
       {/* ── Feature cards ── */}
       <div className="grid-cols-3" style={{ marginTop:'40px', gap:'16px' }}>
         {[
-          { icon:'⚡', title:'Instant Compilation', desc:'Your code runs on a secure cloud sandbox with Java 17+ support. Results appear within seconds.' },
-          { icon:'🔒', title:'Secure & Sandboxed', desc:'Every execution is isolated. No code is stored on our servers — your work stays private.' },
-          { icon:'📥', title:'stdin Support', desc:'Provide standard input to programs that use Scanner or BufferedReader for interactive testing.' },
-          { icon:'📚', title:'6 Starter Templates', desc:'Jump-start with Hello World, Fibonacci, Sorting, OOP, Recursion, and Collections examples.' },
-          { icon:'💾', title:'Save & Upload', desc:'Download your code as a .java file or upload existing files directly into the editor.' },
-          { icon:'🎨', title:'Syntax Highlighting', desc:'Real-time syntax highlighting with color-coded keywords, strings, numbers, and class names.' },
+          { icon:'⚡', title:'Instant Compilation', desc:'Your code compiles and executes in seconds with modern OpenJDK support.' },
+          { icon:'🔒', title:'Secure & Sandboxed', desc:'Every execution is isolated in an ephemeral container. Your code remains private.' },
+          { icon:'📥', title:'stdin Support', desc:'Provide custom standard input for programs using Scanner or BufferedReader.' },
+          { icon:'📚', title:'6 Code Templates', desc:'Start instantly with Hello World, Fibonacci, Sorting, OOP, Recursion, and Collections.' },
+          { icon:'💾', title:'Save & Upload', desc:'Export code to a .java file or load existing Java files directly into the editor.' },
+          { icon:'🎨', title:'Syntax Highlighting', desc:'Color-coded editor highlighting keywords, strings, numbers, class names, and comments.' },
         ].map(f => (
           <div key={f.title} className="card" style={{ padding:'22px 18px', textAlign:'center' }}>
             <div style={{ fontSize:'26px', marginBottom:'8px' }}>{f.icon}</div>
@@ -732,6 +766,42 @@ export default function JavaCompilerPage() {
           </div>
         ))}
       </div>
+
+      {/* ── Comprehensive Article & Educational Guide for SEO ── */}
+      <article className="card" style={{ marginTop: '48px', padding: '36px', lineHeight: '1.7' }}>
+        <h2 style={{ fontSize: '22px', fontWeight: '800', marginBottom: '16px', color: 'var(--text-primary)' }}>
+          Why Use an Online Java Compiler?
+        </h2>
+        <p style={{ fontSize: '15px', color: 'var(--text-secondary)', marginBottom: '20px' }}>
+          Setting up a local Java Development Kit (JDK), configuring <code style={{ background: 'var(--bg-secondary)', padding: '2px 6px', borderRadius: '4px' }}>JAVA_HOME</code>, and installing complex IDEs like IntelliJ IDEA or Eclipse can take significant time—especially when you just want to test a quick algorithm or learn Java syntax. An <strong>Online Java Compiler</strong> allows developers, students, and educators to write and execute Java code directly inside any browser without installing software.
+        </p>
+
+        <h3 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '12px', marginTop: '24px', color: 'var(--text-primary)' }}>
+          Key Advantages of Our Online Java IDE
+        </h3>
+        <ul style={{ paddingLeft: '20px', color: 'var(--text-secondary)', fontSize: '14px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <li><strong>Zero Installation Required:</strong> Run Java code anywhere, on any operating system (Windows, macOS, Linux, or Chromebook).</li>
+          <li><strong>Modern Java Version Support:</strong> Full support for core Java language syntax, Object-Oriented Programming (OOP), Collections Framework, Lambdas, and Streams.</li>
+          <li><strong>Interactive Standard Input (stdin):</strong> Easily test interactive programs using <code style={{ background: 'var(--bg-secondary)', padding: '2px 6px', borderRadius: '4px' }}>Scanner</code> or <code style={{ background: 'var(--bg-secondary)', padding: '2px 6px', borderRadius: '4px' }}>BufferedReader</code>.</li>
+          <li><strong>Instant Error Reporting:</strong> Receive detailed line-by-line compiler error outputs to quickly fix syntax and logic bugs.</li>
+        </ul>
+
+        <h3 style={{ fontSize: '18px', fontWeight: '700', marginBottom: '12px', marginTop: '24px', color: 'var(--text-primary)' }}>
+          How to Run Java Programs Online
+        </h3>
+        <ol style={{ paddingLeft: '20px', color: 'var(--text-secondary)', fontSize: '14px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <li>Type or paste your Java source code into the editor. Ensure your entry class containing <code style={{ background: 'var(--bg-secondary)', padding: '2px 6px', borderRadius: '4px' }}>public static void main(String[] args)</code> is named <code style={{ background: 'var(--bg-secondary)', padding: '2px 6px', borderRadius: '4px' }}>Main</code>.</li>
+          <li>If your program expects user input, toggle the <strong>Standard Input (stdin)</strong> drawer and provide input lines.</li>
+          <li>Click <strong>Run Code</strong> (or press <kbd style={{ padding: '2px 6px', borderRadius: '4px', border: '1px solid var(--border)', background: 'var(--bg-secondary)' }}>Ctrl+Enter</kbd>) to compile and run your code instantly.</li>
+        </ol>
+      </article>
+
+      {/* ── FAQ Section for Search Snippets ── */}
+      <FaqSection
+        faqsData={toolFaqs.javaCompiler}
+        customTitle="Java Online Compiler FAQ"
+        customDescription="Common questions about running, compiling, and testing Java programs online in the browser."
+      />
 
       <style>{`
         @keyframes spin { to { transform: rotate(360deg); } }
