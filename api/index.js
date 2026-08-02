@@ -37,6 +37,7 @@ import {
 
 import { getTranscript } from './controllers/transcriptController.js';
 import { analyzeThumbnail } from './controllers/imageController.js';
+import { compileJava } from './controllers/compilerController.js';
 
 dotenv.config();
 
@@ -81,8 +82,11 @@ app.post('/api/ai/shorts-hook-analysis', analyzeShortsHook);
 app.post('/api/ai/community-posts', generateCommunityPosts);
 app.post('/api/ai/livestream-titles', generateLiveStreamTitles);
 
+// Java Online Compiler
+app.post('/api/compile/java', compileJava);
+
 app.get('/api/tools', (req, res) => {
-  res.json({ status: "healthy", activeTools: 30 });
+  res.json({ status: "healthy", activeTools: 31 });
 });
 
 // Provide fallback for the old endpoints just in case

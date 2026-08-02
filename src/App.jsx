@@ -8,6 +8,7 @@ import { Sun, Moon, Menu, X } from 'lucide-react';
 
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 const CommentPickerPage = lazy(() => import('./pages/CommentPickerPage'));
+const JavaCompilerPage = lazy(() => import('./pages/JavaCompilerPage'));
 const ThumbnailDownloaderPage = lazy(() => import('./pages/ThumbnailDownloaderPage'));
 const TagExtractorPage = lazy(() => import('./pages/TagExtractorPage'));
 const SEOCheckerPage = lazy(() => import('./pages/SEOCheckerPage'));
@@ -206,6 +207,7 @@ function AnimatedRoutes() {
         <Routes>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/tools" element={<DashboardPage />} />
+          <Route path="/java-compiler" element={<JavaCompilerPage />} />
           <Route path="/youtube-comment-picker" element={<CommentPickerPage defaultPlatform="youtube" />} />
           <Route path="/instagram-comment-picker" element={<CommentPickerPage defaultPlatform="instagram" />} />
           <Route path="/tiktok-comment-picker" element={<CommentPickerPage defaultPlatform="tiktok" />} />
