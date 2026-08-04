@@ -1,14 +1,7 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "youtubecommentpickerthumbnaildownload.online" }],
-      "destination": "https://www.youtubecommentpickerthumbnaildownload.online/$1",
-      "permanent": true
-    }
-  ],
+
   "headers": [
     {
       "source": "/(.*)",
