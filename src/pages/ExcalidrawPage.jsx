@@ -111,8 +111,8 @@ export default function ExcalidrawPage() {
   const [isPanning, setIsPanning] = useState(false);
   const [startPoint, setStartPoint] = useState({ x: 0, y: 0 });
   const [currentElement, setCurrentElement] = useState(null);
-
-  // Status & Notification
+  // Ref for freehand points — avoids stale closure in mousemove
+  const freedrawPointsRef = useRef([]);
   const [toastMessage, setToastMessage] = useState('');
 
   const showToast = (msg) => {
@@ -224,6 +224,10 @@ export default function ExcalidrawPage() {
     // Creating new element
     setIsDrawing(true);
     const newId = 'el_' + Date.now();
+    const initialPoints = [{ x, y }];
+    if (activeTool === 'freedraw') {
+      freedrawPointsRef.current = initialPoints;
+    }
     const newEl = {
       id: newId,
       type: activeTool,
@@ -231,7 +235,7 @@ export default function ExcalidrawPage() {
       y,
       width: 0,
       height: 0,
-      points: activeTool === 'freedraw' ? [{ x, y }] : [],
+      points: activeTool === 'freedraw' ? initialPoints : [],
       strokeColor,
       fillColor: activeTool === 'freedraw' ? 'transparent' : fillColor,
       fillStyle,
@@ -277,10 +281,12 @@ export default function ExcalidrawPage() {
     if (!currentElement) return;
 
     if (activeTool === 'freedraw') {
-      setCurrentElement({
-        ...currentElement,
-        points: [...currentElement.points, { x, y }]
-      });
+      // Accumulate into ref (no batching lag), update visual via state
+      freedrawPointsRef.current.push({ x, y });
+      setCurrentElement((prev) => ({
+        ...prev,
+        points: [...freedrawPointsRef.current]
+      }));
     } else {
       const w = x - startPoint.x;
       const h = y - startPoint.y;
@@ -333,7 +339,11 @@ export default function ExcalidrawPage() {
 
         updateElements([...elements, finalEl]);
         setCurrentElement(null);
-        setActiveTool('select');
+        freedrawPointsRef.current = [];
+        // Stay on freedraw so user can keep sketching; only switch for other tools
+        if (finalEl.type !== 'freedraw') {
+          setActiveTool('select');
+        }
       }
     }
   };
@@ -979,10 +989,23 @@ export default function ExcalidrawPage() {
         {/* Main Canvas Workspace */}
         <div
           ref={canvasRef}
-          style={{ flex: 1, width: '100%', height: '100%', cursor: activeTool === 'hand' || isPanning ? 'grab' : 'crosshair' }}
+          style={{
+            flex: 1,
+            width: '100%',
+            height: '100%',
+            cursor:
+              activeTool === 'hand' || isPanning
+                ? 'grab'
+                : activeTool === 'freedraw'
+                ? `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%231e293b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 19l7-7 3 3-7 7-3-3z'/%3E%3Cpath d='M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z'/%3E%3Cpath d='M2 2l7.586 7.586'/%3E%3Ccircle cx='11' cy='11' r='2'/%3E%3C/svg%3E") 4 20, crosshair`
+                : activeTool === 'eraser'
+                ? 'cell'
+                : 'crosshair'
+          }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}
           onWheel={handleWheel}
         >
           <svg
