@@ -7,6 +7,7 @@ import DisclaimerModal from './components/DisclaimerModal';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
+const ExcalidrawPage = lazy(() => import('./pages/ExcalidrawPage'));
 const CommentPickerPage = lazy(() => import('./pages/CommentPickerPage'));
 const JavaCompilerPage = lazy(() => import('./pages/JavaCompilerPage'));
 const ThumbnailDownloaderPage = lazy(() => import('./pages/ThumbnailDownloaderPage'));
@@ -207,6 +208,7 @@ function AnimatedRoutes() {
         <Routes>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/tools" element={<DashboardPage />} />
+          <Route path="/excalidraw" element={<ExcalidrawPage />} />
           <Route path="/java-compiler" element={<JavaCompilerPage />} />
           <Route path="/youtube-comment-picker" element={<CommentPickerPage defaultPlatform="youtube" />} />
           <Route path="/instagram-comment-picker" element={<CommentPickerPage defaultPlatform="instagram" />} />

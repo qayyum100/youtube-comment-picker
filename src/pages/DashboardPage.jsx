@@ -17,6 +17,14 @@ export default function DashboardPage() {
 
   const tools = [
     {
+      name: "Excalidraw Whiteboard",
+      description: "Infinite hand-drawn sketch whiteboard for system architectures, flowcharts, and visual brainstorming.",
+      path: "/excalidraw",
+      icon: <Code size={22} />,
+      color: "#6366F1",
+      category: "Developer Tools"
+    },
+    {
       name: "Java Online Compiler",
       description: "Write, compile, and execute Java code in your browser with real-time output and stdin support.",
       path: "/java-compiler",
