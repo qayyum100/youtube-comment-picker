@@ -671,9 +671,9 @@ export default function DashboardPage() {
   return (
     <div className="page-wrapper">
       <SEO
-        title="Free AI YouTube Creator Tools | Optimize Your YouTube SEO"
-        description="Access free YouTube SEO and creator tools. Extract tags, generate viral titles, analyze channels, check SEO scores, and pick comment giveaway winners."
-        url="/tools"
+        title="YouTube Giveaway Picker — Free YouTube Comment Picker & Creator Tools"
+        description="Free YouTube giveaway picker tool to randomly pick winners from YouTube comments. Also includes 100+ free YouTube creator tools: SEO checker, tag extractor, title generator, thumbnail downloader, and more."
+        url="/"
       />
 
       {/* Hero */}
@@ -686,17 +686,25 @@ export default function DashboardPage() {
           letterSpacing: '-0.03em',
           lineHeight: '1.15',
         }}>
-          AI-Powered YouTube Creator Tools
+          Free YouTube Giveaway Picker & Creator Tools
         </h1>
         <p style={{
           fontSize: '18px',
           color: 'var(--text-secondary)',
-          maxWidth: '640px',
-          margin: '0 auto 32px',
+          maxWidth: '660px',
+          margin: '0 auto 12px',
           lineHeight: '1.7',
         }}>
-          Free, high-fidelity SEO tools built for content creators, marketers, and channel managers.
-          Optimize your videos and grow your channel today.
+          The #1 free <strong style={{ color: 'var(--text-primary)' }}>YouTube giveaway picker</strong> — randomly pick winners from YouTube comments with zero bias. Plus 100+ free creator tools for SEO, thumbnails, analytics, and AI content generation.
+        </p>
+        <p style={{
+          fontSize: '14px',
+          color: 'var(--text-muted)',
+          maxWidth: '560px',
+          margin: '0 auto 32px',
+          lineHeight: '1.6',
+        }}>
+          Trusted by YouTubers worldwide. No login required. Completely free.
         </p>
 
         {/* Search */}
@@ -830,10 +838,55 @@ export default function DashboardPage() {
 
       {/* Publisher Content & Creator Resource Hub for AdSense Compliance */}
       <section style={{ marginTop: '56px', color: 'var(--text-primary)' }}>
+
+        {/* YouTube Giveaway Picker Feature Section */}
+        <div className="card card-lg" style={{ marginBottom: '32px', lineHeight: '1.75', borderLeft: '4px solid #EF4444' }}>
+          <h2 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '12px', color: 'var(--text-primary)' }}>
+            🎁 YouTube Giveaway Picker — Pick Random Comment Winners Free
+          </h2>
+          <p style={{ fontSize: '15px', color: 'var(--text-secondary)', marginBottom: '12px' }}>
+            Our <strong style={{ color: 'var(--text-primary)' }}>YouTube giveaway picker</strong> is the fastest, fairest way to randomly select a winner from any YouTube video's comment section. Simply paste your YouTube video URL, load all comments via the official YouTube Data API, and let our free <strong style={{ color: 'var(--text-primary)' }}>YouTube comment picker</strong> choose a random winner in seconds.
+          </p>
+          <p style={{ fontSize: '15px', color: 'var(--text-secondary)', marginBottom: '12px' }}>
+            Unlike other YouTube giveaway picker tools, ours filters duplicate comments, lets you require specific keywords (e.g. "giveaway"), exclude replies, and even run multiple winners — making it the best free YouTube random comment picker available today.
+          </p>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginTop: '16px' }}>
+            {[
+              '✅ Free YouTube Giveaway Picker',
+              '✅ Random Comment Winner Selector',
+              '✅ Duplicate Filter',
+              '✅ Keyword Filter',
+              '✅ Multi-Winner Support',
+              '✅ No Login Required',
+            ].map((f, i) => (
+              <span key={i} style={{ fontSize: '13px', padding: '6px 14px', borderRadius: '999px', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', color: 'var(--text-secondary)', fontWeight: '500' }}>{f}</span>
+            ))}
+          </div>
+          <div style={{ marginTop: '20px' }}>
+            <Link
+              to="/youtube-comment-picker"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '12px 24px',
+                background: '#EF4444',
+                color: '#fff',
+                borderRadius: '8px',
+                fontWeight: '700',
+                fontSize: '15px',
+                textDecoration: 'none',
+              }}
+            >
+              <Gift size={16} /> Open YouTube Giveaway Picker
+            </Link>
+          </div>
+        </div>
+
         {/* Comprehensive Overview Card */}
         <div className="card card-lg" style={{ marginBottom: '32px', lineHeight: '1.75' }}>
           <h2 style={{ fontSize: '24px', fontWeight: '800', marginBottom: '16px', color: 'var(--text-primary)' }}>
-            The Ultimate YouTube & Social Media Creator Suite
+            The Ultimate YouTube Giveaway & Creator Tools Suite
           </h2>
           <p style={{ fontSize: '15px', color: 'var(--text-secondary)', marginBottom: '16px' }}>
             Growing a successful digital presence across YouTube, TikTok, Instagram Reels, and Shorts requires a data-driven approach to SEO, visual branding, analytics, and workflow automation. Our comprehensive suite of free creator tools provides everything you need to audit channels, extract high-performing tags, generate viral titles, download high-resolution thumbnails, and run fair comment giveaways.
@@ -880,10 +933,10 @@ export default function DashboardPage() {
           </p>
 
           <h3 style={{ fontSize: '17px', fontWeight: '700', marginTop: '20px', marginBottom: '8px' }}>
-            2. Audience Engagement & Fair Giveaways
+            2. Audience Engagement & YouTube Giveaway Picker
           </h3>
           <p style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '16px' }}>
-            Fostering an active community requires transparent engagement. Hosting giveaways is a proven strategy to boost comments and subscriber loyalty. Our <Link to="/youtube-comment-picker" style={{ color: 'var(--primary)', fontWeight: '600' }}>YouTube Comment Picker</Link> uses impartial random selection algorithms with custom filters for unique users, target keywords, and reply exclusion.
+            Fostering an active community requires transparent engagement. Hosting YouTube giveaways is a proven strategy to boost comments and subscriber loyalty. Our free <Link to="/youtube-comment-picker" style={{ color: 'var(--primary)', fontWeight: '600' }}>YouTube giveaway picker</Link> uses cryptographically impartial random selection algorithms with custom filters for unique users, target keywords, and reply exclusion — trusted by thousands of creators to run fair YouTube comment giveaways.
           </p>
 
           <h3 style={{ fontSize: '17px', fontWeight: '700', marginTop: '20px', marginBottom: '8px' }}>
@@ -904,19 +957,31 @@ export default function DashboardPage() {
         {/* Homepage Frequently Asked Questions */}
         <div className="card card-lg" style={{ lineHeight: '1.75' }}>
           <h2 style={{ fontSize: '22px', fontWeight: '700', marginBottom: '20px' }}>
-            Frequently Asked Questions (FAQs)
+            YouTube Giveaway Picker — Frequently Asked Questions
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ borderBottom: '1px solid var(--border)', paddingBottom: '16px' }}>
-              <h3 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '6px' }}>Are these YouTube creator tools completely free?</h3>
+              <h3 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '6px' }}>What is a YouTube giveaway picker?</h3>
               <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: 0 }}>
-                Yes! All tools on our platform are 100% free to use with no account registration or software installation required.
+                A YouTube giveaway picker is a free tool that randomly selects a winner from the comments section of a YouTube video. It's used by creators to run fair, transparent YouTube giveaways — ensuring every commenter has an equal chance of winning.
               </p>
             </div>
             <div style={{ borderBottom: '1px solid var(--border)', paddingBottom: '16px' }}>
-              <h3 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '6px' }}>How does the YouTube Comment Picker ensure fairness?</h3>
+              <h3 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '6px' }}>How does the YouTube comment picker ensure fairness?</h3>
               <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: 0 }}>
-                Our picker directly connects to YouTube's Data API to fetch all public comments. It filters duplicate entries and randomly selects winners client-side to guarantee complete impartiality.
+                Our YouTube giveaway picker directly connects to YouTube's Data API to fetch all public comments. It filters duplicate entries and randomly selects winners client-side using a cryptographically secure algorithm, guaranteeing complete impartiality for every YouTube comment giveaway.
+              </p>
+            </div>
+            <div style={{ borderBottom: '1px solid var(--border)', paddingBottom: '16px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '6px' }}>Is the YouTube giveaway picker free to use?</h3>
+              <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: 0 }}>
+                Yes! Our YouTube giveaway picker tool is 100% free — no account, no subscription, and no software download required. Simply paste your YouTube video URL and pick a random winner instantly.
+              </p>
+            </div>
+            <div style={{ borderBottom: '1px solid var(--border)', paddingBottom: '16px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '6px' }}>Can the YouTube random comment picker filter by keyword?</h3>
+              <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: 0 }}>
+                Yes. Our YouTube comment picker lets you filter winners by a required keyword (e.g. only pick comments containing "giveaway"), exclude replies, and remove duplicate users — giving you full control over your YouTube giveaway rules.
               </p>
             </div>
             <div style={{ borderBottom: '1px solid var(--border)', paddingBottom: '16px' }}>
@@ -928,7 +993,7 @@ export default function DashboardPage() {
             <div>
               <h3 style={{ fontSize: '16px', fontWeight: '700', marginBottom: '6px' }}>Do these tools comply with YouTube's Terms of Service?</h3>
               <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: 0 }}>
-                Absolutely. All tools access publicly available data in full compliance with YouTube's official developer guidelines and API policies.
+                Absolutely. Our YouTube giveaway picker and all other tools access publicly available data in full compliance with YouTube's official developer guidelines and API policies.
               </p>
             </div>
           </div>
