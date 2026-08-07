@@ -217,29 +217,39 @@ export default function CommentPickerPage({ defaultPlatform = 'youtube' }) {
         <div className="container">
 
           {/* Hero */}
-          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <div style={{ textAlign: 'center', marginBottom: '36px' }}>
             <h1 style={{
               fontSize: '36px',
-              fontWeight: '700',
+              fontWeight: '800',
               color: 'var(--text-primary)',
               marginBottom: '12px',
               letterSpacing: '-0.02em',
               lineHeight: '1.2',
-              textTransform: 'capitalize',
             }}>
               {platform === 'youtube'
-                ? 'YouTube Giveaway Picker — Free YouTube Comment Picker'
-                : `${platform} Giveaway & Comment Picker`}
+                ? 'YouTube Giveaway Picker — Free Random Comment Winner Picker'
+                : platform === 'instagram'
+                ? 'Instagram Giveaway Picker — Free Random Comment Winner'
+                : 'TikTok Giveaway Picker — Free Random Comment Winner'}
             </h1>
             <p style={{
               color: 'var(--text-secondary)',
               fontSize: '16px',
-              maxWidth: '600px',
-              margin: '0 auto',
+              maxWidth: '640px',
+              margin: '0 auto 14px',
               lineHeight: '1.6',
             }}>
-              The ultimate free YouTube giveaway picker tool. Pick random comment winners for your YouTube giveaways fast, fair, and hassle-free.
+              {platform === 'youtube'
+                ? 'Free YouTube giveaway picker — randomly select a winner from YouTube comments in seconds. Filter duplicates, require keywords, exclude replies, and pick multiple winners. No login. No install. 100% free.'
+                : `Free ${platform} giveaway comment picker — randomly select winners for your ${platform} giveaways. Works alongside our YouTube giveaway picker for cross-platform giveaway management.`}
             </p>
+            {platform === 'youtube' && (
+              <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
+                {['✅ Free YouTube Giveaway Picker', '✅ Duplicate Filter', '✅ Keyword Entry Filter', '✅ Multi-Winner', '✅ No Login Required'].map((badge, i) => (
+                  <span key={i} style={{ fontSize: '12px', padding: '4px 12px', borderRadius: '999px', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', color: 'var(--text-secondary)', fontWeight: '500' }}>{badge}</span>
+                ))}
+              </div>
+            )}
           </div>
 
           <PlatformSwitcher platform={platform} />

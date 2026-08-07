@@ -11,27 +11,28 @@ export default function SeoHead({ pageType, platform, blogData, title: customTit
       if (customDescription) {
         description = customDescription;
       } else {
-        // Auto-generate a unique, keyword-rich description from the tool title.
         const toolName = customTitle.split(' — ')[0].trim();
         description = `Use our free ${toolName} to boost your YouTube channel. Part of the all-in-one suite of free YouTube SEO, analytics, and creator tools — no login required.`;
       }
     } else if (pageType === 'thumbnail') {
-      title = 'YouTube Thumbnail Downloader — Free YouTube Giveaway Picker Tools';
-      description = 'Download high-resolution (HD, 4K, 1080p) thumbnails from any YouTube video instantly. Free YouTube thumbnail grabber and YouTube giveaway picker suite.';
+      title = 'YouTube Thumbnail Downloader — Free HD Thumbnail Grabber | YouTube Giveaway Picker Suite';
+      description = 'Download high-resolution (HD, 4K, 1080p) thumbnails from any YouTube video instantly. Free YouTube thumbnail downloader — part of the #1 YouTube giveaway picker & creator tools suite.';
     } else if (pageType === 'blog') {
-      title = 'YouTube Giveaway Picker Blog & Creator Guides — YouTube Comment Picker';
-      description = 'Master running successful giveaways with our YouTube giveaway picker guide. Learn how to pick random comment winners, optimize thumbnails, and grow your channel.';
+      title = 'YouTube Giveaway Picker Blog & Creator Guides — Free YouTube Comment Picker';
+      description = 'Expert guides on running YouTube giveaways, picking random comment winners, and growing your channel. From the team behind the #1 free YouTube giveaway picker tool.';
     } else if (pageType === 'blog-post' && blogData) {
-      title = `${blogData.title} | Free YouTube Giveaway Picker Guide`;
+      title = `${blogData.title} | YouTube Giveaway Picker Blog`;
       description = blogData.excerpt;
     } else {
       if (platform === 'youtube') {
-        title = 'YouTube Giveaway Picker — Free YouTube Comment Picker & Winner Generator';
-        description = 'The ultimate free YouTube giveaway picker tool. Easily pick random comment winners for your YouTube giveaways with fair, duplicate-filtered comment selection.';
+        title = 'YouTube Giveaway Picker — Free Random YouTube Comment Winner Picker';
+        description = 'Free YouTube giveaway picker: randomly select winners from YouTube comments in seconds. Filter duplicates, require entry keywords, exclude replies, pick multiple winners. No login. No install. 100% free.';
+      } else if (platform === 'instagram') {
+        title = 'Instagram Giveaway Picker — Free Random Comment Winner Selector';
+        description = 'Free Instagram giveaway comment picker to randomly select winners from Instagram posts and Reels. Works with our YouTube giveaway picker for cross-platform giveaway management.';
       } else {
-        const platformLabel = 'Instagram Posts & Reels';
-        title = `${platformLabel} Picker — Free Giveaway & Comment Picker Suite`;
-        description = `Extract and pick random giveaway winners from your ${platformLabel}. Works seamlessly alongside our YouTube giveaway picker tool with advanced filters.`;
+        title = 'TikTok Giveaway Picker — Free Random Comment Winner Selector';
+        description = 'Free TikTok giveaway comment picker to pick random winners from TikTok video comments. Part of our free YouTube giveaway picker & creator tools suite.';
       }
     }
 
@@ -53,6 +54,14 @@ export default function SeoHead({ pageType, platform, blogData, title: customTit
       }
       tag.content = content;
     };
+
+    // Keywords meta
+    const keywordsMap = {
+      picker: 'youtube giveaway picker, youtube comment picker, free youtube giveaway picker, random youtube comment picker, youtube giveaway winner picker, pick random youtube comment, youtube random comment picker, youtube giveaway tool, youtube comment winner selector, youtube giveaway picker free, youtube giveaway picker no login, pick youtube comment winner',
+      thumbnail: 'youtube thumbnail downloader, download youtube thumbnail, youtube thumbnail grabber, hd youtube thumbnail, youtube giveaway picker',
+      blog: 'youtube giveaway picker, youtube giveaway guide, youtube comment winner, youtube creator tips',
+    };
+    updateMetaTag('meta[name="keywords"]', 'name', 'keywords', keywordsMap[pageType] || 'youtube giveaway picker, youtube creator tools');
 
     // Update Meta Description & Title
     updateMetaTag('meta[name="description"]', 'name', 'description', description);
@@ -150,8 +159,26 @@ export default function SeoHead({ pageType, platform, blogData, title: customTit
 
     // 3. FAQPage Schema for AI Overviews / SGE
     const activeFaqs = customFaqs || (pageType === 'picker' || pageType === 'blog' ? [
-      { q: "Is this YouTube Giveaway Picker free and safe to use?", a: "Yes, our YouTube giveaway picker is 100% free and completely safe. It does not require login or passwords." },
-      { q: "How does the YouTube Giveaway Picker pick random winners?", a: "Our YouTube giveaway picker selects random winners using a verified cryptographic random selection algorithm." }
+      {
+        q: 'What is a YouTube giveaway picker?',
+        a: 'A YouTube giveaway picker is a free browser-based tool that randomly selects winners from a YouTube video\'s comment section. Our YouTube giveaway picker uses the official YouTube Data API v3 to load all public comments, then picks a random winner using a cryptographically secure algorithm. It supports duplicate filtering, keyword entry requirements, reply exclusion, and multi-winner selection.'
+      },
+      {
+        q: 'How does the YouTube giveaway picker pick random winners?',
+        a: 'Our YouTube giveaway picker connects to the YouTube Data API v3, fetches every public comment from your video, applies your selected filters (keyword, no replies, unique users), then uses a cryptographically secure random selection algorithm to pick one or more winners — guaranteeing zero bias and complete fairness for every YouTube comment giveaway.'
+      },
+      {
+        q: 'Is the YouTube giveaway picker completely free?',
+        a: 'Yes. Our YouTube giveaway picker is 100% free — no account, no subscription, no Chrome extension required, and no download needed. Simply paste your YouTube video URL and pick a random comment winner instantly, from any browser on any device.'
+      },
+      {
+        q: 'Can the YouTube giveaway picker filter by keyword?',
+        a: 'Yes. The YouTube giveaway picker lets you require a specific keyword in comments (e.g. only pick comments containing \'giveaway\'), exclude replies, deduplicate by username, and pick multiple winners — giving you full control over your giveaway entry rules.'
+      },
+      {
+        q: 'Does the YouTube giveaway picker work for Instagram and TikTok too?',
+        a: 'Yes. In addition to the YouTube giveaway picker, we also offer a free Instagram giveaway picker and TikTok giveaway picker — letting you run fair, filtered comment giveaways across all major video platforms from the same tool suite.'
+      }
     ] : null);
 
     if (activeFaqs && activeFaqs.length > 0) {
