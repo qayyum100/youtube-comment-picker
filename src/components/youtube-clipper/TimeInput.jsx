@@ -141,7 +141,7 @@ export default function TimeInput({
       >
         {isPreviewing ? (
           <>
-            <Pause size={16} /> Stop Preview
+            <Pause size={16} /> Previewing Clip...
           </>
         ) : (
           <>

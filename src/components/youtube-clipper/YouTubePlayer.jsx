@@ -70,16 +70,42 @@ export default function YouTubePlayer({
     };
   }, [videoId]);
 
+  // Handle Preview Clip trigger & pause
+  useEffect(() => {
+    if (!playerRef.current || typeof playerRef.current.seekTo !== 'function') return;
+
+    if (isPreviewing) {
+      try {
+        playerRef.current.seekTo(startTimeSec || 0, true);
+        if (playerRef.current.playVideo) {
+          playerRef.current.playVideo();
+        }
+      } catch (err) {
+        console.warn('Error starting preview playback:', err.message);
+      }
+    } else {
+      try {
+        if (playerRef.current.pauseVideo) {
+          playerRef.current.pauseVideo();
+        }
+      } catch (err) {
+        console.warn('Error pausing preview playback:', err.message);
+      }
+    }
+  }, [isPreviewing]);
+
   const startTrackingTime = () => {
     stopTrackingTime();
     intervalRef.current = setInterval(() => {
-      if (playerRef.current && playerRef.current.getCurrentTime) {
+      if (playerRef.current && typeof playerRef.current.getCurrentTime === 'function') {
         const curr = playerRef.current.getCurrentTime();
         if (onTimeUpdate) onTimeUpdate(curr);
 
-        // Handle auto-stop for clip preview
+        // Handle auto-stop for clip preview when end time is reached
         if (isPreviewing && endTimeSec && curr >= endTimeSec) {
-          playerRef.current.pauseVideo();
+          if (typeof playerRef.current.pauseVideo === 'function') {
+            playerRef.current.pauseVideo();
+          }
           if (onPreviewEnd) onPreviewEnd();
         }
       }
