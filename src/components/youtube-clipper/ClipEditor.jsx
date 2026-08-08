@@ -36,12 +36,15 @@ export default function ClipEditor({
 
   // Frame container dimensions preview
   let frameWidth = '100%';
+  let frameMaxHeight = '420px';
   let frameAspectRatio = '16/9';
   if (aspectRatio === '9:16') {
-    frameWidth = '340px';
+    frameWidth = '270px';
+    frameMaxHeight = '480px';
     frameAspectRatio = '9/16';
   } else if (aspectRatio === '1:1') {
-    frameWidth = '480px';
+    frameWidth = '400px';
+    frameMaxHeight = '400px';
     frameAspectRatio = '1/1';
   }
 
@@ -160,6 +163,7 @@ export default function ClipEditor({
             position: 'relative',
             width: frameWidth,
             maxWidth: '100%',
+            maxHeight: frameMaxHeight,
             aspectRatio: frameAspectRatio,
             borderRadius: 'var(--radius-md)',
             overflow: 'hidden',

@@ -97,11 +97,10 @@ export default function YouTubePlayer({
     <div style={{
       position: 'relative',
       width: '100%',
-      paddingTop: '56.25%', // 16:9 aspect ratio
-      borderRadius: 'var(--radius-md)',
+      height: '100%',
+      minHeight: '220px',
       overflow: 'hidden',
-      backgroundColor: '#000',
-      boxShadow: 'var(--shadow-md)'
+      backgroundColor: '#000'
     }}>
       <div
         id={`yt-player-${videoId}`}
