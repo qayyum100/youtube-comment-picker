@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   ShieldCheck, Users, Zap, Globe, BookOpen,
-  Youtube, Instagram, Hash, Star, CheckCircle2, Mail
+  Youtube, Instagram, Hash, Star, CheckCircle2, Mail, Scissors
 } from 'lucide-react';
 
 const stats = [
@@ -44,6 +44,7 @@ const values = [
 ];
 
 const tools = [
+  { icon: <Scissors size={18} />, name: 'YouTube Video Clipper', path: '/youtube-clipper' },
   { icon: <Youtube size={18} />, name: 'YouTube Comment Picker', path: '/youtube-comment-picker' },
   { icon: <Instagram size={18} />, name: 'Instagram Comment Picker', path: '/instagram-comment-picker' },
   { icon: <Hash size={18} />, name: 'YouTube Tag Extractor', path: '/youtube-tag-extractor' },

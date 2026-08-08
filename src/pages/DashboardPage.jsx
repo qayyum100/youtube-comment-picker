@@ -17,6 +17,14 @@ export default function DashboardPage() {
 
   const tools = [
     {
+      name: "YouTube Video Clipper",
+      description: "Trim YouTube videos into 9:16 Shorts, Reels, and 16:9 clips with custom captions.",
+      path: "/youtube-clipper",
+      icon: <Scissors size={22} />,
+      color: "#FF0000",
+      category: "Creator Graphics & Extras"
+    },
+    {
       name: "Excalidraw Whiteboard",
       description: "Infinite hand-drawn sketch whiteboard for system architectures, flowcharts, and visual brainstorming.",
       path: "/excalidraw",
