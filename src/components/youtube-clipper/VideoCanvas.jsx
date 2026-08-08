@@ -34,71 +34,84 @@ export default function VideoCanvas({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
     canvas.width = width;
     canvas.height = height;
 
     let animationFrameId;
+    let isImageLoaded = false;
 
     const img = new Image();
     img.crossOrigin = 'anonymous';
-    img.src = thumbnailUrl || '';
+    img.onload = () => { isImageLoaded = true; };
+    img.onerror = () => { isImageLoaded = false; };
+    if (thumbnailUrl) {
+      img.src = thumbnailUrl;
+    }
 
     const render = () => {
-      // Background fill
-      ctx.fillStyle = '#0F172A';
+      // 1. Background Fill & Dynamic SaaS Gradient
+      const gradient = ctx.createLinearGradient(0, 0, width, height);
+      gradient.addColorStop(0, '#0F172A');
+      gradient.addColorStop(0.5, '#1E293B');
+      gradient.addColorStop(1, '#0F172A');
+      ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, width, height);
 
-      // Draw background / thumbnail according to fit mode
-      if (img.complete && img.naturalWidth > 0) {
-        if (fitMode === 'cover') {
-          const imgRatio = img.naturalWidth / img.naturalHeight;
-          const canvasRatio = width / height;
-          let drawW, drawH, drawX, drawY;
+      // 2. Draw Image (if loaded without tainting canvas)
+      if (isImageLoaded && img.naturalWidth > 0) {
+        try {
+          if (fitMode === 'cover') {
+            const imgRatio = img.naturalWidth / img.naturalHeight;
+            const canvasRatio = width / height;
+            let drawW, drawH, drawX, drawY;
 
-          if (imgRatio > canvasRatio) {
-            drawH = height;
-            drawW = height * imgRatio;
-            drawX = (width - drawW) / 2;
-            drawY = 0;
-          } else {
-            drawW = width;
-            drawH = width / imgRatio;
-            drawX = 0;
-            drawY = (height - drawH) / 2;
-          }
-          ctx.drawImage(img, drawX, drawY, drawW, drawH);
-        } else if (fitMode === 'contain') {
-          const imgRatio = img.naturalWidth / img.naturalHeight;
-          const canvasRatio = width / height;
-          let drawW, drawH, drawX, drawY;
+            if (imgRatio > canvasRatio) {
+              drawH = height;
+              drawW = height * imgRatio;
+              drawX = (width - drawW) / 2;
+              drawY = 0;
+            } else {
+              drawW = width;
+              drawH = width / imgRatio;
+              drawX = 0;
+              drawY = (height - drawH) / 2;
+            }
+            ctx.drawImage(img, drawX, drawY, drawW, drawH);
+          } else if (fitMode === 'contain') {
+            const imgRatio = img.naturalWidth / img.naturalHeight;
+            const canvasRatio = width / height;
+            let drawW, drawH, drawX, drawY;
 
-          if (imgRatio > canvasRatio) {
-            drawW = width;
-            drawH = width / imgRatio;
-            drawX = 0;
-            drawY = (height - drawH) / 2;
+            if (imgRatio > canvasRatio) {
+              drawW = width;
+              drawH = width / imgRatio;
+              drawX = 0;
+              drawY = (height - drawH) / 2;
+            } else {
+              drawH = height;
+              drawW = height * imgRatio;
+              drawX = (width - drawW) / 2;
+              drawY = 0;
+            }
+            ctx.drawImage(img, drawX, drawY, drawW, drawH);
           } else {
-            drawH = height;
-            drawW = height * imgRatio;
-            drawX = (width - drawW) / 2;
-            drawY = 0;
+            // Center crop
+            const sWidth = Math.min(img.naturalWidth, img.naturalHeight * (width / height));
+            const sHeight = Math.min(img.naturalHeight, img.naturalWidth * (height / width));
+            const sx = (img.naturalWidth - sWidth) / 2;
+            const sy = (img.naturalHeight - sHeight) / 2;
+            ctx.drawImage(img, sx, sy, sWidth, sHeight, 0, 0, width, height);
           }
-          ctx.drawImage(img, drawX, drawY, drawW, drawH);
-        } else {
-          // Center crop
-          const sWidth = Math.min(img.naturalWidth, img.naturalHeight * (width / height));
-          const sHeight = Math.min(img.naturalHeight, img.naturalWidth * (height / width));
-          const sx = (img.naturalWidth - sWidth) / 2;
-          const sy = (img.naturalHeight - sHeight) / 2;
-          ctx.drawImage(img, sx, sy, sWidth, sHeight, 0, 0, width, height);
+        } catch (e) {
+          // Cross-origin image draw fallback
         }
       }
 
-      // Draw Captions Overlay
+      // 3. Draw Captions Overlay
       if (captionEnabled && captionText) {
-        const fontSz = (captionSettings.fontSize || 20) * (height / 600);
-        ctx.font = `${captionSettings.fontWeight || '700'} ${fontSz}px ${captionSettings.fontFamily || 'sans-serif'}`;
+        const fontSz = Math.max(16, (captionSettings.fontSize || 22) * (height / 640));
+        ctx.font = `${captionSettings.fontWeight || '700'} ${fontSz}px ${captionSettings.fontFamily || 'Inter, sans-serif'}`;
         ctx.textAlign = captionSettings.alignment || 'center';
         ctx.textBaseline = 'middle';
 
@@ -151,7 +164,7 @@ export default function VideoCanvas({
     <canvas
       ref={canvasRef}
       style={{
-        display: 'none' // Canvas renders off-screen for recording engine
+        display: 'none'
       }}
     />
   );

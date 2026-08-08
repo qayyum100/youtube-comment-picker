@@ -95,8 +95,8 @@ export default function YouTubeClipperPage() {
     setProgressPercent(5);
     setStatusStep('Preparing your clip...');
 
-    await new Promise(r => setTimeout(r, 600));
-    setProgressPercent(35);
+    await new Promise(r => setTimeout(r, 400));
+    setProgressPercent(20);
     setStatusStep('Creating clip...');
 
     try {
@@ -124,11 +124,12 @@ export default function YouTubeClipperPage() {
         mediaRecorder.start(100);
       }
 
-      // Simulate step progress matching frame recording
-      const steps = 20;
-      for (let i = 1; i <= steps; i++) {
-        await new Promise(r => setTimeout(r, (clipDurationSec * 1000) / steps));
-        const currentPct = 35 + (i / steps) * 45;
+      // Simulate step progress matching frame recording duration
+      const totalSteps = 20;
+      const stepInterval = Math.max(100, Math.min(300, (clipDurationSec * 1000) / totalSteps));
+      for (let i = 1; i <= totalSteps; i++) {
+        await new Promise(r => setTimeout(r, stepInterval));
+        const currentPct = 20 + (i / totalSteps) * 60;
         setProgressPercent(Math.min(80, currentPct));
       }
 
@@ -136,19 +137,21 @@ export default function YouTubeClipperPage() {
       setProgressPercent(90);
 
       if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-        mediaRecorder.stop();
-        await new Promise(r => setTimeout(r, 300));
+        await new Promise((resolve) => {
+          mediaRecorder.onstop = resolve;
+          mediaRecorder.stop();
+        });
       }
 
       let clipBlob;
       let formatStr = 'webm';
       if (recordedChunks.length > 0) {
-        clipBlob = new Blob(recordedChunks, { type: recordedChunks[0].type });
-        formatStr = recordedChunks[0].type.includes('mp4') ? 'mp4' : 'webm';
+        clipBlob = new Blob(recordedChunks, { type: recordedChunks[0].type || 'video/webm' });
+        formatStr = (recordedChunks[0].type || '').includes('mp4') ? 'mp4' : 'webm';
       } else {
-        // Web API fallback canvas frame blob
-        const canvasBlob = await new Promise(res => canvas ? canvas.toBlob(res, 'image/jpeg') : res(null));
-        clipBlob = canvasBlob || new Blob(['mock video data'], { type: 'video/webm' });
+        // Fallback frame capture if MediaRecorder stream is empty
+        const canvasBlob = await new Promise(res => canvas ? canvas.toBlob(res, 'image/png') : res(null));
+        clipBlob = canvasBlob || new Blob([], { type: 'video/webm' });
       }
 
       const clipUrl = URL.createObjectURL(clipBlob);
@@ -255,6 +258,20 @@ export default function YouTubeClipperPage() {
               onCanvasRef={(c) => { canvasRef.current = c; }}
             />
           </>
+        )}
+
+        {/* Video Canvas engine stays mounted whenever video is loaded */}
+        {videoMetadata && (
+          <VideoCanvas
+            aspectRatio={aspectRatio}
+            fitMode={fitMode}
+            captionEnabled={captionEnabled}
+            captionText={captionText}
+            captionSettings={captionSettings}
+            thumbnailUrl={videoMetadata.thumbnailUrl}
+            videoTitle={videoMetadata.title}
+            onCanvasRef={(c) => { canvasRef.current = c; }}
+          />
         )}
 
         {/* Step 7: Processing Progress State */}

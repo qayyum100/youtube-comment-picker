@@ -63,6 +63,15 @@ export default function ClipResult({
           controls
           autoPlay
           loop
+          onLoadedMetadata={(e) => {
+            if (e.target && (e.target.duration === Infinity || !isFinite(e.target.duration) || e.target.duration === 0)) {
+              e.target.currentTime = 1e101;
+              e.target.ontimeupdate = () => {
+                e.target.ontimeupdate = null;
+                e.target.currentTime = 0;
+              };
+            }
+          }}
           style={{ width: '100%', height: 'auto', display: 'block' }}
         />
       </div>
