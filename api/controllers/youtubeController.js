@@ -75,6 +75,80 @@ export const getYouTubeComments = async (req, res) => {
   }
 };
 
+export function parseDurationInSeconds(isoDuration) {
+  if (!isoDuration) return 300;
+  const regex = /P(?:(\d+)Y)?(?:(\d+)M)?(?:(\d+)D)?(?:T(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?)?/;
+  const matches = isoDuration.match(regex);
+  if (!matches) return 300;
+  const hours = parseInt(matches[4] || 0, 10);
+  const minutes = parseInt(matches[5] || 0, 10);
+  const seconds = parseInt(matches[6] || 0, 10);
+  return hours * 3600 + minutes * 60 + seconds;
+}
+
+export const getYouTubeClipperMetadata = async (req, res) => {
+  const { url } = req.query;
+  const videoId = extractYouTubeId(url);
+  
+  if (!url) return res.status(400).json({ error: 'YouTube URL is required' });
+  if (!videoId) return res.status(400).json({ error: 'Please enter a valid YouTube URL.' });
+
+  const apiKey = process.env.YOUTUBE_API_KEY;
+
+  if (apiKey) {
+    try {
+      const response = await axios.get('https://www.googleapis.com/youtube/v3/videos', {
+        params: { part: 'snippet,contentDetails,statistics', id: videoId, key: apiKey }
+      });
+      
+      if (response.data.items && response.data.items.length > 0) {
+        const item = response.data.items[0];
+        const durationSec = parseDurationInSeconds(item.contentDetails?.duration);
+        return res.json({
+          simulated: false,
+          videoId,
+          title: item.snippet.title,
+          description: item.snippet.description,
+          channelTitle: item.snippet.channelTitle,
+          thumbnailUrl: item.snippet.thumbnails?.maxres?.url || item.snippet.thumbnails?.high?.url || `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+          durationSec,
+          isoDuration: item.contentDetails?.duration || 'PT5M00S'
+        });
+      }
+    } catch (error) {
+      console.warn('YouTube API call failed in clipper metadata, falling back to oembed:', error.message);
+    }
+  }
+
+  // Fallback: Try YouTube oEmbed API (does not require API key)
+  try {
+    const oembedUrl = `https://www.youtube.com/oembed?url=${encodeURIComponent(`https://www.youtube.com/watch?v=${videoId}`)}&format=json`;
+    const oembedResp = await axios.get(oembedUrl);
+    return res.json({
+      simulated: false,
+      videoId,
+      title: oembedResp.data.title || "YouTube Video",
+      description: "",
+      channelTitle: oembedResp.data.author_name || "YouTube Creator",
+      thumbnailUrl: oembedResp.data.thumbnail_url || `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+      durationSec: 300, // Default duration if YouTube player player API dynamically reports exact duration later
+      isoDuration: "PT5M00S"
+    });
+  } catch (err) {
+    // Final fallback
+    return res.json({
+      simulated: true,
+      videoId,
+      title: `YouTube Video (${videoId})`,
+      description: "YouTube Video Clip Preview",
+      channelTitle: "YouTube Creator",
+      thumbnailUrl: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+      durationSec: 300,
+      isoDuration: "PT5M00S"
+    });
+  }
+};
+
 export const getYouTubeVideoDetails = async (req, res) => {
   const { url } = req.query;
   const videoId = extractYouTubeId(url);

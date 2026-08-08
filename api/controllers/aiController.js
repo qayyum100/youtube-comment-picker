@@ -606,3 +606,84 @@ export const generateLiveStreamTitles = async (req, res) => {
         return res.status(500).json({ error: 'Failed to generate live stream titles' });
     }
 };
+
+export const suggestClipMoments = async (req, res) => {
+    const { videoTitle, transcriptText, durationSec = 300 } = req.body;
+    
+    const fallbackMoments = [
+        {
+            title: "Strong Intro Hook & Problem Statement",
+            startTime: "00:10",
+            endTime: "00:45",
+            startSec: 10,
+            endSec: 45,
+            duration: "00:35",
+            reasoning: "High energy opening hook that grabs immediate attention and establishes value."
+        },
+        {
+            title: "Core Insight & Main Key Takeaway",
+            startTime: "01:15",
+            endTime: "01:50",
+            startSec: 75,
+            endSec: 110,
+            duration: "00:35",
+            reasoning: "Delivers the central solution with concise punchy phrasing ideal for social clips."
+        },
+        {
+            title: "Actionable Advice & Final Wrap-up",
+            startTime: "02:30",
+            endTime: "03:00",
+            startSec: 150,
+            endSec: 180,
+            duration: "00:30",
+            reasoning: "Self-contained tip with high viral potential and clear call to action."
+        }
+    ];
+
+    try {
+        const apiKey = process.env.GEMINI_API_KEY;
+        if (!apiKey) {
+            return res.json({ moments: fallbackMoments, simulated: true });
+        }
+
+        const genAI = getGeminiClient();
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-flash-latest",
+            generationConfig: { responseMimeType: "application/json" }
+        });
+
+        const prompt = `Analyze this YouTube video context:
+Title: "${videoTitle || 'YouTube Video'}"
+Transcript / Context: "${(transcriptText || '').slice(0, 3000)}"
+Video Duration in seconds: ${durationSec}
+
+Identify 3 high-engagement viral clip moments (between 15 to 60 seconds each).
+Return a JSON object with a "moments" array, where each item has:
+- "title" (string, short punchy title)
+- "startSec" (number, start second timestamp)
+- "endSec" (number, end second timestamp)
+- "startTime" (string formatted MM:SS)
+- "endTime" (string formatted MM:SS)
+- "duration" (string formatted MM:SS)
+- "reasoning" (string, why this moment is great for TikTok/Shorts/Reels)
+Return ONLY valid JSON.`;
+
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        let data = {};
+        try {
+            data = JSON.parse(text);
+        } catch(e) {
+            const jsonMatch = text.match(/\{.*\}/s);
+            if (jsonMatch) data = JSON.parse(jsonMatch[0]);
+        }
+
+        if (data && Array.isArray(data.moments) && data.moments.length > 0) {
+            return res.json({ moments: data.moments, simulated: false });
+        }
+        return res.json({ moments: fallbackMoments, simulated: true });
+    } catch (error) {
+        console.error("Clip Moments AI Error:", error.message);
+        return res.json({ moments: fallbackMoments, simulated: true });
+    }
+};

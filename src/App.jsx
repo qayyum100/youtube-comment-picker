@@ -42,6 +42,7 @@ const RankTrackerPage = lazy(() => import('./pages/RankTrackerPage'));
 const QRCodeGeneratorPage = lazy(() => import('./pages/QRCodeGeneratorPage'));
 const KeywordToolPage = lazy(() => import('./pages/KeywordToolPage'));
 const EmbedGeneratorPage = lazy(() => import('./pages/EmbedGeneratorPage'));
+const YouTubeClipperPage = lazy(() => import('./pages/YouTubeClipperPage'));
 
 // Priority 1 Tool Pages
 const BestTimeToUploadPage = lazy(() => import('./pages/BestTimeToUploadPage'));
@@ -244,6 +245,7 @@ function AnimatedRoutes() {
           <Route path="/youtube-rank-tracker" element={<RankTrackerPage />} />
           <Route path="/youtube-qr-code-generator" element={<QRCodeGeneratorPage />} />
           <Route path="/youtube-embed-generator" element={<EmbedGeneratorPage />} />
+          <Route path="/youtube-clipper" element={<YouTubeClipperPage />} />
           <Route path="/youtube-keyword-tool" element={<KeywordToolPage />} />
 
           {/* Priority 1 Tool Routes */}

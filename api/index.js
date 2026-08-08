@@ -10,7 +10,8 @@ import {
   getYouTubeChannelDetails,
   checkVideoRank,
   getYouTubeChannelTags,
-  getYouTubeSuggestions
+  getYouTubeSuggestions,
+  getYouTubeClipperMetadata
 } from './controllers/youtubeController.js';
 
 import { 
@@ -32,7 +33,8 @@ import {
   generateShortsCaptions,
   analyzeShortsHook,
   generateCommunityPosts,
-  generateLiveStreamTitles
+  generateLiveStreamTitles,
+  suggestClipMoments
 } from './controllers/aiController.js';
 
 import { getTranscript } from './controllers/transcriptController.js';
@@ -56,6 +58,8 @@ app.get('/api/youtube/video', getYouTubeVideoDetails);
 app.get('/api/youtube/channel', getYouTubeChannelDetails);
 app.get('/api/youtube/channel-tags', getYouTubeChannelTags);
 app.get('/api/youtube/suggest', getYouTubeSuggestions);
+app.get('/api/youtube/clipper-metadata', getYouTubeClipperMetadata);
+app.post('/api/youtube/suggest-clips', suggestClipMoments);
 
 // Phase 2 Direct endpoints
 app.get('/api/transcript', getTranscript);
