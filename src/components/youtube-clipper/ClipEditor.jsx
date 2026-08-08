@@ -23,6 +23,8 @@ export default function ClipEditor({
   onChangeAspectRatio,
   fitMode,
   onChangeFitMode,
+  outputFormat,
+  onChangeOutputFormat,
   captionEnabled,
   onToggleCaptionEnabled,
   captionText,
@@ -223,6 +225,8 @@ export default function ClipEditor({
               onChangeAspectRatio={onChangeAspectRatio}
               fitMode={fitMode}
               onChangeFitMode={onChangeFitMode}
+              outputFormat={outputFormat}
+              onChangeOutputFormat={onChangeOutputFormat}
             />
           ) : null}
 

@@ -28,6 +28,7 @@ export default function YouTubeClipperPage() {
   // Studio Settings
   const [aspectRatio, setAspectRatio] = useState('16:9');
   const [fitMode, setFitMode] = useState('cover');
+  const [outputFormat, setOutputFormat] = useState('mp4');
   const [captionEnabled, setCaptionEnabled] = useState(true);
   const [captionText, setCaptionText] = useState('Watch full video on YouTube!');
   const [captionSettings, setCaptionSettings] = useState({
@@ -109,9 +110,24 @@ export default function YouTubeClipperPage() {
 
       if (canvas && canvas.captureStream && typeof MediaRecorder !== 'undefined') {
         stream = canvas.captureStream(30);
-        let mimeType = 'video/webm;codecs=vp9';
-        if (!MediaRecorder.isTypeSupported(mimeType)) {
-          mimeType = 'video/webm';
+        let mimeType = 'video/mp4';
+
+        if (outputFormat === 'mp4') {
+          if (MediaRecorder.isTypeSupported('video/mp4;codecs=avc1')) {
+            mimeType = 'video/mp4;codecs=avc1';
+          } else if (MediaRecorder.isTypeSupported('video/mp4')) {
+            mimeType = 'video/mp4';
+          } else if (MediaRecorder.isTypeSupported('video/webm;codecs=vp9')) {
+            mimeType = 'video/webm;codecs=vp9';
+          } else {
+            mimeType = 'video/webm';
+          }
+        } else {
+          if (MediaRecorder.isTypeSupported('video/webm;codecs=vp9')) {
+            mimeType = 'video/webm;codecs=vp9';
+          } else {
+            mimeType = 'video/webm';
+          }
         }
 
         mediaRecorder = new MediaRecorder(stream, { mimeType });
@@ -144,14 +160,15 @@ export default function YouTubeClipperPage() {
       }
 
       let clipBlob;
-      let formatStr = 'webm';
+      let formatStr = outputFormat || 'mp4';
       if (recordedChunks.length > 0) {
-        clipBlob = new Blob(recordedChunks, { type: recordedChunks[0].type || 'video/webm' });
-        formatStr = (recordedChunks[0].type || '').includes('mp4') ? 'mp4' : 'webm';
+        const recordedType = recordedChunks[0].type || '';
+        formatStr = recordedType.includes('mp4') ? 'mp4' : (recordedType.includes('webm') ? 'webm' : outputFormat);
+        clipBlob = new Blob(recordedChunks, { type: recordedType || `video/${formatStr}` });
       } else {
         // Fallback frame capture if MediaRecorder stream is empty
         const canvasBlob = await new Promise(res => canvas ? canvas.toBlob(res, 'image/png') : res(null));
-        clipBlob = canvasBlob || new Blob([], { type: 'video/webm' });
+        clipBlob = canvasBlob || new Blob([], { type: `video/${formatStr}` });
       }
 
       const clipUrl = URL.createObjectURL(clipBlob);
@@ -248,6 +265,8 @@ export default function YouTubeClipperPage() {
               onChangeAspectRatio={setAspectRatio}
               fitMode={fitMode}
               onChangeFitMode={setFitMode}
+              outputFormat={outputFormat}
+              onChangeOutputFormat={setOutputFormat}
               captionEnabled={captionEnabled}
               onToggleCaptionEnabled={setCaptionEnabled}
               captionText={captionText}

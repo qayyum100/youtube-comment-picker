@@ -61,7 +61,7 @@ export default function AspectRatioSelector({ aspectRatio, onChangeAspectRatio, 
       </div>
 
       {/* Frame Fit Modes */}
-      <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+      <div style={{ display: 'flex', gap: '8px', alignItems: 'center', marginBottom: '16px' }}>
         <span style={{ fontSize: '12px', fontWeight: '600', color: 'var(--text-secondary)' }}>Fit Mode:</span>
         {fitModes.map(fm => (
           <button
@@ -83,6 +83,33 @@ export default function AspectRatioSelector({ aspectRatio, onChangeAspectRatio, 
           </button>
         ))}
       </div>
+
+      {/* Output Format Selector */}
+      {onChangeOutputFormat && (
+        <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+          <span style={{ fontSize: '12px', fontWeight: '600', color: 'var(--text-secondary)' }}>Format:</span>
+          {['mp4', 'webm'].map(fmt => (
+            <button
+              key={fmt}
+              type="button"
+              onClick={() => onChangeOutputFormat(fmt)}
+              style={{
+                padding: '6px 14px',
+                fontSize: '12px',
+                fontWeight: '700',
+                borderRadius: 'var(--radius-xs)',
+                border: (outputFormat || 'mp4') === fmt ? '1px solid var(--primary)' : '1px solid var(--border)',
+                background: (outputFormat || 'mp4') === fmt ? 'var(--primary-light)' : 'var(--surface)',
+                color: (outputFormat || 'mp4') === fmt ? 'var(--primary)' : 'var(--text-secondary)',
+                cursor: 'pointer',
+                textTransform: 'uppercase'
+              }}
+            >
+              {fmt}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
