@@ -610,5 +610,35 @@ export const toolFaqs = {
       question: "Can I download YouTube subtitles as a text file?",
       answer: "Yes, our tool allows you to download the extracted YouTube subtitles as a .TXT or .SRT file without timestamps, making it incredibly easy to repurpose the video content into blog posts or articles."
     }
+  ],
+  youtubeClipper: [
+    {
+      question: "Can I clip a YouTube video for free without downloading it?",
+      answer: "Yes! Our YouTube Video Clipper tool lets you select any segment of a YouTube video directly in your browser — no software download required. Simply paste the URL, drag the timeline handles to set your start and end times, and generate a clip in seconds."
+    },
+    {
+      question: "How do I make a YouTube Short from a long video?",
+      answer: "To make a YouTube Short from a long video, use our clipper to select the best 15–60 second moment, switch the aspect ratio to 9:16 (Shorts/Reels format), optionally add a caption overlay, and then download the clip. You can then upload it directly to YouTube Shorts, Instagram Reels, or TikTok."
+    },
+    {
+      question: "What is the best aspect ratio for YouTube Shorts clips?",
+      answer: "The best aspect ratio for YouTube Shorts is 9:16 (vertical), which fills the full mobile screen. For standard YouTube videos and thumbnails, use 16:9 (landscape). For Instagram and Facebook square posts, use 1:1. Our tool supports all three formats with one click."
+    },
+    {
+      question: "Can I add captions or text overlays to my YouTube clip?",
+      answer: "Yes. The Clip Editor Studio includes a built-in Caption Editor where you can type custom text, choose from preset styles (Minimal, Bold, Social, Karaoke), adjust font size, text color, background, and position (top, center, bottom). Captions are rendered directly onto the exported clip."
+    },
+    {
+      question: "Why is my YouTube clip downloading as WebM instead of MP4?",
+      answer: "Browser-based video recording uses the MediaRecorder API, and MP4 support varies by browser. Chrome and Edge typically support WebM (VP9 codec). If you need MP4, try Microsoft Edge or enable the MP4 format option. WebM files are still widely supported and can be re-encoded using free tools like HandBrake."
+    },
+    {
+      question: "How does the AI Best Moments Finder work?",
+      answer: "The AI Best Moments Finder analyzes your video's title and metadata to intelligently predict the highest-engagement segments — such as hooks, climax moments, or key takeaways. It suggests timestamped clip ranges with reasoning so you can jump directly to the most viral-worthy parts of any video."
+    },
+    {
+      question: "Is there a clip length limit for YouTube Shorts?",
+      answer: "YouTube Shorts must be 60 seconds or less (as of 2025, YouTube extended this to 3 minutes for some accounts). For maximum reach across all platforms, we recommend keeping clips between 15–60 seconds. Our timeline trimmer shows the exact clip duration in real time so you never go over."
+    }
   ]
 };

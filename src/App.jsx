@@ -148,6 +148,8 @@ const HashtagFormatterPage = lazy(() => import('./pages/HashtagFormatterPage'));
 
 const BlogIndexPage = lazy(() => import('./pages/BlogIndexPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
+const WebStoriesIndexPage = lazy(() => import('./pages/WebStoriesIndexPage'));
+const WebStoryViewerPage = lazy(() => import('./pages/WebStoryViewerPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const ContactPage = lazy(() => import('./pages/ContactPage'));
 
@@ -181,6 +183,12 @@ function Navigation({ isMobileMenuOpen, setIsMobileMenuOpen }) {
         className={`nav-link ${isActive('/blogs') ? 'active' : ''}`}
       >
         Blog
+      </Link>
+      <Link
+        to="/web-stories"
+        className={`nav-link ${isActive('/web-stories') ? 'active' : ''}`}
+      >
+        Stories
       </Link>
       <Link
         to="/about"
@@ -352,6 +360,8 @@ function AnimatedRoutes() {
 
           <Route path="/blogs" element={<BlogIndexPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
+          <Route path="/web-stories" element={<WebStoriesIndexPage />} />
+          <Route path="/web-stories/:slug" element={<WebStoryViewerPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
         </Routes>

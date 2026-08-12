@@ -1,7 +1,7 @@
 import React from 'react';
 import { Monitor, Smartphone, Square, Layout } from 'lucide-react';
 
-export default function AspectRatioSelector({ aspectRatio, onChangeAspectRatio, fitMode, onChangeFitMode }) {
+export default function AspectRatioSelector({ aspectRatio, onChangeAspectRatio, fitMode, onChangeFitMode, outputFormat, onChangeOutputFormat }) {
   const ratios = [
     { id: '16:9', label: '16:9', desc: 'YouTube', icon: Monitor },
     { id: '9:16', label: '9:16', desc: 'Shorts / Reels', icon: Smartphone },

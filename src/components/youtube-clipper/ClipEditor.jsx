@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Film, Type, Layout, Sliders, Scissors, Play, Download, Sparkles } from 'lucide-react';
+
 import YouTubePlayer from './YouTubePlayer';
 import ClipTimeline from './ClipTimeline';
 import TimeInput from './TimeInput';
@@ -34,7 +35,8 @@ export default function ClipEditor({
   onCreateClip,
   onCanvasRef
 }) {
-  const [activeTool, setActiveTool] = useState('video'); // 'video' | 'captions' | 'layout'
+  const [activeTool, setActiveTool] = useState('layout'); // 'layout' | 'captions'
+
 
   // Frame container dimensions preview
   let frameWidth = '100%';
@@ -114,9 +116,8 @@ export default function ClipEditor({
           alignItems: 'center'
         }}>
           {[
-            { id: 'video', label: 'Video', icon: Film },
-            { id: 'captions', label: 'Captions', icon: Type },
-            { id: 'layout', label: 'Layout', icon: Layout }
+            { id: 'layout', label: 'Layout', icon: Layout },
+            { id: 'captions', label: 'Captions', icon: Type }
           ].map(tool => {
             const Icon = tool.icon;
             const isActive = activeTool === tool.id;
@@ -219,7 +220,7 @@ export default function ClipEditor({
 
         {/* RIGHT SIDEBAR: Selected Tool Settings */}
         <div className="card" style={{ padding: '20px' }}>
-          {activeTool === 'layout' || activeTool === 'video' ? (
+          {activeTool === 'layout' && (
             <AspectRatioSelector
               aspectRatio={aspectRatio}
               onChangeAspectRatio={onChangeAspectRatio}
@@ -228,9 +229,9 @@ export default function ClipEditor({
               outputFormat={outputFormat}
               onChangeOutputFormat={onChangeOutputFormat}
             />
-          ) : null}
+          )}
 
-          {activeTool === 'captions' || activeTool === 'video' ? (
+          {activeTool === 'captions' && (
             <CaptionEditor
               enabled={captionEnabled}
               onToggleEnabled={onToggleCaptionEnabled}
@@ -239,7 +240,19 @@ export default function ClipEditor({
               captionSettings={captionSettings}
               onChangeCaptionSettings={onChangeCaptionSettings}
             />
-          ) : null}
+          )}
+
+          {activeTool === 'video' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0 }}>
+                Use the <strong>Layout</strong> tab to set aspect ratio, fit mode, and output format.
+                Use the <strong>Captions</strong> tab to add text overlays to your clip.
+              </p>
+              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0 }}>
+                When ready, drag the timeline handles below to select your clip range, then click <strong>Create Clip</strong> to export.
+              </p>
+            </div>
+          )}
         </div>
       </div>
 

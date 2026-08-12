@@ -172,6 +172,7 @@ export default function YouTubeClipperPage() {
       }
 
       const clipUrl = URL.createObjectURL(clipBlob);
+      const isImageFallback = recordedChunks.length === 0;
 
       setProgressPercent(100);
       setStatusStep('Your clip is ready!');
@@ -183,7 +184,8 @@ export default function YouTubeClipperPage() {
         blob: clipBlob,
         durationSec: clipDurationSec,
         aspectRatio,
-        format: formatStr
+        format: formatStr,
+        isImageFallback
       });
 
       setUiState('completed');
@@ -206,10 +208,11 @@ export default function YouTubeClipperPage() {
   return (
     <div className="page-wrapper">
       <SEO
-        title="YouTube Video Clipper — Turn Long Videos into Viral Shorts & Clips"
-        description="Extract high-impact clips from any YouTube video instantly. Custom aspect ratios (9:16 Shorts, 16:9, 1:1), animated captions, drag timeline trimmers, and browser-based MP4/WebM clip generator."
+        title="Free YouTube Video Clipper — Clip & Create YouTube Shorts, Reels & Clips Online"
+        description="Instantly clip any YouTube video online for free. Trim to exact timestamps, export in 9:16 for YouTube Shorts & TikTok, add animated captions, and download as MP4 or WebM. No software needed — works entirely in your browser."
         url="/youtube-clipper"
       />
+
 
       <div className="container" style={{ paddingBottom: '60px' }}>
         {/* Step 1: URL Input (always available unless completed or editing) */}
@@ -279,19 +282,7 @@ export default function YouTubeClipperPage() {
           </>
         )}
 
-        {/* Video Canvas engine stays mounted whenever video is loaded */}
-        {videoMetadata && (
-          <VideoCanvas
-            aspectRatio={aspectRatio}
-            fitMode={fitMode}
-            captionEnabled={captionEnabled}
-            captionText={captionText}
-            captionSettings={captionSettings}
-            thumbnailUrl={videoMetadata.thumbnailUrl}
-            videoTitle={videoMetadata.title}
-            onCanvasRef={(c) => { canvasRef.current = c; }}
-          />
-        )}
+        {/* Video Canvas engine — mounted inside ClipEditor; canvasRef bubbles up via onCanvasRef */}
 
         {/* Step 7: Processing Progress State */}
         {uiState === 'processing' && (
@@ -309,6 +300,7 @@ export default function YouTubeClipperPage() {
             durationSec={generatedClip.durationSec}
             aspectRatio={generatedClip.aspectRatio}
             format={generatedClip.format}
+            isImageFallback={generatedClip.isImageFallback}
             onEditClip={() => setUiState('editing')}
             onReset={handleReset}
           />
@@ -325,8 +317,44 @@ export default function YouTubeClipperPage() {
 
         {/* FAQ Section */}
         <div style={{ marginTop: '60px' }}>
-          <FaqSection faqs={toolFaqs.youtubeTagExtractor || []} />
+          <FaqSection faqs={toolFaqs.youtubeClipper || []} />
         </div>
+
+        {/* SEO Content Block */}
+        {(uiState === 'initial' || uiState === 'error') && (
+          <div style={{ marginTop: '60px' }}>
+            <h2 style={{ fontSize: '24px', fontWeight: '800', color: 'var(--text-primary)', marginBottom: '12px', textAlign: 'center' }}>
+              The Easiest Way to Clip YouTube Videos Online — Free
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '15px', lineHeight: 1.8, maxWidth: '760px', margin: '0 auto 36px auto', textAlign: 'center' }}>
+              Our free YouTube Video Clipper lets you extract any moment from any YouTube video and export it as a shareable short-form clip — no account, no download, no watermark. Perfect for content creators, social media managers, and anyone repurposing long-form YouTube content into viral Shorts, Reels, or TikTok videos.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px' }}>
+              {[
+                { emoji: '✂️', title: 'Precise Timeline Trimmer', desc: 'Drag the start and end handles on the visual timeline to select the exact clip segment you want. Supports second-level precision.' },
+                { emoji: '📐', title: '9:16 Shorts & Reels Format', desc: 'Instantly reframe your clip to vertical 9:16 for YouTube Shorts, TikTok, and Instagram Reels — or keep it in 16:9 or 1:1.' },
+                { emoji: '💬', title: 'Animated Caption Overlays', desc: 'Add bold text captions with custom fonts, colors, and positions. Choose from Minimal, Bold, Social, or Karaoke presets.' },
+                { emoji: '🤖', title: 'AI Best Moments Finder', desc: 'Let AI analyze your video and automatically suggest the highest-engagement clip moments — hooks, climaxes, and key takeaways.' },
+                { emoji: '📥', title: 'MP4 & WebM Export', desc: 'Download your clip directly in MP4 or WebM format with no watermark. 100% browser-based — nothing is uploaded to our servers.' },
+                { emoji: '🎨', title: 'Aspect Ratio & Fit Modes', desc: 'Cover, Contain, or Center Crop — control exactly how your original 16:9 video fills the vertical or square frame.' }
+              ].map((f, i) => (
+                <div key={i} style={{
+                  padding: '20px',
+                  borderRadius: 'var(--radius-md)',
+                  border: '1px solid var(--border)',
+                  backgroundColor: 'var(--surface)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '8px'
+                }}>
+                  <div style={{ fontSize: '28px' }}>{f.emoji}</div>
+                  <h3 style={{ fontSize: '15px', fontWeight: '700', color: 'var(--text-primary)', margin: 0 }}>{f.title}</h3>
+                  <p style={{ fontSize: '13px', color: 'var(--text-secondary)', margin: 0, lineHeight: 1.6 }}>{f.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

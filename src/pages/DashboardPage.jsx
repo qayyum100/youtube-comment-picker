@@ -25,6 +25,15 @@ export default function DashboardPage() {
       category: "Creator Graphics & Extras"
     },
     {
+      name: "Visual Web Stories Feed",
+      description: "Discover & post tappable Web Stories optimized for Google Discover & mobile feeds.",
+      path: "/web-stories",
+      icon: <Sparkles size={22} />,
+      color: "#8B5CF6",
+      category: "SEO & Optimization"
+    },
+
+    {
       name: "Excalidraw Whiteboard",
       description: "Infinite hand-drawn sketch whiteboard for system architectures, flowcharts, and visual brainstorming.",
       path: "/excalidraw",

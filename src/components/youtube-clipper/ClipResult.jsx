@@ -8,6 +8,7 @@ export default function ClipResult({
   durationSec,
   aspectRatio,
   format,
+  isImageFallback,
   onEditClip,
   onReset
 }) {
@@ -15,7 +16,7 @@ export default function ClipResult({
     if (!clipUrl) return;
     const a = document.createElement('a');
     a.href = clipUrl;
-    const ext = format.includes('mp4') ? 'mp4' : 'webm';
+    const ext = isImageFallback ? 'png' : (format.includes('mp4') ? 'mp4' : 'webm');
     a.download = `youtube-clip.${ext}`;
     document.body.appendChild(a);
     a.click();
@@ -58,22 +59,42 @@ export default function ClipResult({
         border: '2px solid var(--border-strong)',
         backgroundColor: '#000'
       }}>
-        <video
-          src={clipUrl}
-          controls
-          autoPlay
-          loop
-          onLoadedMetadata={(e) => {
-            if (e.target && (e.target.duration === Infinity || !isFinite(e.target.duration) || e.target.duration === 0)) {
-              e.target.currentTime = 1e101;
-              e.target.ontimeupdate = () => {
-                e.target.ontimeupdate = null;
-                e.target.currentTime = 0;
-              };
-            }
-          }}
-          style={{ width: '100%', height: 'auto', display: 'block' }}
-        />
+        {isImageFallback ? (
+          <>
+            <img
+              src={clipUrl}
+              alt="Clip frame preview"
+              style={{ width: '100%', height: 'auto', display: 'block' }}
+            />
+            <div style={{
+              padding: '10px 14px',
+              backgroundColor: 'var(--warning-light, rgba(245, 158, 11, 0.1))',
+              color: 'var(--warning, #D97706)',
+              fontSize: '12px',
+              fontWeight: '600',
+              textAlign: 'center'
+            }}>
+              ⚠️ Your browser couldn't record a video stream. Showing a frame preview instead. Try Chrome or Edge for full video export.
+            </div>
+          </>
+        ) : (
+          <video
+            src={clipUrl}
+            controls
+            autoPlay
+            loop
+            onLoadedMetadata={(e) => {
+              if (e.target && (e.target.duration === Infinity || !isFinite(e.target.duration) || e.target.duration === 0)) {
+                e.target.currentTime = 1e101;
+                e.target.ontimeupdate = () => {
+                  e.target.ontimeupdate = null;
+                  e.target.currentTime = 0;
+                };
+              }
+            }}
+            style={{ width: '100%', height: 'auto', display: 'block' }}
+          />
+        )}
       </div>
 
       {/* Metadata Badges */}

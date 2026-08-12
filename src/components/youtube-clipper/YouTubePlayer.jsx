@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
+
 export default function YouTubePlayer({
   videoId,
   onReady,
@@ -12,6 +13,12 @@ export default function YouTubePlayer({
   const containerRef = useRef(null);
   const playerRef = useRef(null);
   const intervalRef = useRef(null);
+  const isPreviewingRef = useRef(isPreviewing);
+  const endTimeSecRef = useRef(endTimeSec);
+
+  // Keep refs in sync with props so interval callback always reads latest values
+  useEffect(() => { isPreviewingRef.current = isPreviewing; }, [isPreviewing]);
+  useEffect(() => { endTimeSecRef.current = endTimeSec; }, [endTimeSec]);
 
   useEffect(() => {
     if (!videoId) return;
@@ -102,7 +109,8 @@ export default function YouTubePlayer({
         if (onTimeUpdate) onTimeUpdate(curr);
 
         // Handle auto-stop for clip preview when end time is reached
-        if (isPreviewing && endTimeSec && curr >= endTimeSec) {
+        // Use refs to avoid stale closure — always reads current isPreviewing / endTimeSec
+        if (isPreviewingRef.current && endTimeSecRef.current && curr >= endTimeSecRef.current) {
           if (typeof playerRef.current.pauseVideo === 'function') {
             playerRef.current.pauseVideo();
           }

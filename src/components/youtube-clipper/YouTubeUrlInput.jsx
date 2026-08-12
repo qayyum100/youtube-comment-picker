@@ -54,14 +54,27 @@ export default function YouTubeUrlInput({ onAnalyze, loading }) {
           fontWeight: '600',
           marginBottom: '12px'
         }}>
-          <Youtube size={16} /> YouTube Video Clipper
+          <Youtube size={16} /> Free Online Tool
         </div>
         <h1 style={{ fontSize: '32px', fontWeight: '800', marginBottom: '8px', color: 'var(--text-primary)' }}>
           YouTube Video Clipper
         </h1>
-        <p style={{ color: 'var(--text-secondary)', fontSize: '16px', maxWidth: '600px', margin: '0 auto' }}>
-          Paste a YouTube video URL, select the moment you want, and create a clip.
+        <p style={{ color: 'var(--text-secondary)', fontSize: '16px', maxWidth: '620px', margin: '0 auto 16px auto' }}>
+          Paste any YouTube URL to trim, clip, and export moments as viral Shorts, Reels, or TikTok videos — right in your browser.
         </p>
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center' }}>
+          {['✂️ Clip Trimmer', '📐 9:16 Shorts', '💬 Captions', '🤖 AI Moments', '📥 MP4 Export'].map((tag) => (
+            <span key={tag} style={{
+              padding: '4px 12px',
+              fontSize: '12px',
+              fontWeight: '600',
+              borderRadius: 'var(--radius-full)',
+              border: '1px solid var(--border)',
+              color: 'var(--text-secondary)',
+              backgroundColor: 'var(--bg-secondary)'
+            }}>{tag}</span>
+          ))}
+        </div>
       </div>
 
       <form onSubmit={handleSubmit}>
