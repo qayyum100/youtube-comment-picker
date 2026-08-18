@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-export default function SEO({ title, description, url, image, type = 'website', schema, keywords }) {
+export default function SEO({ title, description, url, image, type = 'website', schema }) {
   const siteUrl = 'https://www.youtubecommentpickerthumbnaildownload.online';
   const fullUrl = url ? `${siteUrl}${url}` : siteUrl;
   const defaultImage = `${siteUrl}/og-image.jpg`;
@@ -11,7 +11,6 @@ export default function SEO({ title, description, url, image, type = 'website', 
       {/* Standard SEO */}
       <title>{title}</title>
       <meta name="description" content={description} />
-      {keywords && <meta name="keywords" content={keywords} />}
       <link rel="canonical" href={fullUrl} />
 
       {/* Open Graph */}

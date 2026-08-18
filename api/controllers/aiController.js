@@ -687,3 +687,146 @@ Return ONLY valid JSON.`;
         return res.json({ moments: fallbackMoments, simulated: true });
     }
 };
+
+export const generateCommentReplies = async (req, res) => {
+    const { comment, tone = 'Appreciative' } = req.body;
+    if (!comment) return res.status(400).json({ error: 'Viewer comment is required' });
+
+    const fallbacks = [
+        `Thanks so much for watching! Really glad this resonated with you. 🙌`,
+        `Great point! I'm planning to cover that in a follow-up video soon. Stay tuned! 🔔`,
+        `Appreciate your feedback! What topic would you like to see next on the channel? 🚀`
+    ];
+
+    try {
+        const apiKey = process.env.GEMINI_API_KEY;
+        if (!apiKey) return res.json({ replies: fallbacks, simulated: true });
+
+        const genAI = getGeminiClient();
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-flash-latest",
+            generationConfig: { responseMimeType: "application/json" }
+        });
+
+        const prompt = `Generate 3 smart, engaging, high-converting YouTube comment replies to the following viewer comment with a "${tone}" tone.
+Comment: "${comment}"
+Return a JSON object with a "replies" array containing 3 string responses. Return ONLY valid JSON.`;
+
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        let data = {};
+        try {
+            data = JSON.parse(text);
+        } catch(e) {
+            const jsonMatch = text.match(/\{.*\}/s);
+            if (jsonMatch) data = JSON.parse(jsonMatch[0]);
+        }
+
+        if (data && Array.isArray(data.replies) && data.replies.length > 0) {
+            return res.json({ replies: data.replies, simulated: false });
+        }
+        return res.json({ replies: fallbacks, simulated: true });
+    } catch (error) {
+        console.error("Comment Reply AI Error:", error.message);
+        return res.json({ replies: fallbacks, simulated: true });
+    }
+};
+
+export const generateContentRepurposer = async (req, res) => {
+    const { text, title = '' } = req.body;
+    if (!text) return res.status(400).json({ error: 'Text content is required' });
+
+    const fallbacks = {
+        tweet: `🚀 Quick key takeaway from our latest video "${title || 'YouTube Guide'}":\n\n${text.slice(0, 180)}...\n\nWhat are your thoughts on this? 👇 #YouTube #ContentCreator`,
+        linkedin: `💡 Key Insight on ${title || 'Video Strategy'}:\n\n${text.slice(0, 300)}\n\nHere are 3 quick takeaways:\n1. Focus on clear structure\n2. Hook the audience in the first 5s\n3. Deliver immediate value\n\nHow do you approach this in your content?`,
+        shortsHook: `Did you know that ${text.slice(0, 100)}? Here is exactly how to leverage this for 10x views!`,
+        newsletter: `Hey Creators!\n\nIn this issue, we breakdown: ${title || 'Content Optimization'}.\n\n${text.slice(0, 400)}\n\nUntil next time,\nHappy creating!`,
+        igCaption: `✨ NEW POST ✨\n\n"${title || 'Creator Secrets'}"\n\n${text.slice(0, 250)}\n\nDouble tap if this helped you! ❤️ Save for later! 📌`
+    };
+
+    try {
+        const apiKey = process.env.GEMINI_API_KEY;
+        if (!apiKey) return res.json({ repurposed: fallbacks, simulated: true });
+
+        const genAI = getGeminiClient();
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-flash-latest",
+            generationConfig: { responseMimeType: "application/json" }
+        });
+
+        const prompt = `Repurpose the following video script/transcript snippet into 5 social media formats:
+Title context: "${title}"
+Content: "${text.slice(0, 3000)}"
+
+Return a JSON object with:
+- "tweet" (X/Twitter post)
+- "linkedin" (LinkedIn structured post)
+- "shortsHook" (15-second viral Shorts script hook)
+- "newsletter" (Short newsletter email section)
+- "igCaption" (Instagram caption with emojis and tags)
+Return ONLY valid JSON.`;
+
+        const result = await model.generateContent(prompt);
+        const resText = result.response.text();
+        let data = {};
+        try {
+            data = JSON.parse(resText);
+        } catch(e) {
+            const jsonMatch = resText.match(/\{.*\}/s);
+            if (jsonMatch) data = JSON.parse(jsonMatch[0]);
+        }
+
+        if (data && data.tweet) {
+            return res.json({ repurposed: data, simulated: false });
+        }
+        return res.json({ repurposed: fallbacks, simulated: true });
+    } catch (error) {
+        console.error("Content Repurposer AI Error:", error.message);
+        return res.json({ repurposed: fallbacks, simulated: true });
+    }
+};
+
+export const generateFaqs = async (req, res) => {
+    const { topic } = req.body;
+    if (!topic) return res.status(400).json({ error: 'Topic is required' });
+
+    const fallbacks = [
+        { q: `How long does it take to see results with ${topic}?`, a: `Most creators notice clear improvements within 14-30 days when executing consistently.` },
+        { q: `What equipment or tools do I need for ${topic}?`, a: `No expensive setup is required. Free built-in tools and standard smartphones are more than enough to start.` },
+        { q: `What is the #1 mistake to avoid in ${topic}?`, a: `Overcomplicating the initial structure. Focus on immediate audience value over complex editing.` },
+        { q: `Can beginners succeed with ${topic}?`, a: `Yes, following structured best practices allows channels of any size to gain fast traction.` }
+    ];
+
+    try {
+        const apiKey = process.env.GEMINI_API_KEY;
+        if (!apiKey) return res.json({ faqs: fallbacks, simulated: true });
+
+        const genAI = getGeminiClient();
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-flash-latest",
+            generationConfig: { responseMimeType: "application/json" }
+        });
+
+        const prompt = `Generate 4 frequently asked questions (FAQs) with concise answers about "${topic}" to include in a YouTube video description or pinned comment.
+Return a JSON object with a "faqs" array where each object has "q" (question string) and "a" (answer string). Return ONLY valid JSON.`;
+
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        let data = {};
+        try {
+            data = JSON.parse(text);
+        } catch(e) {
+            const jsonMatch = text.match(/\{.*\}/s);
+            if (jsonMatch) data = JSON.parse(jsonMatch[0]);
+        }
+
+        if (data && Array.isArray(data.faqs) && data.faqs.length > 0) {
+            return res.json({ faqs: data.faqs, simulated: false });
+        }
+        return res.json({ faqs: fallbacks, simulated: true });
+    } catch (error) {
+        console.error("FAQ AI Error:", error.message);
+        return res.json({ faqs: fallbacks, simulated: true });
+    }
+};
+

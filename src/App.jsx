@@ -112,6 +112,9 @@ const MembershipPerksGeneratorPage = lazy(() => import('./pages/MembershipPerksG
 const EndScreenOptimizerPage = lazy(() => import('./pages/EndScreenOptimizerPage'));
 const CardsCtaGeneratorPage = lazy(() => import('./pages/CardsCtaGeneratorPage'));
 
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
+const TermsPage = lazy(() => import('./pages/TermsPage'));
+
 // 30 New Tools (Thumbnail, AI Generators, Formatters & Utilities)
 const ThumbnailSplitTesterPage = lazy(() => import('./pages/ThumbnailSplitTesterPage'));
 const ThumbnailColorCheckerPage = lazy(() => import('./pages/ThumbnailColorCheckerPage'));
@@ -364,6 +367,8 @@ function AnimatedRoutes() {
           <Route path="/web-stories/:slug" element={<WebStoryViewerPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
         </Routes>
       </Suspense>
     </div>
@@ -482,6 +487,8 @@ export default function App() {
                 { label: 'About', to: '/about', isLink: true },
                 { label: 'Contact', to: '/contact', isLink: true },
                 { label: 'Blog', to: '/blogs', isLink: true },
+                { label: 'Privacy Policy', to: '/privacy', isLink: true },
+                { label: 'Terms of Service', to: '/terms', isLink: true },
               ].map(item => (
                 <Link
                   key={item.label}
@@ -503,8 +510,6 @@ export default function App() {
               ))}
               {[
                 { label: 'Disclaimer', onClick: () => setShowDisclaimer(true) },
-                { label: 'Privacy Policy', onClick: () => setShowPrivacy(true) },
-                { label: 'Terms of Service', onClick: () => setShowTerms(true) },
               ].map(item => (
                 <span
                   key={item.label}

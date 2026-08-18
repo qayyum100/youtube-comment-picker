@@ -34,7 +34,10 @@ import {
   analyzeShortsHook,
   generateCommunityPosts,
   generateLiveStreamTitles,
-  suggestClipMoments
+  suggestClipMoments,
+  generateCommentReplies,
+  generateContentRepurposer,
+  generateFaqs
 } from './controllers/aiController.js';
 
 import { getTranscript } from './controllers/transcriptController.js';
@@ -85,6 +88,9 @@ app.post('/api/ai/shorts-captions', generateShortsCaptions);
 app.post('/api/ai/shorts-hook-analysis', analyzeShortsHook);
 app.post('/api/ai/community-posts', generateCommunityPosts);
 app.post('/api/ai/livestream-titles', generateLiveStreamTitles);
+app.post('/api/ai/comment-replies', generateCommentReplies);
+app.post('/api/ai/content-repurposer', generateContentRepurposer);
+app.post('/api/ai/faqs', generateFaqs);
 
 // Java Online Compiler
 app.post('/api/compile/java', compileJava);
